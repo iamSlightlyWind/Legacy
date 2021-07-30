@@ -1,0 +1,195 @@
+@media screen and (min-width: 992px){
+
+    body {
+        margin: 0;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    div.navBar {
+        margin: 0;
+        height: 120px;
+        position: relative;
+        left: 7.5vw;
+    }
+
+    div.navBar > li {
+        margin: 0;
+        list-style-type: none;
+        height: 4rem;
+        position: relative;
+        top: 3vh;
+        float: left;
+    }
+
+    div.navBar > li.leftNavBar {
+        left: 10px;
+    }
+
+    div.navBar > li.rightNavBar {
+        position: inherit;
+        left: 34vw;
+    }
+
+    div.navBar > li > a {
+        text-decoration: none;
+        height: 40px;
+        color: grey;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 0.9em;
+        top: 1vh;
+        position: relative;
+
+        display: flex;
+        justify-content:center;
+        align-items: center;
+    }
+
+    div.navBar > li:hover {
+        border-radius: 5%;
+        background-color: whitesmoke;
+    }
+
+    div.firstParagraph {
+        bottom: 18px;
+        margin-bottom: -50px;
+        display: block;
+        position: relative;
+        height: 550px;
+        left: 7.5vw;
+        background-image: url(https://s3.amazonaws.com/codecademy-content/courses/ltp/img/lodging.png);
+        background-size: 85vw;
+    }
+
+    div.firstParagraph > p.daBigOnes {
+        position: absolute;
+        font-family: 'Bitter', serif;
+        top: 120px;
+        left: 85px;
+        font-size: 300%;
+        color: white;
+    }
+
+    div.firstParagraph > P.daSmallOnes {
+        position: relative;
+        font-family: "Roboto", sans-serif;
+        top: 210px;
+        left: 85px;
+        font-size: 150%;
+        color: white;
+    }
+
+    div.secondPart {
+        display: block;
+        background-color: #e4e4e4;
+        margin-left: 7.5vw;
+        height: calc(190px + 13.5vw + 13.5vw + 2vw);
+    }
+
+    div.secondParagraph {
+        position: relative;
+        top: 45px;
+        left: 3vw;
+        margin-bottom: 110px;
+    }
+
+    div.secondParagraph > p.daBigOnes {
+        font-family: "Noto Sans JP", sans-serif;
+        font-weight: 505;
+        font-size: 225%;
+        color:rgb(61, 61, 61);
+        margin-bottom: -5px;
+    }
+
+    div.secondParagraph > p.daSmallOnes {
+        color: rgb(110, 110, 110);
+        font-size: 120%;
+        font-family: "Open Sans", sans-serif;
+    }
+
+    .bigImage {
+        float:left;
+        margin-left: 2.5vw;
+    }
+
+    div.footer {
+        margin: 0;
+        display:block;
+        margin-left: 7.5vw;
+        height:30vh;
+        margin-bottom: 1vw;
+        background-color: #f1f0f1;
+        }
+        
+    div.footer > div.mediumParagraph{
+        display:block;
+        margin-left: 2vw;
+        left: 1vw;
+        float: left;
+        position: relative;
+    }
+        
+    .pTitle {
+        font-family: 'Bitter', serif;
+        font-size: 250%;
+        position: relative;
+        top: 1vh;
+    }
+        
+    .pContent {
+        font-size: 140%;
+        color: rgb(110, 110, 110);
+        font-family: "Roboto", sans-serif;
+    }
+        
+    .pNav {
+        color: rgb(37, 143, 185);
+        font-size: 100%;
+        font-family: "Roboto", sans-serif;
+    }
+        
+    a.pNav:hover {
+        text-decoration: underline;
+    }
+
+    [class*="col-"] {
+        float: left;
+        padding: 0px 1px 0px 1px;
+    }
+
+    .col-d5   {width: 5vw;}
+    .col-d10  {width: 10vw;}
+    .col-d15  {width: 15vw;}
+    .col-d20  {width: 20vw;}
+    .col-d25  {width: 25vw;}
+    .col-d30  {width: 30vw;}
+    .col-d35  {width: 35vw;}
+    .col-d40  {width: 40vw;}
+    .col-d45  {width: 45vw;}
+    .col-d50  {width: 50vw;}
+    .col-d55  {width: 55vw;}
+    .col-d60  {width: 60vw;}
+    .col-d65  {width: 65vw;}
+    .col-d70  {width: 70vw;}
+    .col-d75  {width: 75vw;}
+    .col-d80  {width: 80vw;}
+    .col-d85  {width: 85vw;}
+    .col-d90  {width: 90vw;}
+    .col-d95  {width: 95vw;}
+    .col-d100 {width: 100vw;}
+
+    div.imageBox {
+        display: block;
+        width: 27vw;
+        height: 25vw;
+        float: left;
+        position: relative;
+        left: 2.5vw;
+    }
+
+    .imageBox > img {
+        margin-bottom: 4vh;
+    }
+}

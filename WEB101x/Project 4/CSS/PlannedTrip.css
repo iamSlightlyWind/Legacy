@@ -1,0 +1,241 @@
+@media only screen and (orientation: landscape) {
+    .welcome {
+        display: block;
+        width: 100%;
+        height: 25vh;
+        background-color: lightcyan;
+    }
+
+    .mLongThread {
+        display: block;
+        width: 100%;
+        height: 75vh;
+        background-color: lightgreen;
+        border-bottom: 1px solid black;
+        background-size: cover;
+        background-position-x: 50%;
+    }
+
+    .boxName {
+        padding: 5px;
+        font-size: 2vw;
+        text-align: center;
+    }
+
+    .book {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        font-size: 1.5vw;
+        color: white;
+        text-shadow: 2px 2px 4px #000000;
+        text-decoration: none;
+    }
+
+    .book:hover {
+        border: 2px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .popButton {
+        display: inline-block;
+        width: 25%;
+        overflow: hidden;
+        text-shadow: 2px 2px 8px black;
+        border: 3px solid white;
+        background-color: rgba(0, 0, 0, 0.25);
+        border-radius: 0.5vw;
+        color: white;
+        height: 10vh;
+        min-height: 5vw;
+        transition: height 0.2s;
+    }
+
+    .Vacation>.popButton {
+        position: relative;
+        float: right;
+        right: 15%;
+        top: 30%;
+    }
+
+    .Vacation>.popButton:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 250px;
+    }
+
+    .Travel>.popButton {
+        position: relative;
+        float: left;
+        left: 15%;
+        top: 30%;
+    }
+
+    .Travel>.popButton:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 210px;
+    }
+
+    .Honeymoon>.popButton {
+        position: relative;
+        float: right;
+        right: 15%;
+        top: 20%;
+    }
+
+    .Honeymoon>.popButton:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 230px;
+    }
+
+    #popButton {
+        transition-timing-function: ease-in-out;
+    }
+
+    .popBox {
+        position: absolute;
+        display: none;
+        margin-left: 5%;
+    }
+
+    .popButton:hover>.popBox {
+        color: white;
+        bottom: 0;
+        display: inline-block;
+    }
+
+    /**/
+
+    div.Vacation {
+        background-image: url(../Pictures/Desktop/Hawaii.webp);
+    }
+
+    div.Travel {
+        background-image: url(../Pictures/Desktop/Eiffel.webp);
+    }
+
+    div.Honeymoon {
+        background-image: url(../Pictures/Desktop/St.webp);
+        background-position-y: 70%;
+    }
+}
+
+@media only screen and (orientation: portrait) {
+    .welcome {
+        display: block;
+        width: 100%;
+        height: 25vh;
+        background-color: lightcyan;
+    }
+
+    .mLongThread {
+        display: block;
+        width: 100%;
+        height: 75vh;
+        background-color: lightgreen;
+        border-bottom: 1px solid black;
+        background-size: cover;
+        background-position-x: 50%;
+    }
+
+    .boxName {
+        padding: 5px;
+        font-size: 3vw;
+        text-align: center;
+    }
+
+    .book {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        font-size: 2.5vw;
+        color: white;
+        text-shadow: 2px 2px 4px #000000;
+        text-decoration: none;
+    }
+
+    .book:hover {
+        border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .popButton {
+        display: inline-block;
+        width: 40%;
+        overflow: hidden;
+        text-shadow: 2px 2px 8px black;
+        border: 2px solid white;
+        background-color: rgba(0, 0, 0, 0.25);
+        border-radius: 0.5vw;
+        color: white;
+        height: 9vw;
+        transition: height 0.2s;
+    }
+
+    .Vacation>.popButton {
+        position: relative;
+        float: right;
+        right: 5%;
+        top: 20%;
+    }
+
+    .Vacation>.popButton.active {
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 220px;
+    }
+
+    .Travel>.popButton {
+        position: relative;
+        float: left;
+        left: 4%;
+        top: 22.5%;
+    }
+
+    .Travel>.popButton.active {
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 200px;
+    }
+
+    .Honeymoon>.popButton {
+        position: relative;
+        float: right;
+        right: 5%;
+        top: 50%;
+    }
+
+    .Honeymoon>.popButton.active {
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 240px;
+    }
+
+    #popButton {
+        transition-timing-function: ease-in-out;
+    }
+
+    .popBox {
+        position: absolute;
+        display: none;
+        margin-left: 5%;
+    }
+
+    .popButton.active>.popBox {
+        color: white;
+        bottom: 0;
+        display: inline-block;
+    }
+
+    /**/
+
+    .Vacation {
+        background-image: url(../Pictures/Phone/Hawaii.webp);
+    }
+
+    .Travel {
+        background-image: url(../Pictures/Phone/Eiffel.webp);
+    }
+
+    .Honeymoon {
+        background-image: url(../Pictures/Phone/St.webp);
+    }
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+}

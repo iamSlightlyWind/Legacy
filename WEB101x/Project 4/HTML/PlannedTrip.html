@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K8CMH1FWDJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-K8CMH1FWDJ');
+    </script>
+    <title>PlannedTrip</title>
+    <meta name="google-site-verification" content="6E08x0CAR8XdDroTGimwzH2gKF3H4QFdsc1XDShXcBk" />
+    <meta name="description" content="Prepaid trip at a reduced price">
+    <meta name="keywords" content="prepaid trip, honeymoon, vacation, travel">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../CSS/body.css">
+    <link rel="stylesheet" href="../CSS/PlannedTrip.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="navBar">
+        <div class="navButton leftNavButton "><a href="./PlannedTrip.html">PlannedTrip</a></div>
+        <div class="navButton leftNavButton "><a href="./SpecialDeals.html">Special Offers</a></div>
+        <div class="navButton rightNavButton"><a href="./SignIn.html">Sign In</a></div>
+        <div class="navButton rightNavButton"><a href="./SignUp.html">Sign Up</a></div>
+        <div class="navButton rightNavButton"><a href="./AboutUs.html">About Us</a></div>
+    </div>
+
+
+    <div class="Vacation  mLongThread">
+        <div class="popButton">
+            <div class="boxName">Hawaii, United State</div>
+            <div class="popBox">
+                <p class="msTitle">Are you looking for a place for this vacation?</p>
+                <p class="mContent">Look no further, because here at PlannedTrip, we provide you the best prepared trip for your next vacation at the beautiful Hawaii.</p>
+            </div>
+            <a class="book" href="./SignIn.html">Book Now</a>
+        </div>
+    </div>
+
+    <div class="Travel  mLongThread">
+        <div class="popButton">
+            <div class="boxName">Paris, France</div>
+            <div class="popBox">
+                <p class="msTitle">When was the last time you travel?</p>
+                <p class="mContent">Explore France: The beauty, the food, the art, and the people.</p>
+            </div>
+            <a class="book" href="./SignIn.html">Book Now</a>
+        </div>
+    </div>
+
+    <div class="Honeymoon  mLongThread">
+        <div class="popButton">
+            <div class="boxName">St. Lucia</div>
+            <div class="popBox">
+                <p class="msTitle">Looking for a place for your one and only honeymoon?</p>
+                <p class="mContent">Here at PlannedTrip we can offer you the perfect honeymoon location, with a reduced price and increased happiness.</p>
+            </div>
+            <a class="book" href="./SignIn.html">Book Now</a>
+        </div>
+    </div>
+
+    <script>
+        $('.popButton').click(function() {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active')
+            } else {
+                $(this).addClass('active')
+            }
+        });
+    </script>
+</body>
+
+</html>

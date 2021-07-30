@@ -1,0 +1,185 @@
+@media screen and (min-width: 769px) and (max-width: 991px){
+
+    [class*="col-"] {
+        float: left;
+        padding: 0px 1px 0px 1px;
+    }
+
+    .col-t5   {width: 5vw;}
+    .col-t10  {width: 10vw;}
+    .col-t15  {width: 15vw;}
+    .col-t20  {width: 20vw;}
+    .col-t25  {width: 25vw;}
+    .col-t30  {width: 30vw;}
+    .col-t35  {width: 35vw;}
+    .col-t40  {width: 40vw;}
+    .col-t45  {width: 45vw;}
+    .col-t50  {width: 50vw;}
+    .col-t55  {width: 55vw;}
+    .col-t60  {width: 60vw;}
+    .col-t65  {width: 65vw;}
+    .col-t70  {width: 70vw;}
+    .col-t75  {width: 75vw;}
+    .col-t80  {width: 80vw;}
+    .col-t85  {width: 85vw;}
+    .col-t90  {width: 90vw;}
+    .col-t95  {width: 95vw;}
+    .col-t100 {width: 100vw;}
+
+
+    body {
+        margin: 0;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    div.navBar {
+        margin: 0;
+        max-width: 92vw;
+        height:90px;
+        background-color: #556270;
+        position: relative;
+        left: 5vw;
+    }
+
+    div.navBar > li {
+        margin: 0;
+        list-style-type: none;
+        height: 70px;
+        position: relative;
+        margin-top: 20px;
+        position: relative;
+        top: 18px;
+        font-size: 120%;
+    }
+
+    div.navBar > li.rightNavBar {
+        position: relative;
+        left: 38.5vw;
+    }
+
+    div.navBar > li.leftNavBar {
+        position: relative;
+        left: 1vw;
+    }
+
+    div.navBar > li > a {
+        text-decoration: none;
+        display:inline-block;
+        height: 40px;
+        color: whitesmoke;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 85%;
+        border-radius: 5%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    div.navBar > li > a:hover {
+        background-color: #374049;
+    }
+
+    div.firstParagraph {
+        position: relative;
+        left: 3vw;
+        clear: both;
+        display: block;
+        height: 150px;
+        
+        margin: 0 0 30px 0;
+    }
+
+    div.firstParagraph > p.daBigOnes {
+        font-size: 230%;
+        font-family: 'Noto Sans JP', sans-serif;
+        position:relative;
+        top: 10px;
+        left: 25px;
+        word-wrap: normal;
+        color:rgb(44, 44, 44);
+    }
+
+    div.firstParagraph > p.daSmallOnes {
+        font-size: 80%;
+        font-family: 'Noto Sans JP', sans-serif;
+        position:relative;
+        color: rgb(172, 172, 172);
+        padding-bottom: 30px;
+        border-bottom: 1px solid rgb(201, 201, 201);
+        top: 20px;
+        left: 3vw;
+        word-wrap:normal;
+    }
+
+    div.secondParagraph {
+        position: relative;
+        left: 3vw;
+        clear: both;
+        display: block;
+        height: 110px;
+        max-width: 90vw;
+    }
+
+    div.secondParagraph > p.daBigOnes {
+        font-size: 230%;
+        font-family: 'Noto Sans JP', sans-serif;
+        position:relative;
+        bottom: 5px;
+        left: 25px;
+        word-wrap: normal;
+        color:rgb(44, 44, 44);
+    }
+
+    div.secondParagraph > p.daSmallOnes {
+        font-size: 80%;
+        font-family: 'Noto Sans JP', sans-serif;
+        position:relative;
+        color: rgb(172, 172, 172);
+        bottom: 30px;
+        left: 3vw;
+        word-wrap:normal;
+    }
+
+    img.image {
+        position:relative;
+        left: 5vw;
+        margin-right: 5vw;
+        display:block;
+        margin-bottom: 65px;
+        float:left;
+    }
+
+    div.mediumParagraph{
+        display: block;
+        position: relative;
+        border: solid transparent 1px;
+        bottom: 20px;
+        left: 8vw;
+        height: 200px;
+    }
+
+    div.mediumParagraph > p.pTitle{
+        font-size: 230%;
+        font-family: "Noto Sans JP", sans-serif;
+    }
+
+    div.mediumParagraph > p.pContent {
+        font-family: "Open Sans", sans-serif;
+        font-size: 90%;
+        color: rgb(116, 116, 116);
+        position: inherit;
+        bottom: 20px;
+    }
+
+    div.mediumParagraph > a.pNav {
+        font-size: 100%;
+        position: inherit;
+        color: rgb(37, 143, 185);
+        bottom: 20px;
+    }
+}

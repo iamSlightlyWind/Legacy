@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Sign In</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT4E9CYQYT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-NT4E9CYQYT');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../CSS/body.css">
+    <link rel="stylesheet" href="../CSS/SignIn.css">
+
+    <meta name="google-signin-client_id" content="523605210026-69c2b19c0614ud9oncahmh0skbpb2rm6.apps.googleusercontent.com">
+</head>
+
+<body>
+
+    <div class="navBar">
+        <div class="navButton leftNavButton "><a href="./PlannedTrip.html">PlannedTrip</a></div>
+        <div class="navButton leftNavButton "><a href="./SpecialDeals.html">Special Offers</a></div>
+        <div class="navButton rightNavButton"><a href="./SignIn.html">Sign In</a></div>
+        <div class="navButton rightNavButton"><a href="./SignUp.html">Sign Up</a></div>
+        <div class="navButton rightNavButton"><a href="./AboutUs.html">About Us</a></div>
+    </div>
+
+    <div class="signinBackground" style="background-image: url('../Pictures/background.webp');">
+        <div class="accountDetailBox">
+
+            <div class="randomBox">
+                <a class="signin" href="#">SIGN IN</a>
+                <a class="signup" href="./SignUp.html">SIGN UP</a>
+            </div>
+
+            <div class="signinBox">
+                <div class="omgItsText">
+                    <p>Sign In to access PlannedTrip</p>
+                </div>
+
+                <input type="text" placeholder="Enter Username" name="uname" required>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                <form action="./PlannedTrip.html">
+                    <button type="submit">Sign In</button>
+                </form>
+                <div class="gsignin" id="my-signin2"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer"></div>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <script>
+        function onSuccess(googleUser) {
+            console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+        }
+
+        function onFailure(error) {
+            console.log(error);
+        }
+
+        var wWidth = window.innerWidth;
+        var wHeight = window.innerHeight;
+
+        if (wWidth > wHeight) {
+            var customWidth = wWidth * 0.325 * 0.35;
+        } else {
+            var customWidth = wWidth * 0.7 * 0.35;
+        }
+
+        function renderButton() {
+            gapi.signin2.render('my-signin2', {
+                'scope': 'profile email',
+                'width': customWidth,
+                'height': window.innerHeight * 0.5 * 0.1,
+                'longtitle': false,
+                'theme': 'light',
+                'onsuccess': onSuccess,
+                'onfailure': onFailure
+            });
+        }
+    </script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+
+</body>
+
+</html>
+
+<!--
+window.innerWidth * 0.325 * 0.35
+window.innerWidth * 0.325 * 0.35;
+-->

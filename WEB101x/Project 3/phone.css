@@ -1,0 +1,165 @@
+body {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+[class*="col-"] {
+    width: 100%;
+}
+
+div.navBar {
+    margin: 0;
+    max-width: 100vw;
+    height: 100px;
+    background-color: #556270;
+    display: block;
+}
+
+div.navBar > li {
+    display: block;
+    position: relative;
+    float: left;
+    list-style-type: none;
+    height: 100px;
+    background-color: #556270;
+    width: 19%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.navBar > li > a {
+    text-decoration: none;
+    position: relative;
+    left: 3.5vw;
+    width: 18vw;
+    height: 40px;
+    color: whitesmoke;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 75%;
+    border-radius: 5%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.navBar > li > a:hover {
+    background-color: #374049;
+}
+
+div.largeParagraph {
+    clear: both;
+    display: block;
+    height: 330px;
+    max-width: 90vw;
+    border: solid transparent 1px;
+}
+
+p.daBigOnes {
+    font-size: 350%;
+    font-family: 'Noto Sans JP', sans-serif;
+    position:relative;
+    top: 20px;
+    left: 25px;
+    word-wrap: normal;
+}
+
+p.daSmallOnes {
+    font-size: 105%;
+    font-family: 'Noto Sans JP', sans-serif;
+    position:relative;
+    color: rgb(172, 172, 172);
+    top: 10px;
+    left: 25px;
+    word-wrap:normal;
+}
+
+img.image {
+    position:relative;
+    width: 80vw;
+    left: 25px;
+    display:block;
+    margin-bottom: 80px;
+}
+
+img.firstImage {
+    margin-top: 110px;
+}
+
+img.bigImage {
+    margin-bottom: 20px;
+}
+
+div.mediumParagraph {
+    display: block;
+    position: relative;
+    left: 30px;
+    height: 290px;
+    max-width: 80vw;
+    border: solid transparent 1px;
+}
+
+div.mediumParagraph > p.pTitle{
+    font-size: 300%;
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+div.mediumParagraph > p.pContent {
+    font-size: 120%;
+    position:relative;
+    bottom: 15px;
+}
+
+div.mediumParagraph > a.pNav {
+    position: relative;
+    top: 15px;
+    color:rgb(61, 61, 61);
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+/*
+div.navBar {
+    margin: 0;
+    width: 97vw;
+    height: 50px;
+    background-color: #556270;
+    display: block;
+}
+
+div.navBar > li {
+    display: block;
+    position: relative;
+    float: left;
+    list-style-type: none;
+    height: 125px;
+    background-color: #556270;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.navBar > li > a {
+    text-decoration: none;
+    position: relative;
+    left: 3.5vw;
+    width: 18vw;
+    height: 40px;
+    color: whitesmoke;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 75%;
+    border-radius: 5%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.navBar > li > a:hover {
+    background-color: #374049;
+}
