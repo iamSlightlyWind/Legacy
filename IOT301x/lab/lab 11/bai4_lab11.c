@@ -7,6 +7,7 @@ int main(){
         arrLength++;
     }
 
+    // @ts-ignore
     int *aa = &a, *pS = &temp;
     *pS = 1235;
 
