@@ -13,6 +13,7 @@ int main(){
     for(int i = 0; i < arrLength;i++){
         if(*(aa + i) > largest) largest = *(aa + i);
     }
-
+    
+    // @ts-ignore
     printf("%d",largest);
 }
