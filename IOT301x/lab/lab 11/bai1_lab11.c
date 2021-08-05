@@ -8,7 +8,8 @@ int main(){
         arrLength++;
         temp++;
     }
-
+    
+    // @ts-ignore
     int *aa = &a;
     aa += arrLength - 1;
     for(int i = 0; i < arrLength; i++){
