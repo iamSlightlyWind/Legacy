@@ -8,9 +8,9 @@
 char myString[1000][MAXLENGTH];
 int linesCount;
 
+
 void fileRead(){
-    FILE *fp = NULL;
-    fp = fopen(FILENAME, "r");
+    FILE *fp = fopen(FILENAME, "r");
     int count = 0;
 
     for(linesCount = 0;;linesCount++){
@@ -32,22 +32,38 @@ int soBanTinGuiDi(int *sentLines){
         }
     }
 
-    printf("So ban ti gui di: %d\n",sentCount);
+    printf("So ban tin gui di: %d\n",sentCount);
 
     return sentCount;
 }
 
-void soBanTinTuThietBi(){
+void soBanTinTuThietBi(int sentCount,int *sentLines){
     char deviceName[100];
     int lineContains[100];
     int cLineCounts = 0;
-    printf("Nhap dia chi nwk cua thiet bi:");
-    scanf("%s",deviceName);
+    int dSentCount = 0;
 
-    for(int i = 0; i < linesCount; i++){
-        if(strstr(myString[i], deviceName) != NULL){
+    printf("\n\nNhap dia chi nwk cua thiet bi:");
+    scanf("%s\n",deviceName);
+    upperString(&deviceName,strlen(deviceName));
+
+    for(int i = 0; i < sentCount; i++){
+        if(strstr(myString[*(sentLines + i)], deviceName) != NULL){
             lineContains[cLineCounts++] = i;
+            dSentCount++;
         }
+    }
+
+    for(int i = 0; i < cLineCounts; i++){
+        printf("%s\n",myString[lineContains[i]]);
+    }
+    printf("\nSo ban tin gui di cua thiet bi: %d",dSentCount);
+
+}
+
+void upperString(char *givenString, int strLength){
+    for(int i = 0; i < strLength; i++){
+        *(givenString + i) = toupper(*(givenString+i));
     }
 }
 
@@ -56,5 +72,7 @@ int main(){
 
     int sentLines[100];
     int sentCount = soBanTinGuiDi(&sentLines);
+    soBanTinTuThietBi(sentCount,&sentLines);
+
     
 }
