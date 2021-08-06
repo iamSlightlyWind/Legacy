@@ -1,10 +1,11 @@
 - must compile with sqrt >= 2.0: https://stackoverflow.com/questions/3533594/sqrt-function-not-working-with-variable-arguments
 - `eg "gcc tamgiac_*nix.c -lm"`
 
+Assignment 1 - Lập trình giải hình tam giác
 
-#assignment report
+Yêu cầu: 
+- Bắt buộc: 5/5
+- Nâng cao: 3/
 
-- completed 8/8 requirements for assignment.
-- using common math knowledge, including recognizable formulas: heron's, law of Cosine,... etc.
-- program's output is programmed to mimic as much as the assignment example gives.
-- most functions use small number of prints and simple calculations, not worth dealing with loops so loops are only used in shape checking function.
+Sử dụng kiến thức toán cơ bản.
+Phần lớn các vòng lặp dùng để kiểm tra hình dạng tam giác.

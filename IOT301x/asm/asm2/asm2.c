@@ -67,7 +67,7 @@ void upperString(char *givenString, int strLength){//uppercase the input address
     }
 }
 
-void getMaxDelay(){
+void thoiGianTreLonNhat(){
     int maxDelay = 0;
     int customTimerSoIWontMessWithTheCalculator = 0;
     char tempStr[5];
@@ -147,6 +147,6 @@ int main(){
     int sentCount = soBanTinGuiDi(&sentLines);
     soBanTinTuThietBi(sentCount,&sentLines);
     soBanTinGuiLoi();
-    getMaxDelay();
+    thoiGianTreLonNhat();
     thoiGianTreTrungBinh();
 }
