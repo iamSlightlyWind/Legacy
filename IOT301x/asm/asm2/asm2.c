@@ -75,7 +75,7 @@ void getMaxDelay(){
             memset(tempStr, 0, 255);p1 = atol(strncpy(tempStr, myString[i] + 20,2));
             memset(tempStr, 0, 255);p2 = atol(strncpy(tempStr, myString[i] + 23,2));
             memset(tempStr, 0, 255);p3 = atol(strncpy(tempStr, myString[i] + 26,3));
-            sentTime = p1*60000 + p2*1000 + p3;
+            //sentTime = p1*60000 + p2*1000 + p3;
             printf("\n%d\n%d\n%d\n\n",p1,p2,p3);
         }
     }
