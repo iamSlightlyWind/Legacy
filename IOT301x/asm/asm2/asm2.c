@@ -97,7 +97,7 @@ void getMaxDelay(){
             customTimerSoIWontMessWithTheCalculator++;
         }
     }
-    printf("\n\n\nmax delay: %d",maxDelay);
+    printf("\nDo tre lon nhat la: %d",maxDelay);
 }
 
 int main(){
