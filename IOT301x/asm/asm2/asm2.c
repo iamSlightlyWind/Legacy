@@ -8,6 +8,8 @@
 
 char myString[1000][MAXLENGTH];
 int linesCount;
+int delay[100];
+int delayCounter = 0;
 
 void fileRead(){
     FILE *fp = fopen(FILENAME, "r");
@@ -24,7 +26,7 @@ int soBanTinGuiDi(int *sentLines){
     int tempSentCount = 0;
     int tempSentLines = 0;
     
-    for(int i = 0; i < linesCount; i++){
+    for(int i = 0; i < linesCount; i++){// check whether or not 
         if(strstr(myString[i], "\"cmd\":\"set\"") != NULL){
             tempSentCount++;
             *(sentLines + tempSentLines++) = i;
@@ -67,37 +69,75 @@ void upperString(char *givenString, int strLength){
 
 void getMaxDelay(){
     int maxDelay = 0;
-    int customTimerSoIWontMessWithTheCalculator  = 0;
+    int customTimerSoIWontMessWithTheCalculator = 0;
     char tempStr[5];
     int s1,s2,s3,r1,r2,r3;
     int sentTime = 0, recvTime = 0;
-    for (int i = 2; i < linesCount+2; i++){
+    for (int i = 0; i < linesCount+1; i++){
         if(customTimerSoIWontMessWithTheCalculator == 2){
             if (maxDelay < (recvTime - sentTime)){
                 maxDelay = (recvTime - sentTime);
             }customTimerSoIWontMessWithTheCalculator = 0;
+            delay[delayCounter] = recvTime - sentTime;
+            printf("\n\ndelay #%d: %d",delayCounter,delay[delayCounter]);
+            delayCounter++;
         }
 
-        if(i % 2 == 0){
-            s1 = atol(strncpy(tempStr, myString[i-2] + 20,2));
-            s2 = atol(strncpy(tempStr, myString[i-2] + 23,2));
-            s3 = atol(strncpy(tempStr, myString[i-2] + 26,3));
-            memset(tempStr, 0, 3);
-            sentTime = s1*60000 + s2*1000 + s3;
-            customTimerSoIWontMessWithTheCalculator++;
-        }
+        if(i <= linesCount){
+            if(i % 2 == 0){
+                s1 = atol(strncpy(tempStr, myString[i] + 20,2));
+                s2 = atol(strncpy(tempStr, myString[i] + 23,2));
+                s3 = atol(strncpy(tempStr, myString[i] + 26,3));
+                memset(tempStr, 0, 3);
+                sentTime = s1*60000 + s2*1000 + s3;
+                customTimerSoIWontMessWithTheCalculator++;
+            }
 
-        if(i % 2 != 0){
-            r1 = atol(strncpy(tempStr, myString[i-2] + 20,2));
-            r2 = atol(strncpy(tempStr, myString[i-2] + 23,2));
-            r3 = atol(strncpy(tempStr, myString[i-2] + 26,3));
-            memset(tempStr, 0, 3);
-            printf("\n%d:\n%d\n%d\n%d\n\n",i-2,s1,s2,s3);
-            recvTime = r1*60000 + r2*1000 + r3;
-            customTimerSoIWontMessWithTheCalculator++;
+            if(i % 2 != 0){
+                r1 = atol(strncpy(tempStr, myString[i] + 20,2));
+                r2 = atol(strncpy(tempStr, myString[i] + 23,2));
+                r3 = atol(strncpy(tempStr, myString[i] + 26,3));
+                memset(tempStr, 0, 3);
+                recvTime = r1*60000 + r2*1000 + r3;
+                customTimerSoIWontMessWithTheCalculator++;
+            }
         }
     }
-    printf("\nDo tre lon nhat la: %d",maxDelay);
+    printf("\n\nDo tre lon nhat la: %d",maxDelay);
+}
+
+void soBanTinGuiLoi(){
+    int customTimerSoIWontMessWithTheCalculator = 0;
+    char tempStr[5];
+    int sID, rID;
+    int error = 0;
+    for (int i = 0; i < linesCount+1; i++){
+        if(customTimerSoIWontMessWithTheCalculator == 2){
+            if (sID != rID) {error++;}
+            customTimerSoIWontMessWithTheCalculator = 0; 
+        }
+
+        if(i <= linesCount){
+            if(i % 2 == 0){
+                sID = atol(strncpy(tempStr, myString[i] + 185,4));
+                customTimerSoIWontMessWithTheCalculator++;
+            }
+
+            if(i % 2 != 0){
+                rID = atol(strncpy(tempStr, myString[i] + 199,4));
+                customTimerSoIWontMessWithTheCalculator++;
+            }
+        }
+    }
+    printf("\n\nSo ban tin loi: %d",error);
+}
+
+void thoiGianTreTrungBinh(){
+    int totalDelay = 0;
+    for(int i = 0; i < delayCounter; i++){
+        totalDelay += delay[i];
+    }
+    printf("\n\nDe tre trung binh la: %d", totalDelay);
 }
 
 int main(){
@@ -106,6 +146,7 @@ int main(){
     int sentLines[100];
     int sentCount = soBanTinGuiDi(&sentLines);
     soBanTinTuThietBi(sentCount,&sentLines);
+    soBanTinGuiLoi();
     getMaxDelay();
-
+    thoiGianTreTrungBinh();
 }
