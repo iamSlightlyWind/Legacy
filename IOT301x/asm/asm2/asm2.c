@@ -67,18 +67,37 @@ void upperString(char *givenString, int strLength){
 
 void getMaxDelay(){
     int maxDelay = 0;
-    char tempStr[100];
-    long int p1,p2,p3;
-    long int sentTime = 0, recvTime = 0;
-    for (int i = 0; i < linesCount-1; i++){
-        if(i % 2==0){
-            memset(tempStr, 0, 255);p1 = atol(strncpy(tempStr, myString[i] + 20,2));
-            memset(tempStr, 0, 255);p2 = atol(strncpy(tempStr, myString[i] + 23,2));
-            memset(tempStr, 0, 255);p3 = atol(strncpy(tempStr, myString[i] + 26,3));
-            //sentTime = p1*60000 + p2*1000 + p3;
-            printf("\n%d\n%d\n%d\n\n",p1,p2,p3);
+    int customTimerSoIWontMessWithTheCalculator  = 0;
+    char tempStr[5];
+    int s1,s2,s3,r1,r2,r3;
+    int sentTime = 0, recvTime = 0;
+    for (int i = 2; i < linesCount+2; i++){
+        if(customTimerSoIWontMessWithTheCalculator == 2){
+            if (maxDelay < (recvTime - sentTime)){
+                maxDelay = (recvTime - sentTime);
+            }customTimerSoIWontMessWithTheCalculator = 0;
+        }
+
+        if(i % 2 == 0){
+            s1 = atol(strncpy(tempStr, myString[i-2] + 20,2));
+            s2 = atol(strncpy(tempStr, myString[i-2] + 23,2));
+            s3 = atol(strncpy(tempStr, myString[i-2] + 26,3));
+            memset(tempStr, 0, 3);
+            sentTime = s1*60000 + s2*1000 + s3;
+            customTimerSoIWontMessWithTheCalculator++;
+        }
+
+        if(i % 2 != 0){
+            r1 = atol(strncpy(tempStr, myString[i-2] + 20,2));
+            r2 = atol(strncpy(tempStr, myString[i-2] + 23,2));
+            r3 = atol(strncpy(tempStr, myString[i-2] + 26,3));
+            memset(tempStr, 0, 3);
+            printf("\n%d:\n%d\n%d\n%d\n\n",i-2,s1,s2,s3);
+            recvTime = r1*60000 + r2*1000 + r3;
+            customTimerSoIWontMessWithTheCalculator++;
         }
     }
+    printf("\n\n\nmax delay: %d",maxDelay);
 }
 
 int main(){
