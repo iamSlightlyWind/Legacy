@@ -21,43 +21,44 @@ void fileRead(){
 }
 
 int soBanTinGuiDi(int *sentLines){
-    int sentCount = 0;
-    char temp[3];
-    int sLineCounts = 0;
+    int tempSentCount = 0;
+    int tempSentLines = 0;
     
     for(int i = 0; i < linesCount; i++){
         if(strstr(myString[i], "\"cmd\":\"set\"") != NULL){
-            sentCount++;
-            *(sentLines + sLineCounts++) = i;
+            tempSentCount++;
+            *(sentLines + tempSentLines++) = i;
         }
     }
 
-    printf("So ban tin gui di: %d\n",sentCount);
+    printf("So ban tin gui di: %d\n",tempSentCount);
 
-    return sentCount;
+    return tempSentCount;
 }
 
 void soBanTinTuThietBi(int sentCount,int *sentLines){
     char deviceName[100];
-    int lineContains[100];
-    int cLineCounts = 0;
-    int dSentCount = 0;
+
+    int tempLineContains[100];
+    int tempSentLineCounts = 0;
+    int tempDeviceSentCounts = 0;
 
     printf("\n\nNhap dia chi nwk cua thiet bi:");
-    scanf("%s\n",deviceName);
+    scanf("%s",deviceName);
     upperString(&deviceName,strlen(deviceName));
 
     for(int i = 0; i < sentCount; i++){
         if(strstr(myString[*(sentLines + i)], deviceName) != NULL){
-            lineContains[cLineCounts++] = i;
-            dSentCount++;
+            tempLineContains[tempSentLineCounts++] = i;
+            tempDeviceSentCounts++;
+            printf("%s\n",myString[tempLineContains[i]]);
         }
     }
 
-    for(int i = 0; i < cLineCounts; i++){
-        printf("%s\n",myString[lineContains[i]]);
-    }
-    printf("\nSo ban tin gui di cua thiet bi: %d",dSentCount);
+    //for(int i = 0; i < tempSentLineCounts; i++){
+    //    printf("%s\n",myString[tempLineContains[i]]);
+    //}
+    printf("So ban tin gui di cua thiet bi: %d",tempDeviceSentCounts);
 
 }
 
