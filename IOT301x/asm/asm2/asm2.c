@@ -20,21 +20,41 @@ void fileRead(){
     }
 }
 
-void soBanTinGuiDi(){
+int soBanTinGuiDi(int *sentLines){
     int sentCount = 0;
     char temp[3];
+    int sLineCounts = 0;
     
     for(int i = 0; i < linesCount; i++){
         if(strstr(myString[i], "\"cmd\":\"set\"") != NULL){
             sentCount++;
+            *(sentLines + sLineCounts++) = i;
         }
     }
 
     printf("So ban ti gui di: %d\n",sentCount);
+
+    return sentCount;
+}
+
+void soBanTinTuThietBi(){
+    char deviceName[100];
+    int lineContains[100];
+    int cLineCounts = 0;
+    printf("Nhap dia chi nwk cua thiet bi:");
+    scanf("%s",deviceName);
+
+    for(int i = 0; i < linesCount; i++){
+        if(strstr(myString[i], deviceName) != NULL){
+            lineContains[cLineCounts++] = i;
+        }
+    }
 }
 
 int main(){
     fileRead();
-    soBanTinGuiDi();
+
+    int sentLines[100];
+    int sentCount = soBanTinGuiDi(&sentLines);
     
 }
