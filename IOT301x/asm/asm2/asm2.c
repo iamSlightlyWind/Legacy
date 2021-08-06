@@ -22,14 +22,14 @@ void fileRead(){
     }
 }
 
-int soBanTinGuiDi(int *sentLines){
+int soBanTinGuiDi(int *sentLines){//also returns how many lines are used to sent info(s)
     int tempSentCount = 0;
     int tempSentLines = 0;
     
-    for(int i = 0; i < linesCount; i++){// check whether or not 
+    for(int i = 0; i < linesCount; i++){//check whether or not a line is a log of sent info(s)
         if(strstr(myString[i], "\"cmd\":\"set\"") != NULL){
             tempSentCount++;
-            *(sentLines + tempSentLines++) = i;
+            *(sentLines + tempSentLines++) = i; //save the line number
         }
     }
 
@@ -49,19 +49,19 @@ void soBanTinTuThietBi(int sentCount,int *sentLines){
     scanf("%s",deviceName);
     upperString(&deviceName,strlen(deviceName));
 
-    for(int i = 0; i < sentCount; i++){
-        if(strstr(myString[*(sentLines + i)], deviceName) != NULL){
-            tempLineContains[tempSentLineCounts++] = i;
-            tempDeviceSentCounts++;
-            printf("%s\n",myString[tempLineContains[i]]);
-        }
-    }
+    for(int i = 0; i < sentCount; i++){                                 //
+        if(strstr(myString[*(sentLines + i)], deviceName) != NULL){     //if destination line contains (parts of) device address
+            tempLineContains[tempSentLineCounts++] = i;                 //then mark the line which contains the device address
+            tempDeviceSentCounts++;                                     //and increase the count of times which device has been called
+            printf("%s\n",myString[tempLineContains[i]]);               //
+        }                                                               //
+    }                                                                   //
 
     printf("So ban tin gui di cua thiet bi: %d",tempDeviceSentCounts);
 
 }
 
-void upperString(char *givenString, int strLength){
+void upperString(char *givenString, int strLength){//uppercase the input address to match device address in log
     for(int i = 0; i < strLength; i++){
         *(givenString + i) = toupper(*(givenString+i));
     }
@@ -74,30 +74,30 @@ void getMaxDelay(){
     int s1,s2,s3,r1,r2,r3;
     int sentTime = 0, recvTime = 0;
     for (int i = 0; i < linesCount+1; i++){
-        if(customTimerSoIWontMessWithTheCalculator == 2){
-            if (maxDelay < (recvTime - sentTime)){
-                maxDelay = (recvTime - sentTime);
-            }customTimerSoIWontMessWithTheCalculator = 0;
-            delay[delayCounter] = recvTime - sentTime;
-            printf("\n\ndelay #%d: %d",delayCounter,delay[delayCounter]);
-            delayCounter++;
+        if(customTimerSoIWontMessWithTheCalculator == 2){   //
+            if (maxDelay < (recvTime - sentTime)){          //maxDelay compares and rewrite
+                maxDelay = (recvTime - sentTime);           //
+            }customTimerSoIWontMessWithTheCalculator = 0;   //
+
+            delay[delayCounter] = recvTime - sentTime;      //log delay times for thoiGianTreTrungBinh()
+            delayCounter++;                                 //
         }
 
         if(i <= linesCount){
             if(i % 2 == 0){
-                s1 = atol(strncpy(tempStr, myString[i] + 20,2));
-                s2 = atol(strncpy(tempStr, myString[i] + 23,2));
-                s3 = atol(strncpy(tempStr, myString[i] + 26,3));
-                memset(tempStr, 0, 3);
+                s1 = atol(strncpy(tempStr, myString[i] + 20,2));    //
+                s2 = atol(strncpy(tempStr, myString[i] + 23,2));    //consider location is set, get substring and atol convert said substring into int
+                s3 = atol(strncpy(tempStr, myString[i] + 26,3));    //
+                memset(tempStr, 0, 3);      //strncpy does not null terminate, empty tempStr instead
                 sentTime = s1*60000 + s2*1000 + s3;
-                customTimerSoIWontMessWithTheCalculator++;
+                customTimerSoIWontMessWithTheCalculator++;          //only trigger the recalculation of delay once got both sent and recv time ie == 2
             }
 
             if(i % 2 != 0){
-                r1 = atol(strncpy(tempStr, myString[i] + 20,2));
-                r2 = atol(strncpy(tempStr, myString[i] + 23,2));
-                r3 = atol(strncpy(tempStr, myString[i] + 26,3));
-                memset(tempStr, 0, 3);
+                r1 = atol(strncpy(tempStr, myString[i] + 20,2));    //
+                r2 = atol(strncpy(tempStr, myString[i] + 23,2));    //same as above
+                r3 = atol(strncpy(tempStr, myString[i] + 26,3));    //
+                memset(tempStr, 0, 3);                              //
                 recvTime = r1*60000 + r2*1000 + r3;
                 customTimerSoIWontMessWithTheCalculator++;
             }
@@ -113,19 +113,19 @@ void soBanTinGuiLoi(){
     int error = 0;
     for (int i = 0; i < linesCount+1; i++){
         if(customTimerSoIWontMessWithTheCalculator == 2){
-            if (sID != rID) {error++;}
-            customTimerSoIWontMessWithTheCalculator = 0; 
+            if (sID != rID) {error++;}                      //increase error counts
+            customTimerSoIWontMessWithTheCalculator = 0;    //once got both sent and recv id
         }
 
         if(i <= linesCount){
             if(i % 2 == 0){
-                sID = atol(strncpy(tempStr, myString[i] + 185,4));
-                customTimerSoIWontMessWithTheCalculator++;
+                sID = atol(strncpy(tempStr, myString[i] + 185,4));  //get sent id
+                customTimerSoIWontMessWithTheCalculator++;          //
             }
 
             if(i % 2 != 0){
-                rID = atol(strncpy(tempStr, myString[i] + 199,4));
-                customTimerSoIWontMessWithTheCalculator++;
+                rID = atol(strncpy(tempStr, myString[i] + 199,4));  //get recived id
+                customTimerSoIWontMessWithTheCalculator++;          //
             }
         }
     }
@@ -137,7 +137,7 @@ void thoiGianTreTrungBinh(){
     for(int i = 0; i < delayCounter; i++){
         totalDelay += delay[i];
     }
-    printf("\n\nDe tre trung binh la: %d", totalDelay);
+    printf("\n\nDe tre trung binh la: %d",totalDelay/delayCounter);
 }
 
 int main(){
