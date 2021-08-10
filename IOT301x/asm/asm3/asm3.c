@@ -57,7 +57,7 @@ void enQueue(Queue *q, point_t x){
 }
 
 point_t deQueue(Queue *q){
-    point_t d;   
+    point_t d;
     if (!isEmpty(*q)){
         d = q->data[q->front];
         q->front = q->front +1;
@@ -103,38 +103,39 @@ void findSurroundingPoint(int x, int y, point_t surroundingPnt[4], int* count){
     *count = tempCnt;
 }
 
-void findShortestPath (int x, int y) {
-    Khai báo 1 hàng đợi Queue queue;
-    Gọi hàm initQueue() để khởi tạo hàng đợi đã khai báo;
-    Đánh dấu nút matrix[0][0] là đã đi qua (matrix[0][0].visited = true);
-    Cho nút matrix[0][0] vào hàng đợi bằng hàm enQueue();
+void findShortestPath (int x, int y){
+    Queue myQueue;
+    initQueue(&myQueue);
+    matrix[0][0].visited = true;
+    enQueue(myQueue, )
     bool found = false;
-    while ((hàng đợi chưa rỗng (isEmpty(queue) == false)) && (chưa tìm thấy nút A(x, y) trên đường đi(found == false))) {
-        Gọi hàm deQueue() để lấy nút p là phần tử đầu của hàng đợi;
-        Gọi hàm surroundingPnt() để tìm các nút xung quanh pp[] của nút p vừa lấy ra khỏi hàng đợi;
-        Dùng vòng for duyệt lần lượt các nút chung quanh vừa được tìm thấy ở trên {
-            Nếu là nút chưa được đi qua (visited = false) {
-                Đánh dấu nút pp[i] là đã đi qua (pp[i].visited = true);
-                Đánh dấu nút p là nút đi qua trước đó của nút pp[i] (pp[i].prev = &p);
-                if (pp[i] chính là nút A(x, y) {
-                    found = true;
-                    break khỏi vòng lặp for;
-                }
-                else {
-                    cho nút pp[i] vào hàng đợi bằng hàm enQueue();
-                }
-            }
-        }
+    while((isEmpty(myQueue) == false)) && (found == false)){
+//        Gọi hàm deQueue() để lấy nút p là phần tử đầu của hàng đợi;
+//        Gọi hàm surroundingPnt() để tìm các nút xung quanh pp[] của nút p vừa lấy ra khỏi hàng đợi;
+//        Dùng vòng for duyệt lần lượt các nút chung quanh vừa được tìm thấy ở trên {
+//            Nếu là nút chưa được đi qua (visited = false) {
+//                Đánh dấu nút pp[i] là đã đi qua (pp[i].visited = true);
+//                Đánh dấu nút p là nút đi qua trước đó của nút pp[i] (pp[i].prev = &p);
+//                if (pp[i] chính là nút A(x, y) {
+//                    found = true;
+//                    break khỏi vòng lặp for;
+//                }
+//                else {
+//                    cho nút pp[i] vào hàng đợi bằng hàm enQueue();
+//                }
+//            }
+//        }
     }
-    if (found == true) {
-        Sử dụng con trỏ prev trong mỗi nút để in lần lượt tọa độ các nút đã đi qua từ A(x, y) đến O(0, 0);
-    }else{
-        Thông báo "Không có đường đi từ O(0, 0) đến A(x, y)";
-    }
+//    if (found == true) {
+//        Sử dụng con trỏ prev trong mỗi nút để in lần lượt tọa độ các nút đã đi qua từ A(x, y) đến O(0, 0);
+//    }else{
+//        printf("Không có đường đi từ O(0, 0) đến A(x, y)");
+//    }
 }
 
 int main(){
-    //initQueue();
+    Queue myQueue;
+    initQueue(&myQueue);
     //srand(time(NULL));
     for(int i = 0; i < MAX_ROW; i++){
         for(int x = 0; x < MAX_COLUMN; x++){
