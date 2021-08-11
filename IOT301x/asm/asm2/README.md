@@ -1,13 +1,3 @@
-Assignment 2 - Xử lý bản tin dữ liệu cảm biến lưu trữ tại bộ điều khiển trung tâm
-
-Yêu cầu: 
-- Bắt buộc: 3/3
-- Nâng cao: 2/3
-
-Sử dụng phần lớn các function liên quan tới string, pointer để chỉ địa chỉ và thay đổi các phần tử array.
-Các hàm hỗ trợ lần nhau sử dụng biến global và các địa chỉ biến.
-
-
 //avg delay showed in asm tutorial is not the same as output, so manually calculated avg delay is shown here
 total sent : 14933753
 total recv : 15076289
@@ -15,7 +5,7 @@ total delay: 142536
 avg delay  : 142536/9 = 15837
 
 sent
-mins       secs        millisecs                                                    
+mins       secs        millisecs
 21         45          638
 22         29          232
 22         33          192
@@ -25,8 +15,9 @@ mins       secs        millisecs
 32         45          088
 36         39          262
 36         39          267
-14580000   351000      2753           14933753            
+14580000   351000      2753           14933753
 
+recv
 mins       secs        millisecs
 22         11          936
 22         29          256
