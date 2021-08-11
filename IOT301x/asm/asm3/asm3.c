@@ -13,9 +13,7 @@ struct POINT{//struct of every point on matrix board
     int value;
     bool visited;
     struct POINT* prev;
-};
-
-typedef struct POINT point_t;
+};typedef struct POINT point_t;
 point_t matrix[MAX_ROW][MAX_COLUMN];
 
 typedef struct{
@@ -23,8 +21,6 @@ typedef struct{
         int front;
         int rear;
 }Queue;
-
-typedef struct POINT point_t;
 
 void initQueue(Queue *q){
     q->front = 0;
@@ -79,28 +75,30 @@ bool checkCoordinate(int x, int y) {
 void findSurroundingPoint(int x, int y, point_t surroundingPnt[], int* count){
     int tempCnt = 0;//posible directions
     
-    if (checkCoordinate(x, y+1) == true && matrix[x][y+1].value == 1){                   
-        surroundingPnt[tempCnt] = matrix[x][y+1];                     
-        tempCnt++;                                                    
-    }                                                                 
-    if (checkCoordinate(x+1, y) == true && matrix[x+1][y].value == 1){                  
-        surroundingPnt[tempCnt] = matrix[x+1][y];                     
-        tempCnt++;                                                    
-    }                                                                 
-    if (checkCoordinate(x, y-1) == true && matrix[x][y-1].value == 1){
+    if (checkCoordinate(x, y+1) == true && matrix[x][y+1].value == 1 && matrix[x][y+1].visited == false){                   
+        surroundingPnt[tempCnt] = matrix[x][y+1];
+        tempCnt++;
+        printf("\nsuiteable: %d, %d",x,y+1);
+    }
+    if (checkCoordinate(x+1, y) == true && matrix[x+1][y].value == 1 && matrix[x+1][y].visited == false){                  
+        surroundingPnt[tempCnt] = matrix[x+1][y];
+        tempCnt++;
+        printf("\nsuiteable: %d, %d",x+1,y);
+    }
+    if (checkCoordinate(x, y-1) == true && matrix[x][y-1].value == 1 && matrix[x][y-1].visited == false){
         surroundingPnt[tempCnt] = matrix[x][y-1];                     
         tempCnt++;                                                    
-    }                                                                 
-    if (checkCoordinate(x-1, y) == true && matrix[x-1][y].value == 1){                    
+        printf("\nsuiteable: %d, %d",x,y-1);
+    }
+    if (checkCoordinate(x-1, y) == true && matrix[x-1][y].value == 1 && matrix[x-1][y].visited == false){                    
         surroundingPnt[tempCnt] = matrix[x-1][y];
         tempCnt++;
+        printf("\nsuiteable: %d, %d",x-1,y);
     }
 
     *count = tempCnt;
     //printf("\n\ncount: %d\n\n",tempCnt);
 }
-
-
 
 void findShortestPath(int x, int y){
     Queue myQueue;
@@ -113,6 +111,7 @@ void findShortestPath(int x, int y){
     bool found = false;
 
     while (isEmpty(myQueue) == false && found == false) {
+        printf("\n\nnext in queue");
         point_t p = deQueue(&myQueue);
         findSurroundingPoint(p.row,p.column,pp,&count);
         for(int i = 0; i < 4; i++){
@@ -139,19 +138,22 @@ void findShortestPath(int x, int y){
 
 int main(){
     srand(10);
-    for(int i = 0; i < MAX_ROW; i++){
-        for(int x = 0; x < MAX_COLUMN; x++){
-            matrix[i][x].row = x;
-            matrix[i][x].column = i;
-            matrix[i][x].value = rand() % 2;
-            matrix[i][x].visited = false;
+    int tmpc = 0;
+
+    for(int i = 0; i < MAX_COLUMN; i++){
+        for(int x = 0; x < MAX_ROW;x++){
+            matrix[x][i].row = x;
+            matrix[x][i].column = i;
+            matrix[x][i].value = rand()%10;
+            matrix[x][i].visited = false;
 
             printf(" %d ",matrix[i][x].value);
-            if(x == MAX_COLUMN-1){}else printf("|");
+            if(x != MAX_COLUMN-1) printf("|");
         }
         printf("\n-----------------------------------\n");
     }
-    int destX = 1;
-    int destY = 0;
-    findShortestPath(destX,destY);
+
+    //int destX = 1;
+    //int destY = 0;
+    //findShortestPath(destX,destY);
 }
