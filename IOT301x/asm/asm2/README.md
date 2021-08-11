@@ -1,8 +1,10 @@
-//avg delay showed in asm tutorial is not the same as output, so manually calculated avg delay is shown here
+`avg delay showed in asm tutorial is not the same as output, so manually calculated avg delay is shown here`
+ ```
 total sent : 14933753
 total recv : 15076289
 total delay: 142536
 avg delay  : 142536/9 = 15837
+```
 ```
 sent
 mins       secs        millisecs
