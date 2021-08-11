@@ -72,42 +72,55 @@ bool checkCoordinate(int x, int y) {
     return false;
 }
 
-void findSurroundingPoint(int x, int y, point_t surroundingPnt[], int* count){
+point_t* findSurroundingPoint(int x, int y, int* count){
     int tempCnt = 0;//posible directions
-    printf("\n\nnext in queue: point [%d][%d]",x,y);
-
+    printf("\n\nnext in queue: point [%d][%d]\r\n",x,y);
+    static point_t surroundingPnt[4];
     if(checkCoordinate(x, y+1) == true && matrix[x][y+1].value == 1 && matrix[x][y+1].visited == false){                   
-        surroundingPnt[tempCnt] = matrix[x][y+1];
+        surroundingPnt[tempCnt].value = matrix[x][y+1].value;
+        surroundingPnt[tempCnt].row = matrix[x][y+1].row;
+        surroundingPnt[tempCnt].column = matrix[x][y+1].column;
         tempCnt++;
         printf("\nsuitable: below");
     }
 
     if(checkCoordinate(x+1, y) == true && matrix[x+1][y].value == 1 && matrix[x+1][y].visited == false){                  
-        surroundingPnt[tempCnt] = matrix[x+1][y];
+        //surroundingPnt[tempCnt] = matrix[x+1][y];
+        surroundingPnt[tempCnt].value = matrix[x+1][y].value;
+        surroundingPnt[tempCnt].row = matrix[x+1][y].row;
+        surroundingPnt[tempCnt].column = matrix[x+1][y].column;
         tempCnt++;
         printf("\nsuitable: right");
     }
 
     if(checkCoordinate(x, y-1) == true && matrix[x][y-1].value == 1 && matrix[x][y-1].visited == false){
-        surroundingPnt[tempCnt] = matrix[x][y-1];                     
+        //surroundingPnt[tempCnt] = matrix[x][y-1];    
+        surroundingPnt[tempCnt].value = matrix[x][y-1].value;
+        surroundingPnt[tempCnt].row = matrix[x][y-1].row;
+        surroundingPnt[tempCnt].column = matrix[x][y-1].column;                 
         tempCnt++;                                                    
         printf("\nsuitable: upper");
     }
 
     if(checkCoordinate(x-1, y) == true && matrix[x-1][y].value == 1 && matrix[x-1][y].visited == false){                    
-        surroundingPnt[tempCnt] = matrix[x-1][y];
+        //surroundingPnt[tempCnt] = matrix[x-1][y];
+        surroundingPnt[tempCnt].value = matrix[x-1][y].value;
+        surroundingPnt[tempCnt].row = matrix[x-1][y].row;
+        surroundingPnt[tempCnt].column = matrix[x-1][y].column;   
         tempCnt++;
         printf("\nsuitable: left");
     }
+    
 
     *count = tempCnt;
+    return surroundingPnt;
     //printf("\n\ncount: %d\n\n",tempCnt);
 }
 
 void findShortestPath(int x, int y){
     Queue myQueue;
     initQueue(&myQueue);
-    point_t pp[4];
+    //point_t pp[4];
     int count = 0;
 
     matrix[0][0].visited = true;
@@ -116,7 +129,7 @@ void findShortestPath(int x, int y){
 
     while (isEmpty(myQueue) == false && found == false){
         point_t p = deQueue(&myQueue);
-        findSurroundingPoint(p.row,p.column,pp,&count);
+        point_t *pp = findSurroundingPoint(p.row,p.column,&count);
 
         for(int i = 0; i < 4; i++){
             pp[i].visited = true;
@@ -147,7 +160,7 @@ int main(){
             matrix[x][i].value = rand()%2;
             matrix[x][i].visited = false;
 
-            printf(" %d ",matrix[x][i].value);
+            printf("%d ",matrix[x][i].value);
 
             if(x != MAX_ROW-1){printf("|");}
         }
