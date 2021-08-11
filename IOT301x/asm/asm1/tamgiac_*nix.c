@@ -172,6 +172,5 @@ void giaima_tamgiac(){
 }
 
 int main(){
-    system("clear");
     giaima_tamgiac();
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdbool.h>
+#include <windows.h>
 #define PI 3.14159265
 
 bool isTriangle = false;
@@ -56,7 +57,7 @@ bool kiemtra_tamgiac(float coords[]){// if area != 0 triangle is valid
         printf("\nToa do 3 diem nhap vao tao thanh mot tam giac.\n");
         return true;
     }else{
-        printf("\nToa do 3 diem nhap vao khong tao thanh mot tam giac.\n");sleep(1);system("clear");
+        printf("\nToa do 3 diem nhap vao khong tao thanh mot tam giac.\n");Sleep(1000);system("clear");
         return false;
     }                                                           
 }
