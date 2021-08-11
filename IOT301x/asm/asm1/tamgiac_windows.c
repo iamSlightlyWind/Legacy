@@ -46,7 +46,7 @@ void trungtuyen_tamgiac(float coord[]){
 }
 
 void dientich_tamgiac(){
-    printf("%0.2f",area);
+    printf("%0.2f",area);//got area from kiemtra_tamgiac
 }
 
 bool kiemtra_tamgiac(float coords[]){// if area != 0 triangle is valid
