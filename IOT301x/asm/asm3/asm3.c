@@ -75,30 +75,29 @@ bool checkCoordinate(int x, int y) {
 void findSurroundingPoint(int x, int y, point_t surroundingPnt[], int* count){
     int tempCnt = 0;//posible directions
     printf("\n\nnext in queue: point [%d][%d]",x,y);
-    printf("%d",matrix[1][1].value);
 
     if(checkCoordinate(x, y+1) == true && matrix[x][y+1].value == 1 && matrix[x][y+1].visited == false){                   
         surroundingPnt[tempCnt] = matrix[x][y+1];
         tempCnt++;
-        printf("\nsuiteable: below");
+        printf("\nsuitable: below");
     }
 
     if(checkCoordinate(x+1, y) == true && matrix[x+1][y].value == 1 && matrix[x+1][y].visited == false){                  
         surroundingPnt[tempCnt] = matrix[x+1][y];
         tempCnt++;
-        printf("\nsuiteable: right");
+        printf("\nsuitable: right");
     }
 
     if(checkCoordinate(x, y-1) == true && matrix[x][y-1].value == 1 && matrix[x][y-1].visited == false){
         surroundingPnt[tempCnt] = matrix[x][y-1];                     
         tempCnt++;                                                    
-        printf("\nsuiteable: upper");
+        printf("\nsuitable: upper");
     }
 
     if(checkCoordinate(x-1, y) == true && matrix[x-1][y].value == 1 && matrix[x-1][y].visited == false){                    
         surroundingPnt[tempCnt] = matrix[x-1][y];
         tempCnt++;
-        printf("\nsuiteable: left");
+        printf("\nsuitable: left");
     }
 
     *count = tempCnt;
@@ -158,6 +157,7 @@ int main(){
         }
         printf("\n");
     }
+    
     int destX = 2;
     int destY = 2;
     findShortestPath(destX,destY);
