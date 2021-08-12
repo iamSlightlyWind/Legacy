@@ -77,21 +77,29 @@ void findSurroundingPoint(int x, int y,point_t *pp[4], int* count){
     static point_t surroundingPnt[4];
     if(checkCoordinate(x, y+1) == true && matrix[x][y+1].value == 1 && matrix[x][y+1].visited == false){                   
         pp[tempCount] = &matrix[x][y+1];
+        matrix[x][y+1].prev->row    = x;
+        matrix[x][y+1].prev->column = y;
         tempCount++;
     }
 
     if(checkCoordinate(x+1, y) == true && matrix[x+1][y].value == 1 && matrix[x+1][y].visited == false){                  
         pp[tempCount] = &matrix[x+1][y];
+        matrix[x][y+1].prev->row    = x;
+        matrix[x][y+1].prev->column = y;
         tempCount++;
     }
 
     if(checkCoordinate(x, y-1) == true && matrix[x][y-1].value == 1 && matrix[x][y-1].visited == false){  
         pp[tempCount] = &matrix[x][y-1];
+        matrix[x][y+1].prev->row    = x;
+        matrix[x][y+1].prev->column = y;
         tempCount++;                                                    
     }
 
     if(checkCoordinate(x-1, y) == true && matrix[x-1][y].value == 1 && matrix[x-1][y].visited == false){                    
         pp[tempCount] = &matrix[x-1][y];
+        matrix[x][y+1].prev->row    = x;
+        matrix[x][y+1].prev->column = y;
         tempCount++;
     }
     
@@ -104,32 +112,31 @@ void findShortestPath(int x, int y){
     int count = 0;
     point_t *pp[4];
     point_t p;
-    point_t destP;
+    int rant = 0;
 
     matrix[0][0].visited = true;
     enQueue(&myQueue,matrix[0][0]);
     bool found = false;
     while (isEmpty(myQueue) == false && found == false){
+        rant++;
         p = deQueue(&myQueue);
         findSurroundingPoint(p.row,p.column,pp,&count);
 
         for(int i = 0; i < count; i++){
             pp[i]->visited = true;
             pp[i]->prev = &p;
+            printf("\n------------------\ncurrent: [%d][%d]\nprev:    [%d][%d]\n",pp[i]->row,pp[i]->column,pp[i]->prev->row,pp[i]->prev->column);
             if (pp[i]->row == x && pp[i]->column == y){
-                destP = *pp[i];
                 found = true;
                 break;
             }else{
                 enQueue(&myQueue,*pp[i]);
             }
-        
         }
     }
 
     if (found == true) {
         printf("\n\nfound!");
-        printf("\n[%d][%d]\n\n",(destP.prev)->prev->row,(destP.prev)->prev->column);
     }else{
         printf("\n\nKhông có đường đi từ O(0, 0) đến A(%d, %d)",x,y);
     }
@@ -156,7 +163,7 @@ int main(){
     }
     
     
-    int destX = 3;
-    int destY = 1;
+    int destX = 4;
+    int destY = 4;
     findShortestPath(destX,destY);
 }
