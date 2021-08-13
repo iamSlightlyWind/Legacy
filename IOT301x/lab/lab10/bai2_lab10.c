@@ -8,6 +8,3 @@ int main(){
 
     printf("a = %d\n", a);
 }
-
-//basically whats asked but cant compile locally
-//https://onlinegdb.com/G3xA0W8C_
