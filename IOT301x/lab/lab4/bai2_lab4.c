@@ -2,7 +2,7 @@
 
 int main(){
     int x;
-    scanf("%i",&x);
+    scanf("%d",&x);
     x |= (1<<4);
-    printf("\n%i",x);
+    printf("\n%d",x);
 }
