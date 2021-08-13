@@ -10,7 +10,7 @@ int main(){
         for(int x = 1;x <= i;x++){
             if(i%x==0) pCount++;
         }
-        if(pCount == 2) primeN[aCount++] = i;;
+        if(pCount == 2) primeN[aCount++] = i;
     pCount=0;
     }
 

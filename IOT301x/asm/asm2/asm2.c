@@ -22,20 +22,22 @@ void fileRead(){
     }
 }
 
-int soBanTinGuiDi(int *sentLines){//also returns how many lines are used to sent info(s)
-    int tempSentCount = 0;
-    int tempSentLines = 0;
+void soBanTinGuiDi(int *sentLines, int *recvLines, int *sentCount, int* recvCount){//also returns how many lines are used to sent info(s)
+    int tempSentLines = 0, tempRecvLines = 0;
     
     for(int i = 0; i < linesCount; i++){//check whether or not a line is a log of sent info(s)
         if(strstr(myString[i], "\"cmd\":\"set\"") != NULL){
-            tempSentCount++;
+            *sentCount += 1;
             *(sentLines + tempSentLines++) = i; //save the line number
+        }
+
+        if(strstr(myString[i], "\"cmd\":\"status\"") != NULL){
+            *recvCount += 1;
+            *(recvLines + tempRecvLines++) = i; //save the line number
         }
     }
 
-    printf("So ban tin gui di: %d\n",tempSentCount);
-
-    return tempSentCount;
+    printf("So ban tin gui di: %d\n",*sentCount);
 }
 
 void soBanTinTuThietBi(int sentCount,int *sentLines){
@@ -143,8 +145,10 @@ void thoiGianTreTrungBinh(){
 int main(){
     fileRead();
 
-    int sentLines[100];
-    int sentCount = soBanTinGuiDi(&sentLines);
+    int sentLines[100], recvLines[100];
+    int sentCount = 0, recvCount = 0;
+    soBanTinGuiDi(&sentLines,&recvLines,&sentCount,&recvCount);
+    
     soBanTinTuThietBi(sentCount,&sentLines);
     soBanTinGuiLoi();
     thoiGianTreLonNhat();
