@@ -132,7 +132,7 @@ int findShortestPath(int x, int y){
     }
 
     if (found == true) {
-        printf("\n\nQuang duong ngan nhat di tu [0][0] den [%d][%d]",x,y,current->row,current->column);
+        printf("\n\nQuang duong ngan nhat di tu [0][0] den [%d][%d]",current->row,current->column);
         for(;;){
             if(current->column != 0 || current->row !=0){
                 distanceCount++;
