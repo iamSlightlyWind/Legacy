@@ -25,32 +25,33 @@ void fileRead(){//read file and write line by line to array
 void soBanTinGuiDi(int *sentLines, int *recvLines, int *sentCount, int* recvCount){//count sent lines, also returns how many lines are used to sent info(s)
     int tempSentLines = 0, tempRecvLines = 0;
     
-    for(int i = 0; i < linesCount; i++){//check whether or not a line is a log of sent info(s)
+    for(int i = 0; i < linesCount; i++){                                //check whether or not a line is a log of sent info(s)
         if(strstr(myString[i], "\"cmd\":\"set\"") != NULL){
             *sentCount += 1;
-            *(sentLines + tempSentLines++) = i; //save the line number
+            *(sentLines + tempSentLines++) = i;                         //save the line number
         }
 
         if(strstr(myString[i], "\"cmd\":\"status\"") != NULL){
             *recvCount += 1;
-            *(recvLines + tempRecvLines++) = i; //save the line number
+            *(recvLines + tempRecvLines++) = i;                         //save the line number
         }
     }
 
     printf("So ban tin gui di: %d\n",*sentCount);
 }
 
-void soBanTinTuThietBi(int sentCount,int *sentLines){       //check if input device name == device id got from sent lines
+void soBanTinTuThietBi(int sentCount,int *sentLines){//check if input device name == device id got from sent lines
     char deviceName[5];
 
     int LineContainsDevice[1000];
     int DeviceSentCounts = 0;
 
-    char *pfound = strstr(myString[0], "zwave-");           //find distance to "zwave-"
-    int distanceToAddress = (int)(pfound - myString[0])+6;  //+6 = distance starting after "zwave-" (ie distance to device address)
+    char *pfound = strstr(myString[0], "zwave-");                                                   //find distance to "zwave-"
+    int distanceToAddress = (int)(pfound - myString[0])+6;                                          //+6 = distance starting after "zwave-" (ie distance to device address)
 
     printf("\n\nNhap dia chi nwk cua thiet bi: ");
     scanf("%s",deviceName);
+    lowerString(&deviceName,strlen(deviceName));
 
     char temp[5];
     for(int i = 0; i < sentCount; i++){
@@ -68,31 +69,31 @@ void lowerString(char *givenString, int strLength){//lowercase the input address
     }
 }
 
-void thoiGianTreLonNhat(int *sentLines, int *recvLines, int *errorLines, int *sentCount, int* recvCount,int errorCount){
+void thoiGianTreLonNhat(int *sentLines, int *recvLines, int *errorLines, int *sentCount, int* recvCount,int errorCount){//get largest delay of valid sents and receives
     int maxDelay = 0;
     int calculationTrigger = 0;
     char tempStr[5];
     int sMins, sSeconds, sMilliseconds, rMins, rSeconds, rMilliseconds;
     int sentTime = 0, recvTime = 0;
     int tempSentCount = 0, tempRecvCount = 0;
-    int skip = 0;
+    int skip = 0;                                                   //used to 'continue' loop when encountered a line with error
 
-    char *pfound = strstr(myString[0], "zwave-");           //find distance to "zwave-"
-    int distanceToAddress = (int)(pfound - myString[0])+6;  //+6 = distance starting after "zwave-" (ie distance to device address)
+    char *pfound = strstr(myString[0], "zwave-");                   //find distance to "zwave-"
+    int distanceToAddress = (int)(pfound - myString[0])+6;          //pfound + 6 = distance starting after "zwave-" (ie distance to device address,"zwave-" = 6)
 
 
     for (int i = 0; i < linesCount+1; i++){
         for(int x = 0; x < errorCount; x++){
-            if(i == errorLines[x]){
-                skip = 1;
+            if(i == errorLines[x]){                                 //if the line is already marked as contains error
+                skip = 1;                                           //set skip condition
             }
         }
         
         if(skip == 1){
-            skip = 0;
-            if(i == sentLines[tempSentCount]){tempSentCount++;}
-            if(i == recvLines[tempRecvCount]){tempRecvCount++;}
-            continue;
+            skip = 0;                                               //reset skip condition
+            if(i == sentLines[tempSentCount]){tempSentCount++;}     //sync the counter of sentLines
+            if(i == recvLines[tempRecvCount]){tempRecvCount++;}     //and recvLines
+            continue;                                               //-next loop
         }
 
         memset(tempStr, 0, 5);
@@ -134,7 +135,7 @@ void thoiGianTreLonNhat(int *sentLines, int *recvLines, int *errorLines, int *se
     printf("\n\nDo tre lon nhat la: %d",maxDelay);
 }
 
-void soBanTinGuiLoi(int *sentLines, int *recvLines, int *errorLines, int *sentCount, int* recvCount,int *errorCount){
+void soBanTinGuiLoi(int *sentLines, int *recvLines, int *errorLines, int *sentCount, int* recvCount,int *errorCount){//check if received lines have matching id with sents, count and store them in "errorLines" and "errorCount"
     int CheckTrigger = 0;
     char tempStr[5];
     int sID, rID;
@@ -145,20 +146,20 @@ void soBanTinGuiLoi(int *sentLines, int *recvLines, int *errorLines, int *sentCo
     char *sentReqidLocation = strstr(myString[sentLines[0]], "reqid");  //find distance to "reqid" in sent lines
     char *recvReqidLocation = strstr(myString[recvLines[0]], "reqid");  //find distance to "reqid" in recv lines
     
-    int distanceToSentID = (int)(sentReqidLocation - myString[sentLines[0]])+9;  //reqid": "xxxx", {reqid": "} = 9
-    int distanceToRecvID = (int)(recvReqidLocation - myString[recvLines[0]])+9;  //reqid": "xxxx", {reqid": "} = 9
+    int distanceToSentID = (int)(sentReqidLocation - myString[sentLines[0]])+9; //reqid": "xxxx", {reqid": "} = 9
+    int distanceToRecvID = (int)(recvReqidLocation - myString[recvLines[0]])+9; //reqid": "xxxx", {reqid": "} = 9
 
     for (int i = 0; i < linesCount+1; i++){
         if(i <= linesCount){
             if(i == sentLines[tempRecvCount]){
-                sID = atol(strncpy(tempStr, myString[i] + distanceToSentID,4));  //get sent id
+                sID = atol(strncpy(tempStr, myString[i] + distanceToSentID,4)); //get sentID and convert to long
                 CheckTrigger++;
                 tempSentCount++;
                 tempErrorLinesMarked[0] = i;
             }
 
             if(i == recvLines[tempRecvCount]){
-                rID = atol(strncpy(tempStr, myString[i] + distanceToRecvID,4));  //get recived id
+                rID = atol(strncpy(tempStr, myString[i] + distanceToRecvID,4)); //get recvID and convert to long
                 CheckTrigger++;
                 tempRecvCount++;
                 tempErrorLinesMarked[1] = i;
@@ -167,19 +168,18 @@ void soBanTinGuiLoi(int *sentLines, int *recvLines, int *errorLines, int *sentCo
 
         if(CheckTrigger == 2){
             if (sID != rID){
-                errorLines[*errorCount] = tempErrorLinesMarked[0];
-                *errorCount += 1;
-                errorLines[*errorCount] = tempErrorLinesMarked[1];
-                *errorCount += 1;
-            }                      //increase error counts
-            CheckTrigger = 0;                         //once got both sent and recv id
-
+                errorLines[*errorCount] = tempErrorLinesMarked[0];              //
+                *errorCount += 1;                                               //mark each line as contain error
+                errorLines[*errorCount] = tempErrorLinesMarked[1];              //
+                *errorCount += 1;                                               //and increase errorCount
+            }
+            CheckTrigger = 0;                                                   //reset checkTrigger
         }
     }
     printf("\n\nSo ban tin loi: %d",(*errorCount)/2);
 }
 
-void thoiGianTreTrungBinh(){
+void thoiGianTreTrungBinh(){//get stored delay values and divide them to get average delay
     int totalDelay = 0;
     for(int i = 0; i < delayCounter; i++){
         totalDelay += delay[i];
@@ -188,22 +188,15 @@ void thoiGianTreTrungBinh(){
 }
 
 int main(){
-    fileRead();
+    fileRead();                                                                             //read log to string
 
     int sentLines[100], recvLines[100], errorLines[100];
     int sentCount = 0, recvCount = 0, errorCount = 0;
-    soBanTinGuiDi(&sentLines,&recvLines,&sentCount,&recvCount);
+    soBanTinGuiDi(&sentLines,&recvLines,&sentCount,&recvCount);                             //count both sent and received lines
     
-    soBanTinTuThietBi(sentCount,&sentLines);
-    soBanTinGuiLoi(&sentLines,&recvLines,&errorLines,&sentCount,&recvCount,&errorCount);
+    soBanTinTuThietBi(sentCount,&sentLines);                                                //check sent lines if log deviceID matches user input deviceID
+    soBanTinGuiLoi(&sentLines,&recvLines,&errorLines,&sentCount,&recvCount,&errorCount);    //check if received lines have matching id with sents, count and store them in "errorLines" and "errorCount"
 
-    printf("\n---%d",errorLines[0]);
-    printf("\n---%d",errorLines[1]);
-    printf("\n---%d",errorLines[2]);
-    printf("\n---%d",errorLines[3]);
-
-    printf("\n");
-
-    thoiGianTreLonNhat(&sentLines,&recvLines,&errorLines,&sentCount,&recvCount,errorCount);
-    thoiGianTreTrungBinh();
+    thoiGianTreLonNhat(&sentLines,&recvLines,&errorLines,&sentCount,&recvCount,errorCount); //get largest delay of valid sents and receives
+    thoiGianTreTrungBinh();                                                                 //get average delay of valid sents and receives
 }
