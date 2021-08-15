@@ -65,8 +65,8 @@ point_t deQueue(Queue *q){//return the first point in queue
     return d;//then return d
 }
 
-bool checkCoordinate(int x, int y) {                            //
-    if (x >= 0 && x <= MAX_ROW && y >= 0 && y <= MAX_COLUMN){   //check if point exist on matrix
+bool checkCoordinate(int x, int y){                             //
+    if (x >= 0 && x < MAX_ROW && y >= 0 && y < MAX_COLUMN){     //check if point exist on matrix
         return true;                                            //
     }                                                           //
     return false;                                               
@@ -186,7 +186,6 @@ int main(){
         }                                                                       
         printf("\n");
     }
-    
     
     int destX = 4;                                      //destination.x     no attributes needed, not using point_t
     int destY = 4;                                      //destination.y     
