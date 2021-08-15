@@ -56,7 +56,7 @@ void enQueue(Queue *q, point_t x){//put the point in rear of queue
 point_t deQueue(Queue *q){//return the first point in queue
     point_t d;   
     if (!isEmpty(*q)) {             //if queue is not empty
-       d = q->data[q->front];       //d = new front in queue
+       d = q->data[q->front];       //get d = new front in queue
        q->front = q->front +1;      //
     }                               
     if (q->front > q->rear) {           //if queue is empty
@@ -136,7 +136,7 @@ int findShortestPath(int x, int y){//find shortest path from [0][0] to [x][y]
             if(current->column != 0 || current->row !=0){                       //if current point is not starting point
                 distanceCount++;                                                //
                 current = current->prev;                                        //keep getting prev point's row and column
-                printf("\nprev: [%d][%d]",current->row,current->column);        //and print route tracked back to starting point
+                printf("\nDiem truoc do: [%d][%d]",current->row,current->column);        //and print route tracked back to starting point
             }else break;
         }
     }else{
