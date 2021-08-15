@@ -154,11 +154,32 @@ int main(){
             matrix[x][i].column = i;                                            //
             matrix[x][i].value = rand()%2;                                      //
             matrix[x][i].visited = false;                                       //
+        }                                                                       
+    }
 
-            printf(" %d ",matrix[x][i].value);                                  //
-                                                                                //
-            if(x != MAX_ROW-1){printf("|");}                                    //
-        }                                                                       //draw matrix
+    //int customMatrix[9][9] ={
+    //    {1, 1, 1, 1, 1, 1, 1, 1, 1},
+    //    {1, 0, 0, 0, 0, 0, 0, 0, 1},
+    //    {1, 1, 0, 0, 0, 0, 0, 1, 1},
+    //    {0, 1, 0, 0, 0, 0, 0, 1, 0},
+    //    {0, 1, 0, 0, 0, 0, 0, 1, 1},
+    //    {1, 1, 0, 0, 0, 0, 0, 0, 1},
+    //    {1, 0, 0, 0, 0, 0, 0, 1, 1},
+    //    {1, 0, 0, 0, 0, 0, 1, 1, 0},
+    //    {1, 1, 1, 1, 1, 1, 1, 0, 0}
+    //};
+//custom matrix used for testing, could also be used in assignment review, keeping as commented.
+    //for(int i = 0; i < 9; i++){
+    //    for(int x = 0; x < 9; x++){
+    //        matrix[i][x].value = customMatrix[x][i];
+    //    }
+    //}
+
+    for(int i = 0; i < MAX_COLUMN; i++){
+        for(int x = 0; x < MAX_ROW; x++){
+            printf(" %d ",matrix[x][i].value);
+            if(x != MAX_ROW-1){printf("|");}
+        }
         printf("\n");                                                           //
         for(int z = 0; z < MAX_ROW; z++){                                       //
             printf("----");                                                     //
