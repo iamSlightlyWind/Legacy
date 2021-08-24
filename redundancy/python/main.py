@@ -17,14 +17,16 @@ length = []
 for i in do_dai:
     length.append(i)
 
+setCount = int(so_bo)
+
 data2 = []
 if len (length) > 2:
     for i in length:
-        canh_1 = int(i)
-        do_dai.remove(i)
-        for j in do_dai:
+        for j in range(setCount):
+            j = int(j)
             data3 = []
-            canh_2 = int(j)
+            canh_1 = int(do_dai[0])
+            canh_2 = int(do_dai[j])
             stuff = math.sqrt(canh_1**2 + canh_2**2)
             for a in do_dai:
                 a = int(a)
@@ -33,13 +35,10 @@ if len (length) > 2:
                     data3.append(canh_2)
                     data3.append(a)
                     data2.append(data3)
-for i in data2:
-    if len(i)!=3:
-        data2.remove(i)
+        do_dai.remove(i)
 print(data2)
 
 # tinh dap an
-final_key = 0
 data4 = 1
 key = []
 for i in data2:
@@ -47,8 +46,8 @@ for i in data2:
         for a in data:
             if int(j) == int(a[0]):
                 data4 *= int(a[1])
-    key.append(data4)
-    data4 = 1
+                key.append(data4)
+                data4 = 1
 for i in key:
-    final_key += i
-print(final_key)
+    data4 *= i
+print(data4)

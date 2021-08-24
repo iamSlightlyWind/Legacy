@@ -20,7 +20,7 @@ int cmpfunc(const void* a, const void* b){
    return(*(int*)a - *(int*)b);
 }
 
-int availSet[10][2];
+int availSet[10][3];
 int availCount = 0, errorCount = 0;
 
 int main(){
@@ -52,21 +52,22 @@ int main(){
 
                     qsort(&temp,3,sizeof(int),cmpfunc);
                     if(pow(temp[0],2) + pow(temp[1],2) > pow(temp[2],2)){
-                        errorCount = 0;
                         for(int y = 0; y < availCount; y++){
+                            errorCount = 0;
                             if(temp[0] == availSet[y][0]) errorCount++;
                             if(temp[1] == availSet[y][1]) errorCount++;
                             if(temp[2] == availSet[y][2]) errorCount++;
                         }
 
                         if(errorCount < 3){
-                            printf("%d %d %d",temp[0],temp[1],temp[2]);
+                            //printf("%d %d %d",temp[0],temp[1],temp[2]);
                             printf("\n");
 
                             availSet[availCount][0]   = temp[0];
                             availSet[availCount][1]   = temp[1];
                             availSet[availCount++][2] = temp[2];
                             sum += set[i][1]*set[i+x][1]*set[i+z][1];
+                            printf("%d * %d * %d",set[i][1],set[i+x][1],set[i+z][1]);
                         }
                     }
                 }
