@@ -20,13 +20,14 @@ int cmpfunc(const void* a, const void* b){
    return(*(int*)a - *(int*)b);
 }
 
-int availSet[10][3];
+int availSet[10][2];
 int availCount = 0, errorCount = 0;
 
 int main(){
     FILE *readStream = fopen(inputFile,"r");
     int setCount = readFile(readStream);
     int set[setCount][3];
+    int sum = 0;
 
     for(int i = 0; i < setCount; i++){
         set[i][2] = 0;
@@ -64,11 +65,13 @@ int main(){
 
                             availSet[availCount][0]   = temp[0];
                             availSet[availCount][1]   = temp[1];
-                            availSet[availCount++][2] = temp[2];   
+                            availSet[availCount++][2] = temp[2];
+                            sum += set[i][1]*set[i+x][1]*set[i+z][1];
                         }
                     }
                 }
             }
         }
     }
+    printf("\n\n\n---%d",sum);
 }

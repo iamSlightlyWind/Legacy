@@ -4,7 +4,7 @@ import math
 so_bo = int(input("so bo: "))
 data = []
 for i in range (so_bo) :
-    b = input(": ").split(",")
+    b = input(": ").split(" ")
     data.append(b)
 
 # check so cap co the lam canh tam giac
@@ -14,10 +14,14 @@ for i in data:
 do_dai.sort()
 
 data2 = []
-if len (do_dai) > 2:
+if len (do_dai) > 3:
     for i in do_dai:
-        for j in range(1,len(do_dai)):
-            data3 = []
+        for j in do_dai[1:]:
+            print(j)
+        print("---------")
+        do_dai.remove(i)
+
+'''data3 = []
             canh_1 = int(do_dai[0])
             canh_2 = int(do_dai[j])
             stuff = math.sqrt(canh_1**2 + canh_2**2)
@@ -29,6 +33,7 @@ if len (do_dai) > 2:
                     data3.append(a)
                     data2.append(data3)
         do_dai.remove(i)
+print(data2)
 
 # tinh dap an
 data4 = 1
@@ -42,4 +47,4 @@ for i in data2:
                 data4 = 1
 for i in key:
     data4 *= i
-print(data4)
+print(data4)'''
