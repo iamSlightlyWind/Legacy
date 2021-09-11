@@ -180,10 +180,10 @@ int main(){
             printf(" %d ",matrix[x][i].value);
             if(x != MAX_ROW-1){printf("|");}
         }
-        printf("\n");                                                           //
-        for(int z = 0; z < MAX_ROW; z++){                                       //
-            printf("----");                                                     //
-        }                                                                       
+        printf("\n");
+        for(int z = 0; z < MAX_ROW; z++){
+            printf("----");
+        }
         printf("\n");
     }
     
