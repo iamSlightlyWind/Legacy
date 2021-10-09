@@ -50,7 +50,7 @@ void enQueue(Queue *q, point_t x){//put the point in rear of queue
         }
         q->rear = q->rear + 1;
         q->data[q->rear] = x;
-    }
+    } 
 }
 
 point_t deQueue(Queue *q){//return the first point in queue
