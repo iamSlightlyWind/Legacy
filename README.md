@@ -7,4 +7,4 @@
  
  
   
-- `24/1/2022 - For windows who cannot clone the repository: There seem to be files whose names cannot be used on Windows. Most of the time I spent doing the work on Linux, and the naming restriction isn't as stupid as on Windows. These files contain "*" in their name. I will update these file names once I have the time.`
+- `24/1/2022 - For windows users who cannot clone the repository: There seem to be files whose names cannot be used on Windows. Most of the time I spent doing the work on Linux, and the naming restriction isn't as stupid as on Windows. These files contain "*" in their name. I will update these file names once I have the time.`
