@@ -68,8 +68,14 @@ public class GradeStudent {
     public static void report(double midTermScore, double finalScore, double homeworkScore){
         double score = midTermScore + finalScore + homeworkScore;
         System.out.println("\nOverall percentage = " + score);
-
-        
+        System.out.print("Your grade will be at least: ");
+        if(score >= 85){
+            System.out.println("3.0");
+        }else if(score >= 75){
+            System.out.println("2.0");
+        }else if(score >= 60){
+            System.out.println("1.0");
+        }else System.out.println("0.0");
 
     }
 
