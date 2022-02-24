@@ -4,20 +4,29 @@ import java.util.Scanner;
 public class GradeStudent {
 
     public static double homework(Scanner scan) {
-        System.out.println("\nHomework:"); 
+        System.out.println("\nHomework:");
+        System.out.print("Weight (0-100)? "); int weight = scan.nextInt();
         System.out.print("Number of assignments? "); int asmCount = scan.nextInt(); scan.nextLine(); //consume leftover new line
-        int[][] scores = new int[asmCount + 1][2];
+        double[] scores = new double[2];//scores[0] = student score; scores[1] = max score
+        scores[1] = 30;//max score without hw = max attendance score
 
         for (int i = 1; i <= asmCount; i++) {
             System.out.print("Assignment " + i + " score and max: ");
 
             int count = 0; for (String s : scan.nextLine().split(" ")) {
-                scores[i][count++] = Integer.parseInt(s);
+                scores[count++] += Integer.parseInt(s);
             }
         }
+
+        System.out.print("How many sections did you attend? "); int attended = scan.nextInt();
+        System.out.println("Section points = " + attended*5 + " / 30"); scores[0] += attended*5;
+        System.out.println("Total points = " + (int) scores[0] + " / " + (int) scores[1]);
         
-        System.out.println();
-        return 0;
+        double result = Math.round((scores[0]*weight/scores[1]) * 10.0) / 10.0; //at least it works
+
+        System.out.println("Weighted score = " + result + " / " + weight);
+        
+        return result;
     }
     
 
@@ -43,8 +52,8 @@ public class GradeStudent {
 
         double result = Math.round((score*weight/100.0) * 10.0) / 10.0; //at least it works
 
-        System.out.println("Total points = " + score + " / 100");
-        System.out.println("Weighted score = " + result + " / " + weight);
+        System.out.println("Total points = " + (int) score + " / 100");
+        System.out.println("Weighted score = " + result + " / " + (int) weight);
         return result;
     }
 
@@ -57,14 +66,16 @@ public class GradeStudent {
     }
 
     public static void report(double midTermScore, double finalScore, double homeworkScore){
-        System.out.println(midTermScore);
-        System.out.println(finalScore);
+        double score = midTermScore + finalScore + homeworkScore;
+        System.out.println("\nOverall percentage = " + score);
+
+        
+
     }
 
     public static void main(String[] args) {
         begin();
         Scanner scan = new Scanner(System.in);
-        //report(midTerm(scan,0), finalTerm(scan), homework(scan));
-        System.out.println(homework(scan));
+        report(midTerm(scan,0), finalTerm(scan), homework(scan));
     }
 }
