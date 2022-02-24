@@ -18,10 +18,10 @@ public class GradeStudent {
         }
 
         System.out.print("How many sections did you attend? "); int attended = scan.nextInt();
-        System.out.println("Section points = " + attended*5 + " / 30"); scores[0] += attended*5;
+        System.out.println("Section points = " + attended*5 + " / 30"); scores[0] += attended * 5;
         System.out.println("Total points = " + (int) scores[0] + " / " + (int) scores[1]);
         
-        double result = Math.round((scores[0]*weight/scores[1]) * 10.0) / 10.0; //at least it works
+        double result = Math.round((scores[0] * weight / scores[1]) * 10.0) / 10.0; //at least it works
 
         System.out.println("Weighted score = " + result + " / " + weight);
         
@@ -49,7 +49,7 @@ public class GradeStudent {
             //noDefault
         }
 
-        double result = Math.round((score*weight/100.0) * 10.0) / 10.0; //still works
+        double result = Math.round((score * weight / 100.0) * 10.0) / 10.0; //still works
 
         System.out.println("Total points = " + (int) score + " / 100");
         System.out.println("Weighted score = " + result + " / " + (int) weight);
@@ -68,19 +68,22 @@ public class GradeStudent {
         double score = midTermScore + finalScore + homeworkScore;
         System.out.println("\nOverall percentage = " + score);
         System.out.print("Your grade will be at least: ");
-        if(score >= 85){
+
+        if (score >= 85) {
             System.out.println("3.0");
-        }else if(score >= 75){
+        } else if (score >= 75) {
             System.out.println("2.0");
-        }else if(score >= 60){
+        } else if (score >= 60) {
             System.out.println("1.0");
-        }else System.out.println("0.0");
+        } else
+            System.out.println("0.0");
+
         System.out.println("\033[3m<<your custom grade message here>>\033[3m");//italic, most shell should be able to handle this
     }
 
     public static void main(String[] args) {
         begin();
         Scanner scan = new Scanner(System.in);
-        report(midTerm(scan,0), finalTerm(scan), homework(scan));
+        report(midTerm(scan, 0), finalTerm(scan), homework(scan));
     }
 }
