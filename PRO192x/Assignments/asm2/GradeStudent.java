@@ -1,4 +1,3 @@
-import java.io.StreamCorruptedException;
 import java.util.Scanner;
 
 public class GradeStudent {
