@@ -68,12 +68,3 @@ public class GradeStudent {
         System.out.println(homework(scan));
     }
 }
-
-
-/*
-https://courses.funix.edu.vn/courses/course-v1:FUNiX+PRO192x_2.1-A_VN+2021_T3/courseware/4007356d101f474da68fa2cf9a0523c3/68bd3944dbed4b7aa35c4d2019c5ce7b/?activate_block_id=block-v1%3AFUNiX%2BPRO192x_2.1-A_VN%2B2021_T3%2Btype%40sequential%2Bblock%4068bd3944dbed4b7aa35c4d2019c5ce7b
-
-asm2 có yêu cầu khá nhiều input của người dùng trong khoảng nhất định, nhưng không nhắc đến trường hợp người dùng nhập vào khoảng ngoài xác định/giới hạn.
-
-Em có cần xử lý các trường hợp đó không ạ?
-*/
