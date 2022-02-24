@@ -49,7 +49,7 @@ public class GradeStudent {
             //noDefault
         }
 
-        double result = Math.round((score*weight/100.0) * 10.0) / 10.0; //at least it works
+        double result = Math.round((score*weight/100.0) * 10.0) / 10.0; //still works
 
         System.out.println("Total points = " + (int) score + " / 100");
         System.out.println("Weighted score = " + result + " / " + (int) weight);
@@ -75,7 +75,7 @@ public class GradeStudent {
         }else if(score >= 60){
             System.out.println("1.0");
         }else System.out.println("0.0");
-
+        System.out.println("\033[3m<<your custom grade message here>>\033[3m");//italic, most shell should be able to handle this
     }
 
     public static void main(String[] args) {
