@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 public class GradeStudent {
 
-    public static double inRange(double control, double starting, double ending, Scanner scan) {
-        while (control < starting || control > ending) {
-            if (ending > starting) {
+    public static double inRange(double control, double starting, double ending, Scanner scan) {//failsafe... implementation?
+        while (control < starting) {
+            if (ending > starting || control > ending) {
                 System.out.println("Value must be larger than " + (int) starting + " and smaller than " + (int) ending + ".");
             }else {
                 System.out.println("Value must be larger than " + (int) starting);
@@ -18,15 +18,32 @@ public class GradeStudent {
     public static double homework(Scanner scan) {
         System.out.println("\nHomework:");
         System.out.print("Weight (0-100)? "); double weight = inRange(scan.nextInt(), 0, 100, scan);
-        System.out.print("Number of assignments? "); double asmCount = inRange(scan.nextInt(), 0, -1, scan); scan.nextLine(); //consume leftover new line
+        System.out.print("Number of assignments? "); double asmCount = inRange(scan.nextInt(), 0, -1, scan);
+        scan.nextLine(); //consume leftover new line
+
+        
         double[] scores = new double[2];//scores[0] = student score; scores[1] = max score
         scores[1] = 30;//max score without hw = max attendance score
 
         for (int i = 1; i <= asmCount; i++) {
-            System.out.print("Assignment " + i + " score and max: ");
+            boolean manualFailSafe = false;
+            while (manualFailSafe == false) {
+                System.out.print("Assignment " + i + " score and max: ");
 
-            int count = 0; for (String s : scan.nextLine().split(" ")) {
-                scores[count++] += Integer.parseInt(s);
+                int count = 0; double[] temp = new double[2];
+                for (String s : scan.nextLine().split(" ")) {
+                    temp[count++] += Integer.parseInt(s);
+                }
+
+                if (temp[0] < 0 || temp[0] > temp[1]) {
+                    System.out.println("Assigment score must be higher than 0 and lower than max assignment score");
+                    manualFailSafe = false;
+                    continue;
+                } else {
+                    scores[0] += temp[0];
+                    scores[1] += temp[1];
+                    manualFailSafe = true;
+                }
             }
         }
 
@@ -48,7 +65,7 @@ public class GradeStudent {
         }
         
         System.out.print("Weight (0-100)? "); double weight = inRange(scan.nextInt(), 0, 100, scan);
-        System.out.print("Score earned? ");   double score = inRange(scan.nextInt(), 0, 100, scan);
+        System.out.print("Score earned? ");   double score = inRange(scan.nextDouble(), 0, 100, scan);
         System.out.print("Were scores shifted (1=yes, 2=no)? "); 
         
         switch (scan.nextInt()) {
@@ -94,6 +111,7 @@ public class GradeStudent {
     public static void main(String[] args) {
         begin();
         Scanner scan = new Scanner(System.in);
-        report(midTerm(scan, 0), finalTerm(scan), homework(scan));
+        System.out.println(homework(scan));
+        //report(midTerm(scan, 0), finalTerm(scan), homework(scan));
     }
 }
