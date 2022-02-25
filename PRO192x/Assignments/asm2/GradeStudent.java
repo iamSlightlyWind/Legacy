@@ -70,8 +70,8 @@ public class GradeStudent {
         
         switch (scan.nextInt()) {
             case 1: System.out.print("Shift amount? "); 
-                    score += scan.nextDouble();
-                    if(score > 100) score = 100;//"điểm thi bạn có được **tăng** không"
+                    score += inRange(scan.nextDouble(), 0, -1, scan);
+                    if(score > 100) score = 100;
                     break;
 
             case 2: break;
