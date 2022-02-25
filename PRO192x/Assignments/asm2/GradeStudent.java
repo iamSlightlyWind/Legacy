@@ -2,10 +2,23 @@ import java.util.Scanner;
 
 public class GradeStudent {
 
+    public static double inRange(double control, double starting, double ending, Scanner scan) {
+        while (control < starting || control > ending) {
+            if (ending > starting) {
+                System.out.println("Value must be larger than " + (int) starting + " and smaller than " + (int) ending + ".");
+            }else {
+                System.out.println("Value must be larger than " + (int) starting);
+                ending = Integer.MAX_VALUE;
+            }
+            System.out.print("Re-enter value: "); control = scan.nextDouble();
+        }
+        return control;
+    }
+
     public static double homework(Scanner scan) {
         System.out.println("\nHomework:");
-        System.out.print("Weight (0-100)? "); int weight = scan.nextInt();
-        System.out.print("Number of assignments? "); int asmCount = scan.nextInt(); scan.nextLine(); //consume leftover new line
+        System.out.print("Weight (0-100)? "); double weight = inRange(scan.nextInt(), 0, 100, scan);
+        System.out.print("Number of assignments? "); double asmCount = inRange(scan.nextInt(), 0, -1, scan); scan.nextLine(); //consume leftover new line
         double[] scores = new double[2];//scores[0] = student score; scores[1] = max score
         scores[1] = 30;//max score without hw = max attendance score
 
@@ -17,8 +30,8 @@ public class GradeStudent {
             }
         }
 
-        System.out.print("How many sections did you attend? "); int attended = scan.nextInt();
-        System.out.println("Section points = " + attended*5 + " / 30"); scores[0] += attended * 5;
+        System.out.print("How many sections did you attend? "); double attended = inRange(scan.nextInt(), 0, 5, scan);
+        System.out.println("Section points = " + (int) attended*5 + " / 30"); scores[0] += attended * 5;
         System.out.println("Total points = " + (int) scores[0] + " / " + (int) scores[1]);
         
         double result = Math.round((scores[0] * weight / scores[1]) * 10.0) / 10.0; //at least it works
@@ -28,37 +41,34 @@ public class GradeStudent {
         return result;
     }
     
-
     public static double midTerm(Scanner scan, int isFinal) {
         switch(isFinal){
             case 0: System.out.println("\nMidterm:"); break;
             case 1: System.out.println("\nFinal:");   break;
         }
         
-        System.out.print("Weight (0-100)? "); double weight = scan.nextInt();
-        System.out.print("Score earned? ");   double score = scan.nextDouble();
+        System.out.print("Weight (0-100)? "); double weight = inRange(scan.nextInt(), 0, 100, scan);
+        System.out.print("Score earned? ");   double score = inRange(scan.nextInt(), 0, 100, scan);
         System.out.print("Were scores shifted (1=yes, 2=no)? "); 
         
         switch (scan.nextInt()) {
             case 1: System.out.print("Shift amount? "); 
                     score += scan.nextDouble();
-                    if(score > 100) score = 100;
+                    if(score > 100) score = 100;//"điểm thi bạn có được **tăng** không"
                     break;
 
             case 2: break;
             //noDefault
         }
 
-        double result = Math.round((score * weight / 100.0) * 10.0) / 10.0; //still works
+        double result = Math.round((score * weight / 100.0) * 10.0) / 10.0;
 
         System.out.println("Total points = " + (int) score + " / 100");
         System.out.println("Weighted score = " + result + " / " + (int) weight);
         return result;
     }
 
-    public static double finalTerm(Scanner scan) {
-        return midTerm(scan, 1);
-    }
+    public static double finalTerm(Scanner scan) {return midTerm(scan, 1);}
 
     public static void begin() {
         System.out.println("This program reads exam/homework scores and reports your overall course grade.");
