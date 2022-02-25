@@ -3,6 +3,25 @@ import java.util.Scanner;
 
 public class GradeStudent {
 
+    public static double inRange(double control, double starting, double ending, Scanner scan) {    //making sure that variables stay within limit
+        for(;;){
+            if (starting > ending) {                                                                //variable can be as big as possible
+                if (control > starting) break;
+                System.out.println("Value must be equals to or larger than " + (int) starting);
+                ending = Integer.MAX_VALUE;
+            } else if (starting == ending) {                                                        //variable can only be a certain value
+                if (control == ending) break;
+                System.out.println("Value must be equal to " + starting);
+            } else if (ending < starting || control > ending || control < starting) {               //variable out of bound
+                System.out.println("Value must be in range of " + (int) starting + " to " + (int) ending + ".");
+            } else
+                break;
+
+            System.out.print("Re-enter value: "); control = scan.nextDouble();                      //force user to enter new value
+        }
+        return control;
+    }
+
     public static double currentWeight = 0;                                 //use global variable for avalible weight
 
     public static void begin() {//welcome message
@@ -10,10 +29,10 @@ public class GradeStudent {
     }
 
     public static double midTerm(Scanner scan, int isFinal) {               //get midterm score, also final score since they are basically the same
-        switch(isFinal){                                                    //switch title
+        switch(isFinal){        //switch title
             case 0: System.out.println("\nMidterm:"); break;
             case 1: System.out.println("\nFinal:");   break;
-            //noDefault
+            //noDefaultNeeded
         }
         
         System.out.print("Weight (0-100)? "); double weight = inRange(scan.nextDouble(), 1, 100 - currentWeight, scan); currentWeight += weight;
@@ -22,12 +41,12 @@ public class GradeStudent {
         
         switch ((int) inRange(scan.nextInt(), 1, 2, scan)) {                //max score after shift can only be up to 100
             case 1: System.out.print("Shift amount? "); 
-                    score += inRange(scan.nextDouble(), 0, -1, scan);
-                    if(score > 100) score = 100;
+                    score += inRange(scan.nextDouble(), 0, -1, scan);       //shift can be as big as possible
+                    if(score > 100) score = 100;                            //but score will be limited to 100
                     break;
 
             case 2: break;
-            //noDefault
+            //noDefaultNeeded
         }
 
         double result = Math.round((score * weight / 100.0) * 10.0) / 10.0; //round up to first decimal
@@ -76,7 +95,7 @@ public class GradeStudent {
         System.out.println("Section points = " + (int) attended*5 + " / 30"); scores[0] += attended * 5;
         System.out.println("Total points = " + (int) scores[0] + " / " + (int) scores[1]);
         
-        double result = Math.round((scores[0] * weight / scores[1]) * 10.0) / 10.0;//get result to round correctly
+        double result = Math.round((scores[0] * weight / scores[1]) * 10.0) / 10.0;//round up to first decimal
 
         System.out.println("Weighted score = " + result + " / " + (int) weight);
         
@@ -104,24 +123,5 @@ public class GradeStudent {
         begin();                                                            
         Scanner scan = new Scanner(System.in).useLocale(Locale.US);                 //double use dot instead of comma
         report(midTerm(scan, 0), finalTerm(scan), homework(scan));
-    }
-
-    public static double inRange(double control, double starting, double ending, Scanner scan) {    //makes sure variable stays within limit
-        for(;;){
-            if (starting > ending) {                                                                //variable can be as big as possible
-                if (control > starting) break;
-                System.out.println("Value must be equals to or larger than " + (int) starting);
-                ending = Integer.MAX_VALUE;
-            } else if (starting == ending) {                                                        //variable can only be a certain value
-                if (control == ending) break;
-                System.out.println("Value must be equal to " + starting);
-            } else if (ending < starting || control > ending || control < starting) {               //variable out of bound
-                System.out.println("Value must be in range of " + (int) starting + " to " + (int) ending + ".");
-            } else
-                break;
-
-            System.out.print("Re-enter value: "); control = scan.nextDouble();                      //force user enter new variable
-        }
-        return control;
     }
 }
