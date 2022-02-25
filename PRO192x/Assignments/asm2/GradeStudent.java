@@ -111,7 +111,7 @@ public class GradeStudent {
     public static void main(String[] args) {
         begin();
         Scanner scan = new Scanner(System.in);
-        System.out.println(homework(scan));
-        //report(midTerm(scan, 0), finalTerm(scan), homework(scan));
+        //System.out.println(homework(scan));
+        report(midTerm(scan, 0), finalTerm(scan), homework(scan));
     }
 }
