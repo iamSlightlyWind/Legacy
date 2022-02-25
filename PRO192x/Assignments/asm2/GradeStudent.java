@@ -53,7 +53,7 @@ public class GradeStudent {
         
         double result = Math.round((scores[0] * weight / scores[1]) * 10.0) / 10.0; //at least it works
 
-        System.out.println("Weighted score = " + result + " / " + weight);
+        System.out.println("Weighted score = " + result + " / " + (int) weight);
         
         return result;
     }
@@ -62,13 +62,14 @@ public class GradeStudent {
         switch(isFinal){
             case 0: System.out.println("\nMidterm:"); break;
             case 1: System.out.println("\nFinal:");   break;
+            //noDefault
         }
         
         System.out.print("Weight (0-100)? "); double weight = inRange(scan.nextInt(), 0, 100, scan);
         System.out.print("Score earned? ");   double score = inRange(scan.nextDouble(), 0, 100, scan);
         System.out.print("Were scores shifted (1=yes, 2=no)? "); 
         
-        switch (scan.nextInt()) {
+        switch ((int) inRange(scan.nextInt(), 1, 2, scan)) {
             case 1: System.out.print("Shift amount? "); 
                     score += inRange(scan.nextDouble(), 0, -1, scan);
                     if(score > 100) score = 100;
