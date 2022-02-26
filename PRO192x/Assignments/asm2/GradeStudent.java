@@ -116,9 +116,7 @@ public class GradeStudent {
         } else if (score >= 60) {
             System.out.println("1.0\nThe semester's over but you could have done better.");
         } else
-            System.out.println("0.0\nThe semester's over and your performance this time is quite poor.");
-
-        System.out.println("\033[3m<<your custom grade message here>>\033[3m");
+            System.out.println("0.0\nThe semester's over and your performance is quite poor.");
     }
 
     public static void main(String[] args) {                                
