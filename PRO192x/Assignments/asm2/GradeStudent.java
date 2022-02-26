@@ -6,7 +6,7 @@ public class GradeStudent {
     public static double inRange(double control, double starting, double ending, Scanner scan) {    //making sure that variables stay within limit
         for(;;){
             if (starting > ending) {                                                                //variable can be as big as possible
-                if (control > starting) break;
+                if (control >= starting) break;
                 System.out.println("Value must be equals to or larger than " + (int) starting);
                 ending = Integer.MAX_VALUE;
             } else if (starting == ending) {                                                        //variable can only be a certain value
@@ -35,7 +35,7 @@ public class GradeStudent {
             //noDefaultNeeded
         }
         
-        System.out.print("Weight (0-100)? "); double weight = inRange(scan.nextDouble(), 1, 100 - currentWeight, scan); currentWeight += weight;
+        System.out.print("Weight (0-100)? "); double weight = inRange(scan.nextDouble(), 0, 100 - currentWeight, scan); currentWeight += weight;
         System.out.print("Score earned? ");   double score = inRange(scan.nextDouble(), 1, 100, scan);
         System.out.print("Were scores shifted (1=yes, 2=no)? "); 
         
@@ -91,7 +91,9 @@ public class GradeStudent {
             }
         }
 
-        System.out.print("How many sections did you attend? "); double attended = inRange(scan.nextInt(), 0, 5, scan);
+        System.out.print("How many sections did you attend? "); double attended = inRange(scan.nextInt(), 0, -1, scan);
+        if(attended > 6) attended = 6;                          //attendance*5 = 30 max
+
         System.out.println("Section points = " + (int) attended*5 + " / 30"); scores[0] += attended * 5;
         System.out.println("Total points = " + (int) scores[0] + " / " + (int) scores[1]);
         
@@ -107,16 +109,16 @@ public class GradeStudent {
         System.out.println("\nOverall percentage = " + score);
         System.out.print("Your grade will be at least: ");
 
-        if (score >= 85) {                                                          //
-            System.out.println("3.0");                                              //
-        } else if (score >= 75) {                                                   //gpa
-            System.out.println("2.0");                                              //
-        } else if (score >= 60) {                                                   //prediction?
-            System.out.println("1.0");                                              //
-        } else                                                                      //
-            System.out.println("0.0");                                              //
+        if (score >= 85) {
+            System.out.println("3.0\nThe semester's over and you have done a great job!");
+        } else if (score >= 75) {
+            System.out.println("2.0\nThe semester's over and your result is decent.");
+        } else if (score >= 60) {
+            System.out.println("1.0\nThe semester's over but you could have done better.");
+        } else
+            System.out.println("0.0\nThe semester's over and your performance this time is quite poor.");
 
-        System.out.println("\033[3m<<your custom grade message here>>\033[3m");     //italic, most shell should be able to handle this
+        System.out.println("\033[3m<<your custom grade message here>>\033[3m");
     }
 
     public static void main(String[] args) {                                
