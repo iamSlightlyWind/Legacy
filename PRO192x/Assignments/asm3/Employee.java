@@ -1,4 +1,4 @@
-public class Employee extends Staff implements ICalculator {
+public class Employee extends Staff{
     private int overtime;
     private int baseSalary = 3000000;
 
@@ -26,7 +26,7 @@ public class Employee extends Staff implements ICalculator {
         System.out.println("Staff ID     : " + this.id);
         System.out.println("Salary factor: " + this.factor);
         System.out.println("Allowed leave: " + this.allowedLeave);
-        System.out.println("Overtime     : " + this.overtime);
+        System.out.println("Join date    : " + this.joinDate/10000 + "/" + (this.joinDate%10000)/100 + "/" + this.joinDate%100);
         System.out.println("Join date    : " + this.joinDate);
         System.out.println("Department   : " + this.department);
         System.out.println("Salary       : " + calculateSalary());

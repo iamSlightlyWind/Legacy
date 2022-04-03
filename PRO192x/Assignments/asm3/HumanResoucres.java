@@ -117,6 +117,10 @@ public class HumanResoucres {
         System.out.println("Staff not found!");
     }
 
+    public static void printPayroll(){
+        
+    }
+
     public static void addStaff(int role) {
         scan.nextLine();
 
@@ -188,12 +192,12 @@ public class HumanResoucres {
         dept.add(new Department(1, "Strategic"));
         dept.add(new Department(2, "R&D"));
 
-        staff.add(new Employee(18, 23, 12, 12, "Wind", 12, 0, "Employee", staff.size()));
-        staff.add(new Manager(18, 23, 12, "Ben", 12, 0, "Manager", staff.size()));
+        staff.add(new Employee(18, 23, 12, 12, "Wind", 121094, 0, "Employee", staff.size()));
+        staff.add(new Manager (18, 23, 12, "Ben", 12, 0, "Manager", staff.size()));
         staff.add(new Employee(18, 23, 12, 12, "Erik", 12, 1, "Employee", staff.size()));
-        staff.add(new Manager(18, 23, 12, "M K", 12, 2, "Manager", staff.size()));
+        staff.add(new Manager (18, 23, 12, "M K", 12, 2, "Manager", staff.size()));
         staff.add(new Employee(18, 23, 12, 12, "Nick", 12, 2, "Employee", staff.size()));
-        staff.add(new Manager(18, 23, 12, "A D S", 12, 1, "Manager", staff.size()));
+        staff.add(new Manager (18, 23, 12, "A D S", 12, 1, "Manager", staff.size()));
 
         printOptions(1);
         System.out.println();

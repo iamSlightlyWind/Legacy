@@ -1,4 +1,4 @@
-abstract class Staff {
+abstract class Staff implements ICalculator{
     protected int id;
     protected int age;
     protected int factor;
@@ -9,14 +9,4 @@ abstract class Staff {
     protected String name;
     
     public abstract void displayInformation();
-
-    public abstract String getRole();
-
-    public abstract String getStaff();
-    
-    public abstract String getStaffName();
-
-    public abstract int getDept();
-    
-    public abstract int getID();
 }
