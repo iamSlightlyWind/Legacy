@@ -20,12 +20,11 @@ public class HumanResoucres {
 
             case 3:
                 System.out.println("1. List all departments");
-                System.out.println("2. List all staff");
-                System.out.println("3. List all managers");
-                System.out.println("4. List all employees");
-                System.out.println("5. Find employee by ID");
-                System.out.println("6. Find manager by ID");
-                System.out.println("7. Show payroll");
+                System.out.println("2. List all staffs");
+                System.out.println("3. List all staffs by department");;
+                System.out.println("4. Find employee by ID");
+                System.out.println("5. Find manager by ID");
+                System.out.println("6. Show payroll");
                 choice = 10;
                 break;
         }
@@ -56,7 +55,7 @@ public class HumanResoucres {
                 listStaffs();
                 break;
 
-            case 13:
+            case 13: listStaffsByDept();
                 break;
 
             case 14:
@@ -66,9 +65,6 @@ public class HumanResoucres {
                 break;
 
             case 16:
-                break;
-
-            case 17:
                 break;
 
             case 0:
@@ -103,12 +99,12 @@ public class HumanResoucres {
             case 1:
                 System.out.print("Enter overtime: ");
                 int overtime = scan.nextInt();
-                staff.add(new Employee(age, factor, allowedLeave, overtime, name, date, deptID));
+                staff.add(new Employee(age, factor, allowedLeave, overtime, name, date, deptID, "Employee"));
                 scan.nextLine();
                 break;
 
             case 2:
-                staff.add(new Manager(age, factor, allowedLeave, name, date, deptID));
+                staff.add(new Manager(age, factor, allowedLeave, name, date, deptID, "Manager"));
                 scan.nextLine();
                 break;
         }
@@ -122,11 +118,44 @@ public class HumanResoucres {
     }
 
     public static void listStaffs() {
-        System.out.println("\nListing all staff by ID..");
+        System.out.println("\nListing all staffs by ID..");
         for (int i = 0; i < staff.size(); i++) {
             System.out.println((i + 1) + ". " + staff.get(i).getStaff());
         }
     }
+
+    public static void listStaffsByDept() {
+        System.out.println("\nListing all staffs by department..");
+        for (int i = 0; i < dept.size(); i++) {
+            System.out.println((i + 1) + ". " + dept.get(i).getDeptName());
+            int count = 1;
+            for(int x = 0; x < staff.size(); x++){
+                if(staff.get(x).getDept() == dept.get(i).getDeptID()){
+                    System.out.println("  " + count++ + ". " + staff.get(x).getStaff());
+                }
+            }
+        }
+    }
+
+//    public static void listEmployees() {
+//        System.out.println("\nListing all employees..");
+//        int count = 1;
+//        for (int i = 0; i < staff.size(); i++) {
+//            if (staff.get(i).getRole().equals("Employee")) {
+//                System.out.println(count + ". " + staff.get(i).getStaff());
+//            }
+//        }
+//    }
+//
+//    public static void listManagers() {
+//        System.out.println("\nListing all managers..");
+//        int count = 1;
+//        for (int i = 0; i < staff.size(); i++) {
+//            if (staff.get(i).getRole().equals("Managers")) {
+//                System.out.println(count + ". " + staff.get(i).getStaff());
+//            }
+//        }
+//    }
 
     public static void main(String[] args) {
         System.out.println("Human Resource 0.1A");
@@ -134,6 +163,13 @@ public class HumanResoucres {
         dept.add(new Department(0, "Sales"));
         dept.add(new Department(1, "Strategic"));
         dept.add(new Department(2, "R&D"));
+
+        staff.add(new Employee(18, 23, 12, 12, "e1", 12, 0, "Employee"));
+        staff.add(new Employee(18, 23, 12, 12, "e2", 12, 1, "Employee"));
+        staff.add(new Employee(18, 23, 12, 12, "e3", 12, 2, "Employee"));
+        staff.add(new Manager( 18, 23, 12,     "m1", 12, 0, "Manager"));
+        staff.add(new Manager( 18, 23, 12,     "m2", 12, 2, "Manager"));
+        staff.add(new Manager( 18, 23, 12,     "m3", 12, 1, "Manager"));
 
         printOptions(0);
         System.out.println();

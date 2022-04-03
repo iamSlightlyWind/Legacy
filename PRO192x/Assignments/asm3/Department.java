@@ -9,7 +9,11 @@ public class Department {
     }
 
     public String getDeptName(){
-        return dept;
+        return this.dept;
+    }
+
+    public int getDeptID(){
+        return this.deptID;
     }
 
     public void toSring(){

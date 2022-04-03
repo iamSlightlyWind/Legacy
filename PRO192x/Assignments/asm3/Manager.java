@@ -1,13 +1,14 @@
 public class Manager extends Staff implements ICalculator {
     private int baseSalary = 5000000;
 
-    public Manager(int Age, int Factor, int AllowedLeave, String Name, int JoinDate, int deptID) {
+    public Manager(int Age, int Factor, int AllowedLeave, String Name, int JoinDate, int deptID, String Role) {
         this.age = Age;
         this.factor = Factor;
         this.allowedLeave = AllowedLeave;
         this.name = Name;
         this.joinDate = JoinDate;
         this.department = deptID;
+        this.role = Role;
     }
 
     public int calculateSalary() {
@@ -31,7 +32,7 @@ public class Manager extends Staff implements ICalculator {
     public void displayInformation() {
         System.out.println("Staff name    : " + this.name);
         System.out.println("Staff age     : " + this.age);
-        System.out.println("Staff role    : " + "Manager");
+        System.out.println("Staff role    : " + this.role);
         System.out.println("Salary factor : " + this.factor);
         System.out.println("Allowed leave : " + this.allowedLeave);
         System.out.println("Join date     : " + this.joinDate);
@@ -41,6 +42,14 @@ public class Manager extends Staff implements ICalculator {
 
     public String getStaff() {
         return ("(M) " + this.name);
+    }
+
+    public String getRole() {
+        return this.role;
+    }
+
+    public int getDept() {
+        return this.department;
     }
 
 }
