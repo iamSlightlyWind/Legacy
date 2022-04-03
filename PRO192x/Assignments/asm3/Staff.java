@@ -4,9 +4,10 @@ abstract class Staff {
     protected int factor;
     protected int allowedLeave;
     protected int joinDate;
+    protected int department;
     protected String name;
-    protected String department;
     
-
     public abstract void displayInformation();
+
+    public abstract String getStaff();
 }

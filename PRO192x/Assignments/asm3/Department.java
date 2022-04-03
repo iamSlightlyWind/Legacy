@@ -8,6 +8,10 @@ public class Department {
         this.dept = Dept;
     }
 
+    public String getDeptName(){
+        return dept;
+    }
+
     public void toSring(){
         System.out.println("Department: " + this.dept);
         System.out.println("Department ID: " + this.deptID);

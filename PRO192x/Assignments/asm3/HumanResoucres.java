@@ -15,6 +15,7 @@ public class HumanResoucres {
                 System.out.println("1. Add an employee");
                 System.out.println("2. Add a manager");
                 System.out.println("3. Database");
+                System.out.println("0. Exit");
                 break;
 
             case 3:
@@ -48,9 +49,11 @@ public class HumanResoucres {
                 break;
 
             case 11:
+                listDepts();
                 break;
 
             case 12:
+                listStaffs();
                 break;
 
             case 13:
@@ -67,6 +70,9 @@ public class HumanResoucres {
 
             case 17:
                 break;
+
+            case 0:
+                return;
         }
         printOptions(0);
     }
@@ -89,33 +95,47 @@ public class HumanResoucres {
         System.out.print("Enter allowed leaves: ");
         int allowedLeave = scan.nextInt();
 
+        System.out.println("Available departments: \n1. Business (Sales)\n2. Project (Strategic)\n3. Technical (R&D)");
+        System.out.print("Assign department: ");
+        int deptID = scan.nextInt();
+
         switch (role) {
             case 1:
                 System.out.print("Enter overtime: ");
                 int overtime = scan.nextInt();
-                staff.add(new Employee(age, factor, allowedLeave, overtime, name, date));
+                staff.add(new Employee(age, factor, allowedLeave, overtime, name, date, deptID));
                 scan.nextLine();
                 break;
 
             case 2:
-                System.out.println(
-                        "Available responsibilities: \n1. Business Leader\n2. Project Leader\n3. Technical Leader");
-                System.out.print("Assign responsibility: ");
-                int additional_responsibility = scan.nextInt();
-                staff.add(new Manager(age, factor, allowedLeave, additional_responsibility, name, date));
+                staff.add(new Manager(age, factor, allowedLeave, name, date, deptID));
                 scan.nextLine();
                 break;
+        }
+    }
+
+    public static void listDepts() {
+        System.out.println("\nListing all departments..");
+        for (int i = 0; i < dept.size(); i++) {
+            System.out.println((i + 1) + ". " + dept.get(i).getDeptName());
+        }
+    }
+
+    public static void listStaffs() {
+        System.out.println("\nListing all staff by ID..");
+        for (int i = 0; i < staff.size(); i++) {
+            System.out.println((i + 1) + ". " + staff.get(i).getStaff());
         }
     }
 
     public static void main(String[] args) {
         System.out.println("Human Resource 0.1A");
 
-        dept.add(new Department(0,"Production"));
-        dept.add(new Department(1,"Sales"));
-        dept.add(new Department(2,"R&D"));
+        dept.add(new Department(0, "Sales"));
+        dept.add(new Department(1, "Strategic"));
+        dept.add(new Department(2, "R&D"));
 
-        System.out.println();
         printOptions(0);
+        System.out.println();
     }
 }
