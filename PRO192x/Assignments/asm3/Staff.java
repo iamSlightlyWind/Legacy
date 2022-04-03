@@ -1,4 +1,4 @@
-abstract class Staff implements ICalculator{
+abstract class Staff implements ICalculator{ //implement ICalc
     protected int id;
     protected int age;
     protected int factor;
@@ -11,19 +11,15 @@ abstract class Staff implements ICalculator{
     
     public abstract void displayInformation();
 
-    public String getStaffName(){
+    public String getStaffName(){ // for staff search by name
         return (this.name);
     }
 
-    public String getRole() {
-        return this.role;
-    }
-
-    public int getDept() {
+    public int getDept() { // for staff list by dept
         return this.department;
     }
 
-    public int getID() {
+    public int getID() { // for staff search by ID
         return this.id;
     }
 }

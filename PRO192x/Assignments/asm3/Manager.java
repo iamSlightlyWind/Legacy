@@ -1,7 +1,8 @@
-public class Manager extends Staff{
+public class Manager extends Staff { // extends Staff class which already implemented ICalc
     private int baseSalary = 5000000;
 
-    public Manager(int Age, int Factor, int AllowedLeave, String Name, int JoinDate, int deptID, String Role, int ID) {
+    public Manager(int Age, int Factor, int AllowedLeave, String Name, int JoinDate, int deptID, String Role, int ID) { // init
+                                                                                                                        // staff
         this.age = Age;
         this.factor = Factor;
         this.allowedLeave = AllowedLeave;
@@ -10,21 +11,21 @@ public class Manager extends Staff{
         this.department = deptID;
         this.role = Role;
         this.id = ID;
-        this.salary = calculateSalary();
+        this.salary = calculateSalary(); // calculate staff salary
     }
 
-    public int calculateSalary() {
+    public int calculateSalary() { // calculate staff salary
         int responsibility_salary = 0;
-        switch (this.department) {
-            case 1:
+        switch (this.department) { // additional salary for responsibility
+            case 1: // Business Leader
                 responsibility_salary = 8000000;
                 break;
 
-            case 2:
+            case 2: // Project Leader
                 responsibility_salary = 5000000;
                 break;
 
-            case 3:
+            case 3: // Technical Leader
                 responsibility_salary = 6000000;
                 break;
         }
@@ -38,12 +39,13 @@ public class Manager extends Staff{
         System.out.println("Staff ID      : " + this.id);
         System.out.println("Salary factor : " + this.factor);
         System.out.println("Allowed leave : " + this.allowedLeave);
-        System.out.println("Join date     : " + this.joinDate/1000000 + "/" + (this.joinDate%1000000)/10000 + "/" + this.joinDate%10000);
+        System.out.println("Join date     : " + this.joinDate / 1000000 + "/" + (this.joinDate % 1000000) / 10000 + "/"
+                + this.joinDate % 10000); // format date
         System.out.println("Department    : " + this.department);
         System.out.println("Salary        : " + this.salary);
     }
 
-    public String getStaff() {
+    public String getStaff() { // print staff name with role
         return ("(M) " + this.name);
     }
 }
