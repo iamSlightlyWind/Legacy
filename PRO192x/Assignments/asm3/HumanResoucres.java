@@ -108,9 +108,12 @@ public class HumanResoucres {
         }
 
         System.out.print("\nChoice: ");
-        if(choice == 20){
-            choice += inRange(scan.nextInt(),1,5);
-        }else choice += inRange(scan.nextInt(),0,3);
+        if (choice == 20) {
+            choice += inRange(scan.nextInt(), 1, 5);
+        } else if (choice == 30) {
+            choice += inRange(scan.nextInt(), 1, 2);
+        } else
+            choice += inRange(scan.nextInt(), 0, 3);
         printOptions(choice); // re-run menu with changed choice
     }
 
@@ -131,7 +134,7 @@ public class HumanResoucres {
                 break;
 
             case 2:
-                System.out.print("Enter staff ID to search: ");
+                System.out.print("Enter staff name to search: ");
                 String name = scan.nextLine();
                 for (int i = 0; i < staff.size(); i++) { // go through staff list
                     if (staff.get(i).getStaffName().equals(name)) { // check if name matches
@@ -140,7 +143,6 @@ public class HumanResoucres {
                         return;
                     }
                 }
-                scan.nextLine();
                 break;
         }
         System.out.println("Staff not found!"); // only reaches if staff is not found
@@ -257,6 +259,7 @@ public class HumanResoucres {
         // staff.size()));
         // staff.add(new Manager(18, 23, 12, "A D S", 21012004, 1, "Manager",
         // staff.size()));
+        // updateDeptCount(); // in case of test data exists
 
         printOptions(1); // Menu initial
     }

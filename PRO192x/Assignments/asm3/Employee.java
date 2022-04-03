@@ -29,7 +29,8 @@ public class Employee extends Staff { // extends Staff class which already imple
         System.out.println("Allowed leave: " + this.allowedLeave);
         System.out.println("Join date    : " + this.joinDate / 1000000 + "/" + (this.joinDate % 1000000) / 10000 + "/"
                 + this.joinDate % 10000); // format date
-        System.out.println("Department   : " + this.department);
+        System.out.println("Department   : " + this.deptName[this.department]);
+        System.out.println("Overtime     : " + this.overtime);
         System.out.println("Salary       : " + this.salary);
     }
 

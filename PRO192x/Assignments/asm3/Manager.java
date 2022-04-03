@@ -17,15 +17,15 @@ public class Manager extends Staff { // extends Staff class which already implem
     public int calculateSalary() { // calculate staff salary
         int responsibility_salary = 0;
         switch (this.department) { // additional salary for responsibility
-            case 1: // Business Leader
+            case 0: // Business Leader
                 responsibility_salary = 8000000;
                 break;
 
-            case 2: // Project Leader
+            case 1: // Project Leader
                 responsibility_salary = 5000000;
                 break;
 
-            case 3: // Technical Leader
+            case 2: // Technical Leader
                 responsibility_salary = 6000000;
                 break;
         }
@@ -41,7 +41,7 @@ public class Manager extends Staff { // extends Staff class which already implem
         System.out.println("Allowed leave : " + this.allowedLeave);
         System.out.println("Join date     : " + this.joinDate / 1000000 + "/" + (this.joinDate % 1000000) / 10000 + "/"
                 + this.joinDate % 10000); // format date
-        System.out.println("Department    : " + this.department);
+        System.out.println("Department    : " + this.deptName[this.department]);
         System.out.println("Salary        : " + this.salary);
     }
 
