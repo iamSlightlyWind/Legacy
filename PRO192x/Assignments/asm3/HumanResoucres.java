@@ -2,21 +2,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class HumanResoucres {
-    static Scanner scan = new Scanner(System.in);
-    static ArrayList<Staff> staff = new ArrayList<Staff>();
+    static Scanner scan = new Scanner(System.in);           //class-wide scanner
 
+    static ArrayList<Staff> staff = new ArrayList<Staff>();
     static ArrayList<Department> dept = new ArrayList<Department>();
 
-    public static void printOptions(int printChoice) {
+    public static void printOptions(int printChoice) {      //handle all user interactions
         System.out.println("\n");
         int choice = 0;
         switch (printChoice) {
-            case 1:
-                System.out.println("1. Add an employee");
+            case 1:                                         //default menu
+                System.out.println("1. Add an employee");   
                 System.out.println("2. Add a manager");
                 System.out.println("3. Database");
                 System.out.println("0. Exit");
-                choice = 10;
+                choice = 10;                                //navigate to menu choices 1x
                 break;
 
             case 3:
@@ -26,7 +26,7 @@ public class HumanResoucres {
 
                 System.out.println("4. Find staff");
                 System.out.println("5. Show payroll");
-                choice = 20;
+                choice = 20;                                //navigate to menu choices 2x
                 break;
 
             case 11:
@@ -63,10 +63,12 @@ public class HumanResoucres {
             case 24:
                 System.out.println("1. By ID");
                 System.out.println("2. By full name");
-                choice = 30;
+                choice = 30;                                //navigate to menu choices 3x
                 break;
 
             case 25:
+                printPayroll();
+                printOptions(1);
                 break;
 
             case 31:
@@ -117,8 +119,13 @@ public class HumanResoucres {
         System.out.println("Staff not found!");
     }
 
-    public static void printPayroll(){
-        
+    public static void printPayroll() {
+        System.out.println("Printing payroll..");
+        for (int i = 0; i < staff.size(); i++) {
+            System.out.println(
+                    "ID: " + staff.get(i).getID() + " " + staff.get(i).getStaff() + ": "
+                            + staff.get(i).calculateSalary() + " VND");
+        }
     }
 
     public static void addStaff(int role) {
@@ -130,7 +137,7 @@ public class HumanResoucres {
         System.out.print("Enter staff age: ");
         int age = scan.nextInt();
 
-        System.out.print("Enter join date (DDMMYY): ");
+        System.out.print("Enter join date (DDMMYYYY): ");
         int date = scan.nextInt();
 
         System.out.print("Enter salary factor: ");
@@ -168,7 +175,8 @@ public class HumanResoucres {
     public static void listStaffs() {
         System.out.println("\nListing all staffs by ID..");
         for (int i = 0; i < staff.size(); i++) {
-            System.out.println("ID: " + i + " " + staff.get(i).getStaff());
+            System.out.println();
+            staff.get(i).displayInformation();
         }
     }
 
@@ -192,12 +200,12 @@ public class HumanResoucres {
         dept.add(new Department(1, "Strategic"));
         dept.add(new Department(2, "R&D"));
 
-        staff.add(new Employee(18, 23, 12, 12, "Wind", 121094, 0, "Employee", staff.size()));
-        staff.add(new Manager (18, 23, 12, "Ben", 12, 0, "Manager", staff.size()));
-        staff.add(new Employee(18, 23, 12, 12, "Erik", 12, 1, "Employee", staff.size()));
-        staff.add(new Manager (18, 23, 12, "M K", 12, 2, "Manager", staff.size()));
-        staff.add(new Employee(18, 23, 12, 12, "Nick", 12, 2, "Employee", staff.size()));
-        staff.add(new Manager (18, 23, 12, "A D S", 12, 1, "Manager", staff.size()));
+        staff.add(new Employee(18, 23, 12, 12, "Wind", 12101994, 0, "Employee", staff.size()));
+        staff.add(new Manager(18, 23, 12, "Ben", 22042009, 0, "Manager", staff.size()));
+        staff.add(new Employee(18, 23, 12, 12, "Erik", 23041998, 1, "Employee", staff.size()));
+        staff.add(new Manager(18, 23, 12, "M K", 29022004, 2, "Manager", staff.size()));
+        staff.add(new Employee(18, 23, 12, 12, "Nick", 27031998, 2, "Employee", staff.size()));
+        staff.add(new Manager(18, 23, 12, "A D S", 21012004, 1, "Manager", staff.size()));
 
         printOptions(1);
         System.out.println();

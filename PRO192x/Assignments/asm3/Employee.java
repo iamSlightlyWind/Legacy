@@ -13,6 +13,7 @@ public class Employee extends Staff{
         this.joinDate = JoinDate;
         this.role = Role;
         this.id = ID;
+        this.salary = calculateSalary();
     }
 
     public int calculateSalary() {
@@ -26,29 +27,12 @@ public class Employee extends Staff{
         System.out.println("Staff ID     : " + this.id);
         System.out.println("Salary factor: " + this.factor);
         System.out.println("Allowed leave: " + this.allowedLeave);
-        System.out.println("Join date    : " + this.joinDate/10000 + "/" + (this.joinDate%10000)/100 + "/" + this.joinDate%100);
-        System.out.println("Join date    : " + this.joinDate);
+        System.out.println("Join date    : " + this.joinDate/1000000 + "/" + (this.joinDate%1000000)/10000 + "/" + this.joinDate%10000);
         System.out.println("Department   : " + this.department);
-        System.out.println("Salary       : " + calculateSalary());
+        System.out.println("Salary       : " + this.salary);
     }
 
     public String getStaff() {
         return ("(E) " + this.name);
-    }
-
-    public String getStaffName(){
-        return (this.name);
-    }
-
-    public String getRole() {
-        return this.role;
-    }
-
-    public int getDept() {
-        return this.department;
-    }
-
-    public int getID() {
-        return this.id;
     }
 }
