@@ -41,10 +41,20 @@ public class Main {
 
         System.out.println("Enter search method:\n1. By name\n2. By ID");
         int method = scan.nextInt();
-    }
 
-    public static void getStudent() {
+        switch (method) {
+            case 1:
+                System.out.print("Search using name: ");
+                String search = scan.nextLine();
 
+                for (int i = 0; i < student.size(); i++) {
+                    if (student.get(i).getStatus()) {
+                        if (student.get(i).getName().contains(search)) {
+                            System.out.println("Student found: " + student.get(i).toString());
+                        }
+                    }
+                }
+        }
     }
 
     public static void editStudentProfile() {
@@ -56,11 +66,14 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        // printMenu();
-        // Student Erik = new Student(5, 2, 1, "Erik");
-        student.add(new Student(student.size(), 2, 1, "Erik"));
-        // System.out.println(Erik.toString());
-        createStudentProfile();
+        student.add(new Student(student.size(), 1, 1, "Erik K"));
+        student.add(new Student(student.size(), 3, 1, "Nicky V"));
+        student.add(new Student(student.size(), 2, 1, "Wind Slightly"));
+        student.add(new Student(student.size(), 1, 1, "Candace"));
+        student.add(new Student(student.size(), 2, 1, "Ferb"));
+        studentSearch();
+
+        // createStudentProfile();
         System.out.println();
     }
 }

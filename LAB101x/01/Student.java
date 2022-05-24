@@ -12,24 +12,35 @@ public class Student {
         name = d;
     }
 
-    public int getID(){
+    public String getName(){
+        return name;
+    }
+
+    public int getID() {
         return id;
     }
 
-    public void remove(){
+    public void remove() {
         status = false;
     }
 
-    private String getSubject(){
-        switch(subject){
-            case 0: return "Java";
-            case 1: return ".Net";
-            case 2: return "C / C ++";
+    public boolean getStatus(){
+        return status;
+    }
+
+    private String getSubject() {
+        switch (subject) {
+            case 0:
+                return "Java";
+            case 1:
+                return ".Net";
+            case 2:
+                return "C / C ++";
         }
         return "";
     }
 
-    public String toString(){
+    public String toString() {
         return (name + " | " + getSubject() + " | " + semester);
     }
 }
