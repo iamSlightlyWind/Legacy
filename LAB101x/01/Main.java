@@ -41,19 +41,33 @@ public class Main {
 
         System.out.println("Enter search method:\n1. By name\n2. By ID");
         int method = scan.nextInt();
+        scan.nextLine();
 
         switch (method) {
             case 1:
                 System.out.print("Search using name: ");
-                String search = scan.nextLine();
+                String name = scan.nextLine();
 
                 for (int i = 0; i < student.size(); i++) {
                     if (student.get(i).getStatus()) {
-                        if (student.get(i).getName().contains(search)) {
+                        if (student.get(i).getName().contains(name)) {
                             System.out.println("Student found: " + student.get(i).toString());
                         }
                     }
                 }
+                break;
+            case 2:
+                System.out.print("Search using ID: ");
+                int id = scan.nextInt();
+
+                for (int i = 0; i < student.size(); i++) {
+                    if (student.get(i).getStatus()) {
+                        if (student.get(i).getID() == id) {
+                            System.out.println("Student found: " + student.get(i).toString());
+                        }
+                    }
+                }
+                break;
         }
     }
 
