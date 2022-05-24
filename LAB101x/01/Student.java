@@ -1,5 +1,3 @@
-import javax.swing.Spring;
-
 public class Student {
     private int id;
     private int semester;
