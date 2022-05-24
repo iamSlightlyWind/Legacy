@@ -3,6 +3,7 @@ public class Student {
     private int semester;
     private int subject;
     private String name;
+    private boolean status = true;
 
     public Student(int a, int b, int c, String d) {
         id = a;
@@ -13,6 +14,10 @@ public class Student {
 
     public int getID(){
         return id;
+    }
+
+    public void remove(){
+        status = false;
     }
 
     private String getSubject(){

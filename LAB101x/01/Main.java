@@ -32,7 +32,27 @@ public class Main {
 
         student.add(new Student(student.size(), semester, subject, name));
 
-        System.out.println("Student profile created: " + student.get(student.size() - 1).toString());
+        System.out.println("Student profile saved: " + student.get(student.size() - 1).toString());
+    }
+
+    public static void studentSearch() {
+        System.out.println("---------------------");
+        System.out.println("Searching for a student profile");
+
+        System.out.println("Enter search method:\n1. By name\n2. By ID");
+        int method = scan.nextInt();
+    }
+
+    public static void getStudent() {
+
+    }
+
+    public static void editStudentProfile() {
+        System.out.println("---------------------");
+        System.out.println("Creating a student profile");
+
+        System.out.print("Enter student ID: ");
+        int id = scan.nextInt();
     }
 
     public static void main(String[] args) {
