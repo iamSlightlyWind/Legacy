@@ -39,13 +39,16 @@ public class Main {
         System.out.println("---------------------");
         System.out.println("Searching for a student profile");
 
+        ArrayList<Student> temp = student;
+        temp.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+
         System.out.print("Search using name: ");
         String name = scan.nextLine();
 
-        for (int i = 0; i < student.size(); i++) {
-            if (student.get(i).getStatus()) {
-                if (student.get(i).getName().contains(name)) {
-                    System.out.println("Student found: " + student.get(i).toString());
+        for (int i = 0; i < temp.size(); i++) {
+            if (temp.get(i).getStatus()) {
+                if (temp.get(i).getName().contains(name)) {
+                    System.out.println("Student found: " + temp.get(i).toString());
                 }
             }
         }
@@ -65,9 +68,12 @@ public class Main {
         student.add(new Student(student.size(), 2, 1, "Wind Slightly"));
         student.add(new Student(student.size(), 1, 1, "Candace"));
         student.add(new Student(student.size(), 2, 1, "Ferb"));
-        studentSearch();
-
+        // studentSearch();
         // createStudentProfile();
+        // System.out.println();
+        studentSearch();
         System.out.println();
+
+        // ArrayList<Student> temp = student;
     }
 }
