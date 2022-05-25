@@ -40,14 +40,14 @@ public class Main {
         System.out.println("Tìm kiếm hồ sơ học sinh: ");
 
         ArrayList<Student> temp = student;
-        temp.sort((o1, o2) -> o1.getString(1).compareTo(o2.getString(1)));
+        temp.sort((o1, o2) -> o1.getString("name").compareTo(o2.getString("name")));
 
         System.out.print("Tìm kiếm học sinh bằng tên: ");
         String name = scan.nextLine();
 
         for (int i = 0; i < temp.size(); i++) {
             if (temp.get(i).getStatus()) {
-                if (temp.get(i).getString(1).contains(name)) {
+                if (temp.get(i).getString("name").contains(name)) {
                     System.out.println("Tìm thấy học sinh: " + temp.get(i).toString());
                 }
             }
@@ -63,7 +63,7 @@ public class Main {
 
         for (int i = 0; i < student.size(); i++) {
             if (student.get(i).getStatus()) {
-                if (student.get(i).getInt(1) == id) {
+                if (student.get(i).getInt("id") == id) {
                     System.out.println("Tìm thấy học sinh: " + student.get(i).toString());
                     System.out.print("Bạn muốn cập nhật (U) hay xóa (D) học sinh: ");
                     String choice = scan.nextLine();
@@ -71,14 +71,16 @@ public class Main {
                     switch (choice) {
                         case "U":
                             System.out.println("Nhập để sửa, bỏ trống để giữ nguyên thông tin học sinh:");
-                            System.out.print("Tên học sinh (" + student.get(i).getString(1) + "): ");
+                            System.out.print("Tên học sinh (" + student.get(i).getString("name") + "): ");
                             String newName = scan.nextLine();
                             if (!newName.equals(""))
-                                student.get(i).setString(1, newName);
+                                student.get(i).setString("name", newName);
 
                             System.out.println("Danh sách môn học: ");
                             System.out.println("1. Java\n2. .Net\n3. C / C ++");
-                            System.out.print("Môn học đăng ký (" + student.get(i).getString(2) + "): ");
+                            System.out.print("Môn học đăng ký (" + student.get(i).getString("subject") + "): ");
+                            int temp = scan.nextInt();
+                            if(!(temp == student.get(i).getInt("subject"))) student.get(i).setInt("subject", temp);
 
                             break;
                         case "D":

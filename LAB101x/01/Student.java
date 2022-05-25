@@ -20,30 +20,30 @@ public class Student {
         return status;
     }
 
-    public void setString(int choice, String newString) {
+    public void setString(String choice, String newString) {
         switch (choice) {
-            case 1:
+            case "name":
                 name = newString;
                 break;
         }
     }
 
-    public void setInt(int choice, int newInt) {
+    public void setInt(String choice, int newInt) {
         switch (choice) {
-            case 1:
+            case "subject":
                 subject = newInt;
                 break;
-            case 2:
+            case "semester":
                 semester = newInt;
                 break;
         }
     }
 
-    public String getString(int choice) {
+    public String getString(String choice) {
         switch (choice) {
-            case 1:
+            case "name":
                 return name;
-            case 2:
+            case "subject":
                 switch (subject) {
                     case 1:
                         return "Java";
@@ -56,17 +56,19 @@ public class Student {
         return "";
     }
 
-    public int getInt(int choice) {
+    public int getInt(String choice) {
         switch (choice) {
-            case 1:
+            case "id":
                 return id;
-            case 2:
+            case "semester":
                 return semester;
+            case "subject":
+                return subject;
         }
         return 0;
     }
 
     public String toString() {
-        return (name + " | " + getString(2) + " | " + semester);
+        return (name + " | " + getString("subject") + " | " + semester);
     }
 }
