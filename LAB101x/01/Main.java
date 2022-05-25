@@ -35,7 +35,7 @@ public class Main {
         System.out.println("Hồ sơ học sinh được lưu: " + student.get(student.size() - 1).toString());
     }
 
-    public static void studentSearch() {
+    public static void studentSearchByName() {
         System.out.println("---------------------");
         System.out.println("Tìm kiếm hồ sơ học sinh: ");
 
@@ -54,10 +54,7 @@ public class Main {
         }
     }
 
-    public static void editStudentProfile() {
-        System.out.println("---------------------");
-        System.out.println("Chỉnh sửa hồ sơ học sinh: ");
-
+    public static int studentSearchByID() {
         System.out.print("ID học sinh: ");
         int id = scan.nextInt();
 
@@ -65,30 +62,45 @@ public class Main {
             if (student.get(i).getStatus()) {
                 if (student.get(i).getInt("id") == id) {
                     System.out.println("Tìm thấy học sinh: " + student.get(i).toString());
-                    System.out.print("Bạn muốn cập nhật (U) hay xóa (D) học sinh: ");
-                    String choice = scan.nextLine();
-
-                    switch (choice) {
-                        case "U":
-                            System.out.println("Nhập để sửa, bỏ trống để giữ nguyên thông tin học sinh:");
-                            System.out.print("Tên học sinh (" + student.get(i).getString("name") + "): ");
-                            String newName = scan.nextLine();
-                            if (!newName.equals(""))
-                                student.get(i).setString("name", newName);
-
-                            System.out.println("Danh sách môn học: ");
-                            System.out.println("1. Java\n2. .Net\n3. C / C ++");
-                            System.out.print("Môn học đăng ký (" + student.get(i).getString("subject") + "): ");
-                            int temp = scan.nextInt();
-                            if(!(temp == student.get(i).getInt("subject"))) student.get(i).setInt("subject", temp);
-
-                            break;
-                        case "D":
-                            student.get(i).remove();
-                            break;
-                    }
+                    return i;
                 }
             }
+        }
+        return -1;
+    }
+
+    public static void editStudentProfile() {
+        System.out.println("---------------------");
+        System.out.println("Chỉnh sửa hồ sơ học sinh: ");
+
+        int i = studentSearchByID();
+        if (i == -1) {
+            System.out.println("Không tìm thấy học viên!");
+            return;
+        }
+
+        System.out.print("Bạn muốn cập nhật (U) hay xóa (D) học sinh: ");
+        String choice = scan.nextLine();
+
+        switch (choice) {
+            case "U":
+                System.out.println("Nhập để sửa, bỏ trống để giữ nguyên thông tin học sinh:");
+                System.out.print("Tên học sinh (" + student.get(i).getString("name") + "): ");
+                String newName = scan.nextLine();
+                if (!newName.equals(""))
+                    student.get(i).setString("name", newName);
+
+                System.out.println("Danh sách môn học: ");
+                System.out.println("1. Java\n2. .Net\n3. C / C ++");
+                System.out.print("Môn học đăng ký (" + student.get(i).getString("subject") + "): ");
+                int temp = scan.nextInt();
+                if (!(temp == student.get(i).getInt("subject")))
+                    student.get(i).setInt("subject", temp);
+
+                break;
+            case "D":
+                student.get(i).remove();
+                break;
         }
     }
 
