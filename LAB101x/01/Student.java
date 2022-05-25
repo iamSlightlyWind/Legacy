@@ -12,35 +12,61 @@ public class Student {
         name = d;
     }
 
-    public String getName(){
-        return name;
-    }
-
-    public int getID() {
-        return id;
-    }
-
     public void remove() {
         status = false;
     }
 
-    public boolean getStatus(){
+    public boolean getStatus() {
         return status;
     }
 
-    private String getSubject() {
-        switch (subject) {
+    public void setString(int choice, String newString) {
+        switch (choice) {
             case 1:
-                return "Java";
+                name = newString;
+                break;
+        }
+    }
+
+    public void setInt(int choice, int newInt) {
+        switch (choice) {
+            case 1:
+                subject = newInt;
+                break;
             case 2:
-                return ".Net";
-            case 3:
-                return "C / C ++";
+                semester = newInt;
+                break;
+        }
+    }
+
+    public String getString(int choice) {
+        switch (choice) {
+            case 1:
+                return name;
+            case 2:
+                switch (subject) {
+                    case 1:
+                        return "Java";
+                    case 2:
+                        return ".Net";
+                    case 3:
+                        return "C / C ++";
+                }
         }
         return "";
     }
 
+    public int getInt(int choice) {
+        switch (choice) {
+            case 1:
+                return id;
+            case 2:
+                return semester;
+        }
+        return 0;
+    }
+
     public String toString() {
-        return (name + " | " + getSubject() + " | " + semester);
+        return (name + " | " + getString(2) + " | " + semester);
     }
 }
