@@ -62,10 +62,19 @@ public class Main {
         int id = scan.nextInt();
 
         for (int i = 0; i < student.size(); i++) {
-            if(student.get(i).getStatus()){
-                if(student.get(i).getID() == id){
+            if (student.get(i).getStatus()) {
+                if (student.get(i).getID() == id) {
                     System.out.println("Tìm thấy học sinh: " + student.get(i).toString());
                     System.out.print("Bạn muốn cập nhật (U) hay xóa (D) học sinh: ");
+                    String choice = scan.next();
+
+                    switch (choice) {
+                        case "U":
+                            break;
+                        case "D":
+                            student.get(i).remove();
+                            break;
+                    }
                 }
             }
         }
@@ -73,10 +82,12 @@ public class Main {
 
     public static void main(String[] args) {
         student.add(new Student(student.size(), 1, 1, "Erik K"));
-        student.add(new Student(student.size(), 3, 1, "Nicky V"));
-        student.add(new Student(student.size(), 2, 1, "Wind Slightly"));
-        student.add(new Student(student.size(), 1, 1, "Candace"));
-        student.add(new Student(student.size(), 2, 1, "Ferb"));
+        student.add(new Student(student.size(), 1, 3, "Erik A"));
+        student.add(new Student(student.size(), 1, 2, "Nicky V"));
+        student.add(new Student(student.size(), 1, 3, "Kate B"));
+        student.add(new Student(student.size(), 1, 1, "Wind Slightly"));
+        student.add(new Student(student.size(), 1, 3, "Candace"));
+        student.add(new Student(student.size(), 1, 2, "Ferb"));
         // studentSearch();
         // createStudentProfile();
         // System.out.println();

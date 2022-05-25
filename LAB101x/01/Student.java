@@ -30,11 +30,11 @@ public class Student {
 
     private String getSubject() {
         switch (subject) {
-            case 0:
-                return "Java";
             case 1:
-                return ".Net";
+                return "Java";
             case 2:
+                return ".Net";
+            case 3:
                 return "C / C ++";
         }
         return "";
