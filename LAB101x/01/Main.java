@@ -57,6 +57,7 @@ public class Main {
     public static int studentSearchByID() {
         System.out.print("ID học sinh: ");
         int id = scan.nextInt();
+        scan.nextLine();
 
         for (int i = 0; i < student.size(); i++) {
             if (student.get(i).getStatus()) {
@@ -93,9 +94,14 @@ public class Main {
                 System.out.println("Danh sách môn học: ");
                 System.out.println("1. Java\n2. .Net\n3. C / C ++");
                 System.out.print("Môn học đăng ký (" + student.get(i).getString("subject") + "): ");
-                int temp = scan.nextInt();
-                if (!(temp == student.get(i).getInt("subject")))
-                    student.get(i).setInt("subject", temp);
+                int newSubject = scan.nextInt();
+                if (!(newSubject == student.get(i).getInt("subject")))
+                    student.get(i).setInt("subject", newSubject);
+
+                System.out.print("Học kỳ (" + student.get(i).getInt("semester") + "): ");
+                int newSemester = scan.nextInt();
+                if (!(newSemester == student.get(i).getInt("semester")))
+                    student.get(i).setInt("semester", newSemester);
 
                 break;
             case "D":
@@ -115,8 +121,8 @@ public class Main {
         // studentSearch();
         // createStudentProfile();
         // System.out.println();
+        editStudentProfile();
 
-        studentSearch();
         System.out.println();
     }
 }
