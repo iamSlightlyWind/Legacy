@@ -13,6 +13,25 @@ public class Main {
         System.out.println("5. Thoát");
         System.out.println(
                 "\n(Hãy chọn 1 để Tạo, 2 để Tìm kiếm và Sắp xếp, 3 để Cập nhật/Xóa, 4 để Báo cáo, và 5 để Thoát chương trình).");
+
+        int choice = scan.nextInt();
+        scan.nextLine();
+
+        switch (choice) {
+            case 1:
+                createStudentProfile();
+                break;
+            case 2:
+                studentSearchByName();
+                break;
+            case 3:
+                editStudentProfile();
+                break;
+            case 4:
+                break; // waiting
+            case 5:
+                return;
+        }
     }
 
     public static void createStudentProfile() {
