@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -58,7 +59,11 @@ public class Main {
         System.out.println("---------------------");
         System.out.println("Tìm kiếm hồ sơ học sinh: ");
 
-        ArrayList<Student> temp = student;
+        ArrayList<Student> temp = new ArrayList<Student>();
+        for(int i = 0; i < student.size(); i++){
+            temp.add(new Student(student.get(i).getInt("id"), student.get(i).getInt("semester"), student.get(i).getInt("subject"), student.get(i).getString("name")));
+        }
+
         temp.sort((o1, o2) -> o1.getString("name").compareTo(o2.getString("name")));
 
         System.out.print("Tìm kiếm học sinh bằng tên: ");
@@ -137,10 +142,8 @@ public class Main {
         student.add(new Student(student.size(), 1, 1, "Wind Slightly"));
         student.add(new Student(student.size(), 1, 3, "Candace"));
         student.add(new Student(student.size(), 1, 2, "Ferb"));
-        // studentSearch();
-        // createStudentProfile();
-        // System.out.println();
-        editStudentProfile();
+        
+        studentSearchByName();
 
         System.out.println();
     }

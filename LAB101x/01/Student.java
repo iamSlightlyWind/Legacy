@@ -12,6 +12,14 @@ public class Student {
         name = d;
     }
 
+    public Student(Student that) {
+        this.id = that.getInt("id");
+        this.semester = that.getInt("semester");
+        this.subject = that.getInt("subject");
+        this.name = that.getString("name");
+        //this.status = that."";
+    }
+
     public void remove() {
         status = false;
     }
@@ -37,6 +45,10 @@ public class Student {
                 semester = newInt;
                 break;
         }
+    }
+
+    public Student clone() {
+        return this;
     }
 
     public String getString(String choice) {
