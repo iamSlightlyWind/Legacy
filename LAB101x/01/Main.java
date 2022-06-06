@@ -27,14 +27,15 @@ public class Main {
             case 3:
                 editStudentProfile();
                 break;
-            case 4: report();
+            case 4:
+                report();
                 break; // waiting
             case 5:
                 return;
         }
     }
 
-    public static void report(){
+    public static void report() {
         student.forEach((n) -> System.out.println(n.toString()));
     }
 
@@ -42,8 +43,10 @@ public class Main {
         if (student.size() > 10) {
             System.out.print("Bạn có muốn học tiếp (Y/N) không? ");
             switch (scan.next()) {
-                case "Y": break;
-                case "N": return;
+                case "Y":
+                    break;
+                case "N":
+                    return;
             }
         }
         System.out.println("---------------------");
@@ -153,7 +156,7 @@ public class Main {
         student.add(new Student(student.size(), 1, 3, "Candace"));
         student.add(new Student(student.size(), 1, 2, "Ferb"));
 
-        //studentSearchByName();
+        // studentSearchByName();
         report();
         System.out.println();
     }
