@@ -27,11 +27,15 @@ public class Main {
             case 3:
                 editStudentProfile();
                 break;
-            case 4:
+            case 4: report();
                 break; // waiting
             case 5:
                 return;
         }
+    }
+
+    public static void report(){
+        student.forEach((n) -> System.out.println(n.toString()));
     }
 
     public static void createStudentProfile() {
@@ -149,8 +153,8 @@ public class Main {
         student.add(new Student(student.size(), 1, 3, "Candace"));
         student.add(new Student(student.size(), 1, 2, "Ferb"));
 
-        studentSearchByName();
-
+        //studentSearchByName();
+        report();
         System.out.println();
     }
 }
