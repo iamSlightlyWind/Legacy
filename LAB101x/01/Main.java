@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -36,6 +35,13 @@ public class Main {
     }
 
     public static void createStudentProfile() {
+        if (student.size() > 10) {
+            System.out.print("Bạn có muốn học tiếp (Y/N) không? ");
+            switch (scan.next()) {
+                case "Y": break;
+                case "N": return;
+            }
+        }
         System.out.println("---------------------");
         System.out.println("Tạo hồ sơ học sinh: ");
 
@@ -60,8 +66,9 @@ public class Main {
         System.out.println("Tìm kiếm hồ sơ học sinh: ");
 
         ArrayList<Student> temp = new ArrayList<Student>();
-        for(int i = 0; i < student.size(); i++){
-            temp.add(new Student(student.get(i).getInt("id"), student.get(i).getInt("semester"), student.get(i).getInt("subject"), student.get(i).getString("name")));
+        for (int i = 0; i < student.size(); i++) {
+            temp.add(new Student(student.get(i).getInt("id"), student.get(i).getInt("semester"),
+                    student.get(i).getInt("subject"), student.get(i).getString("name")));
         }
 
         temp.sort((o1, o2) -> o1.getString("name").compareTo(o2.getString("name")));
@@ -105,9 +112,8 @@ public class Main {
         }
 
         System.out.print("Bạn muốn cập nhật (U) hay xóa (D) học sinh: ");
-        String choice = scan.nextLine();
 
-        switch (choice) {
+        switch (scan.nextLine()) {
             case "U":
                 System.out.println("Nhập để sửa, bỏ trống để giữ nguyên thông tin học sinh:");
                 System.out.print("Tên học sinh (" + student.get(i).getString("name") + "): ");
@@ -142,7 +148,7 @@ public class Main {
         student.add(new Student(student.size(), 1, 1, "Wind Slightly"));
         student.add(new Student(student.size(), 1, 3, "Candace"));
         student.add(new Student(student.size(), 1, 2, "Ferb"));
-        
+
         studentSearchByName();
 
         System.out.println();
