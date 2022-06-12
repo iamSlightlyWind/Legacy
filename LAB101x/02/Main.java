@@ -1,10 +1,67 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    Scanner scan = new Scanner(System.in);
+    static Scanner scan = new Scanner(System.in);
+    static ArrayList<Candidate> cands = new ArrayList<>();
 
     public static void main(String[] args) {
+        String attempt = "5t";
 
+    }
+
+    public static boolean check(String attempt, String argument) {
+        switch (argument) {
+            case "birthDate":
+                try {
+                    if (attempt.length() == 4) {
+                        Integer.parseInt(attempt);
+                    } else
+                        throw new NumberFormatException("");
+                } catch (NumberFormatException ex) {
+                    System.out.println("Input not recognized: birth date must be a 4 letter number");
+                    return false;
+                }
+
+                return true;
+
+            case "phoneNumber":
+                try {
+                    if (attempt.length() == 10) {
+                        Integer.parseInt(attempt);
+                    } else
+                        throw new NumberFormatException("");
+                } catch (NumberFormatException ex) {
+                    System.out.println("Input not recognized: phone number must be a 10 letter number");
+                    return false;
+                }
+
+                return true;
+
+            case "emailAddress":
+                break;
+
+            case "expYears":
+                try {
+                    if (Integer.parseInt(attempt) >= 0 && Integer.parseInt(attempt) <= 100) {
+                        return true;
+                    } else
+                        throw new NumberFormatException("");
+                } catch (NumberFormatException ex) {
+                    System.out.println("Input not recognized: phone number must be a 10 letter number");
+                    return false;
+                }
+
+            case "ranking":
+                break;
+        }
+
+        return false;
+    }
+
+    public static void createCandidateProfile() {
+        System.out.println("Creating a candidate profile:");
+        System.out.println("");
     }
 
     public void printMenu() {
