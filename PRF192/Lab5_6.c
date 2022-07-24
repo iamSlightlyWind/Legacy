@@ -44,7 +44,7 @@ char *strrep(char *original, char *lib[])
     return original;
 }
 
-void phan3(char *lib[])
+void censorString(char *lib[])
 {
     //nhập string mới
     //example
@@ -52,7 +52,7 @@ void phan3(char *lib[])
     printf("%s\n", strrep(myString, lib));
 }
 
-void phan1(char *lib[])
+void addToLib(char *lib[])
 {
     printf("Nhap tu can them vao tu dien: ");
     for (int i = 0; i < 1000; i++)
@@ -68,7 +68,7 @@ void phan1(char *lib[])
     }
 }
 
-void phan2(char *lib[])
+void printLib(char *lib[])
 {
     for (int i = 0; i < libSize; i++)
     {
@@ -79,7 +79,7 @@ void phan2(char *lib[])
     }
 }
 
-int main()
+void printMenu()
 {
     printf("----------MENU----------\n");
     printf("1. Them tu nong, tu nhay cam, vao tu dien cac tu nhay cam\n");
@@ -87,28 +87,39 @@ int main()
     printf("3. Nhap chuoi va hien thi chuoi sau khi che cac tu nhay cam\n");
     printf("0. Thoat chuong trinh.\n");
     printf("Nhap lua chon cua ban: ");
+}
 
+int main()
+{
+
+    // Initialize library
     char *lib[libSize];
     for (int i = 0; i < libSize; i++)
     {
         lib[i] = NULL;
     }
-    lib[0] = "dit";
-    lib[1] = "fuck";
-    lib[2] = "hell";
-    lib[3] = "cunt";
+    ///
 
-    phan1(lib);
-    phan2(lib);
+    int choice;
 
-    int choice = 3;
-
-    switch (choice)
+    while (1)
     {
-    case 3:
-        phan3(lib);
-        break;
-    }
+        printMenu();
+        scanf("%d", &choice);
 
-    return 0;
+        switch (choice)
+        {
+        case 1:
+            addToLib(lib);
+            break;
+        case 2:
+            printLib(lib);
+            break;
+        case 3:
+            censorString(lib);
+            break;
+        case 0:
+            return 0;
+        }
+    }
 }
