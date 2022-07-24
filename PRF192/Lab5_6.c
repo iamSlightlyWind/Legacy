@@ -55,14 +55,14 @@ void censorString(char *lib[])
 void addToLib(char *lib[])
 {
     printf("Nhap tu can them vao tu dien: ");
-    for (int i = 0; i < 1000; i++)
+    char temp[10];
+    scanf("%s", temp);
+
+    for (int i = 0; i < libSize; i++)
     {
         if (lib[i] == NULL)
         {
-            char temp[200];
-            scanf("%s", temp);
             lib[i] = temp;
-            puts("");
             break;
         }
     }
@@ -75,17 +75,17 @@ void printLib(char *lib[])
         if (lib[i] == NULL)
             break;
 
-        printf("%d. %s\n", i, lib[i]);
+        printf("\n%d. %s", i, lib[i]);
     }
 }
 
 void printMenu()
 {
-    printf("----------MENU----------\n");
+    printf("\n----------MENU----------\n");
     printf("1. Them tu nong, tu nhay cam, vao tu dien cac tu nhay cam\n");
     printf("2. Hien thi danh sach tu nong, tu nhay cam hien tai\n");
     printf("3. Nhap chuoi va hien thi chuoi sau khi che cac tu nhay cam\n");
-    printf("0. Thoat chuong trinh.\n");
+    printf("0. Thoat chuong trinh.\n\n");
     printf("Nhap lua chon cua ban: ");
 }
 
@@ -101,8 +101,9 @@ int main()
     ///
 
     int choice;
+    char temp[10];
 
-    while (1)
+    for (;;)
     {
         printMenu();
         scanf("%d", &choice);
