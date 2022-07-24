@@ -2,6 +2,8 @@
 #include <string.h>
 #include <ctype.h>
 
+static int libSize = 500;
+
 char *strrep(char *original, char *lib[])
 {
 
@@ -50,6 +52,33 @@ void phan3(char *lib[])
     printf("%s\n", strrep(myString, lib));
 }
 
+void phan1(char *lib[])
+{
+    printf("Nhap tu can them vao tu dien: ");
+    for (int i = 0; i < 1000; i++)
+    {
+        if (lib[i] == NULL)
+        {
+            char temp[200];
+            scanf("%s", temp);
+            lib[i] = temp;
+            puts("");
+            break;
+        }
+    }
+}
+
+void phan2(char *lib[])
+{
+    for (int i = 0; i < libSize; i++)
+    {
+        if (lib[i] == NULL)
+            break;
+
+        printf("%d. %s\n", i, lib[i]);
+    }
+}
+
 int main()
 {
     printf("----------MENU----------\n");
@@ -59,11 +88,18 @@ int main()
     printf("0. Thoat chuong trinh.\n");
     printf("Nhap lua chon cua ban: ");
 
-    char *lib[1000];
-    lib[0] = "fuck";
-    lib[1] = "shit";
-    lib[2] = "cunt";
-    lib[3] = "hell";
+    char *lib[libSize];
+    for (int i = 0; i < libSize; i++)
+    {
+        lib[i] = NULL;
+    }
+    lib[0] = "dit";
+    lib[1] = "fuck";
+    lib[2] = "hell";
+    lib[3] = "cunt";
+
+    phan1(lib);
+    phan2(lib);
 
     int choice = 3;
 
