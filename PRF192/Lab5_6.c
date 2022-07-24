@@ -46,17 +46,18 @@ char *strrep(char *original, char *lib[])
 
 void censorString(char *lib[])
 {
-    //nhập string mới
-    //example
-    char myString[] = "What the hell, shut the fuck up, don't do that shit, you fucking cunt";
+    char myString[200];
+    fflush(stdin);
+    fgets(myString, sizeof(myString), stdin);
+    //char myString[] = "What the dit, shut the fuck up, don't do that shit, you fucking cunt";
     printf("%s\n", strrep(myString, lib));
 }
 
 void addToLib(char *lib[])
 {
-    printf("Nhap tu can them vao tu dien: ");
-    char temp[10];
-    scanf("%s", temp);
+    printf("Nhap them tu vao tu dien: ");
+    char *temp;
+    scanf("%ms", &temp);
 
     for (int i = 0; i < libSize; i++)
     {
@@ -77,6 +78,7 @@ void printLib(char *lib[])
 
         printf("\n%d. %s", i, lib[i]);
     }
+    printf("\n");
 }
 
 void printMenu()
