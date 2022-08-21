@@ -4,8 +4,10 @@ import java.util.Scanner;
 public class Main {
     static Scanner scan = new Scanner(System.in);
     static ArrayList<Student> student = new ArrayList<Student>();
+    static boolean loopLock = true;
 
     public static void printMenu() {
+        System.out.println("===========================");
         System.out.println("1. Tạo");
         System.out.println("2. Tìm kiếm và Sắp xếp");
         System.out.println("3. Cập nhật/Xóa");
@@ -29,14 +31,20 @@ public class Main {
                 break;
             case 4:
                 report();
-                break; // waiting
+                break;
             case 5:
+                loopLock = false;
                 return;
         }
+        System.out.println("\n\n\n");
     }
 
     public static void report() {
-        student.forEach((n) -> System.out.println(n.toString()));
+        student.forEach(n -> {
+            if(n.getStatus() == true){
+                System.out.println(n.toString());
+            }
+        });
     }
 
     public static void createStudentProfile() {
@@ -52,7 +60,7 @@ public class Main {
         System.out.println("---------------------");
         System.out.println("Tạo hồ sơ học sinh: ");
 
-        System.out.print("Tên hhọc sinh: ");
+        System.out.print("Tên học sinh: ");
         String name = scan.nextLine();
 
         System.out.print("Học kỳ: ");
@@ -72,7 +80,8 @@ public class Main {
         System.out.println("---------------------");
         System.out.println("Tìm kiếm hồ sơ học sinh: ");
 
-        ArrayList<Student> temp = new ArrayList<Student>();
+        ArrayList<Student> temp = new ArrayList<Student>(); // create new temp student arraylist for sorting
+
         for (int i = 0; i < student.size(); i++) {
             temp.add(new Student(student.get(i).getInt("id"), student.get(i).getInt("semester"),
                     student.get(i).getInt("subject"), student.get(i).getString("name")));
@@ -156,8 +165,6 @@ public class Main {
         student.add(new Student(student.size(), 1, 3, "Candace"));
         student.add(new Student(student.size(), 1, 2, "Ferb"));
 
-        // studentSearchByName();
-        report();
-        System.out.println();
+        while(loopLock) printMenu();
     }
 }

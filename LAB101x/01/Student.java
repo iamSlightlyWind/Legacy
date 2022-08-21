@@ -5,11 +5,11 @@ public class Student {
     private String name;
     private boolean status = true;
 
-    public Student(int a, int b, int c, String d) {
-        id = a;
-        semester = b;
-        subject = c;
-        name = d;
+    public Student(int ID, int Semester, int Subject, String Name) {
+        id = ID;
+        semester = Semester;
+        subject = Subject;
+        name = Name;
     }
 
     public Student(Student that) {
