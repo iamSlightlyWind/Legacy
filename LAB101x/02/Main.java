@@ -68,14 +68,63 @@ public class Main {
                         throw new NumberFormatException("");
                 } catch (NumberFormatException ex) {
                     System.out.println(
-                            "Input not recognized: number of alphanumeric characters must be more than or equal to 10");
+                            "Input not recognized: number of alphanumeric characters must be equal to or more than 10");
                     return false;
                 }
 
                 return true;
 
             case "emailAddress":
-                break;
+                int count = 0, splitLocation = 0;
+
+                for (int i = 0; i < attempt.length(); i++) {
+                    if (attempt.charAt(i) == '@') {
+                        count++;
+                        splitLocation = ++i;
+                        if (splitLocation == 1) {
+                            System.out.println("Input not recognized: username in email address cannot be empty");
+                            return false;
+                        }
+                    }
+
+                    if (count > 1) {
+                        System.out
+                                .println("Input not recognized: email address must have one occurrence of \"@\"");
+                        return false;
+                    }
+                }
+
+                if (count == 0) {
+                    System.out.println("Input not recognized: email address must have one occurrence of \"@\"");
+                    return false;
+                }
+                count = 0;
+
+                String domain = attempt.substring(splitLocation, attempt.length());
+
+                if (domain.length() < 3) {
+                    System.out.println("Input not recognized: domain length must be equal to or more than 3");
+                    return false;
+                }
+
+                if (domain.charAt(domain.length() - 1) == '.' || domain.charAt(0) == '.') {
+                    System.out.println(
+                            "Input not recognized: \".\" cannot appear at the start nor the end of the domain");
+                }
+
+                for (int i = 0; i < domain.length(); i++) {
+                    if (attempt.charAt(i) == '.') {
+                        return true;
+                    }
+                }
+
+                if (count == 0) {
+                    System.out
+                            .println("Input not recognized: domain address must have at least one occurrence of \".\"");
+                    return false;
+                }
+
+                return true;
 
             case "expYears":
                 try {
