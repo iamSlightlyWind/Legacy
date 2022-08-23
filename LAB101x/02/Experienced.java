@@ -1,9 +1,11 @@
 public class Experienced extends Candidate {
-    protected int exp;
-    protected String skill;
-    
+    public Experienced(boolean isExperienced, int ID) {
+        super(isExperienced, ID);
+    }
 
-    public Experienced(int yearsOfExp, String candSkill){
+    protected String skill, exp;
+
+    public void setExperienced(String yearsOfExp, String candSkill) {
         exp = yearsOfExp;
         skill = candSkill;
     }

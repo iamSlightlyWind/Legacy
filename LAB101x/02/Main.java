@@ -85,6 +85,14 @@ public class Main {
                             System.out.println("Input not recognized: username in email address cannot be empty");
                             return false;
                         }
+
+                        String username = attempt.substring(0, splitLocation - 1);
+
+                        if (username.charAt(username.length() - 1) == '.' || username.charAt(0) == '.') {
+                            System.out.println(
+                                    "Input not recognized: \".\" cannot appear at the start nor the end of the username");
+                            return false;
+                        }
                     }
 
                     if (count > 1) {
@@ -110,10 +118,11 @@ public class Main {
                 if (domain.charAt(domain.length() - 1) == '.' || domain.charAt(0) == '.') {
                     System.out.println(
                             "Input not recognized: \".\" cannot appear at the start nor the end of the domain");
+                    return false;
                 }
 
                 for (int i = 0; i < domain.length(); i++) {
-                    if (attempt.charAt(i) == '.') {
+                    if (domain.charAt(i) == '.') {
                         return true;
                     }
                 }
@@ -138,7 +147,8 @@ public class Main {
                 }
 
             case "gradRank":
-                if (attempt == "Xuat sac" || attempt == "Tot" || attempt == "Kha" || attempt == "Kem") {
+                if (attempt.equals("Xuat sac") || attempt.equals("Tot") || attempt.equals("Kha")
+                        || attempt.equals("Kem")) {
                     return true;
                 } else {
                     System.out.println(
@@ -156,12 +166,11 @@ public class Main {
 
     public static void createCandidateProfile(boolean isExperienced) {
         String firstName, lastName;
-        String birthYear, phoneNumber, emailAddress;
+        String birthYear = "", phoneNumber = "", emailAddress = "";
         boolean inputLock = false;
 
-        String expYears, skill; // experienced
-
-        String gradYear, gradRank, uni;
+        String expYears = "", skill; // experienced
+        String gradYear = "", gradRank = "", uni; // fresher
 
         System.out.print("Enter candidate's first name: ");
         firstName = scan.next();
@@ -200,30 +209,44 @@ public class Main {
 
             System.out.print("Enter candidate's skill: ");
             skill = scan.next();
+
+            cands.add(new Experienced(isExperienced, cands.size()));
+            ((Experienced) cands.get(cands.size() - 1)).setExperienced(expYears, skill);
+
         }
 
         if (!isExperienced) {
             while (!inputLock) {
                 System.out.print("Enter candidate's year of graduation: ");
                 gradYear = scan.next();
+                scan.nextLine();
                 inputLock = check(gradYear, "gradYear");
             }
             inputLock = false;
 
             while (!inputLock) {
                 System.out.print("Enter candidate's rank of graduation: ");
-                gradRank = scan.next();
+                gradRank = scan.nextLine();
                 inputLock = check(gradRank, "gradRank");
             }
             inputLock = false;
 
-            System.out.print("Enter candidate's graduated university");
+            System.out.print("Enter candidate's graduated university: ");
             uni = scan.next();
+
+            cands.add(new Fresher(isExperienced, cands.size()));
+            ((Fresher) cands.get(cands.size() - 1)).setFresher(gradYear, gradRank, uni);
         }
+
+        cands.get(cands.size() - 1).setName(firstName, lastName);
+        cands.get(cands.size() - 1).setInfo(birthYear, phoneNumber, emailAddress);
 
     }
 
     public static void main(String[] args) {
+        printMenu();
+        printMenu();
+        printMenu();
         printMenu();
     }
 }

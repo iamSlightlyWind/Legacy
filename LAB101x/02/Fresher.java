@@ -1,11 +1,14 @@
 public class Fresher extends Candidate {
-    protected int gradYear;
-    protected int gradRank;
-    protected String gradUni;
+    public Fresher(boolean isExperienced, int ID) {
+        super(isExperienced, ID);
+    }
+    
+    protected String gradYear, gradRank, gradUni;
 
-    public Fresher(int yearOfGrad, int rankOfGrad, String uni){
+    public void setFresher(String yearOfGrad, String rankOfGrad, String uni) {
         gradYear = yearOfGrad;
         gradRank = rankOfGrad;
         gradUni = uni;
     }
+    
 }
