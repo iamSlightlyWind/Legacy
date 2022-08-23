@@ -7,11 +7,11 @@ public class Main {
 
     public static void printMenu() {
         System.out.println("HỆ THỐNG QUẢN LÝ ỨNG VIÊN\n");
-        System.out.println("1 .Có kinh nghiệm");
-        System.out.println("2 .Fresher");
-        System.out.println("3 .Thực tập sinh");
-        System.out.println("4 .Đang tìm kiếm");
-        System.out.println("5 .Thoát\n");
+        System.out.println("1. Có kinh nghiệm");
+        System.out.println("2. Fresher");
+        System.out.println("3. Thực tập sinh");
+        System.out.println("4. Đang tìm kiếm");
+        System.out.println("5. Thoát\n");
         System.out.println(
                 " (Vui lòng chọn 1 để tạo Ứng viên có kinh nghiệm, 2 để tạo ứng viên Fresher, 3 cho ứng viên thực tập sinh, 4 để tìm kiếm và 5 để thoát chương trình).");
 
@@ -62,12 +62,13 @@ public class Main {
 
             case "phoneNumber":
                 try {
-                    if (attempt.length() == 10) {
-                        Integer.parseInt(attempt);
+                    if (attempt.length() >= 10) {
+                        Long.parseLong(attempt);
                     } else
                         throw new NumberFormatException("");
                 } catch (NumberFormatException ex) {
-                    System.out.println("Input not recognized: phone number must be a 10 letter number");
+                    System.out.println(
+                            "Input not recognized: number of alphanumeric characters must be more than or equal to 10");
                     return false;
                 }
 
@@ -134,7 +135,7 @@ public class Main {
         inputLock = false;
 
         while (!inputLock) {
-            System.out.print("Enter candidate's email address");
+            System.out.print("Enter candidate's email address: ");
             emailAddress = scan.next();
             inputLock = check(emailAddress, "emailAddress");
         }
@@ -142,7 +143,7 @@ public class Main {
 
         if (isExperienced) {
             while (!inputLock) {
-                System.out.print("Enter candidate's years of experience");
+                System.out.print("Enter candidate's years of experience: ");
                 expYears = scan.next();
                 inputLock = check(expYears, "expYears");
             }
@@ -174,7 +175,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        // createCandidateProfile();
-        // printMenu();
+        printMenu();
     }
 }
