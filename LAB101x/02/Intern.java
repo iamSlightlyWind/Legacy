@@ -1,9 +1,12 @@
 public class Intern extends Candidate {
-    public Intern(boolean isExperienced, int ID) {
-        super(isExperienced, ID);
-    }
-    
+
     protected String major;
-    protected int semester;
+    protected String semester;
     protected String uni;
+
+    public void setIntern(String candMajor, String candSemester, String candUni) {
+        major = candMajor;
+        semester = candSemester;
+        uni = candUni;
+    }
 }

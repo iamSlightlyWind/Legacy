@@ -1,17 +1,8 @@
 public class Candidate {
-    protected int ID;
+
     protected String firstName, lastName, type;
     protected String birthYear, number, email;
-
-    public Candidate(boolean isExperienced, int candID) {
-        if (isExperienced)
-            type = "Experienced";
-
-        if (!isExperienced)
-            type = "Fresher";
-        
-        ID = candID;
-    }
+    protected int ID;
 
     public void setName(String candFirstName, String candLastName) {
         firstName = candFirstName;
@@ -22,5 +13,9 @@ public class Candidate {
         birthYear = candBirthYear;
         number = candNumber;
         email = candEmail;
+    }
+
+    public void setID(int candID){
+        ID = candID;
     }
 }

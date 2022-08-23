@@ -17,13 +17,13 @@ public class Main {
 
         switch (scan.nextInt()) {
             case 1:
-                createCandidateProfile(true);
+                createCandidateProfile(1);
                 break;
             case 2:
-                createCandidateProfile(false);
+                createCandidateProfile(2);
                 break;
             case 3:
-
+                createCandidateProfile(3);
                 break;
             case 4:
                 break;
@@ -164,7 +164,7 @@ public class Main {
         return false;
     }
 
-    public static void createCandidateProfile(boolean isExperienced) {
+    public static void createCandidateProfile(int candidateType) {
         String firstName, lastName;
         String birthYear = "", phoneNumber = "", emailAddress = "";
         boolean inputLock = false;
@@ -199,47 +199,56 @@ public class Main {
         }
         inputLock = false;
 
-        if (isExperienced) {
-            while (!inputLock) {
-                System.out.print("Enter candidate's years of experience: ");
-                expYears = scan.next();
-                inputLock = check(expYears, "expYears");
-            }
-            inputLock = false;
+        switch (candidateType) {
+            case 1: // experienced
+                cands.add(new Experienced());
 
-            System.out.print("Enter candidate's skill: ");
-            skill = scan.next();
+                while (!inputLock) {
+                    System.out.print("Enter candidate's years of experience: ");
+                    expYears = scan.next();
+                    inputLock = check(expYears, "expYears");
+                }
+                inputLock = false;
 
-            cands.add(new Experienced(isExperienced, cands.size()));
-            ((Experienced) cands.get(cands.size() - 1)).setExperienced(expYears, skill);
+                System.out.print("Enter candidate's skill: ");
+                skill = scan.next();
 
-        }
+                ((Experienced) cands.get(cands.size() - 1)).setExperienced(expYears, skill);
+                break;
 
-        if (!isExperienced) {
-            while (!inputLock) {
-                System.out.print("Enter candidate's year of graduation: ");
-                gradYear = scan.next();
-                scan.nextLine();
-                inputLock = check(gradYear, "gradYear");
-            }
-            inputLock = false;
+            case 2: // fresher
+                cands.add(new Fresher());
 
-            while (!inputLock) {
-                System.out.print("Enter candidate's rank of graduation: ");
-                gradRank = scan.nextLine();
-                inputLock = check(gradRank, "gradRank");
-            }
-            inputLock = false;
+                while (!inputLock) {
+                    System.out.print("Enter candidate's year of graduation: ");
+                    gradYear = scan.next();
+                    scan.nextLine();
+                    inputLock = check(gradYear, "gradYear");
+                }
+                inputLock = false;
 
-            System.out.print("Enter candidate's graduated university: ");
-            uni = scan.next();
+                while (!inputLock) {
+                    System.out.print("Enter candidate's rank of graduation: ");
+                    gradRank = scan.nextLine();
+                    inputLock = check(gradRank, "gradRank");
+                }
+                inputLock = false;
 
-            cands.add(new Fresher(isExperienced, cands.size()));
-            ((Fresher) cands.get(cands.size() - 1)).setFresher(gradYear, gradRank, uni);
+                System.out.print("Enter candidate's graduated university: ");
+                uni = scan.next();
+
+                ((Fresher) cands.get(cands.size() - 1)).setFresher(gradYear, gradRank, uni);
+                break;
+
+            case 3: // intern
+                cands.add(new Intern());
+                
+                break;
         }
 
         cands.get(cands.size() - 1).setName(firstName, lastName);
         cands.get(cands.size() - 1).setInfo(birthYear, phoneNumber, emailAddress);
+        cands.get(cands.size() - 1).setID(cands.size() - 1);
 
     }
 
