@@ -1,7 +1,7 @@
 public class Candidate {
 
     protected String firstName, lastName, type;
-    protected String birthYear, number, email;
+    protected String birthYear, number, email, address;
     protected int ID;
 
     public void setName(String candFirstName, String candLastName) {
@@ -9,10 +9,11 @@ public class Candidate {
         lastName = candLastName;
     }
 
-    public void setInfo(String candBirthYear, String candNumber, String candEmail) {
+    public void setInfo(String candBirthYear, String candNumber, String candEmail, String candAddress) {
         birthYear = candBirthYear;
         number = candNumber;
         email = candEmail;
+        address = candAddress;
     }
 
     public void setID(int candID){

@@ -178,7 +178,7 @@ public class Main {
     }
 
     public static void createCandidateProfile(int candidateType) {
-        String firstName, lastName;
+        String firstName, lastName, address;
         String birthYear = "", phoneNumber = "", emailAddress = "";
         boolean inputLock = false;
 
@@ -191,6 +191,11 @@ public class Main {
 
         System.out.print("Enter candidate's last name: ");
         lastName = scan.next();
+        
+        scan.nextLine();
+
+        System.out.print("Enter candidate's address: ");
+        address = scan.nextLine();
 
         while (!inputLock) {
             System.out.print("Enter candidate's year of birth: ");
@@ -275,11 +280,14 @@ public class Main {
         }
 
         cands.get(cands.size() - 1).setName(firstName, lastName);
-        cands.get(cands.size() - 1).setInfo(birthYear, phoneNumber, emailAddress);
+        cands.get(cands.size() - 1).setInfo(birthYear, phoneNumber, emailAddress, address);
         cands.get(cands.size() - 1).setID(cands.size() - 1);
 
     }
 
+    public static void candidateSearch(){
+
+    }
     public static void main(String[] args) {
         printMenu();
         printMenu();
