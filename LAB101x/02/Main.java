@@ -32,6 +32,31 @@ public class Main {
         }
     }
 
+    public static void printCandidates() {
+        System.out.println("Danh sách ứng viên:");
+
+        System.out.println("\n===========ỨNG VIÊN CÓ KINH NGHIỆM============\n");
+        cands.forEach(i -> {
+            if (i instanceof Experienced) {
+                System.out.println(i.getInfo("name") + "\n");
+            }
+        });
+
+        System.out.println("\n===========ỨNG VIÊN FRESHER============\n");
+        cands.forEach(i -> {
+            if (i instanceof Fresher) {
+                System.out.println(i.getInfo("name") + "\n");
+            }
+        });
+
+        System.out.println("\n===========ỨNG VIÊN THỰC TẬP SINH============\n");
+        cands.forEach(i -> {
+            if (i instanceof Intern) {
+                System.out.println(i.getInfo("name") + "\n");
+            }
+        });
+    }
+
     public static boolean check(String attempt, String argument) {
         switch (argument) {
             case "birthYear":
@@ -191,7 +216,7 @@ public class Main {
 
         System.out.print("Enter candidate's last name: ");
         lastName = scan.next();
-        
+
         scan.nextLine();
 
         System.out.print("Enter candidate's address: ");
@@ -285,13 +310,72 @@ public class Main {
 
     }
 
-    public static void candidateSearch(){
+    public static void createData() {
+        ////////////////////////////////////////// Experienced
+        cands.add(new Experienced());
+        cands.get(cands.size() - 1).setName("Levison", "Nesbitt");
+        cands.get(cands.size() - 1).setInfo("1995", "6184280852", "madge_gerlach78@hotmail.com",
+                "82358 Alanis Station");
+        cands.get(cands.size() - 1).setID(cands.size() - 1);
 
+        cands.add(new Experienced());
+        cands.get(cands.size() - 1).setName("Koa", "Strayer");
+        cands.get(cands.size() - 1).setInfo("1995", "8810033404", "audreanne70@yahoo.com",
+                "7018 Maritza Divide");
+        cands.get(cands.size() - 1).setID(cands.size() - 1);
+
+        cands.add(new Experienced());
+        cands.get(cands.size() - 1).setName("Titus", "Roth");
+        cands.get(cands.size() - 1).setInfo("1995", "9424878810", "tania_hamill1@yahoo.com",
+                "4032 Kohler Road");
+        cands.get(cands.size() - 1).setID(cands.size() - 1);
+
+        ////////////////////////////////////////// Fresher
+        cands.add(new Fresher());
+        cands.get(cands.size() - 1).setName("Verona", "Burman");
+        cands.get(cands.size() - 1).setInfo("1995", "4920387290", "aron22@hotmail.com",
+                "69165 Lois Lights");
+        cands.get(cands.size() - 1).setID(cands.size() - 1);
+
+        cands.add(new Fresher());
+        cands.get(cands.size() - 1).setName("Jaydyn", "Hageman");
+        cands.get(cands.size() - 1).setInfo("1995", "3802334893", "lourdes87@yahoo.com",
+                "807 Nitzsche Extension");
+        cands.get(cands.size() - 1).setID(cands.size() - 1);
+
+        cands.add(new Fresher());
+        cands.get(cands.size() - 1).setName("Madison", "Nelson");
+        cands.get(cands.size() - 1).setInfo("1995", "7549677857", "ericka.bernhard@gmail.com",
+                "2811 Van Drive");
+        cands.get(cands.size() - 1).setID(cands.size() - 1);
+
+        ////////////////////////////////////////// Intern
+        cands.add(new Intern());
+        cands.get(cands.size() - 1).setName("Kaysie", "Bhatt");
+        cands.get(cands.size() - 1).setInfo("1995", "7447825903", "nathan.russel15@gmail.com",
+                "626 Cartwright Locks");
+        cands.get(cands.size() - 1).setID(cands.size() - 1);
+
+        cands.add(new Intern());
+        cands.get(cands.size() - 1).setName("Seven", "Aitken");
+        cands.get(cands.size() - 1).setInfo("1995", "4522158137", "jaleel.miller@hotmail.com",
+                "87265 McClure Summit");
+        cands.get(cands.size() - 1).setID(cands.size() - 1);
+
+        cands.add(new Intern());
+        cands.get(cands.size() - 1).setName("Kayde", "Given");
+        cands.get(cands.size() - 1).setInfo("1995", "5102248959", "betsy64@gmail.com",
+                "0911 Jairo Circles");
+        cands.get(cands.size() - 1).setID(cands.size() - 1);
     }
+
     public static void main(String[] args) {
-        printMenu();
-        printMenu();
-        printMenu();
-        printMenu();
+        createData();
+        System.out.println();
+        // printMenu();
+        // printMenu();
+        // printMenu();
+        // printMenu();
+
     }
 }

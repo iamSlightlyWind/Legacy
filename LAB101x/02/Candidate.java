@@ -16,7 +16,16 @@ public class Candidate {
         address = candAddress;
     }
 
-    public void setID(int candID){
+    public String getInfo(String info) {
+        switch (info) {
+            case "name":
+                return (firstName + " " + lastName);
+        }
+
+        return "";
+    }
+
+    public void setID(int candID) {
         ID = candID;
     }
 }
