@@ -68,7 +68,7 @@ public class Main {
                         throw new NumberFormatException("");
                 } catch (NumberFormatException ex) {
                     System.out.println(
-                            "Input not recognized: number of alphanumeric characters must be equal to or more than 10");
+                            "Input not recognized: phone number must only includes alphanumeric characters which length equal to or more than 10");
                     return false;
                 }
 
@@ -159,6 +159,19 @@ public class Main {
                     System.out.println("Kem");
                     return false;
                 }
+
+            case "semester":
+                try {
+                    if (attempt.length() > 0) {
+                        Integer.parseInt(attempt);
+                    } else
+                        throw new NumberFormatException("");
+                } catch (NumberFormatException ex) {
+                    System.out.println("Input not recognized: semester must only includes alphanumeric characters");
+                    return false;
+                }
+
+                return true;
         }
 
         return false;
@@ -171,6 +184,7 @@ public class Main {
 
         String expYears = "", skill; // experienced
         String gradYear = "", gradRank = "", uni; // fresher
+        String major = "", semester = ""; // intern
 
         System.out.print("Enter candidate's first name: ");
         firstName = scan.next();
@@ -242,7 +256,21 @@ public class Main {
 
             case 3: // intern
                 cands.add(new Intern());
-                
+
+                System.out.print("Enter candidate's current major: ");
+                major = scan.next();
+
+                while (!inputLock) {
+                    System.out.print("Enter candidate's current semester: ");
+                    semester = scan.next();
+                    inputLock = check(semester, "semester");
+                }
+
+                System.out.print("Enter candidate's current university: ");
+                uni = scan.next();
+
+                ((Intern) cands.get(cands.size() - 1)).setIntern(major, semester, uni);
+
                 break;
         }
 
