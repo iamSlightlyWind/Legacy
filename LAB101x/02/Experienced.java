@@ -5,5 +5,6 @@ public class Experienced extends Candidate {
     public void setExperienced(String candYearsOfExp, String candSkill) {
         exp = candYearsOfExp;
         skill = candSkill;
+        setType("0");
     }
 }

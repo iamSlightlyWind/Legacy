@@ -6,6 +6,7 @@ public class Fresher extends Candidate {
         gradYear = candYearOfGrad;
         gradRank = candYankOfGrad;
         gradUni = candUni;
+        setType("1");
     }
 
 }

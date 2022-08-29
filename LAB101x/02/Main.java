@@ -6,7 +6,7 @@ public class Main {
     static ArrayList<Candidate> cands = new ArrayList<>();
 
     public static void printMenu() {
-        System.out.println("HỆ THỐNG QUẢN LÝ ỨNG VIÊN\n");
+        System.out.println("\n\nHỆ THỐNG QUẢN LÝ ỨNG VIÊN\n");
         System.out.println("1. Có kinh nghiệm");
         System.out.println("2. Fresher");
         System.out.println("3. Thực tập sinh");
@@ -26,8 +26,11 @@ public class Main {
                 createCandidateProfile(3);
                 break;
             case 4:
+                printCandidates();
+                searchCandidate();
                 break;
             case 5:
+                System.exit(0);
                 return;
         }
     }
@@ -317,18 +320,21 @@ public class Main {
         cands.get(cands.size() - 1).setInfo("1995", "6184280852", "madge_gerlach78@hotmail.com",
                 "82358 Alanis Station");
         cands.get(cands.size() - 1).setID(cands.size() - 1);
+        ((Experienced) cands.get(cands.size() - 1)).setExperienced("10", "Documenting");
 
         cands.add(new Experienced());
         cands.get(cands.size() - 1).setName("Koa", "Strayer");
         cands.get(cands.size() - 1).setInfo("1995", "8810033404", "audreanne70@yahoo.com",
                 "7018 Maritza Divide");
         cands.get(cands.size() - 1).setID(cands.size() - 1);
+        ((Experienced) cands.get(cands.size() - 1)).setExperienced("7", "Programming");
 
         cands.add(new Experienced());
         cands.get(cands.size() - 1).setName("Titus", "Roth");
         cands.get(cands.size() - 1).setInfo("1995", "9424878810", "tania_hamill1@yahoo.com",
                 "4032 Kohler Road");
         cands.get(cands.size() - 1).setID(cands.size() - 1);
+        ((Experienced) cands.get(cands.size() - 1)).setExperienced("8", "Managing");
 
         ////////////////////////////////////////// Fresher
         cands.add(new Fresher());
@@ -336,18 +342,21 @@ public class Main {
         cands.get(cands.size() - 1).setInfo("1995", "4920387290", "aron22@hotmail.com",
                 "69165 Lois Lights");
         cands.get(cands.size() - 1).setID(cands.size() - 1);
+        ((Fresher) cands.get(cands.size() - 1)).setFresher("2018", "Tot", "Boston University");
 
         cands.add(new Fresher());
         cands.get(cands.size() - 1).setName("Jaydyn", "Hageman");
         cands.get(cands.size() - 1).setInfo("1995", "3802334893", "lourdes87@yahoo.com",
                 "807 Nitzsche Extension");
         cands.get(cands.size() - 1).setID(cands.size() - 1);
+        ((Fresher) cands.get(cands.size() - 1)).setFresher("2019", "Xuat sac", "Brown University");
 
         cands.add(new Fresher());
         cands.get(cands.size() - 1).setName("Madison", "Nelson");
         cands.get(cands.size() - 1).setInfo("1995", "7549677857", "ericka.bernhard@gmail.com",
                 "2811 Van Drive");
         cands.get(cands.size() - 1).setID(cands.size() - 1);
+        ((Fresher) cands.get(cands.size() - 1)).setFresher("2017", "Kha", "Vassar College");
 
         ////////////////////////////////////////// Intern
         cands.add(new Intern());
@@ -355,27 +364,45 @@ public class Main {
         cands.get(cands.size() - 1).setInfo("1995", "7447825903", "nathan.russel15@gmail.com",
                 "626 Cartwright Locks");
         cands.get(cands.size() - 1).setID(cands.size() - 1);
+        ((Intern) cands.get(cands.size() - 1)).setIntern("Geography", "5", "Bryn Mawr College");
 
         cands.add(new Intern());
         cands.get(cands.size() - 1).setName("Seven", "Aitken");
         cands.get(cands.size() - 1).setInfo("1995", "4522158137", "jaleel.miller@hotmail.com",
                 "87265 McClure Summit");
         cands.get(cands.size() - 1).setID(cands.size() - 1);
+        ((Intern) cands.get(cands.size() - 1)).setIntern("Psychology", "8", "Carleton College");
 
         cands.add(new Intern());
         cands.get(cands.size() - 1).setName("Kayde", "Given");
         cands.get(cands.size() - 1).setInfo("1995", "5102248959", "betsy64@gmail.com",
                 "0911 Jairo Circles");
         cands.get(cands.size() - 1).setID(cands.size() - 1);
+        ((Intern) cands.get(cands.size() - 1)).setIntern("Literature", "7", "Barnard College");
+    }
+
+    public static void searchCandidate() {
+        System.out.print("Nhập tên ứng viên (Họ hoặc tên): ");
+        String searchFor = scan.next();
+        System.out.print("Loại đầu vào của ứng viên: ");
+        String candType = scan.next();
+        System.out.println();
+
+        cands.forEach(i -> {
+            if (i.getInfo("type").equals(candType)) {
+                if (i.getInfo("name").contains(searchFor)) {
+                    System.out.println(i.getInfo("detail"));
+                }
+            }
+        });
+
     }
 
     public static void main(String[] args) {
         createData();
-        System.out.println();
-        // printMenu();
-        // printMenu();
-        // printMenu();
-        // printMenu();
+        while (true) {
+            printMenu();
+        }
 
     }
 }

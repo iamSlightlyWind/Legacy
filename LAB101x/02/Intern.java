@@ -8,5 +8,6 @@ public class Intern extends Candidate {
         major = candMajor;
         semester = candSemester;
         uni = candUni;
+        super.setType("2");
     }
 }
