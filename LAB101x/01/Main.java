@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class Main {
     static Scanner scan = new Scanner(System.in);
     static ArrayList<Student> student = new ArrayList<Student>();
-    static boolean loopLock = true;
 
     public static void printMenu() {
         System.out.println("===========================");
@@ -33,7 +32,7 @@ public class Main {
                 report();
                 break;
             case 5:
-                loopLock = false;
+                System.exit(0);
                 return;
         }
         System.out.println("\n\n\n");
@@ -41,7 +40,7 @@ public class Main {
 
     public static void report() {
         student.forEach(n -> {
-            if(n.getStatus() == true){
+            if (n.getStatus() == true) {
                 System.out.println(n.toString());
             }
         });
@@ -85,6 +84,10 @@ public class Main {
         for (int i = 0; i < student.size(); i++) {
             temp.add(new Student(student.get(i).getInt("id"), student.get(i).getInt("semester"),
                     student.get(i).getInt("subject"), student.get(i).getString("name")));
+
+            if (!student.get(i).getStatus()) {
+                temp.get(temp.size() - 1).remove();
+            }
         }
 
         temp.sort((o1, o2) -> o1.getString("name").compareTo(o2.getString("name")));
@@ -165,6 +168,8 @@ public class Main {
         student.add(new Student(student.size(), 1, 3, "Candace"));
         student.add(new Student(student.size(), 1, 2, "Ferb"));
 
-        while(loopLock) printMenu();
+        while (true) {
+            printMenu();
+        }
     }
 }
