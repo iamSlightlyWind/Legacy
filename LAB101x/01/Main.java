@@ -98,7 +98,7 @@ public class Main {
 
                 System.out.println("Môn học đăng ký theo thứ tự: : ");
                 student.get(i).printSubjects();
-                System.out.print("Thêm (A), sửa (E), xóa (D) hoặc giữ nguyên (S) môn học : ");
+                System.out.print("Thêm (A), xóa (D) hoặc giữ nguyên (S) môn học : ");
 
                 switch (scan.next()) {
                     case "A":
