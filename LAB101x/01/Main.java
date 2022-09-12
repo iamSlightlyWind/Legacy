@@ -137,7 +137,7 @@ public class Main {
         String name = scan.nextLine();
 
         for (int i = 0; i < temp.size(); i++) {
-            if (temp.get(i).getName().contains(name)) {
+            if (temp.get(i).getName().toLowerCase().contains(name.toLowerCase())) {
                 System.out.println("Tìm thấy sinh viên: " + temp.get(i).getName());
                 temp.get(i).printInfo();
                 System.out.println();
