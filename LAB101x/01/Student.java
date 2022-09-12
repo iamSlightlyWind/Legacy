@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Student {
-    private int id;
-    private String name;
+    protected int id;
+    protected String name;
 
     private static Scanner scan = new Scanner(System.in);
 
@@ -13,11 +13,6 @@ public class Student {
         name = sName;
     }
 
-    public void addSubject(int subject, int semester) {
-        subjectList.add(new Subject(subject, semester));
-    }
-    /////////////
-
     public Student(int ID) {
         id = ID;
         System.out.print("Tên sinh viên: ");
@@ -26,8 +21,18 @@ public class Student {
         System.out.println();
     }
 
+    public Student(Student that) {
+        this.id = that.id;
+        this.name = that.name;
+        this.subjectList = that.subjectList;
+    }
+
     ///////////// Subjects control
     private ArrayList<Subject> subjectList = new ArrayList<>();
+
+    public void addSubject(int subject, int semester) { // for adding test cases
+        subjectList.add(new Subject(subject, semester));
+    }
 
     public void newSubject() {
         System.out.println("Danh sách môn học: ");
@@ -59,9 +64,6 @@ public class Student {
     public void removeSubject() {
         System.out.print("Xóa môn học theo thứ tự: ");
         subjectList.remove(scan.nextInt() - 1);
-    }
-
-    public void editSubject() {
     }
 
     public void printSubjects() {
@@ -100,12 +102,6 @@ public class Student {
         }
     }
 
-    public Student(Student that) {
-        this.id = that.getInt("id");
-        this.name = that.getName();
-        that.subjectList = subjectList;
-    }
-
     public void setName(String newName) {
         name = newName;
     }
@@ -121,13 +117,4 @@ public class Student {
         }
         return 0;
     }
-
-    // private ArrayList<Integer> copySubject() {
-    // ArrayList<Integer> copy = new ArrayList<Integer>(old.size());
-    // subjectList.forEach(i -> {
-    // copy.add(i);
-    // });
-    // return copy;
-    // }
-
 }
