@@ -109,6 +109,10 @@ public class Main {
                     System.out.print("Enter candidate's years of experience: ");
                     expYears = scan.next();
                     inputLock = check(expYears, "expYears");
+                    if(Integer.parseInt(expYears) >= 2022 - Integer.parseInt(birthYear)){
+                        System.out.println("Input not recognized: years of experience must be smaller than age");
+                        inputLock = false;
+                    }
                 }
                 inputLock = false;
 
@@ -126,6 +130,10 @@ public class Main {
                     gradYear = scan.next();
                     scan.nextLine();
                     inputLock = check(gradYear, "gradYear");
+                    if(Integer.parseInt(gradYear) > 2022 || Integer.parseInt(gradYear) < Integer.parseInt(birthYear)){
+                        System.out.println("Input not recognized: year of graduation must be from " + birthYear + " to 2022");
+                        inputLock = false;
+                    }
                 }
                 inputLock = false;
 
@@ -152,6 +160,10 @@ public class Main {
                     System.out.print("Enter candidate's current semester: ");
                     semester = scan.next();
                     inputLock = check(semester, "semester");
+                    if(Integer.parseInt(semester) <= 0){
+                        System.out.println("Input not recognized: semester must be larger than 0");
+                        inputLock = false;
+                    }
                 }
 
                 System.out.print("Enter candidate's current university: ");
@@ -165,7 +177,7 @@ public class Main {
         cands.get(cands.size() - 1).setName(firstName, lastName);
         cands.get(cands.size() - 1).setInfo(birthYear, phoneNumber, emailAddress, address);
         cands.get(cands.size() - 1).setID(cands.size() - 1);
-
+        scan.nextLine();
     }
 
     public static void searchCandidate() {
@@ -176,6 +188,7 @@ public class Main {
         scan.nextLine();
         System.out.println();
 
+        System.out.println("Các ứng cử viên được tìm thấy: ");
         cands.forEach(i -> {
             if (i.getInfo("type").equals(candType)) {
                 if (i.getInfo("name").toLowerCase().contains(searchFor.toLowerCase())) {
@@ -192,10 +205,17 @@ public class Main {
                 try {
                     if (attempt.length() == 4) {
                         Integer.parseInt(attempt);
-                    } else
+                    } else {
+                        System.out.println("Input not recognized: birth year must be a 4 letter number");
                         throw new NumberFormatException("");
+                    }
+
+                    if (Integer.parseInt(attempt) < 1900 || Integer.parseInt(attempt) > 2022) {
+                        System.out.println("Input not recognized: birth year must be from 1900 to 2022");
+                        return false;
+                    }
+
                 } catch (NumberFormatException ex) {
-                    System.out.println("Input not recognized: birth year must be a 4 letter number");
                     return false;
                 }
 
@@ -307,7 +327,7 @@ public class Main {
                     } else
                         throw new NumberFormatException("");
                 } catch (NumberFormatException ex) {
-                    System.out.println("Input not recognized: phone number must be a 10 letter number");
+                    System.out.println("Input not recognized: experience must be larger than 0 and smaller than 100");
                     return false;
                 }
 
