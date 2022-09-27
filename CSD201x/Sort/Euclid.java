@@ -1,4 +1,5 @@
 public class Euclid {
+
     public static int calc(int a, int b) {
         int result = -1;
 
