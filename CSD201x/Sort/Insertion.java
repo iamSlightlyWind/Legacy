@@ -3,7 +3,7 @@ public class Insertion {
     public static void sort() {
 
         if (Main.myInt[1] < Main.myInt[0]) {
-            Main.myInt = Utilities.push(Main.myInt, 1, 0);
+            Utilities.push(1, 0);
         }
 
         for (int i = 2; i < Main.myInt.length; i++) {
@@ -11,9 +11,9 @@ public class Insertion {
                 if (Main.myInt[x] > Main.myInt[count]) {
                     break;
                 } else if (Main.myInt[x] < Main.myInt[count] && Main.myInt[x] > Main.myInt[count - 1]) {
-                    Main.myInt = Utilities.push(Main.myInt, x, count);
+                    Utilities.push(x, count);
                 } else if (Main.myInt[x] < Main.myInt[0]) {
-                    Main.myInt = Utilities.push(Main.myInt, x, 0);
+                    Utilities.push(x, 0);
                 }
             }
         }

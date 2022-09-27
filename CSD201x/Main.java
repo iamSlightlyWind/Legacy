@@ -18,7 +18,7 @@ public class Main {
 
         long endTime = System.nanoTime();
 
-        Utilities.checkSorted(myInt);
+        Utilities.checkSorted();
 
         System.out.println("\nrun time: " + TimeUnit.NANOSECONDS.toMillis(endTime - startTime) + "ms");
     }
