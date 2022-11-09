@@ -1,21 +1,29 @@
 public class Insertion {
 
-    public static void sort() {
+    public static int[] sort(int[] myInt, boolean printStep) {
 
-        if (Main.myInt[1] < Main.myInt[0]) {
-            Utilities.push(1, 0);
+        if (myInt[1] < myInt[0]) {
+            myInt = Utilities.push(myInt, 1, 0);
         }
 
-        for (int i = 2; i < Main.myInt.length; i++) {
+        for (int i = 2; i < myInt.length; i++) {
             for (int count = i - 1, x = i; count > 0; count--) {
-                if (Main.myInt[x] > Main.myInt[count]) {
+                if (myInt[x] > myInt[count]) {
                     break;
-                } else if (Main.myInt[x] < Main.myInt[count] && Main.myInt[x] > Main.myInt[count - 1]) {
-                    Utilities.push(x, count);
-                } else if (Main.myInt[x] < Main.myInt[0]) {
-                    Utilities.push(x, 0);
+                } else if (myInt[x] < myInt[count] && myInt[x] > myInt[count - 1]) {
+                    myInt = Utilities.push(myInt, x, count);
+
+                    if (printStep)
+                        Utilities.printStep(myInt);
+                } else if (myInt[x] < myInt[0]) {
+                    myInt = Utilities.push(myInt, x, 0);
+
+                    if (printStep)
+                        Utilities.printStep(myInt);
                 }
             }
         }
+
+        return myInt;
     }
 }

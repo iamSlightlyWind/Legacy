@@ -4,12 +4,14 @@ import java.util.Scanner;
 
 public class Utilities {
 
-    public static void push(int index, int location) {
+    public static int[] push(int[] myInt, int index, int location) {
         for (int temp; index > location; index--) {
-            temp = Main.myInt[index];
-            Main.myInt[index] = Main.myInt[index - 1];
-            Main.myInt[index - 1] = temp;
+            temp = myInt[index];
+            myInt[index] = myInt[index - 1];
+            myInt[index - 1] = temp;
         }
+
+        return myInt;
     }
 
     public static int getArraySize() {
@@ -22,10 +24,10 @@ public class Utilities {
         return 0;
     }
 
-    public static void checkSorted() {
+    public static void checkSorted(int[] myInt) {
         int count = 0;
-        for (int i = 0; i < Main.myInt.length - 1; i++) {
-            if (Main.myInt[i] < Main.myInt[i + 1]) {
+        for (int i = 0; i < myInt.length - 1; i++) {
+            if (myInt[i] < myInt[i + 1]) {
                 count++;
             } else
                 break;
@@ -33,7 +35,7 @@ public class Utilities {
 
         count++;
 
-        System.out.println("Result: " + count + "/" + Main.myInt.length);
+        System.out.println("Result: " + count + "/" + myInt.length);
 
     }
 
@@ -59,5 +61,12 @@ public class Utilities {
         } catch (FileNotFoundException e) {
         }
         return myInt;
+    }
+
+    public static void printStep(int[] myInt) {
+        for (int i : myInt) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
     }
 }
