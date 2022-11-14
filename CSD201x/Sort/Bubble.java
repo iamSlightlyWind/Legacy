@@ -1,6 +1,6 @@
 public class Bubble {
 
-    public static int[] sort(int[] myInt, boolean printStep) {
+    public static int[] sort(int[] myInt, boolean printSteps) {
         int count = myInt.length;
         for (int i = 1, temp; i < count; i++) {
             if (myInt[i] < myInt[i - 1]) {
@@ -8,7 +8,7 @@ public class Bubble {
                 myInt[i - 1] = myInt[i];
                 myInt[i] = temp;
 
-                if (printStep)
+                if (printSteps)
                     Utilities.printStep(myInt);
             }
 

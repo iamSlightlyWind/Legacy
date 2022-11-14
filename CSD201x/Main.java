@@ -2,8 +2,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 
-    static int arraySize = Utilities.getArraySize();
-    static int[] myInt = Utilities.getPreUnsortedInts();
+    public static int arraySize = Utilities.getArraySize();
+    public static int[] myInt = Utilities.getPreUnsortedInts();
     // static int[] myInt = Utilities.getPreSortedInts();
 
     public static void main(String[] args) {

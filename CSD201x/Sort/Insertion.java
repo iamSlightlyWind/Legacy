@@ -1,6 +1,6 @@
 public class Insertion {
 
-    public static int[] sort(int[] myInt, boolean printStep) {
+    public static int[] sort(int[] myInt, boolean printSteps) {
 
         if (myInt[1] < myInt[0]) {
             myInt = Utilities.push(myInt, 1, 0);
@@ -13,12 +13,12 @@ public class Insertion {
                 } else if (myInt[x] < myInt[count] && myInt[x] > myInt[count - 1]) {
                     myInt = Utilities.push(myInt, x, count);
 
-                    if (printStep)
+                    if (printSteps)
                         Utilities.printStep(myInt);
                 } else if (myInt[x] < myInt[0]) {
                     myInt = Utilities.push(myInt, x, 0);
 
-                    if (printStep)
+                    if (printSteps)
                         Utilities.printStep(myInt);
                 }
             }
