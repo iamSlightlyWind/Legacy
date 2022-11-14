@@ -9,7 +9,7 @@ public class Bubble {
                 myInt[i] = temp;
 
                 if (printSteps)
-                    Utilities.printStep(myInt);
+                    Utils.printStep(myInt);
             }
 
             if (i == count - 1) {

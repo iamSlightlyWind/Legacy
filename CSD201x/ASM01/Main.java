@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class ASM01 {
+public class Main {
     static Scanner scan = new Scanner(System.in);
 
     public static void printMenu() throws IOException {

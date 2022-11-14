@@ -7,9 +7,9 @@ public class Selection {
                     temp = myInt[i];
                     myInt[i] = myInt[x];
                     myInt[x] = temp;
-                    
+
                     if (printSteps)
-                        Utilities.printStep(myInt);
+                        Utils.printStep(myInt);
                 }
             }
         }
