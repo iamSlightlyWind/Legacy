@@ -54,40 +54,40 @@ public class Main {
         }
     }
 
-    public static void writeToFile(int[] myInt, String dest) throws IOException {
+    public static void writeToFile(double[] myDouble, String dest) throws IOException {
         FileWriter writer = new FileWriter(dest);
-        writer.write(myInt.length + "\n");
+        writer.write(myDouble.length + "\n");
 
-        for (int i : myInt) {
+        for (double i : myDouble) {
             writer.write(i + "\n");
         }
 
         writer.close();
     }
 
-    public static int[] readFromFile() throws IOException {
+    public static double[] readFromFile() throws IOException {
         System.out.print("Current: ");
         BufferedReader reader = new BufferedReader(new FileReader("INPUT.TXT"));
-        int[] myInt = new int[Integer.parseInt(reader.readLine())];
+        double[] myDouble = new double[Integer.parseInt(reader.readLine())];
 
-        for (int i = 0; i < myInt.length; i++) {
-            myInt[i] = Integer.parseInt(reader.readLine());
-            System.out.print(myInt[i] + " ");
+        for (int i = 0; i < myDouble.length; i++) {
+            myDouble[i] = Double.parseDouble(reader.readLine());
+            System.out.print(myDouble[i] + " ");
         }
 
         reader.close();
         System.out.println();
-        return myInt;
+        return myDouble;
     }
 
     public static void getInput() throws IOException {
         System.out.print("Amount of input(s): ");
         int count = scan.nextInt();
-        int[] input = new int[count];
+        double[] input = new double[count];
 
         for (int i = 0; i < input.length; i++) {
             System.out.print("#" + (i + 1) + ": ");
-            input[i] = scan.nextInt();
+            input[i] = scan.nextDouble();
         }
 
         writeToFile(input, "INPUT.TXT");
