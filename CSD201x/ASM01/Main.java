@@ -46,6 +46,8 @@ public class Main {
                 writeToFile(Insertion.sort(readFromFile(), true), "OUTPUT3.TXT");
                 break;
             case 6:
+                System.out.print("Enter value for linear search: ");
+                writeToFile(Utils.linearSearch(scan.nextDouble(), readFromFile()), "OUTPUT4.TXT");
                 break;
             case 7:
                 break;
@@ -66,7 +68,7 @@ public class Main {
     }
 
     public static double[] readFromFile() throws IOException {
-        System.out.print("Current: ");
+        System.out.print("Current array: ");
         BufferedReader reader = new BufferedReader(new FileReader("INPUT.TXT"));
         double[] myDouble = new double[Integer.parseInt(reader.readLine())];
 
