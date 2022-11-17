@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Insertion {
 
     public static double[] push(double[] myDouble, int index, int location) {
@@ -14,23 +16,34 @@ public class Insertion {
 
         if (myDouble[1] < myDouble[0]) {
             myDouble = push(myDouble, 1, 0);
+            if (printSteps)
+                Utils.printStep(myDouble);
         }
 
-        for (int i = 2; i < myDouble.length; i++) {
-            for (int count = i - 1, x = i; count > 0; count--) {
-                if (myDouble[x] > myDouble[count]) {
-                    break;
-                } else if (myDouble[x] < myDouble[count] && myDouble[x] > myDouble[count - 1]) {
-                    myDouble = push(myDouble, x, count);
+        for (int repeat = 0; repeat < myDouble.length; repeat++) {
+            double[] sortCheck = new double[myDouble.length];
+            System.arraycopy(myDouble, 0, sortCheck, 0, myDouble.length);
 
-                    if (printSteps)
-                        Utils.printStep(myDouble);
-                } else if (myDouble[x] < myDouble[0]) {
-                    myDouble = push(myDouble, x, 0);
+            for (int i = 2; i < myDouble.length; i++) {
+                for (int count = i - 1, x = i; count > 0; count--) {
+                    if (myDouble[x] > myDouble[count]) {
+                        break;
+                    } else if (myDouble[x] < myDouble[count]) {
+                        myDouble = push(myDouble, x, count);
 
-                    if (printSteps)
-                        Utils.printStep(myDouble);
+                        if (printSteps)
+                            Utils.printStep(myDouble);
+                    } else if (myDouble[x] < myDouble[0]) {
+                        myDouble = push(myDouble, x, 0);
+
+                        if (printSteps)
+                            Utils.printStep(myDouble);
+                    }
                 }
+            }
+
+            if (Arrays.equals(sortCheck, myDouble)) {
+                break;
             }
         }
 
