@@ -74,8 +74,8 @@ public class Main {
 
         for (int i = 0; i < myDouble.length; i++) {
             myDouble[i] = Double.parseDouble(reader.readLine());
-            System.out.print(myDouble[i] + " ");
         }
+        Utils.printStep(myDouble);
 
         reader.close();
         System.out.println();

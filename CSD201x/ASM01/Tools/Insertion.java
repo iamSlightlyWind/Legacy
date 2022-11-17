@@ -2,51 +2,25 @@ import java.util.Arrays;
 
 public class Insertion {
 
-    public static double[] push(double[] myDouble, int index, int location) {
-        for (double temp; index > location; index--) {
-            temp = myDouble[index];
-            myDouble[index] = myDouble[index - 1];
-            myDouble[index - 1] = temp;
-        }
-
-        return myDouble;
-    }
-
     public static double[] sort(double[] myDouble, boolean printSteps) {
 
-        if (myDouble[1] < myDouble[0]) {
-            myDouble = push(myDouble, 1, 0);
-            if (printSteps)
-                Utils.printStep(myDouble);
-        }
-
-        for (int repeat = 0; repeat < myDouble.length; repeat++) {
+        for (int i = 1; i < myDouble.length; i++) {
             double[] sortCheck = new double[myDouble.length];
             System.arraycopy(myDouble, 0, sortCheck, 0, myDouble.length);
 
-            for (int i = 2; i < myDouble.length; i++) {
-                for (int count = i - 1, x = i; count > 0; count--) {
-                    if (myDouble[x] > myDouble[count]) {
-                        break;
-                    } else if (myDouble[x] < myDouble[count]) {
-                        myDouble = push(myDouble, x, count);
+            double current = myDouble[i];
+            int count = i - 1;
 
-                        if (printSteps)
-                            Utils.printStep(myDouble);
-                    } else if (myDouble[x] < myDouble[0]) {
-                        myDouble = push(myDouble, x, 0);
-
-                        if (printSteps)
-                            Utils.printStep(myDouble);
-                    }
-                }
+            while ((count > -1) && (myDouble[count] > current)) {
+                myDouble[count + 1] = myDouble[count--];
+                myDouble[count + 1] = current;
             }
 
-            if (Arrays.equals(sortCheck, myDouble)) {
-                break;
+            if (!Arrays.equals(myDouble, sortCheck) && printSteps) {
+                Utils.printStep(myDouble);
             }
+
         }
-
         return myDouble;
     }
 }
