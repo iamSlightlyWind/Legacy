@@ -50,6 +50,8 @@ public class Main {
                 writeToFile(Utils.linearSearch(scan.nextDouble(), readFromFile()), "OUTPUT4.TXT");
                 break;
             case 7:
+                System.out.print("Enter value for binary search: ");
+                writeToFile(Utils.binarySearch(scan.nextDouble(), readFromFile()), "OUTPUT5.TXT");
                 break;
             default:
                 break;
@@ -64,6 +66,12 @@ public class Main {
             writer.write(i + "\n");
         }
 
+        writer.close();
+    }
+
+    public static void writeToFile(int result, String dest) throws IOException {
+        FileWriter writer = new FileWriter(dest);
+        writer.write("" + result);
         writer.close();
     }
 

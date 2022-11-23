@@ -22,6 +22,36 @@ public class Utils {
         for (double i : finals) {
             System.out.print((int) i + " ");
         }
+
         return finals;
+    }
+
+    public static int binarySearch(double value, double[] myDouble) {
+        Insertion.sort(myDouble, false);
+
+        int low = 0;
+        int high = myDouble.length - 1;
+        int mid = (high + low) / 2;
+
+        for (;;) {
+            if (value < myDouble[mid]) {
+                high = mid;
+            } else if (value > myDouble[mid]) {
+                low = mid;
+            } else if (value == myDouble[mid]) {
+                break;
+            }
+            mid = (high + low) / 2;
+
+            if (high - low == 2)
+                break;
+        }
+
+        if (value == myDouble[mid]) {
+            System.out.println(low + " " + mid + " " + high);
+            return mid;
+        } else
+            return -1;
+
     }
 }
