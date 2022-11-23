@@ -23,6 +23,8 @@ public class Main {
         int choice = scan.nextInt();
         System.out.println("\n");
 
+        double attempt;
+
         switch (choice) {
             case 0:
                 System.exit(0);
@@ -31,27 +33,35 @@ public class Main {
                 getInput();
                 break;
             case 2:
-                readFromFile();
+                readFromFile(true);
                 break;
             case 3:
                 System.out.println("Bubble sorting: ");
-                writeToFile(Bubble.sort(readFromFile(), true), "OUTPUT1.TXT");
+                writeToFile(Bubble.sort(readFromFile(true), true), "OUTPUT1.TXT");
                 break;
             case 4:
                 System.out.println("Selection sorting: ");
-                writeToFile(Selection.sort(readFromFile(), true), "OUTPUT2.TXT");
+                writeToFile(Selection.sort(readFromFile(true), true), "OUTPUT2.TXT");
                 break;
             case 5:
                 System.out.println("Insertion sorting: ");
-                writeToFile(Insertion.sort(readFromFile(), true), "OUTPUT3.TXT");
+                writeToFile(Insertion.sort(readFromFile(true), true), "OUTPUT3.TXT");
                 break;
             case 6:
                 System.out.print("Enter value for linear search: ");
-                writeToFile(Utils.linearSearch(scan.nextDouble(), readFromFile()), "OUTPUT4.TXT");
+                attempt = scan.nextDouble();
+                double[] results = Utils.linearSearch(attempt, readFromFile(false));
+                writeToFile(results, "OUTPUT4.TXT");
                 break;
             case 7:
                 System.out.print("Enter value for binary search: ");
-                writeToFile(Utils.binarySearch(scan.nextDouble(), readFromFile()), "OUTPUT5.TXT");
+                attempt = scan.nextDouble();
+                int result = Utils.binarySearch(attempt, readFromFile(false));
+                if (result != -1) {
+                    writeToFile(result, "OUTPUT5.TXT");
+                } else {
+                    System.out.println("Value not found!");
+                }
                 break;
             default:
                 break;
@@ -75,15 +85,17 @@ public class Main {
         writer.close();
     }
 
-    public static double[] readFromFile() throws IOException {
-        System.out.print("Current array: ");
+    public static double[] readFromFile(boolean printSteps) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("INPUT.TXT"));
         double[] myDouble = new double[Integer.parseInt(reader.readLine())];
 
         for (int i = 0; i < myDouble.length; i++) {
             myDouble[i] = Double.parseDouble(reader.readLine());
         }
-        Utils.printStep(myDouble);
+        if (printSteps) {
+            System.out.print("Current array: ");
+            Utils.printStep(myDouble);
+        }
 
         reader.close();
         System.out.println();

@@ -19,8 +19,11 @@ public class Utils {
         System.arraycopy(results, 0, finals, 0, count);
 
         System.out.print("Items bigger than value located: ");
+        if (finals.length == 0)
+            System.out.print("none!");
+
         for (double i : finals) {
-            System.out.print((int) i + " ");
+            System.out.print("\n[" + (int) i + "]: " + myDouble[(int) i]);
         }
 
         return finals;
@@ -48,10 +51,11 @@ public class Utils {
         }
 
         if (value == myDouble[mid]) {
-            System.out.println(low + " " + mid + " " + high);
+            System.out.println("[" + mid + "]: " + myDouble[mid]);
             return mid;
-        } else
-            return -1;
+        }
+
+        return -1;
 
     }
 }
