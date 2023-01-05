@@ -10,16 +10,16 @@ int main()
 
     printf("\n\n");
 
-    printf("*        *\n");
-    printf("**      **\n");
-    printf("***    ***\n");
-    printf("****  ****\n");
-    printf("**********\n");
-    printf("**********\n");
-    printf("****  ****\n");
-    printf("***    ***\n");
-    printf("**      **\n");
-    printf("*        *\n");
+    printf("*                 *\n");
+    printf("* *             * *\n");
+    printf("* * *         * * *\n");
+    printf("* * * *     * * * *\n");
+    printf("* * * * * * * * * *\n");
+    printf("* * * * * * * * * *\n");
+    printf("* * * *     *  * * *\n");
+    printf("* * *         * * *\n");
+    printf("* *             * *\n");
+    printf("*                 *\n");
 
     printf("\n");
 
@@ -44,16 +44,16 @@ int main()
 
     printf("\n");
 
-    printf("**********\n");
-    printf("****  ****\n");
-    printf("***    ***\n");
-    printf("**      **\n");
-    printf("*        *\n");
-    printf("*        *\n");
-    printf("**      **\n");
-    printf("***    ***\n");
-    printf("****  ****\n");
-    printf("**********\n");
+    printf("* * * * *  * * * * *\n");
+    printf("* * * *      * * * *\n");
+    printf("* * *          * * *\n");
+    printf("* *              * *\n");
+    printf("*                  *\n");
+    printf("*                  *\n");
+    printf("* *              * *\n");
+    printf("* * *          * * *\n");
+    printf("* * * *      * * * *\n");
+    printf("* * * * *  * * * * *\n");
 
     printf("\n");
 
@@ -79,4 +79,6 @@ int main()
     printf("\n / || %%%%%% ||  ");
     printf("\n*  ||-----||  ");
     printf("\n   \"\"     \"\"    ");
+
+    
 }
