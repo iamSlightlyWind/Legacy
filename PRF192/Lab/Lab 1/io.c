@@ -14,17 +14,17 @@ int main()
     printf("Hello\n     world!");
     printf("\n\n");
 
-    printf("Hello\n\tworld!");
+    printf("Hello\n\t\b\b\bworld!");
     printf("\n\n");
 
-    printf("How/tare/tyou?\nI\tam\tOK");
+    printf("How\tare\tyou?\nI\tam\tOK");
     printf("\n\n");
 
-    printf("How/tare/tyou?");
-    printf("\n\nI\tam\tOK");
+    printf("How\tare\tyou?");
+    printf("\nI\tam\tOK");
     printf("\n\n");
 
-    printf("How/tare/tyou?\nI\tam\tOK");
+    printf("How\tare\tyou?\nI\tam\tOK");
     printf("\n\n");
 
     printf("Something has gone crazy\a");
