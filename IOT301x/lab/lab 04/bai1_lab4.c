@@ -7,3 +7,10 @@ int main(){
     myBit = (x >> bitNumber) & 1;
     printf("Bit number %d is %d",bitNumber,myBit);
 }
+/*
+tq28sv72vdnc
+zqoopzobhbx9
+7fnobbenrpt8
+feksgnekkbyz
+qenvzh0hmw1y
+*/
