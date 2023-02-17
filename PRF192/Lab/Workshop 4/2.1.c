@@ -58,8 +58,7 @@ int main() {
             case 2:
                 getDigit();
                 break;
-            case 3:
-            default:
+            case 3: return 0;
         }
 
         printf("\n\n");
