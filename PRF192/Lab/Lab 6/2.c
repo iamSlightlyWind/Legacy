@@ -1,12 +1,10 @@
 #include <stdio.h>
 
-double inchToCm(double inches)
-{
+double inchToCm(double inches) {
     return inches * 2.54;
 }
 
-int main()
-{
+int main() {
     printf("Enter the distance in inches: ");
     double n;
     scanf("%lf", &n);

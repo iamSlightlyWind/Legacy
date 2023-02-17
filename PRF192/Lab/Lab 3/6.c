@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-int main()
-{
+int main() {
     printf("Enter 3 positive integers: ");
     int a, b, c;
     scanf("%d %d %d", &a, &b, &c);
@@ -9,10 +8,8 @@ int main()
     a = (a % 1000) / 100;
     b = (b % 1000) / 100;
     c = (c % 1000) / 100;
-    if (a < b && b < c)
-    {
+    if (a < b && b < c) {
         printf("Yes");
-    }
-    else
+    } else
         printf("No");
 }

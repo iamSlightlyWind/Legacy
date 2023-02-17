@@ -1,16 +1,13 @@
 #include <stdio.h>
 
-int main()
-{
-    int current = 1, count = 0, sum = -1; // offset
+int main() {
+    int current = 1, count = 0, sum = -1;  // offset
     int max = -1, min = -1;
 
-    for (count--; current > 0; count++)
-    {
+    for (count--; current > 0; count++) {
         sum += current;
 
-        if (count > -1)
-        {
+        if (count > -1) {
             if (max < 0 || max < current)
                 max = current;
             if (min < 0 || min > current)

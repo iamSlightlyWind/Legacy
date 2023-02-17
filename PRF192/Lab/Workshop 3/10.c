@@ -1,14 +1,12 @@
 #include <stdio.h>
 
-void printMinMaxDigits(int myInt)
-{
+void printMinMaxDigits(int myInt) {
     int digit;
     int min, max;
     digit = myInt % 10;
     myInt = myInt / 10;
     min = max = digit;
-    while (myInt > 0)
-    {
+    while (myInt > 0) {
         digit = myInt % 10;
         myInt = myInt / 10;
         if (min > digit)
@@ -20,15 +18,12 @@ void printMinMaxDigits(int myInt)
     printf("\nMaximum digit: %d", max);
 }
 
-int main()
-{
+int main() {
     int myInt;
-    do
-    {
+    do {
         printf("Enter a non-negative integer: ");
         scanf("%d", &myInt);
-        if (myInt >= 0)
-        {
+        if (myInt >= 0) {
             printMinMaxDigits(myInt);
         }
     } while (myInt < 0);

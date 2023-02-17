@@ -1,31 +1,23 @@
 #include <stdio.h>
 
-int greatestDivisor(int a, int b)
-{
-    while (a != b)
-    {
-        if (a > b)
-        {
+int greatestDivisor(int a, int b) {
+    while (a != b) {
+        if (a > b) {
             a -= b;
-        }
-        else
-        {
+        } else {
             b -= a;
         }
     }
     return a;
 }
 
-int leastMultiple(int a, int b)
-{
+int leastMultiple(int a, int b) {
     return a * b / greatestDivisor(a, b);
 }
 
-int main(void)
-{
+int main(void) {
     int a, b, d, m;
-    do
-    {
+    do {
         printf("Enter two positive integers: ");
         scanf("%d%d", &a, &b);
     } while (a <= 0 || b <= 0);

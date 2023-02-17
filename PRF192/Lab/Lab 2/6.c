@@ -1,7 +1,6 @@
 #include <stdio.h>
 // no errors?
-int main()
-{
+int main() {
     int a, b, c;
     a = 2.45;
     b = a + 2;

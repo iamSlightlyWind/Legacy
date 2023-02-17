@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-int getSmallest(int a, int b, int c)
-{
+int getSmallest(int a, int b, int c) {
     int min = a;
     if (min > b)
         min = b;
@@ -12,14 +11,12 @@ int getSmallest(int a, int b, int c)
     return min;
 }
 
-int main()
-{
-    for (int a, b, c;;)
-    {
+int main() {
+    for (int a, b, c;;) {
         printf("\nEnter 3 integers: ");
         scanf("%d %d %d", &a, &b, &c);
 
-        if(a == b || b == c || a == c){
+        if (a == b || b == c || a == c) {
             break;
         }
 

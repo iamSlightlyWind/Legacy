@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-void drawRectangle()
-{
+void drawRectangle() {
     printf("\n ******");
     printf("\n *    *");
     printf("\n *    *");
@@ -9,16 +8,14 @@ void drawRectangle()
     printf("\n ******");
 }
 
-void drawTriangle()
-{
+void drawTriangle() {
     printf("\n   *   ");
     printf("\n  *  * ");
     printf("\n *    *");
     printf("\n********");
 }
 
-void drawCircle()
-{
+void drawCircle() {
     printf("\n   **  ");
     printf("\n ");
     printf("\n *    *");
@@ -27,16 +24,14 @@ void drawCircle()
     printf("\n   **  ");
 }
 
-void drawInvertedV()
-{
+void drawInvertedV() {
     printf("\n   *   ");
     printf("\n  *  * ");
     printf("\n *    *");
     printf("\n*      *");
 }
 
-int main()
-{
+int main() {
     drawTriangle();
     drawRectangle();
     drawInvertedV();

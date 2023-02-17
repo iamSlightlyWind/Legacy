@@ -1,15 +1,11 @@
 #include <stdio.h>
 
-int main()
-{
+int main() {
     int count = -1, lock = 1;
-    while (count < 0)
-    {
-        if (lock == 1)
-        {
+    while (count < 0) {
+        if (lock == 1) {
             lock = 0;
-        }
-        else
+        } else
             printf("\nYou should enter a positive number!");
 
         printf("\nEnter a number: ");
@@ -19,12 +15,10 @@ int main()
     int fact = count;
     int factCount = count;
 
-    for (;;)
-    {
+    for (;;) {
         if (factCount - 1 == 0)
             break;
-        if (fact == 0)
-        {
+        if (fact == 0) {
             fact = 1;
             break;
         }

@@ -1,9 +1,7 @@
 #include <stdio.h>
 
-int main()
-{
-    for (int a, b, temp;;)
-    {
+int main() {
+    for (int a, b, temp;;) {
         printf("A = ");
         scanf("%d", &a);
         if (a == 0) break;

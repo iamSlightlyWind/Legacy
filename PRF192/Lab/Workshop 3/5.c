@@ -1,14 +1,12 @@
 #include <stdio.h>
 
-int fibo(int myInt)
-{
+int fibo(int myInt) {
     int prev = 1, current = 1, next, i;
-    
+
     if (myInt <= 2)
         return 1;
-    
-    for (i = 3; i <= myInt; i++)
-    {
+
+    for (i = 3; i <= myInt; i++) {
         next = prev + current;
         prev = current;
         current = next;
@@ -16,11 +14,9 @@ int fibo(int myInt)
     return next;
 }
 
-int main()
-{
+int main() {
     int myInt;
-    do
-    {
+    do {
         printf("Enter a positive integer: ");
         scanf("%d", &myInt);
     } while (myInt < 1);

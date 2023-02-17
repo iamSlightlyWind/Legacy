@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-int main()
-{
+int main() {
     printf("A");
     printf("\nB C");
     printf("\nD E F");
@@ -79,6 +78,4 @@ int main()
     printf("\n / || %%%%%% ||  ");
     printf("\n*  ||-----||  ");
     printf("\n   \"\"     \"\"    ");
-
-    
 }

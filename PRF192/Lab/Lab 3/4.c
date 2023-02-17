@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-int main()
-{
+int main() {
     printf("Enter your gender (0 for female, 1 for male): ");
     int gender;
     scanf("%d", &gender);
@@ -11,28 +10,23 @@ int main()
     scanf("%f %f", &weight, &height);
 
     int lower, upper;
-    switch (gender)
-    {
-    case 0:
-        lower = 19;
-        upper = 24;
-        break;
-    case 1:
-        lower = 20;
-        upper = 25;
-        break;
+    switch (gender) {
+        case 0:
+            lower = 19;
+            upper = 24;
+            break;
+        case 1:
+            lower = 20;
+            upper = 25;
+            break;
     }
 
     float bmi = weight / (height * height);
 
-    if (bmi < lower)
-    {
+    if (bmi < lower) {
         printf("You are a little skinny");
-    }
-    else if (bmi > upper)
-    {
+    } else if (bmi > upper) {
         printf("You are a little big");
-    }
-    else
+    } else
         printf("You are in good shape");
 }
