@@ -1,10 +1,10 @@
 #include <stdio.h>
 
 int greatestSum(int arr[], int size) {
-    int offset = 2, skeleton[size + offset];  //
-    for (int i = 0; i < size; i++) {          // modern problem
-        skeleton[i] = arr[i];                 // requires
-    }                                         // modern solution
+    int offset = 2, skeleton[size + offset];
+    for (int i = 0; i < size; i++) {
+        skeleton[i] = arr[i];
+    }
 
     int sum[2] = {0, 1};
 
@@ -26,6 +26,6 @@ int greatestSum(int arr[], int size) {
 }
 
 int main() {
-    int sampleArr[] = {};
+    int sampleArr[] = {1, 0, 2, 9, 3, 8, 4, 7, 5, 6};
     printf("%d", greatestSum(sampleArr, sizeof(sampleArr) / sizeof(sampleArr[0])));
 }
