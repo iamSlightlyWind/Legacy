@@ -3,3 +3,8 @@
 .sh
 Temp.*
 temp.*
+*
+!/**/
+!*.*
+settings.json
+tasks.json

@@ -63,7 +63,7 @@ int *sort(int myInt[], int size) {
     }
     return &myInt[0];
 }
-
+    
 int *getClone(int myInt[], int size) {
     int *clone = malloc(sizeof(int) * size);
     if (clone == NULL) {
@@ -79,8 +79,6 @@ int *getClone(int myInt[], int size) {
 int main() {
     int myInt[100] = {0, 2, 5, 7, 3, 1, 8, 0, 4, 3};  // maximum of 100 elements
     int size = 10;
-
-    // int *pointer = getClone(myInt,size);
 
     while (1) {
         switch (printMenu()) {
