@@ -8,3 +8,4 @@ temp.*
 !*.*
 settings.json
 tasks.json
+*.zip
