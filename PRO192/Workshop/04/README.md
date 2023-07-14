@@ -13,7 +13,7 @@ The main class of the program. Allow the user to create one of the said items an
 ## Workshop order
 
 - The program starts with the main function of the AntiqueShop class.
-- It will ask the user to choose an option from the menu.
+- It will ask the user to choose an option from the menu using Menu.getChoice().
 - If the user chooses to create an item, the previous item will be overwritten if it exists. Then the program will ask the user to enter the item's attributes.
 - When the item's attributes are entered, it will be verified by the Verify class. If the input is invalid, the user will be asked to input again until the input is valid.
 - If the user chooses to view the item's attributes, the program will display the item's attributes.
