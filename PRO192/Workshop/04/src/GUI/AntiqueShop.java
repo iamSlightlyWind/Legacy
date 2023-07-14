@@ -10,13 +10,12 @@ public class AntiqueShop {
         int choice = 0;
         Scanner scan = new Scanner(System.in);
         do {
-
             System.out.println("1. Create a Vase:");
             System.out.println("2. Create a Statue:");
             System.out.println("3. Create a Painting:");
             System.out.println("4. Display the Item:");
-            System.out.println("Input a choice:");
-            choice = scan.nextInt();
+            System.out.print("Input a choice: ");
+            choice = Integer.parseInt(scan.nextLine());
             switch (choice) {
                 case 1:
                     item = new Vase();
