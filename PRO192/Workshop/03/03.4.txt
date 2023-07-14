@@ -1,0 +1,30 @@
+## Workshop order
+
+- The program starts with the main function of the Tester class.
+- It will create 2 new Guitar objects, the first one with no attributes whatsoever, while the second one has all the attributes.
+- It will then print out the attributes of both objects.
+- It will then change the value price of the first Guitar object to 3000.
+- It will then print out the price attribute of the first Guitar object.
+
+
+## Workshop questions
+`What is stored in the static heap, stack, dynamic heap?`
+- Static heap: store static variables, constants, and class definitions.
+- Stack: stores local variables, function parameters, and function return addresses.
+- Dynamic heap: stores objects and arrays.
+
+`What are objects in the program?`
+- Objects are instances of classes. They are created in the dynamic heap.
+
+`What is the state of obj1, obj2?`
+- obj1: doesn't have any value for all attributes. 3000 for the price after changing.
+- obj2: serialNumber = G123, price = 2000, builder = Sony, model = Model123, backWood = hardWood, topWood = softWood
+
+`Do you access all fields of obj1 in the class Tester.java? Why?`
+- All fields of obj1 can be accessed with the getter methods
+
+`What is the current object when the program runs to the line “obj2.createSound();`
+- It was executed in the Tester class, not an object.
+
+`In the method main, can you use the keyword “this” to access all fields of obj2? Why?`
+- No, because it is not in the scope of the object.
