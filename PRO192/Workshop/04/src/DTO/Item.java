@@ -23,7 +23,7 @@ public class Item {
     }
 
     public void output(String itemType) {
-        System.out.println(itemType + "value: " + value);
-        System.out.println(itemType + "creator: " + creator);
+        System.out.println(itemType + " value: " + value);
+        System.out.println(itemType + " creator: " + creator);
     }
 }
