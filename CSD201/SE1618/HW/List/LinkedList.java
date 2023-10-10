@@ -35,21 +35,19 @@ public class LinkedList {
      * the new list is sorted.
      * 24. Reverse a singly linked list using only one pass through the list.
      * 25. Check whether two singly linked list have the same contents.
-     * 
-     * try to optimize code for number of lines
      */
 
     Node head, tail;
 
-    LinkedList() {
+    public LinkedList() {
         head = tail = null;
     }
 
-    boolean isEmpty() {
+    public boolean isEmpty() {
         return (head == null);
     }
 
-    void addToHead(int x) {
+    public void addToHead(int x) {
         if (isEmpty()) {
             head = tail = new Node(x);
         } else {
@@ -59,7 +57,7 @@ public class LinkedList {
         }
     }
 
-    void addToTail(int x) {
+    public void addToTail(int x) {
         if (isEmpty()) {
             head = tail = new Node(x);
         } else {
@@ -68,7 +66,7 @@ public class LinkedList {
         }
     }
 
-    void addAfter(Node p, int x) {// assume Node p exists
+    public void addAfter(Node p, int x) {
         Node q = new Node(x);
         q.next = p.next;
         p.next = q;
@@ -77,7 +75,7 @@ public class LinkedList {
         }
     }
 
-    void traverse() {
+    public void traverse() {
         Node p = head;
         while (p != null) {
             System.out.print(p.value + " ");
@@ -86,7 +84,7 @@ public class LinkedList {
         System.out.println();
     }
 
-    int deleteFromHead() {
+    public int deleteFromHead() {
         if (isEmpty()) {
             return -1;
         }
@@ -99,7 +97,7 @@ public class LinkedList {
         return value;
     }
 
-    int deleteFromTail() {
+    public int deleteFromTail() {
         if (isEmpty()) {
             return -1;
         }
@@ -117,7 +115,7 @@ public class LinkedList {
         return value;
     }
 
-    int deleteAfter(Node p) {// assume Node p exists
+    public int deleteAfter(Node p) {
         if (p == null || p.next == null) {
             return -1;
         }
@@ -126,7 +124,7 @@ public class LinkedList {
         return value;
     }
 
-    void dele(Node p) {
+    public void dele(Node p) {
         if (p == null) {
             return;
         }
@@ -143,7 +141,7 @@ public class LinkedList {
         }
     }
 
-    int max() {
+    public int max() {
         if (isEmpty()) {
             return -1;
         }
@@ -158,7 +156,7 @@ public class LinkedList {
         return max;
     }
 
-    int min() {
+    public int min() {
         if (isEmpty()) {
             return -1;
         }
@@ -173,7 +171,7 @@ public class LinkedList {
         return min;
     }
 
-    int sum() {
+    public int sum() {
         if (isEmpty()) {
             return -1;
         }
@@ -186,7 +184,7 @@ public class LinkedList {
         return sum;
     }
 
-    void dele(int x) {
+    public void dele(int x) {
         if (isEmpty()) {
             return;
         }
@@ -203,7 +201,7 @@ public class LinkedList {
         }
     }
 
-    Node search(int x) {
+    public Node search(int x) {
         if (isEmpty()) {
             return null;
         }
@@ -220,7 +218,7 @@ public class LinkedList {
             return null;
     }
 
-    void delete(int i) {
+    public void delete(int i) {
         if (isEmpty()) {
             return;
         }
@@ -239,7 +237,7 @@ public class LinkedList {
         }
     }
 
-    int count() {
+    public int count() {
         int count = 0;
         Node p = head;
         while (p != null) {
