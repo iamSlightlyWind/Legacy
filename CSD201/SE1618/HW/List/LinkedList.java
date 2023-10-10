@@ -15,7 +15,7 @@ public class LinkedList {
      * 9. Node search(int x) - search and return the reference to the first node
      * having info x.
      * 10. int count() - count and return number of nodes in the list.
-     * 11. void dele(int i) - delete an i-th node on the list. Besure that such a
+     * 11. void delete(int i) - delete an i-th node on the list. Besure that such a
      * node exists.
      * 12. void sort() - sort the list by ascending order of info.
      * 13. void dele(Node p) - delete node p if it exists in the list.
@@ -35,6 +35,8 @@ public class LinkedList {
      * the new list is sorted.
      * 24. Reverse a singly linked list using only one pass through the list.
      * 25. Check whether two singly linked list have the same contents.
+     * 
+     * try to optimize code for number of lines
      */
 
     Node head, tail;
@@ -57,15 +59,193 @@ public class LinkedList {
         }
     }
 
-    
-}
+    void addToTail(int x) {
+        if (isEmpty()) {
+            head = tail = new Node(x);
+        } else {
+            tail.next = new Node(x);
+            tail = tail.next;
+        }
+    }
 
-class Node {
-    int value;
-    Node next;
+    void addAfter(Node p, int x) {// assume Node p exists
+        Node q = new Node(x);
+        q.next = p.next;
+        p.next = q;
+        if (p == tail) {
+            tail = q;
+        }
+    }
 
-    Node(int x) {
-        value = x;
-        next = null;
+    void traverse() {
+        Node p = head;
+        while (p != null) {
+            System.out.print(p.value + " ");
+            p = p.next;
+        }
+        System.out.println();
+    }
+
+    int deleteFromHead() {
+        if (isEmpty()) {
+            return -1;
+        }
+        int value = head.value;
+        if (head == tail) {
+            head = tail = null;
+        } else {
+            head = head.next;
+        }
+        return value;
+    }
+
+    int deleteFromTail() {
+        if (isEmpty()) {
+            return -1;
+        }
+        int value = tail.value;
+        if (head == tail) {
+            head = tail = null;
+        } else {
+            Node p = head;
+            while (p.next != tail) {
+                p = p.next;
+            }
+            tail = p;
+            tail.next = null;
+        }
+        return value;
+    }
+
+    int deleteAfter(Node p) {// assume Node p exists
+        if (p == null || p.next == null) {
+            return -1;
+        }
+        int value = p.next.value;
+        p.next = p.next.next;
+        return value;
+    }
+
+    void dele(Node p) {
+        if (p == null) {
+            return;
+        }
+        if (p == head) {
+            deleteFromHead();
+        } else {
+            Node q = head;
+            while (q.next != p) {
+                q = q.next;
+            }
+            if (q.next != null) {
+                deleteAfter(q);
+            }
+        }
+    }
+
+    int max() {
+        if (isEmpty()) {
+            return -1;
+        }
+        int max = head.value;
+        Node p = head;
+        while (p != null) {
+            if (p.value > max) {
+                max = p.value;
+            }
+            p = p.next;
+        }
+        return max;
+    }
+
+    int min() {
+        if (isEmpty()) {
+            return -1;
+        }
+        int min = head.value;
+        Node p = head;
+        while (p != null) {
+            if (p.value < min) {
+                min = p.value;
+            }
+            p = p.next;
+        }
+        return min;
+    }
+
+    int sum() {
+        if (isEmpty()) {
+            return -1;
+        }
+        int sum = 0;
+        Node p = head;
+        while (p != null) {
+            sum += p.value;
+            p = p.next;
+        }
+        return sum;
+    }
+
+    void dele(int x) {
+        if (isEmpty()) {
+            return;
+        }
+        if (head.value == x) {
+            deleteFromHead();
+        } else {
+            Node p = head;
+            while (p.next != null && p.next.value != x) {
+                p = p.next;
+            }
+            if (p.next != null) {
+                deleteAfter(p);
+            }
+        }
+    }
+
+    Node search(int x) {
+        if (isEmpty()) {
+            return null;
+        }
+
+        Node p = head;
+        while (p != null && p.value != x) {
+            p = p.next;
+        }
+        if (p == null) {
+            return null;
+        } else if (p.value == x) {
+            return p;
+        } else
+            return null;
+    }
+
+    void delete(int i) {
+        if (isEmpty()) {
+            return;
+        }
+        if (i == 0) {
+            deleteFromHead();
+        } else {
+            Node p = head;
+            int count = 0;
+            while (p.next != null && count != i - 1) {
+                p = p.next;
+                count++;
+            }
+            if (p.next != null) {
+                deleteAfter(p);
+            }
+        }
+    }
+
+    int count() {
+        int count = 0;
+        Node p = head;
+        while (p != null) {
+            count++;
+            p = p.next;
+        }
+        return count;
     }
 }
