@@ -3,7 +3,7 @@ public class Node {
     double rating;
     Node next;
 
-    Node(String name, String artist, double rating) {
+    public Node(String name, String artist, double rating) {
         this.name = name;
         this.artist = artist;
         this.rating = rating;

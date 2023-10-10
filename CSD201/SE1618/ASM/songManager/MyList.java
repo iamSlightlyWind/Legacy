@@ -8,6 +8,7 @@ public class MyList {
     public void add(String xName, String xArtist, double xRating) {
         if (xName.contains("aba") || xRating < 2)
             return;
+
         Node newNode = new Node(xName, xArtist, xRating);
 
         if (head == null) {
@@ -38,12 +39,14 @@ public class MyList {
     }
 
     public int isSorted() {
-        return isSorted(head);
+        if(head == null)
+            return isSorted(head);
+        else return 1;
     }
 
     public int isSorted(Node current) {
-        if (current == null || current.next == null)
-            return 1;
+        if (current.next == null)
+            return 1;  
         if (current.rating < current.next.rating)
             return 0;
         if (current.rating == current.next.rating && current.name.compareTo(current.next.name) > 0)
@@ -56,14 +59,15 @@ public class MyList {
             return 0;
 
         int count = 0;
-        while (head.rating == getLowestRating()) {
+        double min = getLowestRating();
+        while (head.rating == min) {
             head = head.next;
             count++;
         }
 
         Node current = head;
         while (current.next != null) {
-            if (current.next.rating == getLowestRating()) {
+            if (current.next.rating == min) {
                 current.next = current.next.next;
                 count++;
             } else
