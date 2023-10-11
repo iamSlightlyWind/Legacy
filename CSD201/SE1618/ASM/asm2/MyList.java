@@ -18,16 +18,21 @@ public class MyList {
 
     public void add(String xName, double xGPA, int index) {
         Node current = head;
-        for (int i = 1; i < index; i++) {
-            if (current.next != null) {
-                current = current.next;
-            } else
-                break;
+        if(index == 0){
+            head = new Node(new Student(xName, xGPA));
+            head.next = current;
+            return;
         }
 
-        Node next = current.next;
-        current.next = new Node(new Student(xName, xGPA));
-        current.next.next = next;
+        for (int i = 0; i < index - 1; i++) {
+            if (current.next == null)
+                return;
+            current = current.next;
+        }
+
+        Node newNode = new Node(new Student(xName, xGPA));
+        newNode.next = current.next;
+        current.next = newNode;
     }
 
     public void addLast(Node newNode) {

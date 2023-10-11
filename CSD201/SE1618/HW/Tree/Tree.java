@@ -28,52 +28,103 @@ return max(mystery(x.left), mystery(x.right));
 public class Tree {
     Node root;
 
-    Tree() {
+    public Tree() {
         root = null;
     }
 
-    boolean isEmpty() {
+    public boolean isEmpty() {
         return root == null;
     }
 
-    void clear() {
+    public void clear() {
         root = null;
     }
 
-    void insert(int x) {
-        Node p = new Node(x);
-        if (isEmpty()) {
-            root = p;
+    public void insert(int x) {
+        Node newNode = new Node(x);
+
+        if (root == null) {
+            root = newNode;
             return;
         }
-        Node f = null, q = root;
-        while (q != null) {
-            if (q.data == x) {
-                System.out.println("The key " + x + " already exists, no insertion");
-                return;
+
+        Node current = root;
+        Node parent = null;
+
+        while (true) {
+            parent = current;
+
+            if (x < current.data) {
+                current = current.left;
+
+                if (current == null) {
+                    parent.left = newNode;
+                    newNode.parent = parent;
+                    return;
+                }
+            } else {
+                current = current.right;
+
+                if (current == null) {
+                    parent.right = newNode;
+                    newNode.parent = parent;
+                    return;
+                }
             }
-            f = q;
-            if (x < q.data)
-                q = q.left;
-            else
-                q = q.right;
         }
-        if (x < f.data)
-            f.left = p;
-        else
-            f.right = p;
     }
 
+    public Node search(int x) {
+        Node current = root;
+
+        while (current != null) {
+            if (current.data == x) {
+                return current;
+            }
+            if (current.data < x) {
+                current = current.right;
+            } else {
+                current = current.left;
+            }
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        Tree tree = new Tree();
+
+        tree.insert(15);
+        tree.insert(10);
+        tree.insert(20);
+        tree.insert(8);
+        tree.insert(12);
+        tree.insert(17);
+        tree.insert(25);
+        tree.insert(6);
+        tree.insert(11);
+        tree.insert(22);
+        tree.insert(27);
+
+        System.out.println(tree.search(22));
+    }
 }
 
-class Node{
+class Node {
     int data;
     Node left;
     Node right;
     Node parent;
-    Node(int data){
+
+    public Node(int data) {
         this.data = data;
         left = null;
         right = null;
     }
+
+    public String toString(){
+        return "Parent: " + parent.data + " | Value: " + data;
+    }
 }
+
+//Q: What is the easiest traversal method?
+//

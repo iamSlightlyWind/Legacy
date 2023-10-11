@@ -1,36 +1,90 @@
+import java.util.ArrayList;
+
 public class Main {
-    static ComputerManager cm = new ComputerManager();
+
+    static MyList list = new MyList();
 
     public static void main(String[] args) {
         createData();
+        list.display();
 
-        cm.printInOrder();
+        double gpa = 5.6;
 
-        System.out.println();
-        System.out.println();
+        System.out.println("Deleting first student with " + gpa + " gpa");
+        list.delete(gpa);
+        list.display();
 
-        cm.printPreOrder();
-
-        System.out.println();
-        System.out.println();
-
-        System.out.println(cm.find("Dell").com.toString());
-        cm.delete("Dell");
-        System.out.println(cm.find("Asus").com.toString()); // error since deleted
+        gpa = 7;
+        System.out.println("First 5 students with gpa > " + gpa + ": ");
+        displayFirst5(7);
 
         System.out.println();
+        System.out.println("Second max:" + list.findMaxes(2).data.toString());
+        System.out.println("Third max:" + list.findMaxes(3).data.toString());
+        System.out.println();
+
+        gpa = 8.2;
+        System.out.println("Deleting last student with " + gpa + " gpa");
+        list.deleteLast(gpa);
+        list.display();
+
+        System.out.println("Adding a student at index 5");
+        list.add("new", 7.3, 5);
+        list.display();
+
+        gpa = 8.1;
+        System.out.println("Last 5 students with gpa > " + gpa + ": ");
+        displayLast5(gpa);
     }
 
     public static void createData() {
-        cm.insert(new Node(new Computer("Dell", 0, 1000, 0.1)));
-        cm.insert(new Node(new Computer("Apple", 0, 1000, 0.2)));
-        cm.insert(new Node(new Computer("Lenovo", 0, 1000, 0.3)));
-        cm.insert(new Node(new Computer("HP", 0, 1000, 0.15)));
-        cm.insert(new Node(new Computer("Acer", 0, 1000, 0.25)));
-        cm.insert(new Node(new Computer("Asus", 0, 1000, 0.35)));
-        cm.insert(new Node(new Computer("Alienware", 0, 1000, 0.5)));
-        cm.insert(new Node(new Computer("Razer", 0, 1000, 0.22)));
-        cm.insert(new Node(new Computer("Microsoft", 0, 1000, 0.27)));
-        cm.insert(new Node(new Computer("Samsung", 0, 1000, 0.17)));
+        list.addLast(new Node(new Student("A", 8.1)));
+        list.addLast(new Node(new Student("B", 3.9)));
+        list.addLast(new Node(new Student("C", 5.6)));
+        list.addLast(new Node(new Student("D", 9.0)));
+        list.addLast(new Node(new Student("E", 7.5)));
+        list.addLast(new Node(new Student("F", 9.4)));
+        list.addLast(new Node(new Student("G", 8.2)));
+        list.addLast(new Node(new Student("I", 5.6)));
+        list.addLast(new Node(new Student("J", 8.2)));
+        list.addLast(new Node(new Student("K", 3.2)));
+        list.addLast(new Node(new Student("L", 8.3)));
+    }
+
+    public static void displayFirst5(double gpa) {
+        int displayCount = 0;
+        Node current = list.head;
+        while (current != null && displayCount < 5) {
+            if (current.data.gpa > gpa) {
+                System.out.println(current.data);
+                displayCount++;
+            }
+            current = current.next;
+        }
+    }
+
+    public static void displayLast5(double gpa) {
+        MyList last = new MyList();
+        Node current = list.head;
+
+        while (current != null) {
+            if (current.data.gpa > gpa) {
+                if(last.head == null) {
+                    last.head = new Node(current.data);
+                } else {
+                    last.add(current.data.name, current.data.gpa, 0);
+                }
+            }
+            current = current.next;
+        }
+
+        current = last.head;
+        for (int i = 0; i < 5; i++) {
+            if(current == null) {
+                break;
+            }
+            System.out.println(current.data.toString());
+            current = current.next;
+        }
     }
 }

@@ -1,15 +1,9 @@
 public class Node {
-    Computer com;
-    String data;
-    Node left;
-    Node right;
-    Node parent;
+    Student data;
+    Node next;
 
-    public Node(Computer com) {
-        this.com = com;
-        data = com.brandName;
-        left = null;
-        right = null;
-        parent = null;
+    public Node(Student data) {
+        this.data = data;
+        this.next = null;
     }
 }
