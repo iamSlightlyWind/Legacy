@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Main {
 
     static MyList list = new MyList();
@@ -69,7 +67,7 @@ public class Main {
 
         while (current != null) {
             if (current.data.gpa > gpa) {
-                if(last.head == null) {
+                if (last.head == null) {
                     last.head = new Node(current.data);
                 } else {
                     last.add(current.data.name, current.data.gpa, 0);
@@ -80,7 +78,7 @@ public class Main {
 
         current = last.head;
         for (int i = 0; i < 5; i++) {
-            if(current == null) {
+            if (current == null) {
                 break;
             }
             System.out.println(current.data.toString());
