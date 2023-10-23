@@ -206,9 +206,9 @@ public class MyTree {
     public void deleteNode(Node toDelete, Node parent) {
         if (toDelete.left != null && toDelete.right != null) {
             Node successor = inorderSuccessor(toDelete);
+            parent = searchParent(successor);
             toDelete.product = successor.product;
-            deleteNode(successor, null);
-
+            deleteNode(successor, parent);
             return;
         }
         if (parent == null) {

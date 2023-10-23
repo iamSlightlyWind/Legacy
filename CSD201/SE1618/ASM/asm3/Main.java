@@ -19,18 +19,18 @@ public class Main {
         switch (choice) {
             case 1:
                 tree.insert(new Product("P10", "Miliket", 30, 5.2));
-                tree.insert(new Product("P05", "Apple", 32, 4.3));
-                tree.insert(new Product("P15", "Sugar", 12, 5.1));
-                tree.insert(new Product("P07", "Rose", 19, 5.4));
-                tree.insert(new Product("P02", "Beer", 13, 3.2));
-                tree.insert(new Product("P04", "Book", 17, 5.2));
-                tree.insert(new Product("P03", "Milk", 18, 5.1));
-                tree.insert(new Product("P01", "Bread", 16, 4.3));
-                tree.insert(new Product("P12", "Rice", 12, 4.9));
-                tree.insert(new Product("P20", "Candy", 10, 4.8));
-                tree.insert(new Product("P11", "Coke", 12, 4.7));
-                tree.insert(new Product("P14", "Water", 19, 4.6));
-                tree.insert(new Product("P25", "Tea", 12, 4.5));
+                tree.insert(new Product("P05", "Apple", 31, 4.3));
+                tree.insert(new Product("P15", "Sugar", 15, 5.1));
+                tree.insert(new Product("P07", "Rose", 33, 5.4));
+                tree.insert(new Product("P02", "Beer", 15, 3.2));
+                tree.insert(new Product("P04", "Book", 35, 5.2));
+                tree.insert(new Product("P03", "Milk", 36, 5.1));
+                tree.insert(new Product("P01", "Bread", 37, 4.3));
+                tree.insert(new Product("P12", "Rice", 38, 4.9));
+                tree.insert(new Product("P20", "Candy", 39, 4.8));
+                tree.insert(new Product("P11", "Coke", 40, 4.7));
+                tree.insert(new Product("P14", "Water", 41, 4.6));
+                tree.insert(new Product("P25", "Tea", 42, 4.5));
                 break;
 
             case 2:
