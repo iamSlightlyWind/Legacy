@@ -64,7 +64,7 @@ public class Tree {
         }
 
         if(current.right != null){
-        sum = sum(current.left);` 
+        sum = sum(current.left);
         }
 
         
