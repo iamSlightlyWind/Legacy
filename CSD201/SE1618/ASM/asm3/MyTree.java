@@ -82,41 +82,22 @@ public class MyTree {
         return count;
     }
 
-    public int height(Node current) {
-        int leftHeight = 0;
-        int rightHeight = 0;
-
-        if (current != null) {
-            leftHeight++;
-            rightHeight++;
-        } else
-            return 0;
-
-        leftHeight += height(current.left);
-        rightHeight += height(current.right);
-
-        if (leftHeight > rightHeight) {
-            return leftHeight;
-        } else
-            return rightHeight;
-    }
-
     public int level(Node current) {
-        return levelHelper(root, current, 0);
+        return level(root, current, 0);
     }
 
-    private int levelHelper(Node node, Node current, int level) {
+    private int level(Node node, Node current, int level) {
         if (node == null) {
             return -1;
         }
         if (node == current) {
             return level;
         }
-        int leftLevel = levelHelper(node.left, current, level + 1);
+        int leftLevel = level(node.left, current, level + 1);
         if (leftLevel != -1) {
             return leftLevel;
         }
-        return levelHelper(node.right, current, level + 1);
+        return level(node.right, current, level + 1);
     }
 
     public void traverse() {
