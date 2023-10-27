@@ -28,3 +28,10 @@
   + Ultrasound sensor
   + IR sensor
   + IR blaster
+
+## Challenges
+
+- [ ] Get current time
+- [ ] Play audio on phone
+- [ ] Set phone to Do Not Disturb mode
+- [ ] Control servo from far away
