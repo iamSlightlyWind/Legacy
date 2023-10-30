@@ -164,22 +164,68 @@ public class Tree {
         if (isEmpty())
             return;
 
-        printPreorder(root);
+        preorder(root);
     }
 
-    public void printPreorder(Node current) {
+    public void preorder(Node current) {
         if (current != null) {
             System.out.print(current);
         } else
             return;
 
         if (current.left != null) {
-            printPreorder(current.left);
+            preorder(current.left);
         }
 
         if (current.right != null) {
-            printPreorder(current.right);
+            preorder(current.right);
         }
+    }
+
+    public void inorder() {
+        if (isEmpty())
+            return;
+
+        inorder(root);
+    }
+
+    public void inorder(Node current) {
+        if (current == null) {
+            return;
+        }
+
+        if (current.left != null) {
+            inorder(current.left);
+        }
+
+        System.out.print(current);
+
+        if (current.right != null) {
+            inorder(current.right);
+        }
+    }
+
+    public void postorder() {
+        if (isEmpty())
+            return;
+
+        postorder(root);
+    }
+
+    public void postorder(Node current) {
+        if (current == null) {
+            return;
+        }
+
+        if (current.left != null) {
+            postorder(current.left);
+        }
+
+        if (current.right != null) {
+            postorder(current.right);
+        }
+
+        System.out.print(current);
     }
 
     public void delete(int value) {

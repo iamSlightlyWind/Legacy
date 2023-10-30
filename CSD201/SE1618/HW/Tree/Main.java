@@ -5,8 +5,16 @@ public class Main {
     public static void main(String[] args) {
         createData(2);
 
-        System.out.print("Preorder: ");
+        System.out.print("In Order:   ");
+        tree.inorder();
+        System.out.println();
+
+        System.out.print("Pre Order:  ");
         tree.preorder();
+        System.out.println();
+
+        System.out.print("Post Order: ");
+        tree.postorder();
         System.out.println();
 
         System.out.println(tree.searchParent(tree.search(9)));

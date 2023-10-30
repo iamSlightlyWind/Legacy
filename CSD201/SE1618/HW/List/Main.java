@@ -1,60 +1,23 @@
 public class Main {
     public static void main(String[] args) {
-        LinkedList list = new LinkedList();
-        list.addToHead(1);
-        list.addToHead(2);
-        list.addToHead(3);
-        list.addToHead(4);
-        list.addToHead(5);
-        list.addToHead(6);
-        list.addToHead(7);
-        list.addToHead(8);
-        list.addToHead(9);
-        list.addToHead(10);
+        ArrayManagementTest();
+    }
 
-        System.out.println("Count: " + list.count());
-        System.out.print("Traverse: ");
-        list.traverse();
-        System.out.println();
+    public static void ArrayManagementTest() {
+        int[] arr = { 1, 2, 3, 4, 5 };
 
-        int value = 5;
-        System.out.println("Search: " + list.search(value));
-        System.out.println();
+        System.out.println(ArrayManagement.sum(arr, 0));
+        System.out.println(ArrayManagement.min(arr, 0));
+        System.out.println(ArrayManagement.max(arr, 0));
+        System.out.println(ArrayManagement.sorted(arr, 0));
 
-        value = 3;
-        System.out.println("Delete After: " + list.search(value));
-        list.deleteAfter(list.search(value));
-        System.out.print("Traverse: ");
-        list.traverse();
-        System.out.println();
+        System.out.println("\n\n\n");
 
-        System.out.println("Delete From Tail: " + list.deleteFromTail());
-        System.out.print("Traverse: ");
-        list.traverse();
-        System.out.println();
+        int[] arr2 = { 1, 2, 3, 4, 5, 9, 7, 8, 0 };
 
-        System.out.println("Delete From Head: " + list.deleteFromHead());
-        System.out.print("Traverse: ");
-        list.traverse();
-        System.out.println();
-
-        value = 7;
-        System.out.println("Delete: " + value);
-        list.dele(value);
-        System.out.print("Traverse: ");
-        list.traverse();
-        System.out.println();
-
-        value = 8;
-        System.out.println("Delete: " + value);
-        Node toDelete = list.search(value);
-        list.dele(toDelete);
-        System.out.print("Traverse: ");
-        list.traverse();
-        System.out.println();
-
-        System.out.println("Sum: " + list.sum());
-        System.out.println("Max: " + list.max());
-        System.out.println("Min: " + list.min());
+        System.out.println(ArrayManagement.sum(arr2, 0));
+        System.out.println(ArrayManagement.min(arr2, 0));
+        System.out.println(ArrayManagement.max(arr2, 0));
+        System.out.println(ArrayManagement.sorted(arr2, 0));
     }
 }

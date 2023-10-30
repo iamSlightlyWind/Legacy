@@ -6,18 +6,21 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 Servo servo;
 
-int buttonNext = 9, buttonPrev = 10;
+int buttonNext = 10, buttonPrev = 9;
 int potentiometer = A0;
 
 String currentHour = "00", currentMinute = "00";
 String alarmHour = "00", alarmMinute = "00";
+String toAlarmHour = "00", toAlarmMinute = "00";
 
 int current = 0;
 
 void setup()
 {
     pinMode(buttonNext, INPUT);
+    digitalWrite(buttonNext, HIGH);
     pinMode(buttonPrev, INPUT);
+    digitalWrite(buttonPrev, HIGH);
 
     servo.attach(8);
 
@@ -27,7 +30,13 @@ void setup()
 }
 
 void loop()
+
 {
+    //Serial.print(digitalRead(buttonPrev));
+    //Serial.print(" ");
+    //Serial.println(digitalRead(buttonNext));
+    //delay(250);
+
     process();
 }
 
@@ -36,7 +45,29 @@ void process()
     getInput();
     updateTime();
     spinServo();
+    getCycle();
     print();
+}
+
+int getCycle(){
+    int currentTime = currentHour.toInt() * 60 + currentMinute.toInt();
+    int alarmTime = alarmHour.toInt() * 60 + alarmMinute.toInt();
+    int toAlarmTime;
+
+    if (currentTime > alarmTime)
+    {
+        toAlarmTime = 1440 - currentTime + alarmTime;
+    }
+
+    if (currentTime < alarmTime)
+    {
+        toAlarmTime = alarmTime - currentTime;
+    }
+
+    toAlarmHour = String(toAlarmTime / 60);
+    toAlarmMinute = String(toAlarmTime % 60);
+
+    return toAlarmTime;
 }
 
 void spinServo()
@@ -70,6 +101,9 @@ void print()
     lcd.setCursor(6, 0);
     lcd.print(String(analogRead(potentiometer)));
 
+    lcd.setCursor(10, 0);
+    lcd.print(String(toAlarmHour) + ":" + String(toAlarmMinute));
+
     lcd.setCursor(0, 1);
     lcd.print(String(currentHour) + ":" + String(currentMinute));
 
@@ -81,7 +115,7 @@ void print()
 
 void getInput()
 {
-    if (digitalRead(buttonNext) == HIGH)
+    if (digitalRead(buttonNext) == LOW)
     {
         if (current < 3)
         {
@@ -89,7 +123,7 @@ void getInput()
         }
     }
 
-    if (digitalRead(buttonPrev) == HIGH)
+    if (digitalRead(buttonPrev) == LOW)
     {
         if (current > 0)
         {
@@ -131,13 +165,16 @@ String format(String value)
     return String(value);
 }
 
+int porentiometerMax = 970;
+int porentiometerMin = 60;
+
 String updateValue(String choice)
 {
     double value = analogRead(potentiometer);
 
     if (choice == "hour")
-        return String(map(analogRead(potentiometer), 0, 1023, 0, 24));
+        return String(map(analogRead(potentiometer), porentiometerMin, porentiometerMax, 0, 24));
 
     if (choice == "minute")
-        return String(map(analogRead(potentiometer), 0, 1023, 0, 60));
+        return String(map(analogRead(potentiometer), porentiometerMin, porentiometerMax, 0, 60));
 }
