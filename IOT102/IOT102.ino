@@ -14,7 +14,6 @@ String hour[] = {"00", "00", "00"}; // 0 for current, 1 for alarm, 2 for time fr
 String minute[] = {"00", "00", "00"};
 
 int current = 0, cycle = 0;
-boolean alarmSet = false;
 
 void setup()
 {
@@ -52,10 +51,38 @@ void process()
     getInput();
     getTime();
     getCycle();
+    updateTime();
     formatTime();
+
     print();
 
     delay(200);
+}
+
+unsigned long previousMillis = 0; 
+
+void updateTime()
+{
+    unsigned long currentMillis = millis();
+    if (currentMillis - previousMillis >= 60000)
+    {
+        previousMillis = currentMillis;
+
+        int minuteValue = minute[0].toInt();
+        minuteValue++;
+        if (minuteValue > 59)
+        {
+            minuteValue = 0;
+            int hourValue = hour[0].toInt();
+            hourValue++;
+            if (hourValue > 23)
+            {
+                hourValue = 0;
+            }
+            hour[0] = String(hourValue);
+        }
+        minute[0] = String(minuteValue);
+    }
 }
 
 void getInput()
@@ -77,10 +104,6 @@ void getInput()
             delay(50);
         }
     }
-
-    if(current = 4){
-        alarmSet = true;
-    }
 }
 
 int porentiometerMax = 970;
@@ -101,6 +124,8 @@ void getTime()
         break;
     case 3:
         minute[1] = String(map(analogRead(potentiometer), porentiometerMin, porentiometerMax, 0, 60));
+        break;
+    default:
         break;
     }
 }
@@ -186,29 +211,14 @@ void print()
 {
     lcd.clear();
 
+    String line1 = String(current) + " " + String(analogRead(potentiometer)) + " " + String(hour[2]) + ":" + String(minute[2]) + " " + String(cycle);
+
+    String line2 = String(hour[0]) + ":" + String(minute[0]) + " " + String(hour[1]) + ":" + String(minute[1]);
+
     lcd.setCursor(0, 0);
-    lcd.print(digitalRead(buttonPrev));
-
-    lcd.setCursor(1, 0);
-    lcd.print(digitalRead(buttonNext));
-
-    lcd.setCursor(3, 0);
-    lcd.print(current);
-
-    lcd.setCursor(5, 0);
-    lcd.print(String(analogRead(potentiometer)));
-
-    lcd.setCursor(9, 0);
-    lcd.print(String(hour[2]) + ":" + String(minute[2]));
-
-    lcd.setCursor(15, 0);
-    lcd.print(String(cycle));
-
+    lcd.print(line1);
     lcd.setCursor(0, 1);
-    lcd.print(String(hour[0]) + ":" + String(minute[0]));
-
-    lcd.setCursor(6, 1);
-    lcd.print(String(hour[1]) + ":" + String(minute[1]));
+    lcd.print(line2);
 
     blink();
 }
