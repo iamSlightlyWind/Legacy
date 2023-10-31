@@ -1,10 +1,11 @@
 #include <LiquidCrystal.h>
+#include <SoftwareSerial.h>
 #include <Servo.h>
 
 int rs = 2, en = 3, d4 = 4, d5 = 5, d6 = 6, d7 = 7;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
-Servo servo;
+SoftwareSerial bluetooth(0, 1);
 
 int buttonNext = 10, buttonPrev = 9;
 int potentiometer = A0;
@@ -13,6 +14,7 @@ String hour[] = {"00", "00", "00"}; // 0 for current, 1 for alarm, 2 for time fr
 String minute[] = {"00", "00", "00"};
 
 int current = 0, cycle = 0;
+boolean alarmSet = false;
 
 void setup()
 {
@@ -21,15 +23,27 @@ void setup()
     pinMode(buttonPrev, INPUT);
     digitalWrite(buttonPrev, HIGH);
 
-    servo.attach(8);
-
     lcd.begin(16, 2);
     Serial.begin(9600);
-    delay(100);
+    bluetooth.begin(9600);
 }
 
 void loop()
 {
+    // chat between bluetooth and serial
+    if (bluetooth.available())
+    {
+        char receivedChar = bluetooth.read();
+        if (receivedChar != '.')
+        {
+            Serial.print(receivedChar);
+        }
+        else
+        {
+            Serial.println();
+        }
+    }
+
     process();
 }
 
@@ -40,18 +54,18 @@ void process()
     getCycle();
     formatTime();
     print();
-}
 
-int porentiometerMax = 970;
-int porentiometerMin = 60;
+    delay(200);
+}
 
 void getInput()
 {
     if (digitalRead(buttonNext) == LOW)
     {
-        if (current < 3)
+        if (current < 4)
         {
             current++;
+            delay(50);
         }
     }
 
@@ -60,9 +74,17 @@ void getInput()
         if (current > 0)
         {
             current--;
+            delay(50);
         }
     }
+
+    if(current = 4){
+        alarmSet = true;
+    }
 }
+
+int porentiometerMax = 970;
+int porentiometerMin = 60;
 
 void getTime()
 {
@@ -124,14 +146,40 @@ void formatTime()
     }
 }
 
+bool isBlinkOn = false;
+long lastBlink = 0;
+long startBlink = 0;
+long blinkedFor = 0;
+int startLocation[] = {0, 3, 6, 9};
+
 void blink()
 {
-    int startLocation[] = {0, 3, 6, 9};
+    if (current < 4)
+    {
+        int currentTime = millis();
+        if (currentTime - lastBlink > 1000)
+        {
+            isBlinkOn = true;
+            blinkedFor = 0;
+            startBlink = millis();
+            lastBlink = millis() + 5000000; // dummy value so it doesnt get triggered again
+        }
 
-    delay(300);
-    lcd.setCursor(startLocation[current], 1);
-    lcd.print("  ");
-    delay(100);
+        if (isBlinkOn)
+        {
+            blinkedFor = millis() - startBlink;
+            if (blinkedFor < 300)
+            {
+                lcd.setCursor(startLocation[current], 1);
+                lcd.print("  ");
+            }
+            else
+            {
+                lastBlink = millis();
+                isBlinkOn = false;
+            }
+        }
+    }
 }
 
 void print()
@@ -139,10 +187,10 @@ void print()
     lcd.clear();
 
     lcd.setCursor(0, 0);
-    lcd.print(digitalRead(buttonNext));
+    lcd.print(digitalRead(buttonPrev));
 
     lcd.setCursor(1, 0);
-    lcd.print(digitalRead(buttonPrev));
+    lcd.print(digitalRead(buttonNext));
 
     lcd.setCursor(3, 0);
     lcd.print(current);
