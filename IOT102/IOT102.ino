@@ -9,11 +9,10 @@ Servo servo;
 int buttonNext = 10, buttonPrev = 9;
 int potentiometer = A0;
 
-String currentHour = "00", currentMinute = "00";
-String alarmHour = "00", alarmMinute = "00";
-String toAlarmHour = "00", toAlarmMinute = "00";
+String hour[] = {"00", "00", "00"}; // 0 for current, 1 for alarm, 2 for time from current to alarm
+String minute[] = {"00", "00", "00"};
 
-int current = 0;
+int current = 0, cycle = 0;
 
 void setup()
 {
@@ -30,29 +29,65 @@ void setup()
 }
 
 void loop()
-
 {
-    //Serial.print(digitalRead(buttonPrev));
-    //Serial.print(" ");
-    //Serial.println(digitalRead(buttonNext));
-    //delay(250);
-
     process();
 }
 
 void process()
 {
     getInput();
-    updateTime();
-    spinServo();
+    getTime();
     getCycle();
+    formatTime();
     print();
 }
 
-int getCycle(){
-    int currentTime = currentHour.toInt() * 60 + currentMinute.toInt();
-    int alarmTime = alarmHour.toInt() * 60 + alarmMinute.toInt();
-    int toAlarmTime;
+int porentiometerMax = 970;
+int porentiometerMin = 60;
+
+void getInput()
+{
+    if (digitalRead(buttonNext) == LOW)
+    {
+        if (current < 3)
+        {
+            current++;
+        }
+    }
+
+    if (digitalRead(buttonPrev) == LOW)
+    {
+        if (current > 0)
+        {
+            current--;
+        }
+    }
+}
+
+void getTime()
+{
+    switch (current)
+    {
+    case 0:
+        hour[0] = String(map(analogRead(potentiometer), porentiometerMin, porentiometerMax, 0, 24));
+        break;
+    case 1:
+        minute[0] = String(map(analogRead(potentiometer), porentiometerMin, porentiometerMax, 0, 60));
+        break;
+    case 2:
+        hour[1] = String(map(analogRead(potentiometer), porentiometerMin, porentiometerMax, 0, 24));
+        break;
+    case 3:
+        minute[1] = String(map(analogRead(potentiometer), porentiometerMin, porentiometerMax, 0, 60));
+        break;
+    }
+}
+
+void getCycle()
+{
+    int currentTime = hour[0].toInt() * 60 + minute[0].toInt();
+    int alarmTime = hour[1].toInt() * 60 + minute[1].toInt();
+    int toAlarmTime = 0;
 
     if (currentTime > alarmTime)
     {
@@ -64,15 +99,29 @@ int getCycle(){
         toAlarmTime = alarmTime - currentTime;
     }
 
-    toAlarmHour = String(toAlarmTime / 60);
-    toAlarmMinute = String(toAlarmTime % 60);
+    hour[2] = String(toAlarmTime / 60);
+    minute[2] = String(toAlarmTime % 60);
 
-    return toAlarmTime;
+    cycle = toAlarmTime / 90;
 }
 
-void spinServo()
+void formatTime()
 {
-    servo.write(map(analogRead(potentiometer), 0, 1023, 180, 0));
+    for (int i = 0; i <= 2; i++)
+    {
+        if (hour[i].length() < 2)
+        {
+            hour[i] = "0" + String(hour[i]);
+        }
+    }
+
+    for (int i = 0; i <= 2; i++)
+    {
+        if (minute[i].length() < 2)
+        {
+            minute[i] = "0" + String(minute[i]);
+        }
+    }
 }
 
 void blink()
@@ -98,83 +147,20 @@ void print()
     lcd.setCursor(3, 0);
     lcd.print(current);
 
-    lcd.setCursor(6, 0);
+    lcd.setCursor(5, 0);
     lcd.print(String(analogRead(potentiometer)));
 
-    lcd.setCursor(10, 0);
-    lcd.print(String(toAlarmHour) + ":" + String(toAlarmMinute));
+    lcd.setCursor(9, 0);
+    lcd.print(String(hour[2]) + ":" + String(minute[2]));
+
+    lcd.setCursor(15, 0);
+    lcd.print(String(cycle));
 
     lcd.setCursor(0, 1);
-    lcd.print(String(currentHour) + ":" + String(currentMinute));
+    lcd.print(String(hour[0]) + ":" + String(minute[0]));
 
     lcd.setCursor(6, 1);
-    lcd.print(String(alarmHour) + ":" + String(alarmMinute));
+    lcd.print(String(hour[1]) + ":" + String(minute[1]));
 
     blink();
-}
-
-void getInput()
-{
-    if (digitalRead(buttonNext) == LOW)
-    {
-        if (current < 3)
-        {
-            current++;
-        }
-    }
-
-    if (digitalRead(buttonPrev) == LOW)
-    {
-        if (current > 0)
-        {
-            current--;
-        }
-    }
-}
-
-void updateTime()
-{
-    if (current == 0)
-    {
-        currentHour = format(updateValue("hour"));
-    }
-
-    if (current == 1)
-    {
-        currentMinute = format(updateValue("minute"));
-    }
-
-    if (current == 2)
-    {
-        alarmHour = format(updateValue("hour"));
-    }
-
-    if (current == 3)
-    {
-        alarmMinute = format(updateValue("minute"));
-    }
-}
-
-String format(String value)
-{
-    if (value.length() < 2)
-    {
-        return "0" + String(value);
-    }
-
-    return String(value);
-}
-
-int porentiometerMax = 970;
-int porentiometerMin = 60;
-
-String updateValue(String choice)
-{
-    double value = analogRead(potentiometer);
-
-    if (choice == "hour")
-        return String(map(analogRead(potentiometer), porentiometerMin, porentiometerMax, 0, 24));
-
-    if (choice == "minute")
-        return String(map(analogRead(potentiometer), porentiometerMin, porentiometerMax, 0, 60));
 }
