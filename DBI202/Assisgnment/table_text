@@ -1,0 +1,40 @@
+subject:
+    ID
+    Code
+    Name
+    Credits
+    Prerequisite
+
+assessment:
+// assessment could be parent (average of its children)
+// ~ or child (part of its parent)
+// assessmentCriteria only applies to parent assessment
+// course average assessment will the parent of all parent assessments
+    subjectID
+    studentID
+    Category
+
+student:
+    studentID
+    studentFirstName
+    studentLastName
+    studentEmail
+
+Group presentation
+Presentation
+Lab
+Progress test
+Final exam
+Assignment
+Workshop
+Practical Exam
+Exercises
+Theoretical Exam
+Quiz
+Participation
+Activity
+Group assignment
+Small test
+Computer Project
+Project
+Active learning
