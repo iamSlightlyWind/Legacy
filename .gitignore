@@ -1,14 +1,6 @@
-.vscode
-launch.json
-.out
-.sh
-Temp.*
-temp.*
-*
-!/**/
-!*.*
-settings.json
-tasks.json
+*.vscode
+*.out
+*.sh
 *.zip
 
 **temp**
