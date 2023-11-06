@@ -1,53 +1,84 @@
+USE master;
+GO
+ALTER DATABASE DBI_ASM
+SET SINGLE_USER
+WITH ROLLBACK IMMEDIATE;
+GO
+DROP DATABASE DBI_ASM;
+GO
+
+create database DBI_ASM
+go
+
 use DBI_ASM
 go
 
 create table Subject
 (
-    id int primary key,
-    code nvarchar(10) not null,
-    name nvarchar(50) not null,
-    credit int not null,
-    prerequisite int references subject(id)
+    ID int primary key,
+    Code nvarchar(10) not null,
+    Name nvarchar(50) not null,
+    Credit int not null,
+    Prerequisite int references subject(id)
 )
-go
+
+CREATE TABLE Assessment
+(
+	AssessmentID INT identity(1,1) PRIMARY KEY,
+	SubjectID INT REFERENCES Subject(id),
+    ParentID INT REFERENCES Assessment(assessmentID)
+)
+
+create table AssessmentDetail
+(
+    SubjectID int references subject(id),
+    AssessmentID int references Assessment(assessmentID),
+    Category nvarchar(50) not null,
+    Weight float not null,
+    Type nvarchar(50) not null,
+    Part int not null,
+    Duration int not null,
+    NoQuestion int not null,
+    GradingGuide nvarchar(255) not null
+)
 
 create table Student
 (
-    id int identity(1,1) primary key,
-    firstName nvarchar(50) not null,
-    lastName nvarchar(50) not null,
+    StudentID int identity(1,1) primary key,
+    FirstName nvarchar(50) not null,
+    LastName nvarchar(50) not null,
 )
-go
 
 create table StudentCode
 (
-    studentID int references student(id),
-    studentCode nvarchar(15) not null
+    StudentID int references student(StudentID),
+    StudentCode nvarchar(15) not null
 )
-
-create table Assessment
-(
-    id int identity(1,1) primary key,
-    type nvarchar(50) not null,
-    name nvarchar(50) not null,
-    criteria nvarchar(50),
-    weight int not null,
-    time int
-)
-go
 
 create table Grade
 (
-    subject int references subject(id),
-    student int references student(id),
-    assessment int references assessment(id),
-    mark int not null,
-    primary key (subject, student, assessment)
+    SubjectID int references subject(ID),
+    Student int references student(StudentID),
+    Assessment int references Assessment(assessmentID),
+    Mark int not null,
+    primary key (SubjectID, student, assessment)
 )
 go
 
-use DBI_ASM
-go
+-- student code = studentid + first name + first letter of each words in last name
+CREATE TRIGGER trg_InsertStudentCode
+ON Student
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @id INT, @firstName NVARCHAR(50), @lastName NVARCHAR(50), @studentCode NVARCHAR(15)
+
+    SELECT @id = StudentID, @firstName = firstName, @lastName = lastName FROM inserted
+
+    SET @studentCode = CONCAT(@firstName, UPPER(SUBSTRING(@lastName, 1, 1)), UPPER(SUBSTRING(@lastName, CHARINDEX(' ', @lastName) + 1, 1)), FORMAT(@id, '0000'))
+
+    INSERT INTO StudentCode (studentID, studentCode) VALUES (@id, @studentCode)
+END
 
 ---------- Insert into subject table ----------
 
@@ -85,29 +116,79 @@ insert into Subject values (10033, 'PRJ311', 'Java Web Application Development L
 
 ---------- Insert into student table ----------
 
-insert into Student values ('A', 'Nguyen Van');
-insert into Student values ('B', 'Tran Van');
-insert into Student values ('C', 'Le Van');
-insert into Student values ('D', 'Pham Van');
-insert into Student values ('E', 'Hoang Van');
-insert into Student values ('F', 'Vu Van');
-insert into Student values ('G', 'Dang Van');
-insert into Student values ('H', 'Bui Van');
-insert into Student values ('I', 'Do Van');
-insert into Student values ('J', 'Ho Van');
-insert into Student values ('K', 'Ngo Van');
-insert into Student values ('L', 'Duong Van');
-insert into Student values ('M', 'Ly Van');
-insert into Student values ('N', 'An Van');
-insert into Student values ('O', 'Phan Van');
-insert into Student values ('P', 'Dinh Van');
-insert into Student values ('Q', 'Hua Van');
-insert into Student values ('R', 'Nghiem Van');
-insert into Student values ('S', 'Bach Van');
-insert into Student values ('T', 'Phung Van');
-insert into Student values ('U', 'Pho Van');
-insert into Student values ('V', 'Chu Van');
-insert into Student values ('W', 'Kieu Van');
-insert into Student values ('X', 'Trieu Van');
-insert into Student values ('Y', 'Truong Van');
-insert into Student values ('Z', 'Tong Van');
+insert into Student values ('Tuan', 'Nguyen Van')
+insert into Student values ('Minh', 'Tran Thanh')
+insert into Student values ('Huong', 'Le Thi')
+insert into Student values ('Duc', 'Pham Hoang')
+insert into Student values ('Hai', 'Vo Dinh')
+insert into Student values ('Thu', 'Doan Anh')
+insert into Student values ('Nga', 'Hoang Thi')
+insert into Student values ('Thao', 'Ngo Van')
+insert into Student values ('Hoa', 'Vu Thanh')
+insert into Student values ('Quoc', 'Nguyen Anh')
+insert into Student values ('Linh', 'Phan Thi')
+insert into Student values ('Dat', 'Hoang Van')
+insert into Student values ('An', 'Le Van')
+insert into Student values ('Phuong', 'Truong Minh')
+insert into Student values ('Khanh', 'Bui Van')
+insert into Student values ('Cuong', 'Nguyen Thanh')
+insert into Student values ('Nhi', 'Pham Thi')
+insert into Student values ('Thang', 'Le Van')
+insert into Student values ('Mai', 'Tran Thi')
+insert into Student values ('Son', 'Nguyen Trong')
+insert into Student values ('Trang', 'Hoang Van')
+insert into Student values ('Phuc', 'Nguyen Cong')
+insert into Student values ('Lan', 'Tran Thi')
+insert into Student values ('Hung', 'Le Van')
+insert into Student values ('Nhung', 'Pham Thi')
+insert into Student values ('Tien', 'Vo Van')
+insert into Student values ('Kieu', 'Nguyen Thanh')
+insert into Student values ('Hieu', 'Bui Van')
+insert into Student values ('Giang', 'Doan Thi')
+insert into Student values ('Dinh', 'Luong Van')
+insert into Student values ('Anh', 'Truong Thi')
+insert into Student values ('Thuan', 'Nguyen Van')
+insert into Student values ('Quyen', 'Le Thi')
+insert into Student values ('Tung', 'Phan Van')
+insert into Student values ('Tam', 'Nguyen Thi')
+insert into Student values ('Van', 'Hoang Thi')
+insert into Student values ('Quang', 'Doan Van')
+insert into Student values ('Thi', 'Nguyen Van')
+insert into Student values ('Long', 'Nguyen Minh')
+insert into Student values ('Thuy', 'Nguyen Thi')
+go
+
+-- procedure that will insert multiple rows into the Assessment table (assessment and its children). input will be the subjectID, assessmentID and how many children to insert
+CREATE PROCEDURE insertAssessment
+(
+    @subjectID INT,
+    @children INT
+)
+AS
+BEGIN
+    DECLARE @i INT = 1
+    DECLARE @parentID INT
+
+    INSERT INTO Assessment (SubjectID) VALUES (@subjectID)
+    SET @parentID = SCOPE_IDENTITY()
+
+    WHILE @i <= @children
+    BEGIN
+        INSERT INTO Assessment (SubjectID, ParentID) VALUES (@subjectID, @parentID)
+        SET @i = @i + 1
+    END
+END
+GO
+
+exec insertAssessment 9226, 1
+
+
+select * from Subject
+select * from Student
+select * from StudentCode
+select * from Assessment
+
+
+select S.StudentID, StudentCode, FirstName, LastName
+from Student S
+join StudentCode SC on S.StudentID = SC.StudentID

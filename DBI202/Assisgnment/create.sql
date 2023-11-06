@@ -1,7 +1,11 @@
-if exists (select *
-from sys.databases
-where name = 'DBI_ASM')
-    drop database DBI_ASM
+USE master;
+GO
+ALTER DATABASE DBI_ASM
+SET SINGLE_USER
+WITH ROLLBACK IMMEDIATE;
+GO
+DROP DATABASE DBI_ASM;
+GO
 
 create database DBI_ASM
 go
