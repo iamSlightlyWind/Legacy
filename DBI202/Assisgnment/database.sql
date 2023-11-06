@@ -1,14 +1,23 @@
-use DBI_ASM
-go
+select subjectID, round(sum(weight),2) as 'Total weight'
+from assessment
+group by subjectID
 
-/*
--- join subject with subject on prerequisite, then select both names
-select s1.code as subject, s2.code as prerequisite
-from Subject s1
-join Subject s2 on s1.prerequisite = s2.id
-go
-*/
+select subjectID, count(*) as 'Number of assessments'
+from assessment
+group by subjectID
 
--- get first character of each words in last name, concat with first name
-select id, firstName, lastName, concat(firstName, substring(lastName, 1, 1), substring(lastName, charindex(' ', lastName) + 1, 1), id) as studentCode
-from Student
+select * from Subject
+select * from Student
+select * from StudentCode
+select * from Assessment
+select * from Enrollment
+select * from studentGrade
+
+select S.StudentID, StudentCode, FirstName, LastName
+from Student S
+join StudentCode SC on S.StudentID = SC.StudentID
+
+-- print all tables names
+select * from sys.tables
+select * from sys.triggers
+select * from sys.procedures
