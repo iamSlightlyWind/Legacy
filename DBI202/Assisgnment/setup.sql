@@ -105,6 +105,70 @@ begin
 end
 go
 
+create procedure getAverage
+(
+    @studentCode nvarchar(15),
+    @subjectCode nvarchar(10),
+    @average float output
+)
+as
+begin
+    declare @subjectID int
+    select @subjectID = SubjectID from Subject where SubjectCode = @subjectCode
+
+    select @average = sum(Grade * AssessmentWeight)
+    from (
+        select assessmentCategory, Grade, AssessmentWeight
+        from StudentAssessment SA
+        join assessment A on SA.AssessmentID = A.AssessmentID
+        join Student S on SA.StudentID = S.StudentID
+        where StudentCode = @studentCode and SubjectID = @subjectID
+    ) as temp
+end
+go
+
+create procedure getResult
+(
+    @studentCode nvarchar(15),
+    @subjectCode nvarchar(10),
+    @average float output,
+    @passed int output
+)
+as
+begin
+    declare @subjectID int
+    select @subjectID = SubjectID from Subject where SubjectCode = @subjectCode
+
+    select @average = sum(Grade * AssessmentWeight), @passed = sum(Passed)
+    from (
+        select 
+            assessmentCategory,
+            sum(AssessmentWeight) as AssessmentWeight,
+            SUM(Grade)/count(assessmentCategory) as Grade, 
+            AssessmentCriteria, 
+            case 
+                when AssessmentCriteria > 0 and SUM(Grade)/count(assessmentCategory) < AssessmentCriteria then 1 
+                when AssessmentCriteria = 0 and SUM(Grade)/count(assessmentCategory) = AssessmentCriteria then 1 
+                else 0 
+            end as Passed
+        from StudentAssessment SA
+        join assessment A on SA.AssessmentID = A.AssessmentID
+        join Student S on SA.StudentID = S.StudentID
+        where StudentCode = @studentCode and SubjectID = @subjectID
+        group by assessmentCategory, AssessmentCriteria
+    ) as temp
+
+    if @passed = 0
+        set @passed = 1
+    else if @passed > 0
+        set @passed = 0
+
+    if @average < 5
+        set @passed = 0
+end
+go
+
+
 ---------- Insert into subject table ----------
 
 insert into Subject values (9982, 'CSI104', 'Introduction to Computer Science', 3, NULL);
@@ -166,93 +230,93 @@ go
 exec insertAssessment 9982, 2, 'Group presentation', 0.1 , 0
 exec insertAssessment 9982, 2, 'Lab', 0.2 , 0
 exec insertAssessment 9982, 3, 'Progress test', 0.3 , 0
-exec insertAssessment 9982, 1, 'Final exam', 0.4 , 0.4
+exec insertAssessment 9982, 1, 'Final exam', 0.4, 4
 
 exec insertAssessment 9569, 2, 'Progress test', 0.1, 0
 exec insertAssessment 9569, 1, 'Assignment', 0.1, 0
 exec insertAssessment 9569, 5, 'Workshop', 0.1, 0
 exec insertAssessment 9569, 1, 'Practical Exam', 0.4, 0
-exec insertAssessment 9569, 1, 'Final exam', 0.3, 0.4
+exec insertAssessment 9569, 1, 'Final exam', 0.3, 4
 
 exec insertAssessment 10326, 3, 'Assignment/Exercises', 0.3, 0
 exec insertAssessment 10326, 3, 'Progress Test', 0.3, 0
-exec insertAssessment 10326, 1, 'Final Exam', 0.4, 0.4
+exec insertAssessment 10326, 1, 'Final Exam', 0.4, 4
 
 exec insertAssessment 10014, 2, 'Assignment', 0.3, 0
 exec insertAssessment 10014, 4, 'Exercises', 0.3, 0
-exec insertAssessment 10014, 1, 'Final exam', 0.4, 0.4
+exec insertAssessment 10014, 1, 'Final exam', 0.4, 4
 
-exec insertAssessment 10085, 1, 'Theoretical Exam', 1, 0.4
+exec insertAssessment 10085, 1, 'Theoretical Exam', 1, 4
 
 exec insertAssessment 9241, 3, 'Progress Test', 0.3, 0
 exec insertAssessment 9241, 3, 'Assignments/Exercises', 0.3, 0
-exec insertAssessment 9241, 1, 'Final Exam', 0.4, 0.4
+exec insertAssessment 9241, 1, 'Final Exam', 0.4, 4
 
 exec insertAssessment 10114, 4, 'Lab', 0.2, 0
 exec insertAssessment 10114, 1, 'Presentation', 0.2, 0
 exec insertAssessment 10114, 2, 'Progress test', 0.2, 0
-exec insertAssessment 10114, 1, 'Final exam', 0.4, 0.4
+exec insertAssessment 10114, 1, 'Final exam', 0.4, 4
 
-exec insertAssessment 10173, 1, 'Practical Exam', 0.5, 0.4
-exec insertAssessment 10173, 1, 'Theoretical Exam', 0.5, 0.4
+exec insertAssessment 10173, 1, 'Practical Exam', 0.5, 4
+exec insertAssessment 10173, 1, 'Theoretical Exam', 0.5, 4
 
 exec insertAssessment 10084, 3, 'Activity', 0.15, 0
 exec insertAssessment 10084, 2, 'Group Assignment', 0.2, 0
 exec insertAssessment 10084, 3, 'Group Project', 0.3, 0
 exec insertAssessment 10084, 1, 'Participation', 0.1, 0
 exec insertAssessment 10084, 1, 'Quiz', 0.05, 0
-exec insertAssessment 10084, 1, 'Final exam', 0.2, 0.4
+exec insertAssessment 10084, 1, 'Final exam', 0.2, 4
 
 exec insertAssessment 10296, 1, 'Assignment', 0.2, 0
 exec insertAssessment 10296, 6, 'Lab', 0.1, 0
 exec insertAssessment 10296, 1, 'Practical Exam', 0.3, 0
 exec insertAssessment 10296, 2, 'Progress Test', 0.1, 0
-exec insertAssessment 10296, 1, 'Final exam', 0.3, 0.4
+exec insertAssessment 10296, 1, 'Final exam', 0.3, 4
 
 exec insertAssessment 9226, 2, 'Small Test', 0.2, 0
 exec insertAssessment 9226, 1, 'Participation', 0.1, 0
 exec insertAssessment 9226, 1, 'Mid-term', 0.3, 0
-exec insertAssessment 9226, 1, 'Practical exam', 0.3, 0.4
-exec insertAssessment 9226, 1, 'Practical exam', 0.1, 0.4
+exec insertAssessment 9226, 1, 'Practical exam', 0.3, 4
+exec insertAssessment 9226, 1, 'Practical exam', 0.1, 4
 
 exec insertAssessment 10015, 2, 'Progress test', 0.2, 0
 exec insertAssessment 10015, 2, 'Assignment', 0.2, 0
 exec insertAssessment 10015, 1, 'Practical Exam', 0.3, 0
-exec insertAssessment 10015, 1, 'Final exam', 0.3, 0.4
+exec insertAssessment 10015, 1, 'Final exam', 0.3, 4
 
 exec insertAssessment 10010, 1, 'Assignment', 0.2, 0
 exec insertAssessment 10010, 5, 'Lab', 0.1, 0
 exec insertAssessment 10010, 1, 'Practical Exam', 0.3, 0
 exec insertAssessment 10010, 2, 'Progress test', 0.1, 0
-exec insertAssessment 10010, 1, 'Final exam', 0.3, 0.4
+exec insertAssessment 10010, 1, 'Final exam', 0.3, 4
 
-exec insertAssessment 9966, 1, 'Practical Exam', 0.5, 0.4
-exec insertAssessment 9966, 1, 'Theoretical Exam', 0.5, 0.4
+exec insertAssessment 9966, 1, 'Practical Exam', 0.5, 4
+exec insertAssessment 9966, 1, 'Theoretical Exam', 0.5, 4
 
 exec insertAssessment 9243, 2, 'Assignment', 0.2, 0
 exec insertAssessment 9243, 1, 'Computer Project', 0.15, 0
 exec insertAssessment 9243, 3, 'Progress Test', 0.3, 0
-exec insertAssessment 9243, 1, 'Final exam', 0.35, 0.4
+exec insertAssessment 9243, 1, 'Final exam', 0.35, 4
 
 exec insertAssessment 9228, 2, 'Small Test', 0.2, 0
 exec insertAssessment 9228, 1, 'Participation', 0.1, 0
 exec insertAssessment 9228, 1, 'Mid-term', 0.3, 0
-exec insertAssessment 9228, 1, 'Practical exam', 0.3, 0.4
-exec insertAssessment 9228, 1, 'Practical exam', 0.1, 0.4
+exec insertAssessment 9228, 1, 'Practical exam', 0.3, 4
+exec insertAssessment 9228, 1, 'Practical exam', 0.1, 4
 
 exec insertAssessment 10031, 1, 'Active learning', 0.1, 0
 exec insertAssessment 10031, 1, 'Presentation', 0.1, 0
 exec insertAssessment 10031, 2, 'Progress test', 0.1, 0
 exec insertAssessment 10031, 1, 'Project', 0.3, 0
-exec insertAssessment 10031, 1, 'Final exam', 0.4, 0.4
+exec insertAssessment 10031, 1, 'Final exam', 0.4, 4
 
 exec insertAssessment 10032, 6, 'On-going Assessment', 0.6, 0.5
-exec insertAssessment 10032, 1, 'Final Project Presentation', 0.4, 0.4
+exec insertAssessment 10032, 1, 'Final Project Presentation', 0.4, 4
 
 exec insertAssessment 10033, 15, 'Lab', 0.4, 0
 exec insertAssessment 10033, 1, 'Midterm test', 0.2, 0
 exec insertAssessment 10033, 1, 'Participation in Discussions', 0.1, 0
-exec insertAssessment 10033, 1, 'Final exam', 0.3, 0.4
+exec insertAssessment 10033, 1, 'Final exam', 0.3, 4
 go
 
 ---------- Insert into StudentAssessment table ----------
