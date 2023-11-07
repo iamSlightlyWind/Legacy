@@ -105,25 +105,42 @@ begin
 end
 go
 
-create procedure getAverage
-(
-    @studentCode nvarchar(15),
-    @subjectCode nvarchar(10),
-    @average float output
-)
+create procedure getGrade
+    @studentCode varchar(10),
+    @subjectCode varchar(10)
 as
 begin
-    declare @subjectID int
-    select @subjectID = SubjectID from Subject where SubjectCode = @subjectCode
+    create table #temp (
+        AssessmentCategory varchar(50),
+        AssessmentWeight varchar(10),
+        Grade float
+    )
 
-    select @average = sum(Grade * AssessmentWeight)
-    from (
-        select assessmentCategory, Grade, AssessmentWeight
-        from StudentAssessment SA
-        join assessment A on SA.AssessmentID = A.AssessmentID
-        join Student S on SA.StudentID = S.StudentID
-        where StudentCode = @studentCode and SubjectID = @subjectID
-    ) as temp
+    insert into #temp
+    select 
+        AssessmentCategory,
+        CAST(AssessmentWeight * 100 AS varchar(10)) + '%' as AssessmentWeight,
+        Grade
+    from StudentAssessment
+    join Assessment on StudentAssessment.AssessmentId = Assessment.assessmentID
+    join Student on StudentAssessment.StudentId = Student.StudentId
+    join Subject on Assessment.SubjectId = Subject.SubjectId
+    where Student.StudentId = (select StudentId from Student where StudentCode = @studentCode) and subjectCode = @subjectCode
+
+    insert into #temp
+    select
+        AssessmentCategory + ' Total' as AssessmentCategory,
+        CAST(sum(AssessmentWeight) * 100 AS varchar(10)) + '%' as AssessmentWeight,
+        sum(Grade)/count(AssessmentCategory) as Grade
+    from StudentAssessment
+    join Assessment on StudentAssessment.AssessmentId = Assessment.assessmentID
+    join Student on StudentAssessment.StudentId = Student.StudentId
+    join Subject on Assessment.SubjectId = Subject.SubjectId
+    where Student.StudentId = (select StudentId from Student where StudentCode = @studentCode) and subjectCode = @subjectCode
+    group by AssessmentCategory
+
+    select * from #temp
+    order by AssessmentCategory asc, AssessmentWeight asc
 end
 go
 
@@ -132,11 +149,12 @@ create procedure getResult
     @studentCode nvarchar(15),
     @subjectCode nvarchar(10),
     @average float output,
-    @passed int output
+    @status nvarchar(15) output
 )
 as
 begin
     declare @subjectID int
+    declare @passed int
     select @subjectID = SubjectID from Subject where SubjectCode = @subjectCode
 
     select @average = sum(Grade * AssessmentWeight), @passed = sum(Passed)
@@ -159,12 +177,36 @@ begin
     ) as temp
 
     if @passed = 0
-        set @passed = 1
-    else if @passed > 0
-        set @passed = 0
+        set @status = 'Passed'
+    else set @status = 'Not Passed'
 
     if @average < 5
-        set @passed = 0
+        set @status = 'Not Passed'
+end
+go
+
+create procedure getReport
+    @studentCode varchar(10),
+    @subjectCode varchar(10)
+as
+begin
+    create table #temp (
+        AssessmentCategory varchar(50),
+        AssessmentWeight varchar(10),
+        Grade float
+    )
+
+    insert into #temp
+    exec getGrade @studentCode, @subjectCode
+
+    declare @average float
+    declare @status nvarchar(15)
+    exec getResult 'HaiVD0005', 'JPD113', @average output, @status output
+
+    insert into #temp
+    values ('Course Average', @status, @average)
+
+    select * from #temp
 end
 go
 
