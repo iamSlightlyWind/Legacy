@@ -87,8 +87,14 @@ BEGIN
 END
 GO
 
-exec getAcademicRecord 'DucPH0004'
+
 exec getReport 'DucPH0004',  'PRF192'
 
-select *
-from Assessment
+exec EnrollStudent 'DucPH0004', 'CSI104', 'Spring', 2020
+
+exec getAcademicRecord 'DucPH0004'
+select s1.subjectCode, S2.subjectCode as prerequisiteCode
+from subject S1
+left join subject S2 on S1.SubjectPrerequisite = s2.subjectID
+
+select * from Enrollment
