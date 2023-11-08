@@ -106,7 +106,7 @@ end
 go
 
 create procedure getGrade
-    @studentCode varchar(10),
+    @studentCode varchar(15),
     @subjectCode varchar(10)
 as
 begin
@@ -186,7 +186,7 @@ end
 go
 
 create procedure getReport
-    @studentCode varchar(10),
+    @studentCode varchar(15),
     @subjectCode varchar(10)
 as
 begin
@@ -201,7 +201,7 @@ begin
 
     declare @average float
     declare @status nvarchar(15)
-    exec getResult 'HaiVD0005', 'JPD113', @average output, @status output
+    exec getResult @studentCode, @subjectCode, @average output, @status output
 
     insert into #temp
     values ('Course Average', @status, @average)
@@ -209,6 +209,7 @@ begin
     select * from #temp
 end
 go
+
 
 
 ---------- Insert into subject table ----------
