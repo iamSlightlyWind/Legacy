@@ -63,6 +63,27 @@ CREATE TABLE Enrollment (
 )
 go
 
+CREATE VIEW StudentPerformance AS
+SELECT 
+    S.FirstName, 
+    S.LastName, 
+    Sub.SubjectName, 
+    SUM(SA.Grade * A.AssessmentWeight) AS AverageGrade
+FROM 
+    Student S
+JOIN 
+    Enrollment E ON S.StudentID = E.StudentID
+JOIN 
+    Subject Sub ON E.SubjectID = Sub.SubjectID
+JOIN 
+    StudentAssessment SA ON S.StudentID = SA.StudentID
+JOIN 
+    Assessment A ON SA.AssessmentID = A.AssessmentID AND A.SubjectID = Sub.SubjectID
+GROUP BY 
+    S.FirstName, 
+    S.LastName, 
+    Sub.SubjectName;
+
 CREATE TRIGGER trg_InsertStudentCode
 ON Student
 AFTER INSERT
@@ -81,6 +102,7 @@ go
 create procedure insertAssessment
 (
     @SubjectCode nvarchar(10),
+  
     @count int,
     @category nvarchar(50),
     @weight float,
@@ -97,28 +119,6 @@ begin
     begin
         insert into Assessment (SubjectID, AssessmentCategory, AssessmentWeight, AssessmentCriteria) values (@subjectID, @category, @percent, @criteria)
         set @count = @count - 1
-    end
-end
-go
-
-create procedure insertRandomStudentAssessment
-as
-begin
-    declare @studentID int, @assessmentID int, @grade float
-
-    set @studentID = 1
-    set @assessmentID = 1
-
-    while @studentID <= 20
-    begin
-        while @assessmentID <= 140
-        begin
-            set @grade = cast(rand() * 10 as decimal(3,1))
-            insert into StudentAssessment values (@studentID, @assessmentID, @grade)
-            set @assessmentID = @assessmentID + 1
-        end
-        set @studentID = @studentID + 1
-        set @assessmentID = 1
     end
 end
 go
