@@ -3,6 +3,9 @@ select * from Student
 select * from Assessment
 select * from StudentAssessment
 select * from Enrollment
+select * from AssessmentDetail
+
+------------------------------------------------ Sample Queries
 
 -- get grades for a student
 exec getReport 'MinhTT0002', 'MAE101'
@@ -47,6 +50,8 @@ group by
     AssessmentDetails.Knowledge,
     AssessmentDetails.GradingGuide,
     AssessmentDetails.Note
+
+------------------------------------------------ Asked Queries
 
 -- A query that uses ORDER BY 
 -- to sort the result set in descending order by the Grade column
@@ -125,7 +130,7 @@ where studentID = 3
 group by subjectCode
 having sum(Grade * AssessmentWeight) > 5
 
---------------------------- Triggers And Procedures, View and Index
+------------------------------------------------ Triggers And Procedures, View and Index
 -- Calculate grades a lot. Grade from StudentAssessment and weight, criteria from Assessment
 CREATE INDEX idx_AssessmentID
 ON Assessment (AssessmentID);
@@ -202,6 +207,8 @@ begin
     end
 end
 go
+
+exec insertAssessment 'CSI104', 2, 'Group presentation', 0.1 , 0 -- Group presentation has 2 parts, 10% weight for all (5% each)
 
 -- Get grades of a subject for a student (getGrade), add records as total of each assessment category
 -- then add final record of whether or not said student passed said subject
@@ -388,7 +395,7 @@ BEGIN
 END
 GO
 
----------------- Create table
+------------------------------------------------ Create table
 create table Subject
 (
     SubjectID int IDENTITY(1,1) primary key,
