@@ -5,8 +5,33 @@ select * from StudentAssessment
 select * from Enrollment
 select * from AssessmentDetail
 
+------------------------------------------------ Description
+/*
+    Subject: 
+        - Each subject has a code, name, credit
+        - Some subject has prerequist which refers to another subject
+    
+    Assessment:
+        - Each subject has many assessments, which can have many parts (ie CSI104 has 2 Group Presentation assessments (parts(), each 5% for a total of 10% weight)
+        - Each assessment has a category, weight, criteria
+        - Assessment table will contains attributes used to calculate grades
+    
+    AssessmentDetail:
+        - Each subject has the attributes (Type, Category, Duration, QuestionType, GradingGuide, noQuestion, requiredKnowledge, Note)
+        - These attributes are not important to the calculation of grades, but are important to the subject itself
+    
+    Student:
+        - Each student has a first name, a last name and a studentcode
+        - StudentCode will be generated using trigger trg_InsertStudentCode upon insert of firstname,lastname
+    
+    StudentAssessment:
+        - Each assessment will be linked with studentID and have an atrribute Grade
+    
+    Enrollment:
+        - Student can be enrolled to any subject granted they passed the prerequist subject if exist, insert and check using procedure enrollStudent 
+    
+*/
 ------------------------------------------------ Sample Queries
-
 -- get grades for a student
 exec getReport 'MinhTT0002', 'MAE101'
 
@@ -139,7 +164,6 @@ CREATE INDEX idx_StudentAssessmentID
 ON  StudentAssessment (AssessmentID);
 
 -- get average grade of all subjects for all students 
-drop view StudentPerformance
 
 CREATE VIEW StudentPerformance AS
 SELECT 
@@ -158,13 +182,13 @@ JOIN
 JOIN 
     Assessment A ON SA.AssessmentID = A.AssessmentID AND A.SubjectID = Sub.SubjectID
 GROUP BY 
-    S.FirstName, 
-    S.LastName, 
+    S.FirstName,
+    S.LastName,
     Sub.SubjectName;
 
 select * from StudentPerformance
 exec getReport 'DucPH0004', 'SSG104'
-
+go
 
 -- When adding a student, get part of name + id to get studentCode
 CREATE TRIGGER trg_InsertStudentCode
