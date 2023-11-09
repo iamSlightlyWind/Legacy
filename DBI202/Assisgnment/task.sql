@@ -125,7 +125,14 @@ where studentID = 3
 group by subjectCode
 having sum(Grade * AssessmentWeight) > 5
 
---------------------------- Triggers And Procedures
+--------------------------- Triggers And Procedures, View and Index
+-- Calculate grades a lot. Grade from StudentAssessment and weight, criteria from Assessment
+CREATE INDEX idx_AssessmentID
+ON Assessment (AssessmentID);
+
+CREATE INDEX idx_StudentAssessmentID
+ON  StudentAssessment (AssessmentID);
+
 -- get average grade of all subjects for all students 
 drop view StudentPerformance
 

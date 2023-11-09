@@ -63,6 +63,12 @@ CREATE TABLE Enrollment (
 )
 go
 
+CREATE INDEX idx_AssessmentID
+ON Assessment (AssessmentID);
+
+CREATE INDEX idx_StudentAssessmentID
+ON  StudentAssessment (AssessmentID);
+
 CREATE VIEW StudentPerformance AS
 SELECT 
     S.FirstName, 
