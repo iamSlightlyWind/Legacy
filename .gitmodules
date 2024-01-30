@@ -2,3 +2,7 @@
 	path = IOT102
 	url = https://github.com/iamSlightlyWind/sleep-improvement-system.git
 	branch = main
+[submodule "PRJ301"]
+	path = PRJ301
+	url = https://github.com/iamSlightlyWind/WebDevelop
+	branch = main
