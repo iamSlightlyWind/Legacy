@@ -162,7 +162,7 @@ public class StudentManager {
             }
 
             System.out.println("Môn học đăng ký theo thứ tự: : ");
-            currentStudent.printSubjectList();
+            currentStudent.printCurrentSubjects();
             System.out.print("Thêm (A), xóa (D) hoặc giữ nguyên (S) môn học : ");
 
             String subjectAction = scan.next();
@@ -173,7 +173,8 @@ public class StudentManager {
             if (add) {
                 currentStudent.newSubject();
             } else if (delete) {
-                currentStudent.removeSubject();
+                System.out.print("Xóa môn học theo thứ tự: ");
+                currentStudent.removeSubject(scan.nextInt() - 1);
             } else if (keep) {
             }
 
@@ -258,7 +259,7 @@ public class StudentManager {
         int id = scan.nextInt();
         scan.nextLine();
 
-        String result = foundStudent(id);
+        String result = findStudent(id);
         boolean isResultNotEmpty = !result.isEmpty();
 
         if (isResultNotEmpty) {
@@ -269,7 +270,7 @@ public class StudentManager {
         }
     }
 
-    public String foundStudent(int id) {
+    public String findStudent(int id) {
         boolean found = false;
         String studentName = "";
 
@@ -388,8 +389,13 @@ class Student {
         return false;
     }
 
-    public int  addSubject(int subject, int semester) {
+    public int addSubject(int subject, int semester) {
         boolean isAlreadyRegistered = isSubjectAlreadyRegistered(subject, semester);
+        if (subject > 3)
+            return -1;
+
+        if (semester < 1)
+            return -1;
 
         if (isAlreadyRegistered) {
             System.out.println("Sinh viên đã có cùng môn học trong học kỳ đó!");
@@ -415,6 +421,13 @@ class Student {
         addSubject(subject, semester);
     }
 
+    public void printCurrentSubjects() {
+        int count = 1;
+        for (int i = 0; i <= subjectList.size() - 1; i++) {
+            System.out.println(count++ + ". " + subjectList.get(i).info());
+        }
+    }
+
     public void printSubjectList() {
         System.out.println("Danh sách môn học: ");
         System.out.println("1. Java");
@@ -422,11 +435,16 @@ class Student {
         System.out.println("3. C / C ++");
     }
 
-    public void removeSubject() {
-        System.out.print("Xóa môn học theo thứ tự: ");
-        int subjectIndex = scan.nextInt();
-        int adjustedIndex = subjectIndex - 1;
-        subjectList.remove(adjustedIndex);
+    public int removeSubject(int index) {
+        try {
+            if (index < 0) {
+                throw new IndexOutOfBoundsException();
+            }
+            subjectList.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            return -1;
+        }
+        return 1;
     }
 
     public String printSubjectName(int n) {
@@ -542,9 +560,7 @@ class Subject {
     }
 
     public boolean compare(Subject that) {
-        boolean isSameSemester = that.semester == this.semester;
-        boolean isSameSubject = that.subject == this.subject;
-        boolean isSame = isSameSemester && isSameSubject;
-        return !isSame;
+        boolean same = (that.semester == this.semester && that.subject == this.subject);
+        return !same;
     }
 }
