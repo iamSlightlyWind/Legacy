@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import org.junit.Test;
 
 public class Main {
+
     static Scanner scan = new Scanner(System.in);
     static ArrayList<Student> student = new ArrayList<Student>();
 
@@ -160,6 +162,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        start();
+    }
+
+    public static void start() {
         student.add(new Student(12, "Slightly Wind"));
         student.add(new Student(13, "Erik Parker"));
         student.add(new Student(14, "Adam Damn"));
@@ -180,5 +186,158 @@ public class Main {
         while (true) {
             printMenu();
         }
+    }
+}
+
+class Student {
+    protected int id;
+    protected String name;
+
+    private static Scanner scan = new Scanner(System.in);
+
+    public Student(int sID, String sName) {
+        id = sID;
+        name = sName;
+    }
+
+    public Student(int ID) {
+        id = ID;
+        System.out.print("Tên sinh viên: ");
+        name = scan.nextLine();
+        newSubject();
+        System.out.println();
+    }
+
+    public Student(Student that) {
+        this.id = that.id;
+        this.name = that.name;
+        this.subjectList = that.subjectList;
+    }
+
+    private ArrayList<Subject> subjectList = new ArrayList<>();
+
+    public void addSubject(int subject, int semester) { // for adding test cases
+        subjectList.add(new Subject(subject, semester));
+    }
+
+    public void newSubject() {
+        System.out.println("Danh sách môn học: ");
+        System.out.println("1. Java\n2. .Net\n3. C / C ++");
+        System.out.print("Môn học đăng ký: ");
+        int subject = scan.nextInt();
+
+        System.out.print("Học kỳ: ");
+        int semester = scan.nextInt();
+
+        boolean check = true;
+
+        for (int i = 0; i <= subjectList.size() - 1; i++) {
+            if (!subjectList.get(i).compare(new Subject(subject, semester))) {
+                System.out.println("Sinh viên đã có cùng môn học trong học kỳ đó!");
+                System.out.println("Vui lòng gán môn học hoặc ngành học khác cho sinh viên: \n");
+                newSubject();
+                check = false;
+            }
+        }
+
+        if (check) {
+            subjectList.add(new Subject(subject, semester));
+        }
+        scan.nextLine();
+
+    }
+
+    public void removeSubject() {
+        System.out.print("Xóa môn học theo thứ tự: ");
+        subjectList.remove(scan.nextInt() - 1);
+    }
+
+    public void printSubjects() {
+        int count = 1;
+        for (int i = 0; i <= subjectList.size() - 1; i++) {
+            System.out.println(count++ + ". " + subjectList.get(i).info());
+        }
+    }
+
+    public String printSubjectName(int n) {
+        switch (n) {
+            case 1:
+                return ("Java");
+            case 2:
+                return (".Net");
+            case 3:
+                return ("C / C ++");
+        }
+        return "";
+    }
+
+    public void printInfo() { // used for report
+        for (int n = 1; n <= 3; n++) {
+            int count = 0;
+            for (int i = 0; i < subjectList.size(); i++) {
+                if (subjectList.get(i).getInt("subject") == n) {
+                    count++;
+                }
+            }
+
+            if (count != 0) {
+                System.out.println(getName() + " | " + printSubjectName(n) + " | " + count);
+            }
+        }
+    }
+
+    public void setName(String newName) {
+        name = newName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getInt(String choice) {
+        switch (choice) {
+            case "id":
+                return id;
+        }
+        return 0;
+    }
+}
+
+class Subject {
+    private int subject, semester;
+
+    public Subject(int newSubject, int newSemester) {
+        subject = newSubject;
+        semester = newSemester;
+    }
+
+    public int getInt(String argument) {
+        switch (argument) {
+            case "subject":
+                return subject;
+            case "semester":
+                return semester;
+        }
+        return 0;
+    }
+
+    public String info() {
+        return (printSubjectName(subject) + " | " + semester);
+    }
+
+    public String printSubjectName(int n) {
+        switch (n) {
+            case 1:
+                return ("Java");
+            case 2:
+                return (".Net");
+            case 3:
+                return ("C / C ++");
+        }
+        return "";
+    }
+
+    public boolean compare(Subject that) {
+        return !(that.semester == this.semester && that.subject == this.subject);
     }
 }
