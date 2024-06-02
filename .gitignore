@@ -1,6 +1,5 @@
 *.vscode
 *.out
-*.sh
 *.zip
 
 **temp**
