@@ -1,13 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import org.junit.Test;
 
-public class Main {
+public class StudentManager {
 
-    static Scanner scan = new Scanner(System.in);
-    static ArrayList<Student> student = new ArrayList<Student>();
+    ArrayList<Student> student = new ArrayList<Student>();
 
-    public static void printMenu() {
+    public void printMenu() {
+        Scanner scan = new Scanner(System.in);
         System.out.println("----------CHÀO MỪNG ĐẾN QUẢN LÝ SINH VIÊN----------");
         System.out.println("1. Tạo");
         System.out.println("2. Tìm kiếm và Sắp xếp");
@@ -41,7 +40,7 @@ public class Main {
         System.out.println("\n");
     }
 
-    public static void report() {
+    public void report() {
         if (student.size() == 0) {
             System.out.println("Không có hồ sơ sinh viên trong hệ thống");
         } else {
@@ -50,25 +49,41 @@ public class Main {
         }
     }
 
-    public static void createStudentProfile() {
-
-        int id = -1;
-        System.out.println("----------Tạo hồ sơ sinh viên----------");
-
-        while (id == -1) {
-            System.out.print("Nhập ID sinh viên: ");
-            id = scan.nextInt();
-
-            for (int i = 0; i < student.size(); i++) {
-                if ((id == student.get(i).getInt("id"))) {
-                    System.out.println("Đã có sinh viên với ID vừa nhập! Vui lòng sử dụng ID sinh viên khác");
-                    id = -1;
-                }
+    public int checkID(int id) {
+        if (id < 0) {
+            return 0;
+        }
+    
+        for (Student s : student) {
+            if (id == s.getInt("id")) {
+                return -1;
             }
         }
-
+    
+        return 1;
+    }
+    
+    public void createStudentProfile() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("----------Tạo hồ sơ sinh viên----------");
+    
+        int id;
+        int checkResult;
+    
+        do {
+            System.out.print("Nhập ID sinh viên: ");
+            id = scan.nextInt();
+            checkResult = checkID(id);
+    
+            if (checkResult == 0) {
+                System.out.println("ID không hợp lệ! Vui lòng nhập lại.");
+            } else if (checkResult == -1) {
+                System.out.println("Đã có sinh viên với ID vừa nhập! Vui lòng sử dụng ID sinh viên khác");
+            }
+        } while (checkResult != 1);
+    
         student.add(new Student(id));
-
+    
         System.out.print("Bạn có muốn học tiếp (Y/N) không? ");
         switch (scan.next()) {
             case "Y":
@@ -80,7 +95,8 @@ public class Main {
         }
     }
 
-    public static void editStudentProfile() {
+    public void editStudentProfile() {
+        Scanner scan = new Scanner(System.in);
         System.out.println("----------Chỉnh sửa hồ sơ sinh viên----------");
 
         int i = studentSearchByID();
@@ -123,11 +139,12 @@ public class Main {
         }
     }
 
-    public static void studentSearchByName() {
+    public void studentSearchByName() {
+        Scanner scan = new Scanner(System.in);
         System.out.println("---------------------");
         System.out.println("Tìm kiếm hồ sơ sinh viên: ");
 
-        ArrayList<Student> temp = new ArrayList<Student>(); // create new temp student arraylist for sorting
+        ArrayList<Student> temp = new ArrayList<Student>();
 
         for (int i = 0; i < student.size(); i++) {
             temp.add(student.get(i));
@@ -147,7 +164,8 @@ public class Main {
         }
     }
 
-    public static int studentSearchByID() {
+    public int studentSearchByID() {
+        Scanner scan = new Scanner(System.in);
         System.out.print("ID sinh viên: ");
         int id = scan.nextInt();
         scan.nextLine();
@@ -161,31 +179,52 @@ public class Main {
         return -1;
     }
 
-    public static void main(String[] args) {
-        start();
+    public int searchID(int id) {
+        for (int i = 0; i < student.size(); i++) {
+            if (student.get(i).getInt("id") == id) {
+                return i;
+            }
+        }
+        return -1;
     }
 
-    public static void start() {
+    public void populate() {
         student.add(new Student(12, "Slightly Wind"));
-        student.add(new Student(13, "Erik Parker"));
-        student.add(new Student(14, "Adam Damn"));
-        student.add(new Student(15, "Social Dude"));
-
         student.get(0).addSubject(1, 2);
         student.get(0).addSubject(2, 3);
 
+        student.add(new Student(13, "Erik Parker"));
         student.get(1).addSubject(1, 3);
         student.get(1).addSubject(2, 2);
+
+        student.add(new Student(14, "Adam Damn"));
 
         student.get(2).addSubject(3, 1);
         student.get(2).addSubject(2, 1);
 
+        student.add(new Student(15, "Social Dude"));
         student.get(3).addSubject(3, 3);
         student.get(3).addSubject(1, 2);
 
-        while (true) {
-            printMenu();
-        }
+        student.add(new Student(16, "John Doe"));
+        student.get(4).addSubject(1, 4);
+        student.get(4).addSubject(3, 5);
+
+        student.add(new Student(17, "Jane Smith"));
+        student.get(5).addSubject(2, 6);
+        student.get(5).addSubject(3, 7);
+
+        student.add(new Student(18, "Alex Johnson"));
+        student.get(6).addSubject(1, 8);
+        student.get(6).addSubject(2, 9);
+
+        student.add(new Student(19, "Emily Davis"));
+        student.get(7).addSubject(3, 4);
+        student.get(7).addSubject(1, 5);
+
+        student.add(new Student(20, "Michael Wilson"));
+        student.get(8).addSubject(2, 6);
+        student.get(8).addSubject(3, 7);
     }
 }
 
@@ -216,7 +255,7 @@ class Student {
 
     private ArrayList<Subject> subjectList = new ArrayList<>();
 
-    public void addSubject(int subject, int semester) { // for adding test cases
+    public void addSubject(int subject, int semester) {
         subjectList.add(new Subject(subject, semester));
     }
 
@@ -271,7 +310,7 @@ class Student {
         return "";
     }
 
-    public void printInfo() { // used for report
+    public void printInfo() {
         for (int n = 1; n <= 3; n++) {
             int count = 0;
             for (int i = 0; i < subjectList.size(); i++) {
