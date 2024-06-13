@@ -172,14 +172,12 @@ public class StudentManager {
             String subjectAction = scan.next();
             boolean add = "A".equals(subjectAction);
             boolean delete = "D".equals(subjectAction);
-            boolean keep = "S".equals(subjectAction);
 
             if (add) {
                 currentStudent.newSubject();
             } else if (delete) {
                 System.out.print("Xóa môn học theo thứ tự: ");
                 currentStudent.removeSubject(scan.nextInt() - 1);
-            } else if (keep) {
             }
 
         } else if (remove) {
@@ -211,6 +209,9 @@ public class StudentManager {
     }
 
     public ArrayList<Student> searchStudentsByName(String name, ArrayList<Student> students) {
+        if (students == null) {
+            throw new IllegalArgumentException("Students list cannot be null");
+        }
         ArrayList<Student> foundStudents = new ArrayList<Student>();
         boolean isStudentFound = false;
 
@@ -295,6 +296,18 @@ public class StudentManager {
         return "";
     }
 
+    public int countStudent(int subjectId) {
+        int count = 0;
+
+        for (Student s : student) {
+            if (s.isLearningSubject(subjectId)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
     public void populate() {
         addStudent();
         addSubject();
@@ -309,7 +322,7 @@ public class StudentManager {
         student.add(new Student(19, "Emily Davis"));
         student.add(new Student(16, "John Doe"));
         student.add(new Student(18, "Alex Johnson"));
-        student.add(new Student(20, "Michael Wilson"));
+        student.add(new Student(20, "Nguyễn Văn A"));
     }
 
     public void addSubject() {

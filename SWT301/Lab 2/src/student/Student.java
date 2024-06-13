@@ -103,18 +103,14 @@ public class Student {
     }
 
     public int removeSubject(int index) {
-        try {
-            if (index < 0) {
-                throw new IndexOutOfBoundsException();
-            }
-            subjectList.remove(index);
-        } catch (IndexOutOfBoundsException e) {
-            return -1;
+        if (index < 0) {
+            throw new IndexOutOfBoundsException();
         }
+        subjectList.remove(index);
         return 1;
     }
 
-    public String printSubjectName(int n) {
+    public String subjectList(int n) {
         switch (n) {
             case 1:
                 return ("Java");
@@ -124,6 +120,15 @@ public class Student {
                 return ("C / C ++");
         }
         return "";
+    }
+
+    public boolean isLearningSubject(int subjectId) {
+        for (Subject subject : subjectList) {
+            if (subject.getInt("subject") == subjectId) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void printInfo() {
@@ -145,7 +150,7 @@ public class Student {
 
             boolean isSubjectRegistered = count != 0;
             if (isSubjectRegistered) {
-                String subjectName = printSubjectName(subjectNumber);
+                String subjectName = subjectList(subjectNumber);
                 System.out.println(id + ". " + name + " | " + subjectName + " | " + count);
             }
         }

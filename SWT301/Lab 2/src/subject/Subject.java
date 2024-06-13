@@ -35,11 +35,11 @@ public class Subject {
     }
 
     public String info() {
-        String subjectName = printSubjectName(this.subject);
+        String subjectName = subjectList(this.subject);
         return subjectName + " | " + this.semester;
     }
 
-    public String printSubjectName(int n) {
+    public String subjectList(int n) {
         String subjectName;
         switch (n) {
             case 1:

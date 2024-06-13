@@ -1,35 +1,36 @@
 package test;
 
+
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 import manager.StudentManager;
 
 public class TestSubjectAdd {
-    @Test
-    public void testSubjectAdd1() {
-        StudentManager sm = new StudentManager();
-        sm.populate();
+    private StudentManager sm;
 
+    @Before
+    public void setUp() {
+        sm = new StudentManager();
+        sm.populate();
+    }
+
+    @Test
+    public void subjectAdd1() {
         assertEquals(1, sm.student.get(0).addSubject(2, 2));
         assertEquals(-1, sm.student.get(0).addSubject(5, 2));
     }
 
     @Test
-    public void testSemesterAdd2() {
-        StudentManager sm = new StudentManager();
-        sm.populate();
-
+    public void semesterAdd2() {
         assertEquals(-1, sm.student.get(0).addSubject(2, -3));
         assertEquals(1, sm.student.get(0).addSubject(2, 2));
     }
 
     @Test
-    public void testDuplicateAdd3() {
-        StudentManager sm = new StudentManager();
-        sm.populate();
+    public void duplicateAdd3() {
         assertEquals(1, sm.student.get(0).addSubject(2, 2));
         assertEquals(-1, sm.student.get(0).addSubject(2, 2));
-
     }
 }
