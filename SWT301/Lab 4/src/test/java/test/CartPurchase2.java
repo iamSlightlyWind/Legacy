@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class PlaceOrder4 {
+public class CartPurchase2 {
     @Before
     public void setup() throws InterruptedException {
         AIO.setup();
@@ -12,10 +12,14 @@ public class PlaceOrder4 {
     }
 
     @Test
-    public void testCartExceedsStock() throws InterruptedException {
+    public void testCheckCart() throws InterruptedException {
         AIO.addItem("category=cpu&id=18");
-        AIO.increase(10);
-        AIO.assertEquals("TestProductError", "Not enough stock");
+        AIO.addItem("category=gpu&id=43");
+        AIO.addItem("category=mobo&id=107");
+        AIO.checkout();
+        AIO.openNewTab("/Cart");
+        Thread.sleep(1500);
+        AIO.assertEquals("TestCartEmpty", "No products found");
     }
 
     @After
