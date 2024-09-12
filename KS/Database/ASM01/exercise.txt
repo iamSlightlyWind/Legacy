@@ -1,0 +1,25 @@
+Exercise 1:
+a) Draw an ER diagram: 1A.png
+
+b) Relation Schema: 2B.png
+Customer (ID, Name, Phone, Email, Address)
+Product (ID, Name, CategoryID, UnitPrice, Discount)
+Category (ID, Name)
+Invoice (ID, Date)
+InvoiceDetail (Invoice Number, ProductID, Quantity, Discount, UnitPrice)
+InvoiceCustomer (Invoice Number, CustomerID, Name, Phone, Email, Address)
+
+InvoiceCustomer: PK(Invoice Number)
+Email and Phone number while are unique, still are editable on popular platforms.
+
+Exercise 2:
+
+a) Draw an ER diagram: 2A.png
+
+b) Relation Schema: 2B.png
+Trainee (TraineeId, Email, PhoneNumber)
+ETScore (TraineeId, EnglishScore, TechScore, InterviewScore)
+Class (ClassId, ClassCode, StartDate, EndDate, ClassType)
+Course (CourseCode, CourseName, Duration, CourseType)
+TraineeClass (TraineeId, ClassId)
+ClassCourse (ClassId, CourseCode)
