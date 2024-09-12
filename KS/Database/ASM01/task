@@ -1,29 +1,10 @@
-Problem Description:  
-ViVu Store wants to switch to using a web-based sales management system instead of the old system using  excel. The image below is their sales invoice:
-Customer No: 19
-Customer Name: Nguyen Van A
-Phone number: 0987654321
-Email: nguyenvana@gmail.com
-Address: 123 Nguyen Van Linh, Da Nang
+Exercise 1:
+a) Draw an ER diagram: 1A.png
 
-| No | Product Name | Category | Unit price(VND) | Quantity | Discount | Amount |
-|----|--------------|----------|-----------------|----------|----------|--------|
-| 1  | Product A    | A        | 100,000         | 2        | 5%       | 95,000 |
-| 2  | Product B    | B        | 200,000         | 1        | 10%      | 180,000|
-| 3  | Product C    | C        | 300,000         | 1        | 0%       | 300,000|
-| 4  |              |          |                 |          |          |        |
-|----|--------------|----------|-----------------|----------|----------|--------|
-| Total (VND)                                                          | 575,000|
-
-Based on the information on the invoice: 
-- Identify and separate entities, attributes of each entity. 
-- Build relationships between entities. 
-Questions to answer: 
-a) Draw an ER diagram representing the relationships between the entities found.
-b) Convert from ER diagram to relational schema. 
-
-Identify and separate entities, attributes of each entity:
-- Customer: Customer No, Customer Name, Phone number, Email, Address
-- Product: Product ID, Product Name, Category, Unit price
-- Invoice: Invoice No, Customer No, Date
-- InvoiceDetail: Invoice No, Product ID, Unit Price, Quantity, Discount
+b) Relation Schema:
+Customer (ID, Name, Phone, Email, Address)
+Product (ID, Name, CategoryID, UnitPrice, Discount)
+Category (ID, Name)
+Invoice (ID, Date)
+InvoiceDetail (Invoice Number, ProductID, Quantity, Discount, UnitPrice)
+InvoiceCustomer (Invoice Number, CustomerID, Name, Phone, Email, Address)
