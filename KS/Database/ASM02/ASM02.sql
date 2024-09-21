@@ -4,7 +4,6 @@ use ASM02;
 use master;
 drop database if exists ASM02;
 create database ASM02;
-use ASM02;
 */
 
 -- Q1.
@@ -68,8 +67,8 @@ create table Products (
     Note nvarchar(max),
 
     primary key (ProductID),
-    foreign key (SupplierID) references Suppliers(SupplierID),
-    foreign key (CategoryID) references Categories(CategoryID)
+    foreign key (CategoryID) references Categories(CategoryID)/* ,
+    foreign key (SupplierID) references Suppliers(SupplierID) */
 );
 
 alter table Products
@@ -163,7 +162,10 @@ drop column Note
 -- Q3:
 
 -- a. A product belongs to a supplier. A supplier can produce many products. Add the FOREIGN KEY constraint of SupplierID field to the Product table that will relate the Product table.
--- ** alreay satisfied **
+
+alter table Products
+add constraint FK_Products_Suppliers
+foreign key (SupplierID) references Suppliers(SupplierID);
 
 -- b. An order always belongs to a certain customer. A customer can purchase multiple orders. Let's  establish a relationship between the customer and the order (FOREIGN KEY constraint)
 
