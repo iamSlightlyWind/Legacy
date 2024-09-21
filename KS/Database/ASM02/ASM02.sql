@@ -9,13 +9,13 @@ use ASM02;
 
 -- Q1.
 
--- Suppliers: 
--- • SupplierID: primary key (an auto-generated number), data type is integer. 
--- • SupplierName: should be a string in any language, cannot be null 
--- • PhoneNumber: phone number of supplier. 
--- • Address: address of supplier. 
--- • Note: some note about supplier, free text.
--- a. Create Suppliers table with the most appropriate/economic field/column constraints & types. All fields  are mandatory except Note field. 
+/* Suppliers: 
+• SupplierID: primary key (an auto-generated number), data type is integer. 
+• SupplierName: should be a string in any language, cannot be null 
+• PhoneNumber: phone number of supplier. 
+• Address: address of supplier. 
+• Note: some note about supplier, free text.
+a. Create Suppliers table with the most appropriate/economic field/column constraints & types. All fields  are mandatory except Note field. */
 
 create table Suppliers (
     SupplierID int identity(1,1),
@@ -27,12 +27,12 @@ create table Suppliers (
     primary key (SupplierID)
 );
 
--- Categories: 
--- • CategoryID: primary key (an auto-generated number), data type is integer. 
--- • CategoryName: should be a string in any language, cannot be null. 
--- • ParentCategoryID: foreign key, reference to CategoryID of Categories table, data type is integer.
--- • Note: some note about supplier, free text.
--- b. Create Categories table with the most appropriate/economic field/column constraints & types. All  fields are mandatory except Note field. 
+/* Categories: 
+• CategoryID: primary key (an auto-generated number), data type is integer. 
+• CategoryName: should be a string in any language, cannot be null. 
+• ParentCategoryID: foreign key, reference to CategoryID of Categories table, data type is integer.
+• Note: some note about supplier, free text.
+b. Create Categories table with the most appropriate/economic field/column constraints & types. All  fields are mandatory except Note field. */
 create table Categories (
     CategoryID int identity(1,1),
     CategoryName nvarchar(255) not null,
@@ -43,18 +43,18 @@ create table Categories (
     foreign key (ParentCategoryID) references Categories(CategoryID)
 );
 
--- Products: 
--- • ProductID: primary key (an auto-generated number), data type is integer 
--- • ProductName: should be a string in any language, cannot be null 
--- • Summary: should be a string in any language 
--- • Price: data type is money (VND). 
--- • SupplierID: data type is integer. 
--- • CategoryID: foreign key, reference to CategoryID of Categories table, data type is integer.
--- • ManufactureDate: manufacture date of product. not null 
--- • ExpiredDate: expired date of product (not less than inserted time). 
--- • IsDiscontinued: status of the product (0: no longer for sale, 1: still on sale)
--- • Note: some note about product, free text.
--- c. Create Products table with the most appropriate/economic field/column constraints & types, all fields  are mandatory except Note field.
+/* Products: 
+• ProductID: primary key (an auto-generated number), data type is integer 
+• ProductName: should be a string in any language, cannot be null 
+• Summary: should be a string in any language 
+• Price: data type is money (VND). 
+• SupplierID: data type is integer. 
+• CategoryID: foreign key, reference to CategoryID of Categories table, data type is integer.
+• ManufactureDate: manufacture date of product. not null 
+• ExpiredDate: expired date of product (not less than inserted time). 
+• IsDiscontinued: status of the product (0: no longer for sale, 1: still on sale)
+• Note: some note about product, free text.
+c. Create Products table with the most appropriate/economic field/column constraints & types, all fields  are mandatory except Note field. */
 create table Products (
     ProductID int identity(1,1),
     ProductName nvarchar(255) not null,
@@ -75,17 +75,17 @@ create table Products (
 alter table Products
 add constraint CHK_Products_ExpiredDate check (ExpiredDate >= ManufactureDate);
 
--- Customers has attributes: 
--- • CustomerID: primary key (an auto-generated number), data type is integer 
--- • Email: email address of customer, must be unique and cannot be null 
--- • PhoneNumber: phone number of customer, must be unique 
--- • Password: password of customer, cannot be null 
--- • FirstName: should be a string in any language, cannot be null 
--- • LastName: should be a string in any language, cannot be null 
--- • Address: address of customer, can be null 
--- • Level: stores level of customer (accepts value range from 1 to 3 only). 
--- • IsActive: bit type, default is true.
--- d. Create Customers table with the most appropriate/economic field/column constraints & types
+/* Customers has attributes: 
+• CustomerID: primary key (an auto-generated number), data type is integer 
+• Email: email address of customer, must be unique and cannot be null 
+• PhoneNumber: phone number of customer, must be unique 
+• Password: password of customer, cannot be null 
+• FirstName: should be a string in any language, cannot be null 
+• LastName: should be a string in any language, cannot be null 
+• Address: address of customer, can be null 
+• Level: stores level of customer (accepts value range from 1 to 3 only). 
+• IsActive: bit type, default is true.
+d. Create Customers table with the most appropriate/economic field/column constraints & types */
 create table Customers(
     CustomerID int identity(1,1),
     Email nvarchar(320) unique not null, 
@@ -100,11 +100,11 @@ create table Customers(
     primary key (CustomerID)
 );
 
--- Orders has attributes: 
--- • OrderID: primary key(an auto-generated number), data type is integer 
--- • OrderDate: cannot be null, data stored as date and time 
--- • ShipAddress: should be a string in any language.
--- e. Create Orders table with the most appropriate/economic field/column constraints & types
+/* Orders has attributes: 
+• OrderID: primary key(an auto-generated number), data type is integer 
+• OrderDate: cannot be null, data stored as date and time 
+• ShipAddress: should be a string in any language.
+e. Create Orders table with the most appropriate/economic field/column constraints & types */
 create table Orders(
     OrderID int identity(1,1),
     OrderDate datetime not null,
@@ -113,13 +113,13 @@ create table Orders(
     primary key (OrderID)
 );
 
--- OrderDetails has attributes: 
--- • OrderID: foreign key, reference to OrderID of Orders table 
--- • ProductID: foreign key, reference to ProductID of Products table 
--- • Quantity: cannot be null, positive value only  
--- • UnitPrice: money type, cannot be null 
--- • DiscountPercent: cannot be null, value in range from 0.00 to 0.70 
--- f. Create OrderDetails table with the most appropriate/economic field/column constraints & types.
+/* OrderDetails has attributes: 
+• OrderID: foreign key, reference to OrderID of Orders table 
+• ProductID: foreign key, reference to ProductID of Products table 
+• Quantity: cannot be null, positive value only  
+• UnitPrice: money type, cannot be null 
+• DiscountPercent: cannot be null, value in range from 0.00 to 0.70 
+f. Create OrderDetails table with the most appropriate/economic field/column constraints & types. */
 create table OrderDetails(
     OrderID int,
     ProductID int,
@@ -141,6 +141,7 @@ create table OrderDetails(
 
 
 -- Q2.
+
 -- a. Add an ProductCode field to Product table and make sure that the database will not allow the value for ProductCode to be inserted into a new row if that value has already been used in another row. 
 
 alter table Products
@@ -158,16 +159,22 @@ drop column Note
 
 
 
--- Q3:  
+
+-- Q3:
+
 -- a. A product belongs to a supplier. A supplier can produce many products. Add the FOREIGN KEY constraint of SupplierID field to the Product table that will relate the Product table.
--- alreay satisfied
+-- ** alreay satisfied **
 
 -- b. An order always belongs to a certain customer. A customer can purchase multiple orders. Let's  establish a relationship between the customer and the order (FOREIGN KEY constraint)
 
 alter table Orders
 add CustomerID int not null references Customers(CustomerID);
 
--- Q4: 
+
+
+
+-- Q4:
+
 -- a. Add at least 5 records into each the created tables.
 
 insert into Suppliers values
@@ -215,9 +222,9 @@ insert into OrderDetails values
 ('4', '4', '4', '30000000', '0.20'),
 ('5', '5', '5', '5000000', '0.25');
 
--- b. Create a VIEW called vw_Product_Tracking that will appear to the product as ProductID,  ProductName, ProductCode. It has Level satisfied the criteria:  
--- - Price >= 50000. 
--- - Product still on sale. 
+/* b. Create a VIEW called vw_Product_Tracking that will appear to the product as ProductID,  ProductName, ProductCode. It has Level satisfied the criteria:  
+- Price >= 50000. 
+- Product still on sale.  */
 
 go
 create view vw_Product_Tracking
