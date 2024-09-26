@@ -1,8 +1,12 @@
 use ASM02;
 
 /*
-use master;
-drop database if exists ASM02;
+USE master;
+IF EXISTS (SELECT name from sys.databases WHERE (name = 'ASM02'))
+begin
+    ALTER DATABASE [ASM02] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    drop database ASM02;
+end
 create database ASM02;
 */
 
@@ -179,7 +183,7 @@ add CustomerID int not null references Customers(CustomerID);
 
 -- a. Add at least 5 records into each the created tables.
 
-insert into Suppliers values
+/* insert into Suppliers values
 ('Apple', '123456789', 'Cupertino, CA'),
 ('Samsung', '987654321', 'Seoul, South Korea'),
 ('Google', '123123123', 'Mountain View, CA'),
@@ -222,7 +226,7 @@ insert into OrderDetails values
 ('2', '2', '2', '50000000', '0.10'),
 ('3', '3', '3', '20000000', '0.15'),
 ('4', '4', '4', '30000000', '0.20'),
-('5', '5', '5', '5000000', '0.25');
+('5', '5', '5', '5000000', '0.25'); */
 
 /* b. Create a VIEW called vw_Product_Tracking that will appear to the product as ProductID,  ProductName, ProductCode. It has Level satisfied the criteria:  
 - Price >= 50000. 
