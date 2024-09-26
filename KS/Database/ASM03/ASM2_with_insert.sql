@@ -4,10 +4,10 @@ use ASM3;
 USE master;
 IF EXISTS (SELECT name from sys.databases WHERE (name = 'ASM3'))
 begin
-    ALTER DATABASE [ASM3] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    ALTER DATABASE [ASM3] SET SINGLE_USER WITH ROLLBACK IMMEDIATE
     drop database ASM3;
+    create database ASM3;
 end
-create database ASM3;
 */
 
 create table Suppliers (
@@ -108,7 +108,7 @@ from Products
 where Price >= 50000 and IsDiscontinued = 0;
 go
 
-insert into Suppliers values
+insert into Suppliers (SupplierName, PhoneNumber, Address) values
 ('Apple', '123456789', 'Cupertino, CA'),
 ('Samsung', '987654321', 'Seoul, South Korea'),
 ('Google', '123123123', 'Mountain View, CA'),
@@ -118,7 +118,7 @@ insert into Suppliers values
 ('HP', '321321321', 'Palo Alto, CA'),
 ('Lenovo', '654987321', 'Beijing, China');
 
-insert into Categories values
+insert into Categories (CategoryName, ParentCategoryID, Note) values
 ('Smartphones', null, 'Phones that are smart'),
 ('Laptops', null, 'Portable computers'),
 ('Tablets', null, 'Big phones'),
@@ -128,7 +128,7 @@ insert into Categories values
 ('Charger', 6, 'Things that charge the smart things'),
 ('Case', 6, 'Things that protect the smart things');
 
-insert into Products values
+insert into Products (ProductName, Summary, Price, SupplierID, CategoryID, ManufactureDate, ExpiredDate, IsDiscontinued, Note, ProductCode) values
 ('Apple Watch', 'New enough', 45000, 1, 4, '2021-01-01', '2025-01-01', 0, 'been overstocked', 'AWS9'),
 ('Z Fold 5', 'Foldy', 90000, 2, 1, '2021-01-01', '2026-01-01', 0, 'were gonna need more of this, restock once sold out', 'ZF5'),
 ('Pixel Slate', 'Slatey', 60000, 3, 3, '2021-01-01', '2027-01-01', 0, 'not selling well', 'PSL8'),
@@ -138,7 +138,7 @@ insert into Products values
 ('Galaxy S5', 'S5', 30000, 2, 1, '2021-01-01', '2022-01-01', 0, 'old', 'GS5'),
 ('Pixel 2', '2', 40000, 3, 1, '2021-01-01', '2022-01-01', 0, 'old', 'PXL2');
 
-insert into Customers values
+insert into Customers (Email, PhoneNumber, Password, FirstName, LastName, Address, Level, IsActive) values
 ('john.nguyen@example.com', '123-456-7890', 'password123', 'John', 'Doe', '123 Elm St', 3, 1),
 ('nguyenasd.smith@example.com', '234-567-8901', 'password456', 'Jane', 'Smith', '456 Oak St', 2, 1),
 ('alice.jones@example.com', '345-678-9012', 'password789', 'Alice', 'Jones', '789 Pine St', 3, 1),
@@ -148,7 +148,7 @@ insert into Customers values
 ('dave.diver@example.com', '789-012-3456', 'password404', 'Dave', 'Diver', '404 Walnut St', 1, 1),
 ('rockd.snguyenasdt@example.com', '890-123-4567', 'password505', 'Rock', 'Start', '505 Pineapple St', 3, 1);
 
-insert into Orders values
+insert into Orders (OrderDate, ShipAddress, CustomerID) values
 ('2021-01-01', '123 Elm St', '1'),
 ('2021-01-02', '456 Oak St', '2'),
 ('2021-01-03', '789 Pine St', '3'),
@@ -158,7 +158,7 @@ insert into Orders values
 ('2021-01-07', '404 Walnut St', '1'),
 ('2021-01-08', '505 Pineapple St', '2');
 
-insert into OrderDetails values
+insert into OrderDetails (OrderID, ProductID, Quantity, UnitPrice, DiscountPercent) values
 ('1', '1', '1', '45000', '0.05'),
 ('2', '2', '2', '90000', '0.10'),
 ('3', '3', '3', '60000', '0.15'),
