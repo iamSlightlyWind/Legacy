@@ -3,23 +3,23 @@ package fa.training.entities;
 import fa.training.utils.InputValidate;
 
 public class Teacher extends Person {
+    private String teacherID;
     private double basicSalary;
     private double subsidy;
 
     public String[][] info() {
-        String superInfo[][] = super.info();
-
         String values[][] = {
+                { "id", this.getTeacherID(), "string" },
                 { "basicSalary", this.getBasicSalary() + "", "double" },
                 { "subsidy", this.getSubsidy() + "", "double" },
                 { "type", "Teacher", "string" }
         };
 
-        String result[][] = new String[superInfo.length + values.length][3];
-        System.arraycopy(superInfo, 0, result, 0, superInfo.length);
-        System.arraycopy(values, 0, result, superInfo.length, values.length);
+        return values;
+    }
 
-        return result;
+    public String[][] superInfo() {
+        return super.info();
     }
 
     public Teacher() {
@@ -41,8 +41,9 @@ public class Teacher extends Person {
         this.subsidy = subsidy;
     }
 
-    public Teacher(Long id, String name, String gender, String phone, String email, double basicSalary, double subsidy) {
+    public Teacher(Long id, String name, String gender, String phone, String email, String teacherID, double basicSalary, double subsidy) {
         super(id, name, gender, phone, email);
+        this.teacherID = teacherID;
         this.basicSalary = basicSalary;
         this.subsidy = subsidy;
     }
@@ -53,6 +54,10 @@ public class Teacher extends Person {
 
     public double getBasicSalary() {
         return basicSalary;
+    }
+
+    public String getTeacherID() {
+        return teacherID;
     }
 
     public void setBasicSalary(double basicSalary) {

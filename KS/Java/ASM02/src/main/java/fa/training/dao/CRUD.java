@@ -3,13 +3,14 @@ package fa.training.dao;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 
+import fa.training.entities.Person;
 import fa.training.entities.Student;
 import fa.training.utils.Database;
 
 public interface CRUD {
 
-    default void update(Student current) throws SQLException {
-        CallableStatement statement = build(current.info(), "updateStudent");
+    default void update(Person current) throws SQLException {
+        CallableStatement statement = build(current.info(), "updateObject");
         statement.execute();
     }
 
@@ -18,7 +19,7 @@ public interface CRUD {
         StringBuilder query = new StringBuilder();
 
         switch (action) {
-            case "updateStudent":
+            case "updateObject":
                 query.append(" update ")
                         .append(type)
                         .append(" set ");

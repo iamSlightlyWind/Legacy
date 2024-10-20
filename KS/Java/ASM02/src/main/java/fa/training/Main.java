@@ -20,12 +20,12 @@ public class Main {
          * }
          */
 
-        Student a = new Student(2l, "Erik", "gay as fuck", "+84371234567", "whatis.a@a.com", "2", 3.5, 5.5);
-        Teacher b = new Teacher(7l, "Kinda straight" ,"Harp", "+84371234568" , "whereis.b@b.com", 2.5, 3.5);
+        Student a = new Student(2l, "Erik", "gay as fuck", "+84371234567", "whatis.a@a.com", "2", 2.5, 3.5);
+        Teacher b = new Teacher(7l, "Kinda straight" ,"Harp", "+84371234568" , "whereis.b@b.com", "3", 1500, 250);
 
         StudentDaoImpl studentDao = new StudentDaoImpl();
         TeacherDaoImpl teacherDao = new TeacherDaoImpl();
         studentDao.update(a);
-        //System.out.println(teacherDao.build(b.info(), "update"));
+        teacherDao.update(b);
     }
 }
