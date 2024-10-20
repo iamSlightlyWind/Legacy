@@ -10,7 +10,6 @@ public interface StudentDao {
     List<Student> findAll();
     Optional<Student> findById(Long id);
     Student insert(Student student);
-    Student update(Student student);
     void delete(Student student);
 
 }

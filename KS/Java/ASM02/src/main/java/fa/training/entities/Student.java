@@ -11,10 +11,10 @@ public class Student extends Person {
         String superInfo[][] = super.info();
 
         String values[][] = {
-                { "type", "Student", "string" },
                 { "studentid", this.getStudentId().toString(), "string" },
                 { "theory", this.getTheory().toString(), "double" },
-                { "practice", this.getPractice().toString(), "double" }
+                { "practice", this.getPractice().toString(), "double" },
+                { "type", "Student", "string" }
         };
 
         String result[][] = new String[superInfo.length + values.length][3];

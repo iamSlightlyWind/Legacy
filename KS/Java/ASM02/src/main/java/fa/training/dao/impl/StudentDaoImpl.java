@@ -1,5 +1,6 @@
 package fa.training.dao.impl;
 
+import fa.training.dao.CRUD;
 import fa.training.dao.StudentDao;
 import fa.training.entities.Student;
 import fa.training.utils.Database;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class StudentDaoImpl implements StudentDao {
+public class StudentDaoImpl implements StudentDao, CRUD {
 
     @Override
     public List<Student> findAll() {
@@ -60,11 +61,6 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public Student insert(Student student) {
-        return null;
-    }
-
-    @Override
-    public Student update(Student student) {
         return null;
     }
 

@@ -10,9 +10,9 @@ public class Teacher extends Person {
         String superInfo[][] = super.info();
 
         String values[][] = {
-                { "type", "Teacher", "string" },
                 { "basicSalary", this.getBasicSalary() + "", "double" },
-                { "subsidy", this.getSubsidy() + "", "double" }
+                { "subsidy", this.getSubsidy() + "", "double" },
+                { "type", "Teacher", "string" }
         };
 
         String result[][] = new String[superInfo.length + values.length][3];
