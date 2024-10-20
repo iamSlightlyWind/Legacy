@@ -9,7 +9,7 @@ import fa.training.utils.Database;
 public interface CRUD {
 
     default void update(Student current) throws SQLException {
-        CallableStatement statement = build(current.info(), "update");
+        CallableStatement statement = build(current.info(), "updateStudent");
         statement.execute();
     }
 
@@ -18,30 +18,30 @@ public interface CRUD {
         StringBuilder query = new StringBuilder();
 
         switch (action) {
-            case "update":
+            case "updateStudent":
                 query.append(" update ")
                         .append(type)
                         .append(" set ");
-                // .append("person.name = ?, ")
-                // .append("person.gender = ?, ")
-                // .append("person.phone = ?, ")
-                // .append("person.email = ?, ");
 
-                for (int i = 5; i < info.length - 1; i++) {
+                for (int i = 1; i < info.length - 1; i++) {
                     query.append(info[i][0]).append(" = ?");
                     if (i != info.length - 2) {
                         query.append(", ");
                     }
                 }
 
-                query.append(" from ")
-                        .append(type)
-                        .append(" join person on person.id = ")
-                        .append(type)
-                        .append(".person_id ")
-                        .append(" where person.id = ? ");
-
+                query.append(" where id = ? ");
                 break;
+
+            case "updatePerson":
+                query.append(" update person set ")
+                        .append("name = ?, ")
+                        .append("gender = ?, ")
+                        .append("phone = ?, ")
+                        .append("email = ? ")
+                        .append("where id = ? ");
+                break;
+
         }
 
         CallableStatement statement = Database.connection.prepareCall(query.toString());
@@ -51,24 +51,19 @@ public interface CRUD {
     }
 
     default void setValues(CallableStatement statement, String[][] info) throws SQLException {
-        int argCount = 1;
-        int valueCount = 5;
-
-        while (valueCount < info.length - 1) {
-            switch (info[valueCount][2]) {
+        for (int i = 1; i < info.length - 1; i++) {
+            switch (info[i][2]) {
+                case "long":
+                    statement.setLong(i, Long.parseLong(info[i][1]));
+                    break;
                 case "string":
-                    statement.setString(argCount, info[valueCount][1]);
+                    statement.setString(i, info[i][1]);
                     break;
                 case "double":
-                case "long":
-                    statement.setFloat(argCount, Float.parseFloat(info[valueCount][1]));
+                    statement.setFloat(i, Float.parseFloat(info[i][1]));
                     break;
             }
-
-            argCount++;
-            valueCount++;
         }
-
-        statement.setString(argCount, info[0][1]);
+        statement.setLong(info.length - 1, Long.parseLong(info[0][1]));
     }
 }

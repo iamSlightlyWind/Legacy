@@ -20,7 +20,7 @@ public class Main {
          * }
          */
 
-        Student a = new Student(2l, "Erik", "gay as fuck", "+84371234567", "whatis.a@a.com", "2", 6.5, 7.5);
+        Student a = new Student(2l, "Erik", "gay as fuck", "+84371234567", "whatis.a@a.com", "2", 3.5, 5.5);
         Teacher b = new Teacher(7l, "Kinda straight" ,"Harp", "+84371234568" , "whereis.b@b.com", 2.5, 3.5);
 
         StudentDaoImpl studentDao = new StudentDaoImpl();

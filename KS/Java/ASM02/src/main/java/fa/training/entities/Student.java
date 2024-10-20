@@ -8,8 +8,6 @@ public class Student extends Person {
     private Double practice;
 
     public String[][] info() {
-        String superInfo[][] = super.info();
-
         String values[][] = {
                 { "id", this.getStudentId().toString(), "string" },
                 { "theory", this.getTheory().toString(), "double" },
@@ -17,11 +15,11 @@ public class Student extends Person {
                 { "type", "Student", "string" }
         };
 
-        String result[][] = new String[superInfo.length + values.length][3];
-        System.arraycopy(superInfo, 0, result, 0, superInfo.length);
-        System.arraycopy(values, 0, result, superInfo.length, values.length);
+        return values;
+    }
 
-        return result;
+    public String[][] superInfo() {
+        return super.info();
     }
 
     public Student() {
