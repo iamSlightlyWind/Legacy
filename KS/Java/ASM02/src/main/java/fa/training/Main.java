@@ -20,19 +20,12 @@ public class Main {
          * }
          */
 
-        Database.test();
-
-        Student a = new Student(1l, "Erik", "gay as fuck", "+84371234567", "whatis.a@a.com", "1", 3.5, 2.5);
-        String[][] resulta = a.info();
-
+        Student a = new Student(2l, "Erik", "gay as fuck", "+84371234567", "whatis.a@a.com", "2", 6.5, 7.5);
         Teacher b = new Teacher(7l, "Kinda straight" ,"Harp", "+84371234568" , "whereis.b@b.com", 2.5, 3.5);
-        String[][] resultb = b.info();
-
-        System.out.println("");
 
         StudentDaoImpl studentDao = new StudentDaoImpl();
         TeacherDaoImpl teacherDao = new TeacherDaoImpl();
-        studentDao.build(a.info(), "update");
+        studentDao.update(a);
         //System.out.println(teacherDao.build(b.info(), "update"));
     }
 }

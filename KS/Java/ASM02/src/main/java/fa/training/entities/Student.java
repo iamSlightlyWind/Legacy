@@ -11,7 +11,7 @@ public class Student extends Person {
         String superInfo[][] = super.info();
 
         String values[][] = {
-                { "studentid", this.getStudentId().toString(), "string" },
+                { "id", this.getStudentId().toString(), "string" },
                 { "theory", this.getTheory().toString(), "double" },
                 { "practice", this.getPractice().toString(), "double" },
                 { "type", "Student", "string" }

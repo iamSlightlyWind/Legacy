@@ -1,8 +1,20 @@
+use master
+
+IF EXISTS (SELECT 1
+FROM sys.databases
+WHERE name = 'java_ma301')
+BEGIN
+    ALTER DATABASE java_ma301 SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+    DROP DATABASE java_ma301
+END
+
+create database java_ma301
+
 use java_ma301
 
 create table Person
 (
-    id int primary key,
+    id float primary key,
     name varchar(255) not null,
     gender varchar(255) not null,
     phone varchar(255) not null,
@@ -11,16 +23,16 @@ create table Person
 
 create table Student
 (
-    id int primary key,
-    person_id int not null,
+    id varchar(255) primary key,
+    person_id float not null references Person(id),
     theory float not null,
     practice float not null
 )
 
 create table Teacher
 (
-    id int primary key,
-    person_id int not null,
+    id varchar(255) primary key,
+    person_id float not null references Person(id),
     basicSalary float not null,
     subsidy float not null
 )

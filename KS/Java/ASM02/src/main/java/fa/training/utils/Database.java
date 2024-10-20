@@ -21,21 +21,6 @@ public class Database {
         }
     }
 
-    public static void test() {
-        try {
-            String query = "select ? from ?";
-            CallableStatement statement = connection.prepareCall(query);
-            statement.setString(1, "name");
-            statement.setString(2, "person");
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                System.out.println(resultSet.getString("name"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     /*
      * was planning to write the crud logic here, thus the 'type' in Student/Teacher.info
      * making it independent of which class calls the crud method

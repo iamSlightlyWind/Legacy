@@ -21,23 +21,25 @@ public interface CRUD {
             case "update":
                 query.append(" update ")
                         .append(type)
-                        .append(" set")
-                        .append("person.name = ?, ")
-                        .append("person.gender = ?, ")
-                        .append("person.phone = ?, ")
-                        .append("person.email = ?, ");
+                        .append(" set ");
+                // .append("person.name = ?, ")
+                // .append("person.gender = ?, ")
+                // .append("person.phone = ?, ")
+                // .append("person.email = ?, ");
 
-                for (int i = 4; i < info.length - 1; i++) {
-                    query.append(info[i][0] + " = ?");
+                for (int i = 5; i < info.length - 1; i++) {
+                    query.append(info[i][0]).append(" = ?");
                     if (i != info.length - 2) {
                         query.append(", ");
                     }
                 }
 
-                query.append(" where person.id = ? ")
-                        .append("join person on person.id = ")
+                query.append(" from ")
                         .append(type)
-                        .append(".person_id ");
+                        .append(" join person on person.id = ")
+                        .append(type)
+                        .append(".person_id ")
+                        .append(" where person.id = ? ");
 
                 break;
         }
@@ -49,20 +51,24 @@ public interface CRUD {
     }
 
     default void setValues(CallableStatement statement, String[][] info) throws SQLException {
-        int count = 1;
+        int argCount = 1;
+        int valueCount = 5;
 
-        while (count < info.length - 1) {
-            switch (info[count][2]) {
+        while (valueCount < info.length - 1) {
+            switch (info[valueCount][2]) {
                 case "string":
-                    statement.setString(count + 1, info[count][1]);
+                    statement.setString(argCount, info[valueCount][1]);
                     break;
                 case "double":
-                    statement.setFloat(count + 1, Float.parseFloat(info[count][1]));
+                case "long":
+                    statement.setFloat(argCount, Float.parseFloat(info[valueCount][1]));
                     break;
             }
-            count++;
+
+            argCount++;
+            valueCount++;
         }
 
-        statement.setString(count + 1, info[0][1]);
+        statement.setString(argCount, info[0][1]);
     }
 }
