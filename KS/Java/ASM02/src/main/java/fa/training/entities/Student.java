@@ -7,23 +7,40 @@ public class Student extends Person {
     private Double theory;
     private Double practice;
 
+    public String[][] info() {
+        String superInfo[][] = super.info();
+
+        String values[][] = {
+                { "type", "Student", "string" },
+                { "studentid", this.getStudentId().toString(), "string" },
+                { "theory", this.getTheory().toString(), "double" },
+                { "practice", this.getPractice().toString(), "double" }
+        };
+
+        String result[][] = new String[superInfo.length + values.length][3];
+        System.arraycopy(superInfo, 0, result, 0, superInfo.length);
+        System.arraycopy(values, 0, result, superInfo.length, values.length);
+
+        return result;
+    }
+
     public Student() {
         super();
         this.studentId = InputValidate.inputString("Enter student ID: ");
-        this.theory = InputValidate.inputDouble(    "Enter theory score:",
-                                                    "Not a number",
-                                                    "Theory score must be in between 0 and 10",
-                                                    0d,
-                                                    10d);
-        this.practice = InputValidate.inputDouble(  "Enter practice score:",
-                                                    "Not a number",
-                                                    "Practice score must be in between 0 and 10",
-                                                    0d,
-                                                    10d);
+        this.theory = InputValidate.inputDouble("Enter theory score:",
+                "Not a number",
+                "Theory score must be in between 0 and 10",
+                0d,
+                10d);
+        this.practice = InputValidate.inputDouble("Enter practice score:",
+                "Not a number",
+                "Practice score must be in between 0 and 10",
+                0d,
+                10d);
 
     }
 
-    public Student(Long id,String name, String gender, String phone, String email, String studentId, Double theory, Double practice) {
+    public Student(Long id, String name, String gender, String phone, String email, String studentId, Double theory, Double practice) {
         super(id, name, gender, phone, email);
         this.studentId = studentId;
         this.theory = theory;
@@ -65,11 +82,11 @@ public class Student extends Person {
     }
 
     public void update(Student student) {
-        this.setGender(student.getGender()  != null && !student.getGender().isEmpty()   ? student.getGender()   : this.getGender());
-        this.setPhone(student.getPhone()    != null && !student.getPhone().isEmpty()    ? student.getPhone()    : this.getPhone());
-        this.setEmail(student.getEmail()    != null && !student.getEmail().isEmpty()    ? student.getEmail()    : this.getEmail());
-        this.setTheory(student.getTheory()      != null ? student.getTheory()   : this.getTheory());
-        this.setPractice(student.getPractice()  != null ? student.getPractice() : this.getPractice());
+        this.setGender(student.getGender() != null && !student.getGender().isEmpty() ? student.getGender() : this.getGender());
+        this.setPhone(student.getPhone() != null && !student.getPhone().isEmpty() ? student.getPhone() : this.getPhone());
+        this.setEmail(student.getEmail() != null && !student.getEmail().isEmpty() ? student.getEmail() : this.getEmail());
+        this.setTheory(student.getTheory() != null ? student.getTheory() : this.getTheory());
+        this.setPractice(student.getPractice() != null ? student.getPractice() : this.getPractice());
     }
 
     @Override

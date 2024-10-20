@@ -2,8 +2,8 @@ package fa.training.dao.impl;
 
 import fa.training.dao.StudentDao;
 import fa.training.entities.Student;
-import fa.training.utils.JavaM301DbContext;
-
+import fa.training.utils.Database;
+/* import fa.training.utils.JavaM301DbContext; */
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ public class StudentDaoImpl implements StudentDao {
     public List<Student> findAll() {
         List<Student> students = new ArrayList<>();
         try {
-            Connection connection = JavaM301DbContext.getConnection();
+            Connection connection = Database.connection; /* JavaM301DbContext.getConnection(); */
             String query = buildFindAllQueryString();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();

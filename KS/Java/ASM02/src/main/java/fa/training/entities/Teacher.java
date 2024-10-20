@@ -6,18 +6,34 @@ public class Teacher extends Person {
     private double basicSalary;
     private double subsidy;
 
+    public String[][] info() {
+        String superInfo[][] = super.info();
+
+        String values[][] = {
+                { "type", "Teacher", "string" },
+                { "basicSalary", this.getBasicSalary() + "", "double" },
+                { "subsidy", this.getSubsidy() + "", "double" }
+        };
+
+        String result[][] = new String[superInfo.length + values.length][3];
+        System.arraycopy(superInfo, 0, result, 0, superInfo.length);
+        System.arraycopy(values, 0, result, superInfo.length, values.length);
+
+        return result;
+    }
+
     public Teacher() {
         super();
         this.basicSalary = InputValidate.inputDouble("Enter salary: ",
-                                                    "Not a number",
-                                                    "Salary must be greater than 0",
-                                                    0d,
-                                                    null);
-        this.subsidy = InputValidate.inputDouble(   "Enter subsidy: ",
-                                                    "Not a number",
-                                                    "Subsidy must be greater than 0",
-                                                    0d,
-                                                    null);
+                "Not a number",
+                "Salary must be greater than 0",
+                0d,
+                null);
+        this.subsidy = InputValidate.inputDouble("Enter subsidy: ",
+                "Not a number",
+                "Subsidy must be greater than 0",
+                0d,
+                null);
     }
 
     public Teacher(double basicSalary, double subsidy) {

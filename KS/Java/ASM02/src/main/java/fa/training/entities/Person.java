@@ -9,6 +9,17 @@ import fa.training.utils.InputValidate;
  */
 public abstract class Person {
 
+    public String[][] info(){
+        String values[][] = {
+            {"id", this.getId().toString(), "long"},
+            {"name", this.getName(), "string"},
+            {"gender", this.getGender(), "string"},
+            {"phone", this.getPhone(), "string"},
+            {"email", this.getEmail(), "string"}
+        };
+        return values;
+    }
+
     /**
      *  Representing the unique ID of a Person
      */
