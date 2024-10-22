@@ -13,8 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-import org.apache.commons.lang3.StringUtils;
-
 @SuppressWarnings("unchecked")
 public abstract class GenericDao<T, ID> {
 
