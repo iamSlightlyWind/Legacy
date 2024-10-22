@@ -7,7 +7,7 @@ import fa.training.utils.InputValidate;
 @DatabaseTable(name = "student")
 public class Student extends Person {
 
-    @DatabaseColumn(name = "student_id")
+    @DatabaseColumn(name = "studentid")
     private String studentId;
 
     @DatabaseColumn(name = "theory")

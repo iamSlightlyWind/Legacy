@@ -4,7 +4,6 @@ import fa.training.annotation.DatabaseColumn;
 import fa.training.annotation.DatabaseTable;
 import fa.training.annotation.IDColumn;
 import fa.training.utils.JavaM301DbContext;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
@@ -13,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+
+import org.apache.commons.lang3.StringUtils;
 
 @SuppressWarnings("unchecked")
 public abstract class GenericDao<T, ID> {
@@ -66,7 +67,7 @@ public abstract class GenericDao<T, ID> {
             sql.append(" WHERE ");
             sql.append(this.getIdColumnName());
             sql.append(" = ?");
-            System.out.println(sql.toString());
+            // System.out.println(sql.toString());
             PreparedStatement preparedStatement = connection.prepareStatement(sql.toString());
             setParameter(preparedStatement, 1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -89,22 +90,120 @@ public abstract class GenericDao<T, ID> {
     }
 
     // VALUES (?, ?, ?, ?)
-    public T insert(T entity) {
-        return null;
+    public void insert(T entity) {
+        if (!exists(entity)) {
+            try (Connection connection = JavaM301DbContext.getConnection()) {
+                PreparedStatement preparedStatement = connection.prepareStatement(insertQuery());
+                List<T> values = getValues(entity, false);
+
+                for (int i = 0; i < values.size(); i++) {
+                    setParameter(preparedStatement, i + 1, values.get(i));
+                }
+                preparedStatement.executeUpdate();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public String insertQuery() {
+        StringBuilder query = new StringBuilder();
+
+        query.append(" insert into ").append(this.getTableNameFromAnnotation()).append(" (");
+
+        for (Field field : getFields()) {
+            query.append(field.getName()).append(",");
+        }
+        query.deleteCharAt(query.length() - 1);
+        query.append(") values (");
+
+        for (int i = 0; i < getFields().length; i++) {
+            query.append("?,");
+        }
+        query.deleteCharAt(query.length() - 1).append(")");
+        System.out.println(query.toString());
+        return query.toString();
+    }
+
+    public boolean exists(T entity) {
+        try (Connection connection = JavaM301DbContext.getConnection()) {
+            StringBuilder query = new StringBuilder();
+            query.append("select 1 from ").append(this.getTableNameFromAnnotation()).append(" where id = ? ");
+            PreparedStatement preparedStatement = connection.prepareStatement(query.toString());
+            setParameter(preparedStatement, 1, getID(entity));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
     }
 
     // SET name = ? , age = ?,
-    public T update(T entity) {
-        return null;
+    public void update(T entity) {
+        try (Connection connection = JavaM301DbContext.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(updateQuery(entity));
+            List<T> values = getValues(entity, true);
+
+            for (int i = 0; i < values.size(); i++) {
+                setParameter(preparedStatement, i + 1, values.get(i));
+            }
+
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void delete(T entity) throws IllegalAccessException {
+    public List<T> getValues(T entity, boolean skipID) {
+        List<T> values = new ArrayList<>();
+
+        for (Field field : getFields()) {
+            if (field.isAnnotationPresent(DatabaseColumn.class)) {
+                if (!skipID || !field.isAnnotationPresent(IDColumn.class)) {
+                    field.setAccessible(true);
+                    try {
+                        Object value = field.get(entity);
+                        values.add((T) value);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        return values;
+    }
+
+    public String updateQuery(T object) {
+        StringBuilder attr = new StringBuilder();
+
+        attr.append(" update ").append(this.getTableNameFromAnnotation()).append(" set ");
+
+        for (Field field : getFields()) {
+            if (!field.isAnnotationPresent(IDColumn.class)) {
+                attr.append(field.getName()).append(" = ?,");
+            }
+        }
+        attr.deleteCharAt(attr.length() - 1);
+
+        attr.append(" where id = ?");
+        System.out.println(attr.toString());
+        return attr.toString();
+    }
+
+    public ID getID(T entity) throws IllegalArgumentException, IllegalAccessException {
         Map<String, Field> fieldMap = this.getFieldMap();
         String idColumnName = this.getIdColumnName();
         Field field = fieldMap.get(idColumnName);
         field.setAccessible(true);
         ID id = (ID) field.get(entity);
-        deleteById(id);
+        return id;
+    }
+
+    public void delete(T entity) throws IllegalAccessException {
+        deleteById(getID(entity));
     }
 
     public void deleteById(ID id) {
@@ -147,8 +246,7 @@ public abstract class GenericDao<T, ID> {
         Map<String, Field> fieldMap = this.getFieldMap();
         StringBuilder result = new StringBuilder();
         for (String columnName : fieldMap.keySet()) {
-            result.append(columnName);
-            result.append(",");
+            result.append(columnName).append(",");
         }
         result.deleteCharAt(result.length() - 1);
         return result.toString();

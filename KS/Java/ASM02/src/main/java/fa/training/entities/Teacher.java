@@ -7,7 +7,7 @@ import fa.training.utils.InputValidate;
 @DatabaseTable(name = "teacher_table")
 public class Teacher extends Person {
 
-    @DatabaseColumn(name = "basic_salary")
+    @DatabaseColumn(name = "basicSalary")
     private double basicSalary;
 
     @DatabaseColumn(name = "subsidy")
