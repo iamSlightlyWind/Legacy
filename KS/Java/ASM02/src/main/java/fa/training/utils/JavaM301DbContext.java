@@ -1,4 +1,4 @@
-/* package fa.training.utils;
+package fa.training.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,5 +12,13 @@ public class JavaM301DbContext {
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
+
+    public static void main(String[] args) {
+        try {
+            JavaM301DbContext.getConnection();
+            System.out.println("Database connection established");
+        } catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
+        }
+    }
 }
- */

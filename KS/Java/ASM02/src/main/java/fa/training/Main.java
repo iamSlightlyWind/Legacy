@@ -1,31 +1,14 @@
 package fa.training;
 
-import fa.training.dao.StudentDao;
-import fa.training.dao.impl.*;
+import fa.training.dao.impl.StudentDaoImpl;
+import fa.training.dao.impl.TeacherDaoImpl;
+import fa.training.dao.impl.VehicleDaoImpl;
 import fa.training.entities.Student;
-import fa.training.entities.Teacher;
-import fa.training.main.PersonManage;
-import fa.training.utils.Database;
-
-import java.sql.SQLException;
-import java.util.List;
+import fa.training.entities.Vehicle;
 
 public class Main {
-    public static void main(String[] args) throws SQLException {
-        /*
-         * StudentDao dao = new StudentDaoImpl();
-         * List<Student> students = dao.findAll();
-         * for (Student s : students) {
-         * System.out.println(s);
-         * }
-         */
+    public static void main(String[] args) {
+        Student student = new Student(1L, "Erik", "Male", "123456789", "erik@mail.com", "123", 8.0, 9.0);
 
-        Student a = new Student(2l, "Erik", "gay as fuck", "+84371234567", "whatis.a@a.com", "2", 2.5, 3.5);
-        Teacher b = new Teacher(7l, "Kinda straight" ,"Harp", "+84371234568" , "whereis.b@b.com", "3", 1500, 250);
-
-        StudentDaoImpl studentDao = new StudentDaoImpl();
-        TeacherDaoImpl teacherDao = new TeacherDaoImpl();
-        studentDao.update(a);
-        teacherDao.update(b);
     }
 }

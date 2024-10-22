@@ -2,6 +2,7 @@ package fa.training.utils;
 
 /**
  * This class contain constant for the Java.M.A301 application
+ * 
  * @author LamDT9
  */
 public class Constant {

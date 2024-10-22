@@ -1,29 +1,23 @@
 package fa.training.entities;
 
+import fa.training.annotation.DatabaseColumn;
+import fa.training.annotation.DatabaseTable;
 import fa.training.utils.InputValidate;
 
+@DatabaseTable(name = "student")
 public class Student extends Person {
+
+    @DatabaseColumn(name = "student_id")
     private String studentId;
+
+    @DatabaseColumn(name = "theory")
     private Double theory;
+
+    @DatabaseColumn(name = "practice")
     private Double practice;
 
-    public String[][] info() {
-        String values[][] = {
-                { "id", this.getStudentId().toString(), "string" },
-                { "theory", this.getTheory().toString(), "double" },
-                { "practice", this.getPractice().toString(), "double" },
-                { "type", "Student", "string" }
-        };
-
-        return values;
-    }
-
-    public String[][] superInfo() {
-        return super.info();
-    }
-
-    public Student() {
-        super();
+    public Student(boolean promptFromKeyboard) {
+        super(promptFromKeyboard);
         this.studentId = InputValidate.inputString("Enter student ID: ");
         this.theory = InputValidate.inputDouble("Enter theory score:",
                 "Not a number",
@@ -36,6 +30,10 @@ public class Student extends Person {
                 0d,
                 10d);
 
+    }
+
+    public Student() {
+        super();
     }
 
     public Student(Long id, String name, String gender, String phone, String email, String studentId, Double theory, Double practice) {

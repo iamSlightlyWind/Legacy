@@ -17,13 +17,13 @@ public class PersonManage {
     }
 
     public void addNewStudent() {
-        Student s = new Student();
+        Student s = new Student(true);
         persons.add(s);
         System.out.println("New student added");
     }
 
     public void addNewTeacher() {
-        Teacher t = new Teacher();
+        Teacher t = new Teacher(true);
         persons.add(t);
         System.out.println("New teacher added");
     }

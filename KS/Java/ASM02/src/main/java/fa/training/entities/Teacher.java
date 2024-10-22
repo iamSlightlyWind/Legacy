@@ -1,29 +1,23 @@
 package fa.training.entities;
 
+import fa.training.annotation.DatabaseColumn;
+import fa.training.annotation.DatabaseTable;
 import fa.training.utils.InputValidate;
 
+@DatabaseTable(name = "teacher_table")
 public class Teacher extends Person {
-    private String teacherID;
+
+    @DatabaseColumn(name = "basic_salary")
     private double basicSalary;
+
+    @DatabaseColumn(name = "subsidy")
     private double subsidy;
 
-    public String[][] info() {
-        String values[][] = {
-                { "id", this.getTeacherID(), "string" },
-                { "basicSalary", this.getBasicSalary() + "", "double" },
-                { "subsidy", this.getSubsidy() + "", "double" },
-                { "type", "Teacher", "string" }
-        };
-
-        return values;
-    }
-
-    public String[][] superInfo() {
-        return super.info();
-    }
-
     public Teacher() {
-        super();
+    }
+
+    public Teacher(boolean promptFromKeyboard) {
+        super(promptFromKeyboard);
         this.basicSalary = InputValidate.inputDouble("Enter salary: ",
                 "Not a number",
                 "Salary must be greater than 0",
@@ -41,9 +35,8 @@ public class Teacher extends Person {
         this.subsidy = subsidy;
     }
 
-    public Teacher(Long id, String name, String gender, String phone, String email, String teacherID, double basicSalary, double subsidy) {
+    public Teacher(Long id, String name, String gender, String phone, String email, double basicSalary, double subsidy) {
         super(id, name, gender, phone, email);
-        this.teacherID = teacherID;
         this.basicSalary = basicSalary;
         this.subsidy = subsidy;
     }
@@ -54,10 +47,6 @@ public class Teacher extends Person {
 
     public double getBasicSalary() {
         return basicSalary;
-    }
-
-    public String getTeacherID() {
-        return teacherID;
     }
 
     public void setBasicSalary(double basicSalary) {
