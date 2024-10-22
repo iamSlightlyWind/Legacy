@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+@SuppressWarnings("resource")
 public class InputValidate {
     public static double inputDouble(String message, String errorMessage, String boundaryErrorMessage, Double minBoundary, Double maxBoundary) {
         if (minBoundary == null) {
@@ -14,7 +15,7 @@ public class InputValidate {
             maxBoundary = Double.MAX_VALUE;
         }
         Scanner scanner = new Scanner(System.in);
-        inputLoop: while (true) {
+        while (true) {
             try {
                 System.out.println(message);
                 double number = Double.parseDouble(scanner.nextLine());
@@ -36,7 +37,7 @@ public class InputValidate {
             maxBoundary = Integer.MAX_VALUE;
         }
         Scanner scanner = new Scanner(System.in);
-        inputLoop: while (true) {
+        while (true) {
             try {
                 System.out.println(message);
                 int number = Integer.parseInt(scanner.nextLine());
@@ -58,7 +59,7 @@ public class InputValidate {
             maxBoundary = Long.MAX_VALUE;
         }
         Scanner scanner = new Scanner(System.in);
-        inputLoop: while (true) {
+        while (true) {
             try {
                 System.out.println(message);
                 long number = Long.parseLong(scanner.nextLine());
@@ -74,7 +75,7 @@ public class InputValidate {
 
     public static LocalDate inputLocalDate(String message, String errorMessage) {
         Scanner scanner = new Scanner(System.in);
-        inputLoop: while (true) {
+        while (true) {
             try {
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 System.out.println(message);
@@ -88,7 +89,7 @@ public class InputValidate {
 
     public static String inputRegex(String message, String errorMessage, String regex) {
         Scanner scanner = new Scanner(System.in);
-        inputLoop: while (true) {
+        while (true) {
             System.out.println(message);
             String input = scanner.nextLine();
             if (input.matches(regex)) {

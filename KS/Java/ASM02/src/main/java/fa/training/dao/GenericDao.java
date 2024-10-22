@@ -14,12 +14,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+@SuppressWarnings("unchecked")
 public abstract class GenericDao<T, ID> {
 
-    private Class<T> entityClass;
-    private Class<ID> idClass;
+    public Class<T> entityClass;
+    public Class<ID> idClass;
 
-    @SuppressWarnings("unchecked")
     public GenericDao() {
         this.entityClass = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         this.idClass = (Class<ID>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
@@ -124,24 +124,26 @@ public abstract class GenericDao<T, ID> {
         }
     }
 
-    public Long count() {
-        try (Connection connection = JavaM301DbContext.getConnection()) {
-            StringBuilder sql = new StringBuilder();
-            sql.append(" SELECT COUNT(*) FROM ");
-            sql.append(this.getTableNameFromAnnotation());
-            sql.append(" WHERE ");
-            sql.append(this.getIdColumnName());
-            System.out.println(sql.toString());
-            PreparedStatement preparedStatement = connection.prepareStatement(sql.toString());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            return resultSet.getLong(1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    /*
+     * public Long count() {
+     * try (Connection connection = JavaM301DbContext.getConnection()) {
+     * StringBuilder sql = new StringBuilder();
+     * sql.append(" SELECT COUNT(*) FROM ");
+     * sql.append(this.getTableNameFromAnnotation());
+     * sql.append(" WHERE ");
+     * sql.append(this.getIdColumnName());
+     * System.out.println(sql.toString());
+     * PreparedStatement preparedStatement = connection.prepareStatement(sql.toString());
+     * ResultSet resultSet = preparedStatement.executeQuery();
+     * resultSet.next();
+     * return resultSet.getLong(1);
+     * } catch (SQLException e) {
+     * throw new RuntimeException(e);
+     * }
+     * }
+     */
 
-    private String generateFieldForQuery() {
+    public String generateFieldForQuery() {
         Map<String, Field> fieldMap = this.getFieldMap();
         StringBuilder result = new StringBuilder();
         for (String columnName : fieldMap.keySet()) {
@@ -152,15 +154,11 @@ public abstract class GenericDao<T, ID> {
         return result.toString();
     }
 
-    private String getTableNameFromAnnotation() {
-        if (this.entityClass.isAnnotationPresent(DatabaseTable.class)) {
-            return this.entityClass.getAnnotation(DatabaseTable.class).name();
-        } else {
-            throw new RuntimeException("No @DatabaseTable annotation found");
-        }
+    public String getTableNameFromAnnotation() {
+        return this.entityClass.getAnnotation(DatabaseTable.class).name();
     }
 
-    private Field[] getFields() {
+    public Field[] getFields() {
         if (this.entityClass.getSuperclass() != null) {
             Field[] superClassFields = getSuperClassFields();
             Field[] entityFields = this.entityClass.getDeclaredFields();
@@ -171,11 +169,11 @@ public abstract class GenericDao<T, ID> {
         return this.entityClass.getDeclaredFields();
     }
 
-    private Field[] getSuperClassFields() {
+    public Field[] getSuperClassFields() {
         return this.entityClass.getSuperclass().getDeclaredFields();
     }
 
-    private Map<String, Field> getFieldMap() {
+    public Map<String, Field> getFieldMap() {
         Field[] fields = getFields();
         Map<String, Field> fieldMap = new HashMap<>();
         for (Field field : fields) {
@@ -187,7 +185,7 @@ public abstract class GenericDao<T, ID> {
         return fieldMap;
     }
 
-    private String getIdColumnName() {
+    public String getIdColumnName() {
         Map<String, Field> fieldMap = getFieldMap();
         for (Field field : fieldMap.values()) {
             if (field.isAnnotationPresent(IDColumn.class)) {
@@ -198,7 +196,7 @@ public abstract class GenericDao<T, ID> {
         throw new RuntimeException("No @IDColumn annotation found");
     }
 
-    private T mapResultSetToEntity(ResultSet resultSet) throws SQLException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public T mapResultSetToEntity(ResultSet resultSet) throws SQLException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         T entity = this.entityClass.getDeclaredConstructor().newInstance();
         Map<String, Field> fieldMap = this.getFieldMap();
         for (Map.Entry<String, Field> entry : fieldMap.entrySet()) {
@@ -206,7 +204,12 @@ public abstract class GenericDao<T, ID> {
             Field field = entry.getValue();
             Object value = resultSet.getObject(columnName);
             field.setAccessible(true);
-            field.set(entity, value);
+            try {
+                field.set(entity, value);
+            } catch (IllegalArgumentException e) {
+                Long temp = ((Double) value).longValue();
+                field.set(entity, temp);
+            }
         }
         return entity;
     }

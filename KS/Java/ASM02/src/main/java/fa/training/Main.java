@@ -2,13 +2,16 @@ package fa.training;
 
 import fa.training.dao.impl.StudentDaoImpl;
 import fa.training.dao.impl.TeacherDaoImpl;
-import fa.training.dao.impl.VehicleDaoImpl;
-import fa.training.entities.Student;
-import fa.training.entities.Vehicle;
+import fa.training.entities.Teacher;
 
 public class Main {
-    public static void main(String[] args) {
-        Student student = new Student(1L, "Erik", "Male", "123456789", "erik@mail.com", "123", 8.0, 9.0);
+    @SuppressWarnings("unused")
+    public static void main(String[] args) throws IllegalAccessException {
+        StudentDaoImpl sDao = new StudentDaoImpl();
+        TeacherDaoImpl tDao = new TeacherDaoImpl();
 
+        Teacher current = tDao.findById(2l).orElse(null);
+
+        tDao.delete(current);
     }
 }

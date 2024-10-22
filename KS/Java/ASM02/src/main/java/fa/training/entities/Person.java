@@ -4,13 +4,13 @@ import fa.training.annotation.DatabaseColumn;
 import fa.training.annotation.IDColumn;
 import fa.training.utils.Constant;
 import fa.training.utils.InputValidate;
-import java.util.Objects;
 
 /**
  * This class represent a Person with 5 properties {@link #id}, {@link #name}, {@link #gender}, {@link #phone}, {@link #email}
  * 
  * @author LamDT9
  */
+
 public abstract class Person {
 
     /**
