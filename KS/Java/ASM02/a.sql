@@ -60,6 +60,9 @@ insert into teacher_table (id, name, gender, phone, email, basicSalary, subsidy)
 SELECT * FROM Student;
 SELECT * FROM teacher_table;
 
+-- check if the table exists
+select 1 from information_schema.tables where table_name = 'Student';
+
 SELECT
     text
 FROM
