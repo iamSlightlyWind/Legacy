@@ -19,10 +19,14 @@ public class Main {
         List<LineItem> lList = lDao.getAllItemsByOrderId(1);
         double orderTotal = oDao.computeOrderTotal(1);
 
-        /* Customer c = new Customer(10, "Smitty");
+        /* Customer newCustomer = new Customer(10, "Smitty");
         boolean isAdded = cDao.addCustomer(c); */
 
-        cDao.deleteCustomer(1);
+        Customer current = cList.get(0);
+        current.setCustomerName("What the fuck???");
+        boolean isUpdated = cDao.updateCustomer(current);
+
+        /* cDao.deleteCustomer(1); */
         System.out.println();
     }
 }

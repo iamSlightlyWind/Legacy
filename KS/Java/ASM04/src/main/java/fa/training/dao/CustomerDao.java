@@ -9,4 +9,6 @@ public interface CustomerDao {
     boolean addCustomer(Customer customer);
 
     boolean deleteCustomer(int customerId);
+
+    boolean updateCustomer(Customer customer);
 }

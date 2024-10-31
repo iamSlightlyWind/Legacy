@@ -59,4 +59,20 @@ public class CustomerDaoImpl implements CustomerDao {
         }
         return false;
     }
+
+    @Override
+    public boolean updateCustomer(Customer customer) {
+        try {
+            String query = "{call updateCustomer(?, ?, ?)}";
+            CallableStatement statement = Database.getConnection().prepareCall(query);
+            statement.setInt(1, customer.getCustomerId());
+            statement.setString(2, customer.getCustomerName());
+            statement.registerOutParameter(3, java.sql.Types.BIT);
+            statement.execute();
+            return statement.getBoolean(3);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
 }

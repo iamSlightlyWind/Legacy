@@ -116,23 +116,36 @@ BEGIN
     WHILE (@@FETCH_STATUS = 0)
         BEGIN
             PRINT 'Processing order_id: ' + CAST(@orderID AS VARCHAR)
-            /* delete from LineItem where order_id = @orderID */
+            delete from LineItem where order_id = @orderID
             fetch next from cursor_orderID into @orderID
         END
     CLOSE cursor_orderID
     DEALLOCATE cursor_orderID
 
-    /* delete from Orders where customer_id = @customer_id
-    delete from Customer where customer_id = @customer_id */
+    delete from Orders where customer_id = @customer_id
+    delete from Customer where customer_id = @customer_id
     set @result = 1
 END
 go
 
-/* 
-DECLARE @result BIT
-EXEC deleteCustomer @customer_id = 1, @result = @result OUTPUT
-PRINT 'Result: ' + CAST(@result AS VARCHAR)
-*/
+create or alter procedure updateCustomer
+@customer_id int,
+@customer_name nvarchar(255),
+@result bit output
+as
+BEGIN
+    if not exists (select 1 from Customer where customer_id = @customer_id)
+    BEGIN
+        set @result = 0
+        return
+    END
+
+    update Customer
+    set customer_name = @customer_name
+    where customer_id = @customer_id
+    set @result = 1
+END
+go
 
 -- Insert data into Customer table
 INSERT INTO Customer (customer_name) VALUES ('John Doe');
