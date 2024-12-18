@@ -1,1 +1,0 @@
-a web server must be used to run this assignment, in order to prevent browser cors error

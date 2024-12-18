@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Javascript 101",
+    "brief": "This is a brief for 01",
+    "createdDate": "30-02-1979"
+  },
+  {
+    "id": 2,
+    "title": "Javascript 102",
+    "brief": "This is a brief for 02",
+    "createdDate": "30-02-1979"
+  },
+  {
+    "id": 3,
+    "title": "Javascript 103",
+    "brief": "This is a brief for 03",
+    "createdDate": "30-02-1979"
+  },
+  {
+    "id": 4,
+    "title": "Javascript 104",
+    "brief": "This is a brief for 04",
+    "createdDate": "30-02-1979"
+  }
+]

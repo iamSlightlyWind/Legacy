@@ -1,0 +1,66 @@
+<section>
+    <style>
+        #editProfileH2 {
+            margin-top: 3%;
+        }
+
+        #inputPart {
+            margin-top: 2%;
+        }
+
+        #inputPart label {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        #profile-form-elements {
+            border: 1px solid #868a8f;
+            padding: 2%;
+            border-radius: 10px;
+        }
+    </style>
+    <h2 id="editProfileH2">Edit Profile</h2>
+
+    <section id="profile-form-elements" class="panel panel-default">
+        <p class="panel-heading">Profile Form Elements</p>
+        <form id="user-profile-form" class="form-group">
+            <section id="inputPart">
+                <label for="firstName">First Name</label>
+                <input type="text" id="profile-firstName" class="form-control" placeholder="Enter the first name"
+                    required>
+            </section>
+
+            <section id="inputPart">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="profile-lastName" class="form-control" placeholder="Enter the last name"
+                    required>
+            </section>
+
+            <section id="inputPart">
+                <label for="email">Email</label>
+                <input type="email" id="profile-email" class="form-control" placeholder="Enter the email" required>
+            </section>
+
+            <section id="inputPart">
+                <label for="phone">Phone</label>
+                <input type="text" id="profile-phone" class="form-control" placeholder="Enter the phone number"
+                    required>
+            </section>
+
+            <section id="inputPart">
+                <label for="description">Description</label>
+                <textarea id="profile-description" class="form-control" placeholder="Enter the description"
+                    required></textarea>
+            </section>
+
+            <section id="inputPart"></section>
+            <button type="button" class="btn btn-outline-secondary" onclick="writeProfile()">Submit</button>
+            <button type="reset" class="btn btn-outline-secondary">Reset</button>
+    </section>
+    </form>
+</section>
+
+<script src="../assets/js/edit-profile.js"></script>
+<script>
+    profileInit();
+</script>

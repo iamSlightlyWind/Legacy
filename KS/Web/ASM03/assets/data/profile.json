@@ -1,0 +1,37 @@
+[
+    {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "johndoe@example.com",
+        "phone": "+1234567890",
+        "description": "Software engineer with a passion for open-source projects."
+    },
+    {
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "email": "janesmith@example.com",
+        "phone": "+1987654321",
+        "description": "Graphic designer specializing in branding and UX/UI design."
+    },
+    {
+        "firstName": "Alice",
+        "lastName": "Johnson",
+        "email": "alicejohnson@example.com",
+        "phone": "+1123456789",
+        "description": "Content creator and digital marketing expert."
+    },
+    {
+        "firstName": "Bob",
+        "lastName": "Brown",
+        "email": "bobbrown@example.com",
+        "phone": "+1212345678",
+        "description": "Cybersecurity analyst with experience in penetration testing."
+    },
+    {
+        "firstName": "Charlie",
+        "lastName": "Green",
+        "email": "charliegreen@example.com",
+        "phone": "+1312345678",
+        "description": "Data scientist focusing on machine learning and AI applications."
+    }
+]
