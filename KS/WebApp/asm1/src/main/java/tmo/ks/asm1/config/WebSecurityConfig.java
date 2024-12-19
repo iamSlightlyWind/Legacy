@@ -23,7 +23,7 @@ public class WebSecurityConfig {
 				.authorizeHttpRequests(
 						request -> request.requestMatchers("/login").permitAll()
 								.anyRequest().authenticated())
-				.formLogin(Customizer.withDefaults())
+				.httpBasic(Customizer.withDefaults())
 				.build();
 	}
 
