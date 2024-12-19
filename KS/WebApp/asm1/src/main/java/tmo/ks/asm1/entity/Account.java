@@ -1,6 +1,6 @@
 package tmo.ks.asm1.entity;
 
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,11 +11,11 @@ import jakarta.persistence.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Account {
 
     @Id
+    @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -34,4 +34,12 @@ public class Account {
     @OneToOne
     @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
+
+    public Account(String account, String email, String password, int status, Employee employee) {
+        this.account = account;
+        this.email = email;
+        this.password = password;
+        this.status = status;
+        this.employee = employee;
+    }
 }

@@ -22,7 +22,7 @@ public class WebSecurityConfig {
 				.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(
 						request -> request.requestMatchers("/login").permitAll()
-								.requestMatchers("/**").authenticated())
+								.anyRequest().authenticated())
 				.formLogin(Customizer.withDefaults())
 				.build();
 	}

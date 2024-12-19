@@ -1,10 +1,8 @@
 package tmo.ks.asm1.entity;
 
 import java.sql.Date;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,11 +13,11 @@ import jakarta.persistence.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
-    
+
     @Id
+    @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -47,4 +45,14 @@ public class Employee {
     @Column(name = "remark", columnDefinition = "VARCHAR(1000)")
     private String remarks;
 
+    public Employee(String firstName, String lastName, int gender, Date dateOfBirth, String phoneNumber, String address, String department, String remarks) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.department = department;
+        this.remarks = remarks;
+    }
 }
