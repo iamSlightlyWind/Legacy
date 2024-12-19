@@ -33,8 +33,56 @@ public class DatabaseService {
         return instance.employeeRepository.save(employee);
     }
 
+    public static List<Employee> getAllEmployees() {
+        return instance.employeeRepository.findAll();
+    }
+
+    public static boolean updateEmployee(Employee employee) {
+        if (instance.employeeRepository.existsById(employee.getId())) {
+            instance.employeeRepository.save(employee);
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean deleteEmployee(int id) {
+        if (instance.employeeRepository.existsById(id)) {
+            instance.employeeRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    public static Employee getEmployeeById(int id) {
+        return instance.employeeRepository.findById(id).orElse(null);
+    }
+
     public static Account saveAccount(Account account) {
         return instance.accountRepository.save(account);
+    }
+
+    public static List<Account> getAllAccounts() {
+        return instance.accountRepository.findAll();
+    }
+
+    public static boolean updateAccount(Account account) {
+        if (instance.accountRepository.existsById(account.getId())) {
+            instance.accountRepository.save(account);
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean deleteAccount(int id) {
+        if (instance.accountRepository.existsById(id)) {
+            instance.accountRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    public static Account getAccountById(int id) {
+        return instance.accountRepository.findById(id).orElse(null);
     }
 
     public static void populateData() {
