@@ -20,7 +20,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     private Optional<UserDetails> getUserFromDatabase(String username) {
-        // Simulate database lookup for the user by username
         if ("admin".equals(username)) {
             return Optional.of(User.builder()
                     .username("admin")
@@ -36,4 +35,17 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         return Optional.empty();
     }
+
+    /* private Optional<UserDetails> getUser(String username, String password) {
+        int maxId = DatabaseService.getAccountCount();
+        for (int id = 1; id <= maxId; id++) {
+            Account account = DatabaseService.getAccountById(id);
+            if (account.getAccount().equals(username)) {
+                return Optional.of(User.builder()
+                        .username(account.getAccount())
+                        .password(passwordEncoder().encode(account.getPassword()))
+                        .roles("
+            }
+        }
+    } */
 }

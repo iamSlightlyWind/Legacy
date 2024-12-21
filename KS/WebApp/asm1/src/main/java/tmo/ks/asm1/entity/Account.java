@@ -19,7 +19,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "account", nullable = false, columnDefinition = "VARCHAR(255)")
+    @Column(name = "account", nullable = false, unique = true, columnDefinition = "VARCHAR(255)")
     private String account;
 
     @Column(name = "email", nullable = false, columnDefinition = "VARCHAR(255)")

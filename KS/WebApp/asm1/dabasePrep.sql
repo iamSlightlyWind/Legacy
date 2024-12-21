@@ -17,22 +17,39 @@ GO
 
 CREATE TABLE employee
 (
-    id INT PRIMARY KEY,
     name NVARCHAR(50)
 )
 GO
 
 CREATE TABLE account
 (
-    id INT PRIMARY KEY,
-    username NVARCHAR(50),
     password NVARCHAR(50)
 )
 go
 
+create table account_permission
+(
+    name nvarchar(50)
+)
+
+create table permission
+(
+    name nvarchar(50)
+)
+
+create table permission_endpoint
+(
+    name nvarchar(50)
+)
+
 /*
+
+use asm1byphongpthe182589
 
 select * from employee
 select * from account
+select * from account_permission
+select * from permission
+select * from permission_endpoint
 
 */
