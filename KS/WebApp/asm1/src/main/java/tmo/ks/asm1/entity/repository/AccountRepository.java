@@ -1,4 +1,4 @@
-package tmo.ks.asm1.repository;
+package tmo.ks.asm1.entity.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import tmo.ks.asm1.entity.Account;

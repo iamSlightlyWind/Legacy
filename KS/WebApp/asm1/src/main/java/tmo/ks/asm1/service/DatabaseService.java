@@ -11,11 +11,11 @@ import tmo.ks.asm1.entity.AccountPermission;
 import tmo.ks.asm1.entity.Employee;
 import tmo.ks.asm1.entity.Permission;
 import tmo.ks.asm1.entity.PermissionEndpoint;
-import tmo.ks.asm1.repository.AccountPermissionRepository;
-import tmo.ks.asm1.repository.AccountRepository;
-import tmo.ks.asm1.repository.EmployeeRepository;
-import tmo.ks.asm1.repository.PermissionEndpointRepository;
-import tmo.ks.asm1.repository.PermissionRepository;
+import tmo.ks.asm1.entity.repository.AccountPermissionRepository;
+import tmo.ks.asm1.entity.repository.AccountRepository;
+import tmo.ks.asm1.entity.repository.EmployeeRepository;
+import tmo.ks.asm1.entity.repository.PermissionEndpointRepository;
+import tmo.ks.asm1.entity.repository.PermissionRepository;
 
 @Service
 public class DatabaseService {
