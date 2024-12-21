@@ -24,13 +24,13 @@ public class AccountPermission {
     private AccountPermissionId id;
 
     @ManyToOne
-    @MapsId("accountId")
-    @JoinColumn(name = "account")
+    @MapsId("account_id")
+    @JoinColumn(name = "account_id")
     private Account account;
 
     @ManyToOne
-    @MapsId("permissionId")
-    @JoinColumn(name = "permission")
+    @MapsId("permission_id")
+    @JoinColumn(name = "permission_id")
     private Permission permission;
 
     public AccountPermission(Account account, Permission permission) {

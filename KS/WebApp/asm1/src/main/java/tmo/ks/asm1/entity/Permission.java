@@ -1,5 +1,7 @@
 package tmo.ks.asm1.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,5 +31,13 @@ public class Permission {
 
     public Permission(String name) {
         this.name = name;
+    }
+
+    public static String[] extractPermissions(List<AccountPermission> accountPermissions) {
+        String[] permissions = new String[accountPermissions.size()];
+        for (int i = 0; i < accountPermissions.size(); i++) {
+            permissions[i] = accountPermissions.get(i).getPermission().getName();
+        }
+        return permissions;
     }
 }

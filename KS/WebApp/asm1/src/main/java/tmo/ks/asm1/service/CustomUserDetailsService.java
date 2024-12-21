@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import tmo.ks.asm1.entity.Account;
+import tmo.ks.asm1.entity.Permission;
 
 public class CustomUserDetailsService implements UserDetailsService {
     private PasswordEncoder passwordEncoder() {
@@ -15,37 +17,19 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return getUserFromDatabase(username)
+        return getAccount(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-    private Optional<UserDetails> getUserFromDatabase(String username) {
-        if ("admin".equals(username)) {
-            return Optional.of(User.builder()
-                    .username("admin")
-                    .password(passwordEncoder().encode("admin"))
-                    .roles("ADMIN")
-                    .build());
-        } else if ("user".equals(username)) {
-            return Optional.of(User.builder()
-                    .username("user")
-                    .password(passwordEncoder().encode("user"))
-                    .roles("USER")
-                    .build());
+    private Optional<UserDetails> getAccount(String username) {
+        Account match = DatabaseService.instance.accountRepository.findByAccount(username);
+        if (match == null) {
+            return Optional.empty();
         }
-        return Optional.empty();
+        return Optional.of(User.builder()
+                .username(match.getAccount())
+                .password(passwordEncoder().encode(match.getPassword()))
+                .roles(Permission.extractPermissions(DatabaseService.instance.accountPermissionRepository.findByAccount(match)))
+                .build());
     }
-
-    /* private Optional<UserDetails> getUser(String username, String password) {
-        int maxId = DatabaseService.getAccountCount();
-        for (int id = 1; id <= maxId; id++) {
-            Account account = DatabaseService.getAccountById(id);
-            if (account.getAccount().equals(username)) {
-                return Optional.of(User.builder()
-                        .username(account.getAccount())
-                        .password(passwordEncoder().encode(account.getPassword()))
-                        .roles("
-            }
-        }
-    } */
 }

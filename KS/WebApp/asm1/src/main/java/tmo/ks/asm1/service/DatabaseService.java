@@ -20,27 +20,33 @@ import tmo.ks.asm1.entity.repository.PermissionRepository;
 @Service
 public class DatabaseService {
 
-    private static DatabaseService instance;
+    public static DatabaseService instance;
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    public EmployeeRepository employeeRepository;
 
     @Autowired
-    private AccountRepository accountRepository;
+    public AccountRepository accountRepository;
 
     @Autowired
-    private AccountPermissionRepository accountPermissionRepository;
+    public AccountPermissionRepository accountPermissionRepository;
 
     @Autowired
-    private PermissionRepository permissionRepository;
+    public PermissionRepository permissionRepository;
 
     @Autowired
-    private PermissionEndpointRepository permissionEndpointRepository;
+    public PermissionEndpointRepository permissionEndpointRepository;
 
     @PostConstruct
     public void init() {
         instance = this;
         populateData();
+
+        String testAccount = "AdminA1";
+        Account account = accountRepository.findByAccount(testAccount);
+        List<AccountPermission> accountPermissions = accountPermissionRepository.findByAccount(account);
+        String permissions[] = Permission.extractPermissions(accountPermissions);
+        System.out.println();
     }
 
     public static void populateData() {
@@ -56,7 +62,7 @@ public class DatabaseService {
         employees.add(new Employee("Bob", "White", 1, Date.valueOf("1995-11-02"), "4443332222", "321 Pine Lane", "Marketing", ""));
         employees.add(new Employee("Charlie", "Black", 1, Date.valueOf("1985-05-30"), "1112223333", "654 Cedar Rd", "Sales", "Consistent"));
         employees.add(new Employee("Admin", "Admin", 1, Date.valueOf("1990-01-15"), "1234567890", "123 Elm St", "IT", "Super Duper Admin"));
-        
+
         accounts.add(new Account("JohnD1", "johndoe@example.com", "password123", 1, employees.get(0)));
         accounts.add(new Account("JaneS1", "janesmith@example.com", "password123", 1, employees.get(1)));
         accounts.add(new Account("AliceB1", "alicebrown@example.com", "password123", 1, employees.get(2)));
@@ -92,12 +98,12 @@ public class DatabaseService {
             instance.permissionRepository.save(permission);
         }
 
-        for (AccountPermission accountPermission : accountPermissions) {
-            instance.accountPermissionRepository.save(accountPermission);
-        }
-
         for (PermissionEndpoint permissionEndpoint : permissionEndpoints) {
             instance.permissionEndpointRepository.save(permissionEndpoint);
+        }
+
+        for (AccountPermission accountPermission : accountPermissions) {
+            instance.accountPermissionRepository.save(accountPermission);
         }
     }
 }

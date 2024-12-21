@@ -16,6 +16,6 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class AccountPermissionId implements Serializable {
 
-    private int accountId;
-    private int permissionId;
+    private int account_id;
+    private int permission_id;
 }
