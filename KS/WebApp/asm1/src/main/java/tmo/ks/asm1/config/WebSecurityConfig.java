@@ -9,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.Customizer;
 import tmo.ks.asm1.service.CustomUserDetailsService;
 
 @Configuration
@@ -22,8 +21,14 @@ public class WebSecurityConfig {
 				.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(
 						request -> request.requestMatchers("/login").permitAll()
-								.anyRequest().authenticated())
-				.formLogin(Customizer.withDefaults())
+								.requestMatchers("/**").permitAll()) // TODO: temp
+				.formLogin(form -> form.loginPage("/login")
+						.defaultSuccessUrl("/")
+						.failureUrl("/login?error=true")
+						.permitAll())
+				.logout(config -> config
+						.logoutUrl("/logout")
+						.logoutSuccessUrl("/login"))
 				.build();
 	}
 
