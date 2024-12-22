@@ -11,7 +11,7 @@ function loadViewContent() {
     // }
     setTimeout(() => {
         const xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {
+        xhttp.onload = function () {
             document.getElementById('content').innerHTML = this.responseText;
         }
         xhttp.open('GET', 'view-content.html', true);
@@ -21,10 +21,9 @@ function loadViewContent() {
 }
 
 // AJAX Jquery
-function loadFormContent() {
-    $('#content').html('loading');
+function loadEmployeeAdd() {
     setTimeout(() => {
-        $('#content').load('form-content.html');
+        $('#content').load('/fragments/employeeAdd');
     }, 0);
 }
 
@@ -49,7 +48,7 @@ $('#user-profile-form').validate({
 
 function loadContentData() {
     const xhttp = new XMLHttpRequest();
-    xhttp.onload = function() {
+    xhttp.onload = function () {
         fillDataTable(JSON.parse(this.responseText));
     }
     xhttp.open('GET', '../assets/data/content.json', true);

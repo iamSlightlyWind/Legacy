@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
 <body>
     <div class="container mt-4">
         <h2 class="mb-3">Employee List</h2>
@@ -37,17 +27,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr th:each="employee : ${employeeList}">
-                    <td th:text="${employee.id}"></td>
-                    <td th:text="${employee.name}"></td>
-                    <td th:text="${employee.dateOfBirth}"></td>
-                    <td th:text="${employee.address}"></td>
-                    <td th:text="${employee.phoneNumber}"></td>
-                    <td th:text="${employee.department}"></td>
-                    <td><a href="#" class="btn btn-link" th:href="@{/employee/view/{id}(id=${employee.id})}">View</a>
-                    </td>
-                </tr>
+            <tbody id="employeeTableBody">
             </tbody>
         </table>
 
@@ -67,7 +47,32 @@
         </nav>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script>
+        function loadEmployeeData() {
+            fetch('/api/employee/getAll')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('employeeTableBody');
+                    tableBody.innerHTML = '';
+                    data.forEach(employee => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${employee.id}</td>
+                            <td>${employee.firstName} ${employee.lastName}</td>
+                            <td>${employee.dateOfBirth}</td>
+                            <td>${employee.address}</td>
+                            <td>${employee.phoneNumber}</td>
+                            <td>${employee.department}</td>
+                            <td><a href="/employee/view/${employee.id}" class="btn btn-link">View</a></td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error fetching employee data:', error));
+        }
 
-</html>
+        $(document).ready(function () {
+            loadEmployeeData();
+        });
+    </script>
+</body>
