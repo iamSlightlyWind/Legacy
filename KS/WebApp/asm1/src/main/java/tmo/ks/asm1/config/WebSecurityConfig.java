@@ -21,7 +21,7 @@ public class WebSecurityConfig {
 				.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(
 						request -> request.requestMatchers("/login").permitAll()
-								.requestMatchers("/**").authenticated())
+								.requestMatchers("/**").permitAll()) // TODO: Change to .authenticated() when done
 				.formLogin(form -> form.loginPage("/login")
 						.defaultSuccessUrl("/")
 						.failureUrl("/login?error=true")
