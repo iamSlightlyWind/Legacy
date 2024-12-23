@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public class Page {
+public class Page<T> {
     public static <T> List<T> getPage(JpaRepository<T, Integer> repository, int pageSize, int page) {
         int size = (int) repository.count();
 
@@ -32,5 +32,11 @@ public class Page {
         }
 
         return result;
+    }
+
+    @SuppressWarnings("rawtypes")
+    public static int maxPage(JpaRepository repository, int pageSize) {
+        int size = (int) repository.count();
+        return size / pageSize + (size % pageSize == 0 ? 0 : 1);
     }
 }

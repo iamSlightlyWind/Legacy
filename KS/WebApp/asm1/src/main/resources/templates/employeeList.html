@@ -31,17 +31,13 @@
             </tbody>
         </table>
 
-        <nav th:if="${totalPages != null and totalPages > 1}">
-            <ul class="pagination justify-content-center">
-                <li class="page-item" th:classappend="${page == 1} ? 'disabled' : ''">
-                    <a class="page-link" th:href="@{/employee/list(page=${page - 1})}">Previous</a>
+        <nav id="paginationNav">
+            <ul class="pagination justify-content-center" id="paginationControls">
+                <li class="page-item" id="previousPage">
+                    <a class="page-link" href="#" onclick="loadEmployeeData(currentPage - 1)">Previous</a>
                 </li>
-                <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}"
-                    th:classappend="${i == page} ? 'active' : ''">
-                    <a class="page-link" th:href="@{/employee/list(page=${i})}" th:text="${i}"></a>
-                </li>
-                <li class="page-item" th:classappend="${page == totalPages} ? 'disabled' : ''">
-                    <a class="page-link" th:href="@{/employee/list(page=${page + 1})}">Next</a>
+                <li class="page-item" id="nextPage">
+                    <a class="page-link" href="#" onclick="loadEmployeeData(currentPage + 1)">Next</a>
                 </li>
             </ul>
         </nav>

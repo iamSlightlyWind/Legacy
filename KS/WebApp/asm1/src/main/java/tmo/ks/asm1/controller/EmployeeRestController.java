@@ -8,6 +8,7 @@ import tmo.ks.asm1.entity.Department;
 import tmo.ks.asm1.entity.Employee;
 import tmo.ks.asm1.entity.Permission;
 import tmo.ks.asm1.service.DatabaseService;
+import tmo.ks.asm1.service.Page;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +19,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 @RequestMapping("/api/employee")
 public class EmployeeRestController {
+    final static int pageSize = 6;
 
     @PostMapping("/getAll")
     public List<Employee> getAllEmployees() {
         return DatabaseService.instance.employeeRepository.findAll();
+    }
+
+    @PostMapping("/maxPage")
+    public int maxPage() {
+        return Page.maxPage(DatabaseService.instance.employeeRepository, pageSize);
+    }
+
+    @PostMapping("/get")
+    public List<Employee> listEmployees(@RequestBody Map<String, Object> requestData) {
+        return Page.getPage(DatabaseService.instance.employeeRepository, pageSize, (int) requestData.get("page"));
     }
 
     @SuppressWarnings("unchecked")
@@ -71,7 +83,7 @@ public class EmployeeRestController {
         for (Permission p : permissionList) {
             DatabaseService.instance.accountPermissionRepository.save(new AccountPermission(account, p));
         }
-        
+
         return true;
     }
 
