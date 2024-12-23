@@ -129,8 +129,10 @@ public class DatabaseService {
 
         permissionEndpoints.add(new PermissionEndpoint("/user/**", permissions.get(0)));
         permissionEndpoints.add(new PermissionEndpoint("/api/user/**", permissions.get(0)));
+        permissionEndpoints.add(new PermissionEndpoint("/fragments/user/**", permissions.get(0)));
         permissionEndpoints.add(new PermissionEndpoint("/admin/**", permissions.get(1)));
         permissionEndpoints.add(new PermissionEndpoint("/api/admin/**", permissions.get(1)));
+        permissionEndpoints.add(new PermissionEndpoint("/fragments/admin/**", permissions.get(1)));
 
         accountPermissions.add(new AccountPermission(accounts.get(0), permissions.get(0)));
         accountPermissions.add(new AccountPermission(accounts.get(1), permissions.get(0)));

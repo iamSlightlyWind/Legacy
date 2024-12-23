@@ -1,43 +1,45 @@
-// AJAX Plain JS
-function loadViewContent() {
-    document.getElementById('content').innerHTML = 'loading';
-    // let count = 5;
-    // const timer = setInterval(() => {
-    //     document.getElementById('content').innerHTML = count;
-    //     count--;
-    // }, 1000);
-    // if (timer == 1) {
-    //     clearInterval(timer);
-    // }
-    setTimeout(() => {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function () {
-            document.getElementById('content').innerHTML = this.responseText;
-        }
-        xhttp.open('GET', 'view-content.html', true);
-        xhttp.send();
-    }, 0)
-
-}
-
-// AJAX Jquery
 function removeTempElements() {
     document.querySelectorAll('#temp').forEach(element => element.remove());
-}
-
-function loadEmployeeAdd() {
-    removeTempElements();
-    setTimeout(() => {
-        $('#content').load('/fragments/employeeAdd');
-    }, 0);
 }
 
 function loadEmployeeList() {
     removeTempElements();
     setTimeout(() => {
-        $('#content').load('/fragments/employeeList');
+        $('#content').load('/fragments/user/employeeList');
     }, 0);
 }
+
+function loadEmployeeAdd() {
+    removeTempElements();
+    setTimeout(() => {
+        $('#content').load('/fragments/admin/employeeAdd');
+    }, 0);
+}
+
+function spawnToast(header, content) {
+    $.get('/fragments/user/toast.html', function(data) {
+        var toast = $(data);
+
+        toast.find('#toast-header-marker').text(header);
+        toast.find('#toast-content-marker').text(content);
+
+        var toastContainer = $('#toast-container');
+        if (toastContainer.length === 0) {
+            toastContainer = $('<div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3"></div>');
+            $('body').append(toastContainer);
+        }
+        toastContainer.append(toast);
+
+        var bootstrapToast = new bootstrap.Toast(toast[0]);
+        bootstrapToast.show();
+    });
+}
+
+$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+    if (jqxhr.status === 403) {
+        spawnToast('Access Denied', 'You do not have permission to access this resource.');
+    }
+});
 
 $('#user-profile-form').validate({
     rules: {
@@ -51,34 +53,3 @@ $('#user-profile-form').validate({
         }
     }
 });
-
-function loadContentData() {
-    const xhttp = new XMLHttpRequest();
-    xhttp.onload = function () {
-        fillDataTable(JSON.parse(this.responseText));
-    }
-    xhttp.open('GET', '../assets/data/content.json', true);
-    xhttp.send();
-}
-
-function fillDataTable(jsonData) {
-    let element = document.getElementById('table-body');
-    for (let i = 0; i < jsonData.length; i++) {
-        const data = jsonData[i];
-        let tableRow = document.createElement('tr');
-        let cellId = document.createElement('td');
-        let cellTitle = document.createElement('td');
-        let cellBrief = document.createElement('td');
-        let cellCreatedDate = document.createElement('td');
-        cellId.innerHTML = data.id;
-        cellTitle.innerHTML = data.title;
-        cellBrief.innerHTML = data.brief;
-        cellCreatedDate.innerHTML = data.createdDate;
-        tableRow.append(cellId);
-        tableRow.append(cellTitle);
-        tableRow.append(cellBrief);
-        tableRow.append(cellCreatedDate);
-        element.appendChild(tableRow);
-    }
-
-}

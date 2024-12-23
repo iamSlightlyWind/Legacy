@@ -22,20 +22,18 @@ function sendCreateRequest() {
         permissions: permissions
     };
 
-    fetch('/api/admin/employee/add', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(accountData)
-    })
-        .then(response => response.json())
-        .then(data => {
+    $.ajax({
+        type: 'POST',
+        url: '/api/admin/employee/add',
+        contentType: 'application/json',
+        data: JSON.stringify(accountData),
+        success: function(data) {
             console.log('Success:', data);
-        })
-        .catch((error) => {
+        },
+        error: function(jqxhr, status, error) {
             console.error('Error:', error);
-        });
+        }
+    });
 }
 
 function loadDepartment() {
