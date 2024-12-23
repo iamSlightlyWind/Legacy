@@ -33,7 +33,7 @@ public class Employee {
     @Column(name = "date_of_birth", nullable = false, columnDefinition = "DATE")
     private Date dateOfBirth;
 
-    @Column(name = "phone_number", nullable = false, columnDefinition = "VARCHAR(20)")
+    @Column(name = "phone_number", nullable = false, unique = true, columnDefinition = "VARCHAR(20)")
     private String phoneNumber;
 
     @Column(name = "address", columnDefinition = "VARCHAR(255)")

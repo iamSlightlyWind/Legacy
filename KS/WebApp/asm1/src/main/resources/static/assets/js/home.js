@@ -21,13 +21,19 @@ function loadViewContent() {
 }
 
 // AJAX Jquery
+function removeTempElements() {
+    document.querySelectorAll('#temp').forEach(element => element.remove());
+}
+
 function loadEmployeeAdd() {
+    removeTempElements();
     setTimeout(() => {
         $('#content').load('/fragments/employeeAdd');
     }, 0);
 }
 
 function loadEmployeeList() {
+    removeTempElements();
     setTimeout(() => {
         $('#content').load('/fragments/employeeList');
     }, 0);

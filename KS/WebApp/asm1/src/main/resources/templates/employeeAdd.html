@@ -1,11 +1,16 @@
-<style>
+<style id="temp">
     .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-check {
         margin-bottom: 1rem;
     }
 </style>
 
-<div class="container mt-4">
+<div class="container mt-4" id="content" style="border-left: none;">
     <h2 class="mb-4">Add Employee</h2>
+    <hr class="text-secondary">
     <form th:action="@{/api/employee/add}" method="post">
         <!-- First Name -->
         <div class="form-group">
@@ -35,12 +40,12 @@
         <div class="form-group">
             <label>Gender<span class="text-danger">(*)</span></label><br>
             <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="female" name="gender" value="0" required>
-            <label class="form-check-label" for="female">Female</label>
+                <input class="form-check-input" type="radio" id="female" name="gender" value="0" required>
+                <label class="form-check-label" for="female">Female</label>
             </div>
             <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="male" name="gender" value="1">
-            <label class="form-check-label" for="male">Male</label>
+                <input class="form-check-input" type="radio" id="male" name="gender" value="1">
+                <label class="form-check-label" for="male">Male</label>
             </div>
         </div>
 
@@ -74,6 +79,14 @@
             <label class="form-check-label" for="active">Active</label>
         </div>
 
+        <!-- Permissions -->
+        <div class="form-group">
+            <label>Permissions</label>
+            <div id="permissions-container" class="overflow-auto" style="max-width: 100%; white-space: nowrap;">
+                <!-- Checkboxes will be added here by JavaScript -->
+            </div>
+        </div>
+
         <!-- Department -->
         <div class="form-group">
             <label for="department">Department<span class="text-danger">(*)</span></label>
@@ -91,33 +104,9 @@
         <div class="form-group mt-4">
             <a href="#" class="btn btn-info">Back</a>
             <button type="reset" class="btn btn-warning">Reset</button>
-            <button type="submit" class="btn btn-success">Add</button>
+            <button type="button" class="btn btn-success" onclick="sendCreateRequest()">Add</button>
         </div>
     </form>
 </div>
 
-<script>
-    function loadDepartment() {
-        fetch('/api/department/getAll', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({})
-        })
-            .then(response => response.json())
-            .then(data => {
-                const departmentSelect = document.getElementById('department');
-                data.forEach(department => {
-                    const option = document.createElement('option');
-                    option.value = department.name;
-                    option.text = department.name;
-                    departmentSelect.appendChild(option);
-                });
-            });
-    }
-
-    $(document).ready(function () {
-        loadDepartment();
-    });
-</script>
+<script th:src="@{/assets/js/employee/add.js}" id="temp"></script>

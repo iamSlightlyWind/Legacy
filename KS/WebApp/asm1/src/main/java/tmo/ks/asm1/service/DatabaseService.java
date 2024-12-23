@@ -110,6 +110,12 @@ public class DatabaseService {
 
         permissions.add(new Permission("USER"));
         permissions.add(new Permission("ADMIN"));
+        permissions.add(new Permission("well"));
+        permissions.add(new Permission("this"));
+        permissions.add(new Permission("is"));
+        permissions.add(new Permission("awkward"));
+        permissions.add(new Permission("isnt"));
+        permissions.add(new Permission("it"));
 
         permissionEndpoints.add(new PermissionEndpoint("/user/**", permissions.get(0)));
         permissionEndpoints.add(new PermissionEndpoint("/api/user/**", permissions.get(0)));
