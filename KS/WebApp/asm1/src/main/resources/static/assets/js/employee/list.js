@@ -4,7 +4,7 @@ let totalPages = 1;
 function loadEmployeeData(page) {
     if (page < 1 || page > totalPages) return;
 
-    fetch('/api/employee/user/get', {
+    fetch('/api/user/employee/get', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ function loadEmployeeData(page) {
 }
 
 function loadMaxPage() {
-    fetch('/api/employee/user/maxPage', {
+    fetch('/api/user/employee/maxPage', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

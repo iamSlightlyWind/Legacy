@@ -1,12 +1,10 @@
 package tmo.ks.asm1.service;
 
-import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jakarta.annotation.PostConstruct;
@@ -46,13 +44,10 @@ public class DatabaseService {
     @Autowired
     public DepartmentRepository departmentRepository;
 
-    @SuppressWarnings("unused")
     @PostConstruct
     public void init() {
         instance = this;
         populateData();
-
-        URLPermissionMap();
     }
 
     public Map<String, String> URLPermissionMap() {
@@ -62,7 +57,8 @@ public class DatabaseService {
         for (PermissionEndpoint permissionEndpoint : permissionEndpoints) {
             urlPermissionMap.put(permissionEndpoint.getEndpoint(), permissionEndpoint.getPermission().getName());
         }
-        return null;
+        
+        return urlPermissionMap;
     }
 
     public static void populateData() {

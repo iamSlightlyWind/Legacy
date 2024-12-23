@@ -1,5 +1,7 @@
 package tmo.ks.asm1.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import tmo.ks.asm1.entity.Account;
-import tmo.ks.asm1.entity.Permission;
+import tmo.ks.asm1.entity.AccountPermission;
 
 public class CustomUserDetailsService implements UserDetailsService {
     private PasswordEncoder passwordEncoder() {
@@ -26,27 +28,16 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (match == null) {
             return Optional.empty();
         }
-        return Optional.of(User.builder()
-                .username(match.getAccount())
-                .password(passwordEncoder().encode(match.getPassword()))
-                .roles(Permission.extractPermissions(DatabaseService.instance.accountPermissionRepository.findByAccount(match)))
-                .build());
-    }
 
-    /* private Optional<UserDetails> getAccount(String username) {
         List<String> permissions = new ArrayList<>();
-        permissions.add("ROLE_USER");
-        permissions.add("ROLE_ADMIN");
-
-        Account match = DatabaseService.instance.accountRepository.findByAccount(username);
-        if (match == null) {
-            return Optional.empty();
+        for (AccountPermission accountPermission : DatabaseService.instance.accountPermissionRepository.findByAccount(match)) {
+            permissions.add(accountPermission.getPermission().getName());
         }
 
         return Optional.of(User.builder()
                 .username(match.getAccount())
                 .password(passwordEncoder().encode(match.getPassword()))
-                .roles(permissions.toArray(new String[0])) // Convert List to array
+                .authorities(permissions.toArray(new String[0])) // Convert List to array
                 .build());
-    } */
+    }
 }
