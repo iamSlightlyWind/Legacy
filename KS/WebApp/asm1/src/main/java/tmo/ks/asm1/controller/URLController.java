@@ -29,4 +29,9 @@ public class URLController {
     public String loadUserFragment(@PathVariable String fragmentName) {
         return fragmentName;
     }
+
+    @GetMapping("/forbiddenNoAuth")
+    public String forbiddenNoAuth() {
+        return "noAuth";
+    }
 }

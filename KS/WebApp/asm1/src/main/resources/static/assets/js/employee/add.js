@@ -27,14 +27,71 @@ function sendCreateRequest() {
         url: '/api/admin/employee/add',
         contentType: 'application/json',
         data: JSON.stringify(accountData),
-        success: function(data) {
+        success: function (data) {
             console.log('Success:', data);
         },
-        error: function(jqxhr, status, error) {
+        error: function (jqxhr, status, error) {
             console.error('Error:', error);
         }
     });
 }
+
+function validateForm() {
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const phoneNumber = document.getElementById('phoneNumber').value.trim();
+    const dob = document.getElementById('dob').value.trim();
+    const gender = document.querySelector('input[name="gender"]:checked');
+    const account = document.getElementById('account').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const department = document.getElementById('department').value.trim();
+
+    if (firstName.length < 3) {
+        spawnToast("Input not satisfied","First name must be at least 3 characters long");
+        return false;
+    }
+    if (lastName.length < 5) {
+        spawnToast("Input not satisfied","Last name must be at least 5 characters long");
+        return false;
+    }
+    if (!/^\d{10,15}$/.test(phoneNumber)) {
+        spawnToast("Input not satisfied","Phone number must be between 10 and 15 digits long");
+        return false;
+    }
+    if (!dob) {
+        spawnToast("Input not satisfied","Please enter a valid date of birth");
+        return false;
+    }
+    if (!gender) {
+        spawnToast("Input not satisfied","Please select a gender");
+        return false;
+    }
+    if (account.length < 5) {
+        spawnToast("Input not satisfied","Account must be at least 5 characters long");
+        return false;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        spawnToast("Input not satisfied","Please enter a valid email address");
+        return false;
+    }
+    if (password.length < 6) {
+        spawnToast("Input not satisfied","Password must be at least 6 characters long");
+        return false;
+    }
+    if (!department) {
+        spawnToast("Input not satisfied","Please select a department");
+        return false;
+    }
+    return true;
+}
+
+document.getElementById('employee-add-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    if (validateForm()) {
+        sendCreateRequest();
+    }
+});
 
 function loadDepartment() {
     fetch('/api/user/department/getAll', {

@@ -11,6 +11,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.web.access.AccessDeniedHandler;
+
+import jakarta.servlet.http.HttpServletResponse;
 import tmo.ks.asm1.service.CustomUserDetailsService;
 import tmo.ks.asm1.service.DatabaseService;
 
@@ -34,9 +37,22 @@ public class WebSecurityConfig {
 						.permitAll())
 				.logout(config -> config
 						.logoutUrl("/logout")
-						.logoutSuccessUrl("/login"));
+						.logoutSuccessUrl("/login"))
+				.exceptionHandling(exception -> exception
+						.accessDeniedHandler(accessDeniedHandler()));
 
 		return http.build();
+	}
+
+	@Bean
+	public AccessDeniedHandler accessDeniedHandler() {
+		return (request, response, accessDeniedException) -> {
+			if ("/".equals(request.getRequestURI())) {
+				response.sendRedirect("/forbiddenNoAuth");
+			} else {
+				response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied");
+			}
+		};
 	}
 
 	@Bean

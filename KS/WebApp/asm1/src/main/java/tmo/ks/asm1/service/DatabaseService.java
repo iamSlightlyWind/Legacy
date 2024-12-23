@@ -97,8 +97,8 @@ public class DatabaseService {
         employees.add(new Employee("Steve", "Topaz", 1, Date.valueOf("1993-10-19"), "1299001122", "123 Pine St", departments.get(2), "Collaborative"));
         employees.add(new Employee("Admin", "Admin", 1, Date.valueOf("1990-01-15"), "1234567890", "123 Elm St", departments.get(5), "Super Duper Admin"));
 
-        accounts.add(new Account("AliceB1", "alicebrown@example.com", "password123", 1, employees.get(0)));
-        accounts.add(new Account("BobG1", "bobgreen@example.com", "password123", 1, employees.get(1)));
+        accounts.add(new Account("noAuth", "alicebrown@example.com", "password123", 1, employees.get(0)));
+        accounts.add(new Account("userAuth", "bobgreen@example.com", "password123", 1, employees.get(1)));
         accounts.add(new Account("CharlieW1", "charliewhite@example.com", "password123", 1, employees.get(2)));
         accounts.add(new Account("DianaB1", "dianablue@example.com", "password123", 1, employees.get(3)));
         accounts.add(new Account("EveG1", "evegray@example.com", "password123", 1, employees.get(4)));
@@ -127,6 +127,7 @@ public class DatabaseService {
         permissions.add(new Permission("isnt"));
         permissions.add(new Permission("it"));
 
+        permissionEndpoints.add(new PermissionEndpoint("/", permissions.get(0)));
         permissionEndpoints.add(new PermissionEndpoint("/user/**", permissions.get(0)));
         permissionEndpoints.add(new PermissionEndpoint("/api/user/**", permissions.get(0)));
         permissionEndpoints.add(new PermissionEndpoint("/fragments/user/**", permissions.get(0)));
@@ -134,7 +135,6 @@ public class DatabaseService {
         permissionEndpoints.add(new PermissionEndpoint("/api/admin/**", permissions.get(1)));
         permissionEndpoints.add(new PermissionEndpoint("/fragments/admin/**", permissions.get(1)));
 
-        accountPermissions.add(new AccountPermission(accounts.get(0), permissions.get(0)));
         accountPermissions.add(new AccountPermission(accounts.get(1), permissions.get(0)));
         accountPermissions.add(new AccountPermission(accounts.get(2), permissions.get(0)));
         accountPermissions.add(new AccountPermission(accounts.get(3), permissions.get(0)));

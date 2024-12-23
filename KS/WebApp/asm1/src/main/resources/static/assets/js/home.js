@@ -53,17 +53,4 @@ $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
     }
 });
 
-$('#user-profile-form').validate({
-    rules: {
-        firstname: {
-            required: true,
-            minLength: 3
-        },
-        lastname: {
-            required: true,
-            minLength: 5
-        }
-    }
-});
-
 loadUsername();
