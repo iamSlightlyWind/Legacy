@@ -39,13 +39,14 @@ public class Employee {
     @Column(name = "address", columnDefinition = "VARCHAR(255)")
     private String address;
 
-    @Column(name = "department", nullable = false, columnDefinition = "VARCHAR(255)")
-    private String department;
+    @ManyToOne
+    @JoinColumn(name = "name", nullable = false)
+    private Department department;
 
     @Column(name = "remark", columnDefinition = "VARCHAR(1000)")
     private String remarks;
 
-    public Employee(String firstName, String lastName, int gender, Date dateOfBirth, String phoneNumber, String address, String department, String remarks) {
+    public Employee(String firstName, String lastName, int gender, Date dateOfBirth, String phoneNumber, String address, Department department, String remarks) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;

@@ -24,5 +24,6 @@ select * from account
 select * from account_permission
 select * from permission
 select * from permission_endpoint
+select * from department
 
 */

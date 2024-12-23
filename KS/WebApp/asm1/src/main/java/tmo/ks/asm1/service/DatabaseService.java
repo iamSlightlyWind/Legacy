@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 import jakarta.annotation.PostConstruct;
 import tmo.ks.asm1.entity.Account;
 import tmo.ks.asm1.entity.AccountPermission;
+import tmo.ks.asm1.entity.Department;
 import tmo.ks.asm1.entity.Employee;
 import tmo.ks.asm1.entity.Permission;
 import tmo.ks.asm1.entity.PermissionEndpoint;
 import tmo.ks.asm1.entity.repository.AccountPermissionRepository;
 import tmo.ks.asm1.entity.repository.AccountRepository;
+import tmo.ks.asm1.entity.repository.DepartmentRepository;
 import tmo.ks.asm1.entity.repository.EmployeeRepository;
 import tmo.ks.asm1.entity.repository.PermissionEndpointRepository;
 import tmo.ks.asm1.entity.repository.PermissionRepository;
@@ -37,6 +39,9 @@ public class DatabaseService {
     @Autowired
     public PermissionEndpointRepository permissionEndpointRepository;
 
+    @Autowired
+    public DepartmentRepository departmentRepository;
+
     @PostConstruct
     public void init() {
         instance = this;
@@ -47,32 +52,40 @@ public class DatabaseService {
     }
 
     public static void populateData() {
+        List<Department> departments = new ArrayList<>();
         List<Employee> employees = new ArrayList<>();
         List<Account> accounts = new ArrayList<>();
         List<Permission> permissions = new ArrayList<>();
         List<PermissionEndpoint> permissionEndpoints = new ArrayList<>();
         List<AccountPermission> accountPermissions = new ArrayList<>();
 
-        employees.add(new Employee("Alice", "Brown", 1, Date.valueOf("1985-04-12"), "1112233445", "789 Pine St", "Sales", "Hardworking"));
-        employees.add(new Employee("Bob", "Green", 0, Date.valueOf("1990-06-18"), "1122334455", "234 Oak St", "Marketing", "Creative"));
-        employees.add(new Employee("Charlie", "White", 1, Date.valueOf("1993-01-22"), "1133445566", "567 Birch St", "Engineering", "Innovative"));
-        employees.add(new Employee("Diana", "Blue", 0, Date.valueOf("1988-10-05"), "1144556677", "890 Cedar St", "Finance", "Analytical"));
-        employees.add(new Employee("Eve", "Gray", 0, Date.valueOf("1995-02-27"), "1155667788", "123 Cherry St", "HR", "Empathetic"));
-        employees.add(new Employee("Frank", "Yellow", 1, Date.valueOf("1987-07-15"), "1166778899", "345 Willow St", "IT", "Detail-oriented"));
-        employees.add(new Employee("Grace", "Red", 0, Date.valueOf("1992-11-19"), "1177889900", "678 Fir St", "Legal", "Strategic"));
-        employees.add(new Employee("Henry", "Pink", 1, Date.valueOf("1990-12-08"), "1188990011", "910 Spruce St", "Marketing", "Goal-driven"));
-        employees.add(new Employee("Ivy", "Purple", 0, Date.valueOf("1994-03-29"), "1199001122", "246 Redwood St", "Operations", "Efficient"));
-        employees.add(new Employee("Jack", "Silver", 1, Date.valueOf("1986-08-21"), "1200112233", "135 Maple St", "Sales", "Persistent"));
-        employees.add(new Employee("Kara", "Gold", 0, Date.valueOf("1991-05-16"), "1211223344", "579 Pine St", "Engineering", "Creative thinker"));
-        employees.add(new Employee("Liam", "Copper", 1, Date.valueOf("1993-07-11"), "1222334455", "804 Oak St", "Legal", "Problem-solver"));
-        employees.add(new Employee("Mona", "Bronze", 0, Date.valueOf("1994-09-30"), "1233445566", "222 Cedar St", "HR", "Organized"));
-        employees.add(new Employee("Nina", "Platinum", 0, Date.valueOf("1996-01-05"), "1244556677", "333 Cherry St", "Finance", "Meticulous"));
-        employees.add(new Employee("Oscar", "Diamond", 1, Date.valueOf("1989-04-13"), "1255667788", "111 Birch St", "IT", "Efficient"));
-        employees.add(new Employee("Paul", "Emerald", 1, Date.valueOf("1990-09-09"), "1266778899", "444 Cedar St", "Sales", "Adaptable"));
-        employees.add(new Employee("Quinn", "Jade", 1, Date.valueOf("1992-12-23"), "1277889900", "789 Fir St", "Operations", "Logical"));
-        employees.add(new Employee("Rachel", "Ruby", 0, Date.valueOf("1995-05-03"), "1288990011", "101 Spruce St", "Marketing", "Persuasive"));
-        employees.add(new Employee("Steve", "Topaz", 1, Date.valueOf("1993-10-19"), "1299001122", "123 Pine St", "Engineering", "Collaborative"));
-        employees.add(new Employee("Admin", "Admin", 1, Date.valueOf("1990-01-15"), "1234567890", "123 Elm St", "IT", "Super Duper Admin"));
+        departments.add(new Department("Sales"));
+        departments.add(new Department("Marketing"));
+        departments.add(new Department("Engineering"));
+        departments.add(new Department("Finance"));
+        departments.add(new Department("HR"));
+        departments.add(new Department("IT"));
+
+        employees.add(new Employee("Alice", "Brown", 1, Date.valueOf("1985-04-12"), "1112233445", "789 Pine St", departments.get(0), "Hardworking"));
+        employees.add(new Employee("Bob", "Green", 0, Date.valueOf("1990-06-18"), "1122334455", "234 Oak St", departments.get(1), "Creative"));
+        employees.add(new Employee("Charlie", "White", 1, Date.valueOf("1993-01-22"), "1133445566", "567 Birch St", departments.get(2), "Innovative"));
+        employees.add(new Employee("Diana", "Blue", 0, Date.valueOf("1988-10-05"), "1144556677", "890 Cedar St", departments.get(3), "Analytical"));
+        employees.add(new Employee("Eve", "Gray", 0, Date.valueOf("1995-02-27"), "1155667788", "123 Cherry St", departments.get(4), "Empathetic"));
+        employees.add(new Employee("Frank", "Yellow", 1, Date.valueOf("1987-07-15"), "1166778899", "345 Willow St", departments.get(5), "Detail-oriented"));
+        employees.add(new Employee("Grace", "Red", 0, Date.valueOf("1992-11-19"), "1177889900", "678 Fir St", departments.get(2), "Strategic"));
+        employees.add(new Employee("Henry", "Pink", 1, Date.valueOf("1990-12-08"), "1188990011", "910 Spruce St", departments.get(1), "Goal-driven"));
+        employees.add(new Employee("Ivy", "Purple", 0, Date.valueOf("1994-03-29"), "1199001122", "246 Redwood St", departments.get(2), "Efficient"));
+        employees.add(new Employee("Jack", "Silver", 1, Date.valueOf("1986-08-21"), "1200112233", "135 Maple St", departments.get(0), "Persistent"));
+        employees.add(new Employee("Kara", "Gold", 0, Date.valueOf("1991-05-16"), "1211223344", "579 Pine St", departments.get(2), "Creative thinker"));
+        employees.add(new Employee("Liam", "Copper", 1, Date.valueOf("1993-07-11"), "1222334455", "804 Oak St", departments.get(3), "Problem-solver"));
+        employees.add(new Employee("Mona", "Bronze", 0, Date.valueOf("1994-09-30"), "1233445566", "222 Cedar St", departments.get(4), "Organized"));
+        employees.add(new Employee("Nina", "Platinum", 0, Date.valueOf("1996-01-05"), "1244556677", "333 Cherry St", departments.get(3), "Meticulous"));
+        employees.add(new Employee("Oscar", "Diamond", 1, Date.valueOf("1989-04-13"), "1255667788", "111 Birch St", departments.get(5), "Efficient"));
+        employees.add(new Employee("Paul", "Emerald", 1, Date.valueOf("1990-09-09"), "1266778899", "444 Cedar St", departments.get(0), "Adaptable"));
+        employees.add(new Employee("Quinn", "Jade", 1, Date.valueOf("1992-12-23"), "1277889900", "789 Fir St", departments.get(2), "Logical"));
+        employees.add(new Employee("Rachel", "Ruby", 0, Date.valueOf("1995-05-03"), "1288990011", "101 Spruce St", departments.get(1), "Persuasive"));
+        employees.add(new Employee("Steve", "Topaz", 1, Date.valueOf("1993-10-19"), "1299001122", "123 Pine St", departments.get(2), "Collaborative"));
+        employees.add(new Employee("Admin", "Admin", 1, Date.valueOf("1990-01-15"), "1234567890", "123 Elm St", departments.get(5), "Super Duper Admin"));
 
         accounts.add(new Account("AliceB1", "alicebrown@example.com", "password123", 1, employees.get(0)));
         accounts.add(new Account("BobG1", "bobgreen@example.com", "password123", 1, employees.get(1)));
@@ -124,6 +137,10 @@ public class DatabaseService {
         accountPermissions.add(new AccountPermission(accounts.get(18), permissions.get(0)));
         accountPermissions.add(new AccountPermission(accounts.get(19), permissions.get(0)));
         accountPermissions.add(new AccountPermission(accounts.get(19), permissions.get(1)));
+
+        for (Department department : departments) {
+            instance.departmentRepository.save(department);
+        }
 
         for (Employee employee : employees) {
             instance.employeeRepository.save(employee);

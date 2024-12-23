@@ -6,7 +6,7 @@
 
 <div class="container mt-4">
     <h2 class="mb-4">Add Employee</h2>
-    <form method="post">
+    <form th:action="@{/api/employee/add}" method="post">
         <!-- First Name -->
         <div class="form-group">
             <label for="firstName">First name<span class="text-danger">(*)</span></label>
@@ -35,12 +35,12 @@
         <div class="form-group">
             <label>Gender<span class="text-danger">(*)</span></label><br>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="female" value="Female" required>
-                <label class="form-check-label" for="female">Female</label>
+            <input class="form-check-input" type="radio" id="female" name="gender" value="0" required>
+            <label class="form-check-label" for="female">Female</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="male" value="Male">
-                <label class="form-check-label" for="male">Male</label>
+            <input class="form-check-input" type="radio" id="male" name="gender" value="1">
+            <label class="form-check-label" for="male">Male</label>
             </div>
         </div>
 
@@ -78,10 +78,6 @@
         <div class="form-group">
             <label for="department">Department<span class="text-danger">(*)</span></label>
             <select class="form-control" id="department" required>
-                <option value="">Select Department</option>
-                <!--                <option th:each="dept : ${departments}"-->
-                <!--                        th:value="${dept}"-->
-                <!--                        th:text="${dept}">Department</option>-->
             </select>
         </div>
 
@@ -99,3 +95,29 @@
         </div>
     </form>
 </div>
+
+<script>
+    function loadDepartment() {
+        fetch('/api/department/getAll', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+        })
+            .then(response => response.json())
+            .then(data => {
+                const departmentSelect = document.getElementById('department');
+                data.forEach(department => {
+                    const option = document.createElement('option');
+                    option.value = department.name;
+                    option.text = department.name;
+                    departmentSelect.appendChild(option);
+                });
+            });
+    }
+
+    $(document).ready(function () {
+        loadDepartment();
+    });
+</script>
