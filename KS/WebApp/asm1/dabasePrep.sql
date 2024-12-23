@@ -1,3 +1,5 @@
+-- create the database starting spring boot
+
 use master
 
 IF EXISTS (SELECT 1
@@ -16,6 +18,11 @@ USE asm1byphongpthe182589
 GO
 
 /*
+
+use the following accounts
+noAuth:password123 - no auth at all
+userAuth:password123 - has user perms
+AdminA1:adminpassword - has admin & user perms
 
 use asm1byphongpthe182589
 
