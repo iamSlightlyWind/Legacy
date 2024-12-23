@@ -1,3 +1,15 @@
+function loadUsername() {
+    fetch('/api/user/info')
+        .then(response => response.text())
+        .then(username => {
+            const element = document.getElementById('welcome-marker');
+            if (element) {
+                element.textContent = `Welcome ${username}`;
+            }
+        })
+        .catch(error => console.error('Error fetching user info:', error));
+}
+
 function removeTempElements() {
     document.querySelectorAll('#temp').forEach(element => element.remove());
 }
@@ -17,7 +29,7 @@ function loadEmployeeAdd() {
 }
 
 function spawnToast(header, content) {
-    $.get('/fragments/user/toast.html', function(data) {
+    $.get('/fragments/user/toast.html', function (data) {
         var toast = $(data);
 
         toast.find('#toast-header-marker').text(header);
@@ -35,7 +47,7 @@ function spawnToast(header, content) {
     });
 }
 
-$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+$(document).ajaxError(function (event, jqxhr, settings, thrownError) {
     if (jqxhr.status === 403) {
         spawnToast('Access Denied', 'You do not have permission to access this resource.');
     }
@@ -53,3 +65,5 @@ $('#user-profile-form').validate({
         }
     }
 });
+
+loadUsername();
