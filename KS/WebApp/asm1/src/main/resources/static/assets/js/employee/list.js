@@ -4,7 +4,7 @@ let totalPages = 1;
 function loadEmployeeData(page) {
     if (page < 1 || page > totalPages) return;
 
-    fetch('/api/employee/get', {
+    fetch('/api/employee/user/get', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ function loadEmployeeData(page) {
 }
 
 function loadMaxPage() {
-    fetch('/api/employee/maxPage', {
+    fetch('/api/employee/user/maxPage', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -73,7 +73,3 @@ function updatePaginationControls() {
             </li>
         `;
 }
-
-$(document).ready(function () {
-    loadMaxPage();
-});

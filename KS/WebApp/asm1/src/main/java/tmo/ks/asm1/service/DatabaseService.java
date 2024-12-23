@@ -1,8 +1,12 @@
 package tmo.ks.asm1.service;
 
+import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jakarta.annotation.PostConstruct;
@@ -48,8 +52,17 @@ public class DatabaseService {
         instance = this;
         populateData();
 
-        List<Employee> page = Page.getPage(employeeRepository, 50, 2);
-        System.out.println();
+        URLPermissionMap();
+    }
+
+    public Map<String, String> URLPermissionMap() {
+        List<PermissionEndpoint> permissionEndpoints = permissionEndpointRepository.findAll();
+
+        Map<String, String> urlPermissionMap = new HashMap<String, String>();
+        for (PermissionEndpoint permissionEndpoint : permissionEndpoints) {
+            urlPermissionMap.put(permissionEndpoint.getEndpoint(), permissionEndpoint.getPermission().getName());
+        }
+        return null;
     }
 
     public static void populateData() {

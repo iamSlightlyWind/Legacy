@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/admin/additional-methods.min.js"></script>
     <script th:src="@{/assets/js/home.js}"></script>
 
     <style>
@@ -41,7 +41,7 @@
                 <section class="d-flex">
                     <a class="d-flex" style="margin-right: 1rem; text-decoration: none;">Welcome ${user}</a>
 
-                    <a class="d-flex" th:href="@{/login.html}" style="text-decoration: none;">
+                    <a class="d-flex" th:href="@{/logout}" style="text-decoration: none;">
                         <span><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</span>
                     </a>
                 </section>

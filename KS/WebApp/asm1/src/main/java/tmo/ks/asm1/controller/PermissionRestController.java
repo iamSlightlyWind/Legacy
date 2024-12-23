@@ -10,7 +10,7 @@ import tmo.ks.asm1.service.DatabaseService;
 @RestController
 @RequestMapping("/api/permission")
 public class PermissionRestController {
-    @PostMapping("/getAll")
+    @PostMapping("/user/getAll")
     public List<Permission> getAllPermissions() {
         return DatabaseService.instance.permissionRepository.findAll();
     }

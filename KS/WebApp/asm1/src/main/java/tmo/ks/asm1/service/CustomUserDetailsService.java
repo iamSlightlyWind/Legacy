@@ -32,4 +32,21 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .roles(Permission.extractPermissions(DatabaseService.instance.accountPermissionRepository.findByAccount(match)))
                 .build());
     }
+
+    /* private Optional<UserDetails> getAccount(String username) {
+        List<String> permissions = new ArrayList<>();
+        permissions.add("ROLE_USER");
+        permissions.add("ROLE_ADMIN");
+
+        Account match = DatabaseService.instance.accountRepository.findByAccount(username);
+        if (match == null) {
+            return Optional.empty();
+        }
+
+        return Optional.of(User.builder()
+                .username(match.getAccount())
+                .password(passwordEncoder().encode(match.getPassword()))
+                .roles(permissions.toArray(new String[0])) // Convert List to array
+                .build());
+    } */
 }

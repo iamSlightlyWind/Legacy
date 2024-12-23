@@ -19,25 +19,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 @RequestMapping("/api/employee")
 public class EmployeeRestController {
-    final static int pageSize = 6;
+    final static int pageSize = 8;
 
-    @PostMapping("/getAll")
+    @PostMapping("/user/getAll")
     public List<Employee> getAllEmployees() {
         return DatabaseService.instance.employeeRepository.findAll();
     }
 
-    @PostMapping("/maxPage")
+    @PostMapping("/user/maxPage")
     public int maxPage() {
         return Page.maxPage(DatabaseService.instance.employeeRepository, pageSize);
     }
 
-    @PostMapping("/get")
+    @PostMapping("/user/get")
     public List<Employee> listEmployees(@RequestBody Map<String, Object> requestData) {
         return Page.getPage(DatabaseService.instance.employeeRepository, pageSize, (int) requestData.get("page"));
     }
 
     @SuppressWarnings("unchecked")
-    @PostMapping("/add")
+    @PostMapping("/admin/add")
     public boolean addEmployee(@RequestBody Map<String, Object> requestData) {
         Map<String, Object> employeeData = (Map<String, Object>) requestData.get("employee");
         Department department = DatabaseService.instance.departmentRepository.findById((String) employeeData.get("department")).get();

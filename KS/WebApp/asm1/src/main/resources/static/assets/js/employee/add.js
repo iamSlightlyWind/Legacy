@@ -22,7 +22,7 @@ function sendCreateRequest() {
         permissions: permissions
     };
 
-    fetch('/api/employee/add', {
+    fetch('/api/employee/admin/add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -39,7 +39,7 @@ function sendCreateRequest() {
 }
 
 function loadDepartment() {
-    fetch('/api/department/getAll', {
+    fetch('/api/department/user/getAll', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ function loadDepartment() {
 }
 
 function loadPermissions() {
-    fetch('/api/permission/getAll', {
+    fetch('/api/permission/user/getAll', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

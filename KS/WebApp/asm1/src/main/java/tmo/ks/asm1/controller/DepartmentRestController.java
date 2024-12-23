@@ -10,7 +10,7 @@ import tmo.ks.asm1.service.DatabaseService;
 @RestController
 @RequestMapping("/api/department")
 public class DepartmentRestController {
-    @PostMapping("/getAll")
+    @PostMapping("/user/getAll")
     public List<Department> getAllDepartments() {
         return DatabaseService.instance.departmentRepository.findAll();
     }
