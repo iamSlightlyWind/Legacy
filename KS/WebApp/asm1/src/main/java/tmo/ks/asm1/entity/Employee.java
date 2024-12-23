@@ -40,7 +40,7 @@ public class Employee {
     private String address;
 
     @ManyToOne
-    @JoinColumn(name = "name", nullable = false)
+    @JoinColumn(name = "department", nullable = false)
     private Department department;
 
     @Column(name = "remark", columnDefinition = "VARCHAR(1000)")

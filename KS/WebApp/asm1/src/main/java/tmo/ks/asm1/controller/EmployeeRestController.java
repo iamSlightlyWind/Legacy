@@ -3,10 +3,13 @@ package tmo.ks.asm1.controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tmo.ks.asm1.entity.Account;
+import tmo.ks.asm1.entity.AccountPermission;
 import tmo.ks.asm1.entity.Department;
 import tmo.ks.asm1.entity.Employee;
+import tmo.ks.asm1.entity.Permission;
 import tmo.ks.asm1.service.DatabaseService;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,8 +28,9 @@ public class EmployeeRestController {
     @PostMapping("/add")
     public boolean addEmployee(@RequestBody Map<String, Object> requestData) {
         Map<String, Object> employeeData = (Map<String, Object>) requestData.get("employee");
-        Map<String, Object> departmentData = (Map<String, Object>) employeeData.get("department");
-        Department department = DatabaseService.instance.departmentRepository.findById((String) departmentData.get("name")).get();
+        Department department = DatabaseService.instance.departmentRepository.findById((String) employeeData.get("department")).get();
+        List<String> permissions = (ArrayList<String>) requestData.get("permissions");
+        List<Permission> permissionList = new ArrayList<>();
 
         Employee employee = new Employee();
         employee.setFirstName((String) employeeData.get("firstName"));
@@ -53,9 +57,22 @@ public class EmployeeRestController {
             return false;
         }
 
+        for (String permission : permissions) {
+            Permission p = DatabaseService.instance.permissionRepository.findByName(permission);
+            if (p != null) {
+                permissionList.add(p);
+            } else {
+                return false;
+            }
+        }
+
         DatabaseService.instance.employeeRepository.save(employee);
         DatabaseService.instance.accountRepository.save(account);
-
+        for (Permission p : permissionList) {
+            DatabaseService.instance.accountPermissionRepository.save(new AccountPermission(account, p));
+        }
+        
         return true;
     }
+
 }

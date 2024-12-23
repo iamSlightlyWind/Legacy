@@ -42,6 +42,7 @@ public class DatabaseService {
     @Autowired
     public DepartmentRepository departmentRepository;
 
+    @SuppressWarnings("unused")
     @PostConstruct
     public void init() {
         instance = this;
