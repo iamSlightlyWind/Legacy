@@ -9,5 +9,4 @@ class Asm1ApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

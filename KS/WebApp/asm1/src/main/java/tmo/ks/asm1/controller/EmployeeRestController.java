@@ -108,6 +108,8 @@ public class EmployeeRestController {
             DatabaseService.instance.accountPermissionRepository.save(new AccountPermission(account, p));
         }
 
+        System.out.println(">>>>employe already fucking exist");
+
         return true;
     }
 }

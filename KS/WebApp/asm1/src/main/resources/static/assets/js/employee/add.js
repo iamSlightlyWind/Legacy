@@ -28,10 +28,14 @@ function sendCreateRequest() {
         contentType: 'application/json',
         data: JSON.stringify(accountData),
         success: function (data) {
-            console.log('Success:', data);
+            if (data) {
+                spawnToast("Success", "Employee added successfully");
+            } else {
+                spawnToast("Error", "Failed to add employee");
+            }
         },
         error: function (jqxhr, status, error) {
-            console.error('Error:', error);
+            spawnToast("Error", "Failed to add employee");
         }
     });
 }
