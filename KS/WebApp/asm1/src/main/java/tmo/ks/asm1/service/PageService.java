@@ -1,10 +1,9 @@
 package tmo.ks.asm1.service;
 
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public class Page<T> {
+public class PageService<T> {
     public static <T> List<T> getPage(JpaRepository<T, Integer> repository, int pageSize, int page) {
         int size = (int) repository.count();
 
@@ -38,5 +37,39 @@ public class Page<T> {
     public static int maxPage(JpaRepository repository, int pageSize) {
         int size = (int) repository.count();
         return size / pageSize + (size % pageSize == 0 ? 0 : 1);
+    }
+
+    public static int maxPage(List<?> list, int pageSize) {
+        int size = list.size();
+        return size / pageSize + (size % pageSize == 0 ? 0 : 1);
+    }
+
+    public static <T> List<T> getPage(List<T> list, int pageSize, int page) {
+        int size = list.size();
+
+        if (pageSize < 1) {
+            pageSize = 1;
+        } else if (pageSize > size) {
+            pageSize = size;
+        }
+
+        int maxPage = size / pageSize + (size % pageSize == 0 ? 0 : 1);
+
+        if (page < 1) {
+            page = 1;
+        } else if (page > maxPage) {
+            page = maxPage;
+        }
+
+        List<T> result = new java.util.ArrayList<T>();
+
+        for (int i = pageSize * (page - 1); i < pageSize * page; i++) {
+            if (i >= size) {
+                break;
+            }
+            result.add(list.get(i));
+        }
+
+        return result;
     }
 }

@@ -37,7 +37,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return Optional.of(User.builder()
                 .username(match.getAccount())
                 .password(passwordEncoder().encode(match.getPassword()))
-                .authorities(permissions.toArray(new String[0])) // Convert List to array
+                .authorities(permissions.toArray(new String[0]))
                 .build());
     }
 }

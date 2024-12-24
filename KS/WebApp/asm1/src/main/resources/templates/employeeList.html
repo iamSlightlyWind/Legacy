@@ -5,14 +5,15 @@
 
         <div class="d-flex justify-content-end mb-3">
             <input type="text" class="form-control me-2" placeholder="Search" style="max-width: 200px;"
-                th:attr="value=${searchQuery}">
-            <select class="form-select me-2" style="max-width: 150px;" th:attr="value=${filterValue}">
+                id="searchInput">
+            <select class="form-select me-2" style="max-width: 150px;" id="filterBy">
                 <option selected>Filter By</option>
                 <option value="name">Name</option>
                 <option value="department">Department</option>
                 <option value="address">Address</option>
+                <option value="phoneNumber">Phone Number</option>
             </select>
-            <button class="btn btn-primary" th:onclick="|submitSearch('${url}')|">Search</button>
+            <button class="btn btn-primary" onclick="sendSearchRequest(1)">Search</button>
         </div>
 
         <table class="table table-bordered table-hover text-center">
@@ -33,18 +34,10 @@
 
         <nav id="paginationNav">
             <ul class="pagination justify-content-center" id="paginationControls">
-                <li class="page-item" id="previousPage">
-                    <a class="page-link" href="#" onclick="loadEmployeeData(currentPage - 1)">Previous</a>
-                </li>
-                <li class="page-item" id="nextPage">
-                    <a class="page-link" href="#" onclick="loadEmployeeData(currentPage + 1)">Next</a>
-                </li>
+                
             </ul>
         </nav>
     </div>
 
     <script th:src="@{/assets/js/employee/list.js}"></script>
-    <script>
-        loadMaxPage();
-    </script>
 </body>

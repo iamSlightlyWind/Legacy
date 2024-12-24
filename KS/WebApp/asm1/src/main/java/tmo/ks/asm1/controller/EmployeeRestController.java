@@ -8,9 +8,10 @@ import tmo.ks.asm1.entity.Department;
 import tmo.ks.asm1.entity.Employee;
 import tmo.ks.asm1.entity.Permission;
 import tmo.ks.asm1.service.DatabaseService;
-import tmo.ks.asm1.service.Page;
+import tmo.ks.asm1.service.PageService;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,19 +20,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class EmployeeRestController {
     final static int pageSize = 8;
 
-    @PostMapping("/api/user/employee/getAll")
-    public List<Employee> getAllEmployees() {
-        return DatabaseService.instance.employeeRepository.findAll();
-    }
-
-    @PostMapping("/api/user/employee/maxPage")
-    public int maxPage() {
-        return Page.maxPage(DatabaseService.instance.employeeRepository, pageSize);
-    }
-
     @PostMapping("/api/user/employee/get")
-    public List<Employee> listEmployees(@RequestBody Map<String, Object> requestData) {
-        return Page.getPage(DatabaseService.instance.employeeRepository, pageSize, (int) requestData.get("page"));
+    public Map<String, Object> getEmployees(@RequestBody Map<String, Object> requestData) {
+        int page = (int) requestData.get("page");
+        String input = (String) requestData.get("input");
+        String filter = (String) requestData.get("filter");
+
+        List<Employee> result;
+        int maxPage;
+
+        if (input == null || input.isEmpty()) {
+            result = PageService.getPage(DatabaseService.instance.employeeRepository, pageSize, page);
+            maxPage = PageService.maxPage(DatabaseService.instance.employeeRepository, pageSize);
+        } else {
+            result = filterEmployees(input, filter);
+            maxPage = PageService.maxPage(result, pageSize);
+            result = PageService.getPage(result, pageSize, page);
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("employees", result);
+        response.put("maxPage", maxPage);
+
+        return response;
+    }
+
+    private List<Employee> filterEmployees(String input, String filter) {
+        switch (filter) {
+            case "name":
+                return DatabaseService.instance.employeeRepository.findByNameContaining(input);
+            case "phoneNumber":
+                return DatabaseService.instance.employeeRepository.findByPhoneNumberContaining(input);
+            case "address":
+                return DatabaseService.instance.employeeRepository.findByAddressContaining(input);
+            case "department":
+                return DatabaseService.instance.employeeRepository.findByDepartmentNameContaining(input);
+            default:
+                return new ArrayList<>();
+        }
     }
 
     @SuppressWarnings("unchecked")

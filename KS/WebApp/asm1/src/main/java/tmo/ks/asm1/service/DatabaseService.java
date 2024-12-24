@@ -57,7 +57,7 @@ public class DatabaseService {
         for (PermissionEndpoint permissionEndpoint : permissionEndpoints) {
             urlPermissionMap.put(permissionEndpoint.getEndpoint(), permissionEndpoint.getPermission().getName());
         }
-        
+
         return urlPermissionMap;
     }
 

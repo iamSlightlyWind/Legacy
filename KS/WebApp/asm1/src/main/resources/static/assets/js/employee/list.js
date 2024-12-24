@@ -1,58 +1,6 @@
 let currentPage = 1;
 let totalPages = 1;
 
-function loadEmployeeData(page) {
-    if (page < 1 || page > totalPages) return;
-
-    fetch('/api/user/employee/get', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ page: page })
-    })
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = document.getElementById('employeeTableBody');
-            tableBody.innerHTML = '';
-            data.forEach(employee => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${employee.id}</td>
-                    <td>${employee.firstName} ${employee.lastName}</td>
-                    <td>${employee.dateOfBirth}</td>
-                    <td>${employee.address}</td>
-                    <td>${employee.phoneNumber}</td>
-                    <td>${employee.department.name}</td>
-                    <td><a href="/employee/view/${employee.id}" class="btn btn-link">View</a></td>
-                `;
-                tableBody.appendChild(row);
-            });
-            currentPage = page;
-            updatePaginationControls();
-        })
-        .catch(error => console.error('Error fetching employee data:', error));
-}
-
-function loadMaxPage() {
-    fetch('/api/user/employee/maxPage', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({})
-    })
-        .then(response => response.json())
-        .then(data => {
-            totalPages = data;
-            console.log('Total pages:', totalPages);
-            document.getElementById('paginationNav').style.display = totalPages > 1 ? 'block' : 'none';
-            updatePaginationControls();
-            loadEmployeeData(1);
-        })
-        .catch(error => console.error('Error fetching max page:', error));
-}
-
 function updatePaginationControls() {
     const paginationControls = document.getElementById('paginationControls');
     paginationControls.innerHTML = `
@@ -73,3 +21,51 @@ function updatePaginationControls() {
             </li>
         `;
 }
+
+function renderEmployeeData(data) {
+    const tableBody = document.getElementById('employeeTableBody');
+    tableBody.innerHTML = '';
+    data.forEach(employee => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${employee.id}</td>
+            <td>${employee.firstName} ${employee.lastName}</td>
+            <td>${employee.dateOfBirth}</td>
+            <td>${employee.address}</td>
+            <td>${employee.phoneNumber}</td>
+            <td>${employee.department.name}</td>
+            <td><a href="/employee/view/${employee.id}" class="btn btn-link">View</a></td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+function loadEmployeeData(page) {
+    if (page < 1 || page > totalPages) return;
+
+    const input = document.getElementById('searchInput').value;
+    const filter = document.getElementById('filterBy').value;
+
+    fetch('/api/user/employee/get', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ page: page, input: input, filter: filter })
+    })
+        .then(response => response.json())
+        .then(data => {
+            renderEmployeeData(data.employees);
+            currentPage = page;
+            totalPages = data.maxPage;
+            document.getElementById('paginationNav').style.display = totalPages > 1 ? 'block' : 'none';
+            updatePaginationControls();
+        })
+        .catch(error => console.error('Error fetching employee data:', error));
+}
+
+function sendSearchRequest(page) {
+    loadEmployeeData(page);
+}
+
+loadEmployeeData(1);
