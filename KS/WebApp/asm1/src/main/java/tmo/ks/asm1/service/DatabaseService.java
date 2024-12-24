@@ -99,7 +99,7 @@ public class DatabaseService {
 
         accounts.add(new Account("noAuth", "alicebrown@example.com", "password123", 1, employees.get(0)));
         accounts.add(new Account("userAuth", "bobgreen@example.com", "password123", 1, employees.get(1)));
-        accounts.add(new Account("CharlieW1", "charliewhite@example.com", "password123", 1, employees.get(2)));
+        accounts.add(new Account("disabled", "charliewhite@example.com", "password123", 0, employees.get(2)));
         accounts.add(new Account("DianaB1", "dianablue@example.com", "password123", 1, employees.get(3)));
         accounts.add(new Account("EveG1", "evegray@example.com", "password123", 1, employees.get(4)));
         accounts.add(new Account("FrankY1", "frankyellow@example.com", "password123", 1, employees.get(5)));

@@ -22,6 +22,7 @@ GO
 use the following accounts
 noAuth:password123 - no auth at all
 userAuth:password123 - has user perms
+disabled:password123 - has user perms but is disabled
 AdminA1:adminpassword - has admin & user perms
 
 use asm1byphongpthe182589

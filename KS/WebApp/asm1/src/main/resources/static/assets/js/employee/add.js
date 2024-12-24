@@ -37,56 +37,66 @@ function sendCreateRequest() {
 }
 
 function validateForm() {
-    const firstName = document.getElementById('firstName').value.trim();
-    const lastName = document.getElementById('lastName').value.trim();
-    const phoneNumber = document.getElementById('phoneNumber').value.trim();
-    const dob = document.getElementById('dob').value.trim();
-    const gender = document.querySelector('input[name="gender"]:checked');
-    const account = document.getElementById('account').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const department = document.getElementById('department').value.trim();
+    const firstNameElement = document.getElementById('firstName');
+    const lastNameElement = document.getElementById('lastName');
+    const dobElement = document.getElementById('dob');
+    const genderElement = document.querySelector('input[name="gender"]:checked');
+    const phoneNumberElement = document.getElementById('phoneNumber');
+    const emailElement = document.getElementById('email');
+    const accountElement = document.getElementById('account');
+    const passwordElement = document.getElementById('password');
+    const departmentElement = document.getElementById('department');
 
-    if (firstName.length < 3) {
-        spawnToast("Input not satisfied","First name must be at least 3 characters long");
+    const firstName = (firstNameElement ? firstNameElement.value : '').trim();
+    const lastName = (lastNameElement ? lastNameElement.value : '').trim();
+    const dob = (dobElement ? dobElement.value : '').trim();
+    const gender = genderElement ? genderElement.value : null;
+    const phoneNumber = (phoneNumberElement ? phoneNumberElement.value : '').trim();
+    const email = (emailElement ? emailElement.value : '').trim();
+    const account = (accountElement ? accountElement.value : '').trim();
+    const password = (passwordElement ? passwordElement.value : '').trim();
+    const department = (departmentElement ? departmentElement.value : '').trim();
+
+    if (firstName.length < 3 || firstName.length > 50) {
+        spawnToast("Input not satisfied", "First name must be between 3 and 50 characters long");
         return false;
     }
-    if (lastName.length < 5) {
-        spawnToast("Input not satisfied","Last name must be at least 5 characters long");
-        return false;
-    }
-    if (!/^\d{10,15}$/.test(phoneNumber)) {
-        spawnToast("Input not satisfied","Phone number must be between 10 and 15 digits long");
+    if (lastName.length < 3 || lastName.length > 50) {
+        spawnToast("Input not satisfied", "Last name must be between 3 and 50 characters long");
         return false;
     }
     if (!dob) {
-        spawnToast("Input not satisfied","Please enter a valid date of birth");
+        spawnToast("Input not satisfied", "Please enter a valid date of birth");
         return false;
     }
     if (!gender) {
-        spawnToast("Input not satisfied","Please select a gender");
+        spawnToast("Input not satisfied", "Please select a gender");
         return false;
     }
-    if (account.length < 5) {
-        spawnToast("Input not satisfied","Account must be at least 5 characters long");
+    if (!/^\d{10,15}$/.test(phoneNumber)) {
+        spawnToast("Input not satisfied", "Phone number must be between 10 and 15 digits long");
         return false;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        spawnToast("Input not satisfied","Please enter a valid email address");
+        spawnToast("Input not satisfied", "Please enter a valid email address");
         return false;
     }
-    if (password.length < 6) {
-        spawnToast("Input not satisfied","Password must be at least 6 characters long");
+    if (account.length < 5 || account.length > 50) {
+        spawnToast("Input not satisfied", "Account must be between 5 and 50 characters long");
+        return false;
+    }
+    if (password.length < 6 || password.length > 100) {
+        spawnToast("Input not satisfied", "Password must be between 6 and 100 characters long");
         return false;
     }
     if (!department) {
-        spawnToast("Input not satisfied","Please select a department");
+        spawnToast("Input not satisfied", "Please select a department");
         return false;
     }
     return true;
 }
 
-document.getElementById('employee-add-form').addEventListener('submit', function(event) {
+document.getElementById('employee-add-form').addEventListener('submit', function (event) {
     event.preventDefault();
     if (validateForm()) {
         sendCreateRequest();
@@ -148,7 +158,5 @@ function loadPermissions() {
         });
 }
 
-$(document).ready(function () {
-    loadDepartment();
-    loadPermissions();
-});
+loadDepartment();
+loadPermissions();

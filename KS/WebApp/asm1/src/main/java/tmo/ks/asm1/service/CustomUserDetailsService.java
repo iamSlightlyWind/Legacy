@@ -29,6 +29,10 @@ public class CustomUserDetailsService implements UserDetailsService {
             return Optional.empty();
         }
 
+        if (match.getStatus() == 0) {
+            return Optional.empty();
+        }
+
         List<String> permissions = new ArrayList<>();
         for (AccountPermission accountPermission : DatabaseService.instance.accountPermissionRepository.findByAccount(match)) {
             permissions.add(accountPermission.getPermission().getName());
