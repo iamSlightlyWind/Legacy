@@ -1,0 +1,63 @@
+Based on your experience and reading news about Customer Relationship Management
+(CRM), you should Propose the new CRM to support the Student Admissions (Hệ thống
+hỗ trợ tuyển sinh sinh viên cho ĐH FPT với tầm nhìn hệ thống có thể dùng chung cho tất
+cả các đơn vị khác nhau của ĐH FPT, FU Hà Nội, FU TP Hồ Chí Minh, FU Cần Thơ, FU Quy
+Nhơn, FU Đà Nẵng). Dựa theo hiểu biết, kinh nghiệm bản thân, và tự tìm hiểu hệ thống
+CRM cho lĩnh vực cụ thể là hỗ trợ tuyển sinh hiệu quả hơn).
+
+You propose the new solution that can solve the problems (tuyển sinh sinh viên với
+lượng khách hàng tiềm năng lớn, số lượng tuyển sinh lớn, thi đầu vào số lượng lớn về
+thi, hậu cần để thi, hệ thống hỗ trợ tuyển sinh cho cả 5 đơn vị của FU… em tự nghĩ
+thêm)
+
+Identified the problems and writing the problems in software requirement
+specification. The software requirements can be break into 2 smaller parts:
+a. Identify Functional requirements. Write >= 50 use cases. Writing in short
+statements. Not long paragraphs.
+
+-- Student Admissions CRM User Interaction Flow
+
+1. Student Registration
+    - Users create an account with required personal information.
+2. Application Submission
+    - Users complete an application form.
+    - Upload required documents:
+        + High school transcripts.
+        + National High School Graduation Exam (NHSGE) results.
+        + Proof of ranking in the top 50% based on NHSGE scores (certified via SchoolRank).
+    - Select desired programs.
+    - English Proficiency Assessment
+        + Enrolled students take an English placement test before starting main courses
+        + Students with an IELTS score of 6.0 or equivalent can skip English preparatory courses.
+3. Fee Payment
+    - Users submit application fees via integrated payment gateways.
+    - Payment confirmation received in the system.
+4. Application Review
+    - Admissions officers review applications.
+    - System notifies users of missing or incorrect documents.
+5. Scholarship Test (if applicable)
+    - Users register for the scholarship test.
+    - Test includes a logic math test, an essay, and an interview.
+    - Results are accessible within the system.
+    - If users do not take the scholarship test, no interview is required.
+6. Admission Decision
+    - Users receive acceptance, rejection, or waitlist notifications.
+    - Decision letters available for download.
+7. Enrollment Confirmation
+    - Accepted users confirm enrollment via the system.
+    - Submit additional required documents.
+    - Pay tuition deposit if applicable.
+8. English Proficiency Assessment
+    - Enrolled students take an English placement test before starting main courses.
+    - Students with an IELTS score of 6.0 or equivalent can skip English preparatory courses.
+9. Student Account Creation
+    - Enrolled students receive credentials for university systems.
+    - Access to Learning Management System (LMS), email, and FAP (FPTU Academic Portal).
+
+-- Primary Actors
+
+1. Prospective Student
+2. Admissions Officer
+3. Scholarship Test Administrator
+4. System
+5. Payment Gateway
