@@ -10,12 +10,19 @@ lượng khách hàng tiềm năng lớn, số lượng tuyển sinh lớn, thi 
 thi, hậu cần để thi, hệ thống hỗ trợ tuyển sinh cho cả 5 đơn vị của FU… em tự nghĩ
 thêm)
 
-Identified the problems and writing the problems in software requirement
+Identifiped the problems and writing the problems in software requirement
 specification. The software requirements can be break into 2 smaller parts:
 a. Identify Functional requirements. Write >= 50 use cases. Writing in short
 statements. Not long paragraphs.
 
--- Student Admissions CRM User Interaction Flow
+Actors:
+1. Guest
+2. Prospective Students
+3. Admissions Staff (Review Admission, Plan Tests)
+4. API (FAP, Email, AWS, Database, Payment, etc)
+5. Logistics (Test Venues, Interview Venues)
+
+Student Admissions CRM User Interaction Flow
 
 1. Student Registration
     - Users create an account with required personal information.
@@ -26,9 +33,6 @@ statements. Not long paragraphs.
         + National High School Graduation Exam (NHSGE) results.
         + Proof of ranking in the top 50% based on NHSGE scores (certified via SchoolRank).
     - Select desired programs.
-    - English Proficiency Assessment
-        + Enrolled students take an English placement test before starting main courses
-        + Students with an IELTS score of 6.0 or equivalent can skip English preparatory courses.
 3. Fee Payment
     - Users submit application fees via integrated payment gateways.
     - Payment confirmation received in the system.
@@ -53,11 +57,139 @@ statements. Not long paragraphs.
 9. Student Account Creation
     - Enrolled students receive credentials for university systems.
     - Access to Learning Management System (LMS), email, and FAP (FPTU Academic Portal).
+10. General (For guest mostly)
+    - Viewing admission requirements
+    - Browsing available programs
+    - Checking test schedules
+    - Contacting support
 
--- Primary Actors
+    
 
-1. Prospective Student
-2. Admissions Officer
-3. Scholarship Test Administrator
-4. System
-5. Payment Gateway
+use cases:
+I. CRM Authentication
+    - Login
+    - Register
+    - Forgot Password
+    - Phone Verification
+    - Email Verification
+    - Logout
+    - Reset Password
+    - Delete Account
+    - Remember Me
+
+II. Student Registration
+    - Fill Personal Information
+    - Upload Documents
+    - Update Information
+    - Submit Application Fees
+
+III. Application Submission
+    - Select Programs
+    - Fill Application Form (High School Transcripts, NHSGE Results, English Proficiency Certificate)
+
+V. Entrance Test
+    - Take Logic Math Test
+    - Take Essay Test
+    - View Test Results
+    - Attend Interview (if applicable)
+
+VI. Application Review
+    - Review Applications
+    - Verify Documents
+    - Verify Rankings, Certificates
+    - Notify Missing Documents
+
+VII. Admission Decision
+    - Acceptance Notification
+    - Rejection Notification
+    - Waitlist Notification
+    - Assign Scholarship Test (if applicable)
+    - Assign Interview (if applicable)
+
+VIII. Enrollment Confirmation
+    - Pay Tuition Deposit
+    - Confirm Enrollment
+
+IX. Logistics Management
+    - Schedule Entrance Test Sessions
+    - Assign Test Venues
+    - Assign Interview Venues
+    - Manage Test Logistics
+    - Manage Interview Logistics
+    - Notify Students of Test/Interview Details
+    - Update Venue Availability
+
+Actors: 
+1. Prospective Students
+2. Admissions Staff
+3. External APIs
+4. Logistics Staff
+
+Technology Stack:
+- Frontend: ThymeLeaf, Bootstrap, JavaScript
+- Backend: 
+    + Spring Boot (AWS EC2, auto scaling), AWS load balancer
+    + Database: Microsoft SQL Server (AWS RDS)
+    + Payment Gateway: FPT DNG, Online Banking, FPT Pay
+    + Email: AWS SES
+    + SMS: VNPAY SMS
+    + External Systems: FAP, Google, Facebook, FPT DNG, FPT Pay
+
+state diagram
+
+
+1. Prospective Students ↔ CRM System
+
+    Student → CRM (5)
+        Create account
+        Submit application
+        Upload required documents
+        Pay application fees
+        Confirm enrollment
+
+    CRM → Student (3)
+        Send account verification email
+        Notify missing/incomplete documents
+        Deliver admission decision notification
+
+2. Admissions Staff ↔ CRM System
+
+    Admissions Staff → CRM (4)
+        Review applications
+        Verify uploaded documents
+        Approve/reject/waitlist applicants
+        Assign interview/test (if applicable)
+
+    CRM → Admissions Staff (4)
+        Notify about new applications
+        Send document verification status updates
+        Provide test results for review
+        Confirm admission decisions
+
+3. CRM System ↔ External APIs (FAP, Email, AWS, Database, Payment, etc.)
+
+    CRM → External APIs (5)
+        Send email notifications (verification, results, etc.)
+        Process application fee payments
+        Sync student data with university systems
+        Retrieve student ranking from SchoolRank API
+        Request English proficiency scores (IELTS, etc.)
+
+    External APIs → CRM (3)
+        Confirm email delivery status
+        Send payment success/failure notifications
+        Provide student ranking data
+
+4. CRM System ↔ Logistics (Test Venues, Interview Venues)
+
+    CRM → Logistics (4)
+        Request available test venues
+        Assign students to test locations
+        Schedule interviews
+        Send test materials to venues
+
+    Logistics → CRM (4)
+        Provide venue availability data
+        Confirm test schedules
+        Report test completion status
+        Return interview attendance data
