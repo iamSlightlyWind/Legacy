@@ -91,7 +91,6 @@ V. Entrance Test
     - Take Logic Math Test
     - Take Essay Test
     - View Test Results
-    - Attend Interview (if applicable)
 
 VI. Application Review
     - Review Applications
@@ -119,23 +118,32 @@ IX. Logistics Management
     - Notify Students of Test/Interview Details
     - Update Venue Availability
 
-Actors: 
-1. Prospective Students
-2. Admissions Staff
-3. External APIs
-4. Logistics Staff
+X. General 
+    - Viewing admission requirements
+    - Browsing available programs
+    - Checking test schedules
+    - Contacting support
+
 
 Technology Stack:
-- Frontend: ThymeLeaf, Bootstrap, JavaScript
-- Backend: 
-    + Spring Boot (AWS EC2, auto scaling), AWS load balancer
-    + Database: Microsoft SQL Server (AWS RDS)
-    + Payment Gateway: FPT DNG, Online Banking, FPT Pay
-    + Email: AWS SES
-    + SMS: VNPAY SMS
-    + External Systems: FAP, Google, Facebook, FPT DNG, FPT Pay
++ Frontend:
+    - ThymeLeaf
+    - Bootstrap
+    - JavaScript
 
-state diagram
++ Backend:
+    - Spring Boot
+    - Database: Microsoft SQL Server (AWS RDS)
+    - Email: AWS SES
+
++ External Services/APIs:
+    - Payment Gateway: FPT DNG, Online Banking, FPT Pay
+    - SMS: VNPAY SMS
+    - External Systems: FAP, Google, Facebook, FPT DNG, FPT Pay
++ Diagram: Visual Paradigm
++ Version Control: GitHub
++ Packaging: Docker
++ Deployment: AWS EC2 with Auto Scaling and Load Balancing
 
 
 1. Prospective Students ↔ CRM System
