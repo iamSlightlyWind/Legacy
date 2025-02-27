@@ -125,25 +125,7 @@ X. General
     - Contacting support
 
 
-Technology Stack:
-+ Frontend:
-    - ThymeLeaf
-    - Bootstrap
-    - JavaScript
 
-+ Backend:
-    - Spring Boot
-    - Database: Microsoft SQL Server (AWS RDS)
-    - Email: AWS SES
-
-+ External Services/APIs:
-    - Payment Gateway: FPT DNG, Online Banking, FPT Pay
-    - SMS: VNPAY SMS
-    - External Systems: FAP, Google, Facebook, FPT DNG, FPT Pay
-+ Diagram: Visual Paradigm
-+ Version Control: GitHub
-+ Packaging: Docker
-+ Deployment: AWS EC2 with Auto Scaling and Load Balancing
 
 
 1. Prospective Students ↔ CRM System
@@ -201,3 +183,16 @@ Technology Stack:
         Confirm test schedules
         Report test completion status
         Return interview attendance data
+
+The system should respond within 2 seconds for most user interactions, ensuring a smooth experience.
+It must scale dynamically to handle peak loads during admission periods.
+99.9% uptime should be maintained through redundancy and failover mechanisms.
+End-to-end encryption (TLS 1.2+), MFA, and role-based access should secure user data.
+The architecture should be modular for easier maintenance and updates.
+The UI should be responsive, accessible, and optimized for both desktop and mobile.
+API-based integration should follow RESTful and OAuth 2.0 standards for interoperability.
+Data validation, periodic backups, and automated recovery should prevent data loss.
+Centralized logging and monitoring should enable real-time tracking and alerts.
+Multi-language support should be included for different user demographics.
+Compliance with GDPR, local education laws, and cybersecurity standards is required.
+
