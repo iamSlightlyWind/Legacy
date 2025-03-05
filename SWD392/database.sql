@@ -26,17 +26,25 @@ create table user_detail (
     FOREIGN KEY (user_id) REFERENCES users(id)
 )
 
+-- programs
+create table programs (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    name VARCHAR(100) NOT NULL,
+    detail TEXT
+)
+
 -- application detail
 create table application_detail (
     id INT PRIMARY KEY IDENTITY(1,1),
     student_id INT NOT NULL,
-    program VARCHAR(100) NOT NULL,
+    program_id INT NOT NULL,
     english_cert VARCHAR(255),
-    id VARCHAR(255),
+    id_card VARCHAR(255),
     transcript VARCHAR(255),
     status VARCHAR(50) NOT NULL,
     user_id INT,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (program_id) REFERENCES programs(id)
 )
 
 -- venue
@@ -69,11 +77,4 @@ create table payment (
     application_id INT,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (application_id) REFERENCES application_detail(id)
-)
-
--- programs
-create table programs (
-    id INT PRIMARY KEY IDENTITY(1,1),
-    name VARCHAR(100) NOT NULL,
-    detail TEXT
 )
