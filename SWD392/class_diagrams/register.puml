@@ -1,0 +1,27 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/register.puml
+@startuml
+package controller {
+    class StudentController {
+        +register()
+    }
+}
+
+package repository {
+    class UserRepo {
+        +createUser()
+    }
+}
+
+package entity {
+    class User {
+        +id: int
+        +username: String
+        +password: String
+        +email: String
+        +phone: String
+    }
+}
+
+StudentController --> UserRepo : uses
+UserRepo --> User : creates
+@enduml

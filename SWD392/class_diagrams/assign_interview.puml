@@ -1,0 +1,26 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/assign_interview.puml
+@startuml
+package controller {
+    class AdmStaffController {
+        +assignInterview()
+    }
+}
+
+package repository {
+    class InterviewRepo {
+        +storeInterviewAssignment()
+    }
+}
+
+package entity {
+    class Interview {
+        +id: int
+        +userId: int
+        +date: Date
+        +venue: String
+    }
+}
+
+AdmStaffController --> InterviewRepo : uses
+InterviewRepo --> Interview : stores
+@enduml

@@ -1,0 +1,25 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/manage_test_logistics.puml
+@startuml
+package controller {
+    class LogStaffController {
+        +manageTestLogistics()
+    }
+}
+
+package repository {
+    class LogisticsRepo {
+        +storeTestLogisticsDetails()
+    }
+}
+
+package entity {
+    class TestLogistics {
+        +id: int
+        +testId: int
+        +details: String
+    }
+}
+
+LogStaffController --> LogisticsRepo : uses
+LogisticsRepo --> TestLogistics : stores
+@enduml

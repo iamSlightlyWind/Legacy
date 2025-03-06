@@ -1,0 +1,31 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/upload_documents.puml
+@startuml
+package controller {
+    class StudentController {
+        +uploadDocuments()
+    }
+}
+
+package repository {
+    class FormRepo {
+        +storeDocumentMetadata()
+    }
+
+    class StorageRepo {
+        +storeDocumentFiles()
+    }
+}
+
+package entity {
+    class Form {
+        +id: int
+        +userId: int
+        +documentType: String
+        +documentPath: String
+    }
+}
+
+StudentController --> FormRepo : uses
+StudentController --> StorageRepo : uses
+FormRepo --> Form : stores
+@enduml

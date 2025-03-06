@@ -1,0 +1,38 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/verify_rankings_certificates.puml
+@startuml
+package controller {
+    class AdmStaffController {
+        +verifyRankingsAndCertificates()
+    }
+}
+
+package repository {
+    class DatabaseRepo {
+        +queryRankings()
+    }
+
+    class StorageRepo {
+        +retrieveCertificates()
+    }
+}
+
+package entity {
+    class Ranking {
+        +id: int
+        +userId: int
+        +rank: String
+    }
+
+    class Certificate {
+        +id: int
+        +userId: int
+        +type: String
+        +path: String
+    }
+}
+
+AdmStaffController --> DatabaseRepo : uses
+AdmStaffController --> StorageRepo : uses
+DatabaseRepo --> Ranking : returns
+StorageRepo --> Certificate : returns
+@enduml

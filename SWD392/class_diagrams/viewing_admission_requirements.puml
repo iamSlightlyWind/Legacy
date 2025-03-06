@@ -1,0 +1,24 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/viewing_admission_requirements.puml
+@startuml
+package controller {
+    class GuestController {
+        +viewAdmissionRequirements()
+    }
+}
+
+package repository {
+    class DatabaseRepo {
+        +queryAdmissionRequirements()
+    }
+}
+
+package entity {
+    class AdmissionRequirement {
+        +id: int
+        +description: String
+    }
+}
+
+GuestController --> DatabaseRepo : uses
+DatabaseRepo --> AdmissionRequirement : returns
+@enduml

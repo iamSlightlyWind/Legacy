@@ -1,0 +1,32 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/rejection_notification.puml
+@startuml
+package controller {
+    class AdmStaffController {
+        +sendRejectionNotification()
+    }
+}
+
+package repository {
+    class DatabaseRepo {
+        +queryRejectedApplications()
+    }
+}
+
+package service {
+    class NotificationService {
+        +sendNotification()
+    }
+}
+
+package entity {
+    class Application {
+        +id: int
+        +userId: int
+        +status: String
+    }
+}
+
+AdmStaffController --> DatabaseRepo : uses
+AdmStaffController --> NotificationService : uses
+DatabaseRepo --> Application : returns
+@enduml

@@ -1,0 +1,31 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/review_applications.puml
+@startuml
+package controller {
+    class AdmStaffController {
+        +reviewApplications()
+    }
+}
+
+package repository {
+    class DatabaseRepo {
+        +queryApplicationMetadata()
+    }
+
+    class StorageRepo {
+        +retrieveApplicationDocuments()
+    }
+}
+
+package entity {
+    class Application {
+        +id: int
+        +userId: int
+        +status: String
+        +documents: List<String>
+    }
+}
+
+AdmStaffController --> DatabaseRepo : uses
+AdmStaffController --> StorageRepo : uses
+DatabaseRepo --> Application : returns
+@enduml

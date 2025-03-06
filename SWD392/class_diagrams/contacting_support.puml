@@ -1,0 +1,26 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/contacting_support.puml
+@startuml
+package controller {
+    class GuestController {
+        +contactSupport()
+    }
+}
+
+package repository {
+    class SupportRepo {
+        +submitSupportRequest()
+    }
+}
+
+package entity {
+    class SupportRequest {
+        +id: int
+        +userId: int
+        +message: String
+        +status: String
+    }
+}
+
+GuestController --> SupportRepo : uses
+SupportRepo --> SupportRequest : returns
+@enduml

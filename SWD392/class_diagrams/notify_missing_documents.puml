@@ -1,0 +1,33 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/notify_missing_documents.puml
+@startuml
+package controller {
+    class AdmStaffController {
+        +notifyMissingDocuments()
+    }
+}
+
+package repository {
+    class DatabaseRepo {
+        +queryMissingDocuments()
+    }
+}
+
+package service {
+    class NotificationService {
+        +sendNotification()
+    }
+}
+
+package entity {
+    class Document {
+        +id: int
+        +userId: int
+        +type: String
+        +status: String
+    }
+}
+
+AdmStaffController --> DatabaseRepo : uses
+AdmStaffController --> NotificationService : uses
+DatabaseRepo --> Document : returns
+@enduml

@@ -1,0 +1,26 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/verify_documents.puml
+@startuml
+package controller {
+    class AdmStaffController {
+        +verifyDocuments()
+    }
+}
+
+package repository {
+    class StorageRepo {
+        +retrieveDocuments()
+    }
+}
+
+package entity {
+    class Document {
+        +id: int
+        +userId: int
+        +type: String
+        +path: String
+    }
+}
+
+AdmStaffController --> StorageRepo : uses
+StorageRepo --> Document : returns
+@enduml

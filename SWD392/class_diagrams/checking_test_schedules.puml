@@ -1,0 +1,25 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/checking_test_schedules.puml
+@startuml
+package controller {
+    class GuestController {
+        +checkTestSchedules()
+    }
+}
+
+package repository {
+    class DatabaseRepo {
+        +queryTestSchedules()
+    }
+}
+
+package entity {
+    class TestSchedule {
+        +id: int
+        +date: Date
+        +venue: String
+    }
+}
+
+GuestController --> DatabaseRepo : uses
+DatabaseRepo --> TestSchedule : returns
+@enduml

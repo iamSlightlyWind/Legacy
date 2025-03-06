@@ -1,0 +1,27 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/remember_me.puml
+@startuml
+package controller {
+    class AuthController {
+        +loginWithRememberMe()
+    }
+}
+
+package repository {
+    class UserRepo {
+        +verifyCredentials()
+        +storeRememberMeToken()
+    }
+}
+
+package entity {
+    class User {
+        +id: int
+        +username: String
+        +password: String
+        +rememberMeToken: String
+    }
+}
+
+AuthController --> UserRepo : uses
+UserRepo --> User : returns
+@enduml

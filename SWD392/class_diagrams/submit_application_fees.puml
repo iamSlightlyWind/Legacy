@@ -1,0 +1,33 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/submit_application_fees.puml
+@startuml
+package controller {
+    class StudentController {
+        +submitApplicationFees()
+    }
+}
+
+package repository {
+    class PaymentRepo {
+        +storePaymentRecord()
+    }
+}
+
+package service {
+    class PaymentService {
+        +processPayment()
+    }
+}
+
+package entity {
+    class Payment {
+        +id: int
+        +userId: int
+        +amount: double
+        +status: String
+    }
+}
+
+StudentController --> PaymentService : uses
+PaymentService --> PaymentRepo : uses
+PaymentRepo --> Payment : stores
+@enduml

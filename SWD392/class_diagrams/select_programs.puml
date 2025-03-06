@@ -1,0 +1,25 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/select_programs.puml
+@startuml
+package controller {
+    class StudentController {
+        +selectPrograms()
+    }
+}
+
+package repository {
+    class ProgramRepo {
+        +storeSelectedPrograms()
+    }
+}
+
+package entity {
+    class Program {
+        +id: int
+        +name: String
+        +description: String
+    }
+}
+
+StudentController --> ProgramRepo : uses
+ProgramRepo --> Program : stores
+@enduml

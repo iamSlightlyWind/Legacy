@@ -1,0 +1,25 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/schedule_entrance_test_sessions.puml
+@startuml
+package controller {
+    class LogStaffController {
+        +scheduleEntranceTestSessions()
+    }
+}
+
+package repository {
+    class TestRepo {
+        +storeTestSessionDetails()
+    }
+}
+
+package entity {
+    class Test {
+        +id: int
+        +date: Date
+        +venue: String
+    }
+}
+
+LogStaffController --> TestRepo : uses
+TestRepo --> Test : stores
+@enduml

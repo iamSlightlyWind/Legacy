@@ -1,0 +1,32 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/phone_verification.puml
+@startuml
+package controller {
+    class StudentController {
+        +verifyPhone()
+    }
+}
+
+package repository {
+    class UserRepo {
+        +updatePhoneVerification()
+    }
+}
+
+package service {
+    class SMSService {
+        +sendVerificationCode()
+    }
+}
+
+package entity {
+    class User {
+        +id: int
+        +phone: String
+        +isPhoneVerified: boolean
+    }
+}
+
+StudentController --> UserRepo : uses
+StudentController --> SMSService : uses
+UserRepo --> User : updates
+@enduml

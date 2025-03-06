@@ -1,0 +1,25 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/assign_interview_venues.puml
+@startuml
+package controller {
+    class LogStaffController {
+        +assignInterviewVenues()
+    }
+}
+
+package repository {
+    class VenueRepo {
+        +storeInterviewVenueDetails()
+    }
+}
+
+package entity {
+    class Venue {
+        +id: int
+        +name: String
+        +location: String
+    }
+}
+
+LogStaffController --> VenueRepo : uses
+VenueRepo --> Venue : stores
+@enduml

@@ -1,0 +1,28 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/update_information.puml
+@startuml
+package controller {
+    class StudentController {
+        +updateInformation()
+    }
+}
+
+package repository {
+    class UserDetailRepo {
+        +updatePersonalInformation()
+    }
+}
+
+package entity {
+    class UserDetail {
+        +id: int
+        +userId: int
+        +name: String
+        +address: String
+        +phone: String
+        +email: String
+    }
+}
+
+StudentController --> UserDetailRepo : uses
+UserDetailRepo --> UserDetail : updates
+@enduml

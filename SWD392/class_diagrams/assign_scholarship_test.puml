@@ -1,0 +1,26 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/assign_scholarship_test.puml
+@startuml
+package controller {
+    class AdmStaffController {
+        +assignScholarshipTest()
+    }
+}
+
+package repository {
+    class TestRepo {
+        +storeScholarshipTestAssignment()
+    }
+}
+
+package entity {
+    class Test {
+        +id: int
+        +userId: int
+        +type: String
+        +date: Date
+    }
+}
+
+AdmStaffController --> TestRepo : uses
+TestRepo --> Test : stores
+@enduml

@@ -1,0 +1,33 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/notify_students_of_test_interview_details.puml
+@startuml
+package controller {
+    class LogStaffController {
+        +notifyStudentsOfTestInterviewDetails()
+    }
+}
+
+package repository {
+    class NotificationRepo {
+        +storeNotificationDetails()
+    }
+}
+
+package service {
+    class NotificationService {
+        +sendNotification()
+    }
+}
+
+package entity {
+    class Notification {
+        +id: int
+        +userId: int
+        +message: String
+        +status: String
+    }
+}
+
+LogStaffController --> NotificationService : uses
+NotificationService --> NotificationRepo : uses
+NotificationRepo --> Notification : stores
+@enduml

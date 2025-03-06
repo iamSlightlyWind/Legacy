@@ -1,0 +1,26 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/update_venue_availability.puml
+@startuml
+package controller {
+    class LogStaffController {
+        +updateVenueAvailability()
+    }
+}
+
+package repository {
+    class VenueRepo {
+        +updateVenueAvailability()
+    }
+}
+
+package entity {
+    class Venue {
+        +id: int
+        +name: String
+        +location: String
+        +availability: String
+    }
+}
+
+LogStaffController --> VenueRepo : uses
+VenueRepo --> Venue : updates
+@enduml

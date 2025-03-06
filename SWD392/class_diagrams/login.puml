@@ -1,0 +1,26 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/login.puml
+@startuml
+package controller {
+    class AuthController {
+        +login()
+    }
+}
+
+package repository {
+    class UserRepo {
+        +verifyCredentials()
+    }
+}
+
+package entity {
+    class User {
+        +id: int
+        +username: String
+        +password: String
+        +role: String
+    }
+}
+
+AuthController --> UserRepo : uses
+UserRepo --> User : returns
+@enduml

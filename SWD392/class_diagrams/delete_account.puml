@@ -1,0 +1,26 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/delete_account.puml
+@startuml
+package controller {
+    class StudentController {
+        +deleteAccount()
+    }
+}
+
+package repository {
+    class UserRepo {
+        +deleteUser()
+    }
+}
+
+package entity {
+    class User {
+        +id: int
+        +username: String
+        +email: String
+        +password: String
+    }
+}
+
+StudentController --> UserRepo : uses
+UserRepo --> User : deletes
+@enduml

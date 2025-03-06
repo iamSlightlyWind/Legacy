@@ -1,0 +1,26 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/confirm_enrollment.puml
+@startuml
+package controller {
+    class StudentController {
+        +confirmEnrollment()
+    }
+}
+
+package repository {
+    class EnrollmentRepo {
+        +storeEnrollmentConfirmation()
+    }
+}
+
+package entity {
+    class Enrollment {
+        +id: int
+        +userId: int
+        +status: String
+        +date: Date
+    }
+}
+
+StudentController --> EnrollmentRepo : uses
+EnrollmentRepo --> Enrollment : stores
+@enduml

@@ -1,0 +1,32 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/email_verification.puml
+@startuml
+package controller {
+    class StudentController {
+        +verifyEmail()
+    }
+}
+
+package repository {
+    class UserRepo {
+        +updateEmailVerification()
+    }
+}
+
+package service {
+    class EmailService {
+        +sendVerificationEmail()
+    }
+}
+
+package entity {
+    class User {
+        +id: int
+        +email: String
+        +isEmailVerified: boolean
+    }
+}
+
+StudentController --> UserRepo : uses
+StudentController --> EmailService : uses
+UserRepo --> User : updates
+@enduml

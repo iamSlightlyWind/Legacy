@@ -1,0 +1,26 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/view_test_results.puml
+@startuml
+package controller {
+    class StudentController {
+        +viewTestResults()
+    }
+}
+
+package repository {
+    class TestRepo {
+        +queryTestResults()
+    }
+}
+
+package entity {
+    class Test {
+        +id: int
+        +userId: int
+        +score: double
+        +date: Date
+    }
+}
+
+StudentController --> TestRepo : uses
+TestRepo --> Test : returns
+@enduml

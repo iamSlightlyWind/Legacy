@@ -1,0 +1,25 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/fill_application_form.puml
+@startuml
+package controller {
+    class StudentController {
+        +fillApplicationForm()
+    }
+}
+
+package repository {
+    class FormRepo {
+        +storeApplicationForm()
+    }
+}
+
+package entity {
+    class Form {
+        +id: int
+        +userId: int
+        +formData: String
+    }
+}
+
+StudentController --> FormRepo : uses
+FormRepo --> Form : stores
+@enduml
