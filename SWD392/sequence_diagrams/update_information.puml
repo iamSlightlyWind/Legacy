@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/update_information.puml
+@startuml
+actor User
+participant "Update Information Page" as UpdateInfoPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> UpdateInfoPage: Enter updated information
+UpdateInfoPage -> BackendServer: Submit updated information
+BackendServer -> Database: Update information
+Database --> BackendServer: Confirm information updated
+BackendServer --> UpdateInfoPage: Confirm information updated
+UpdateInfoPage --> User: Display confirmation
+@enduml

@@ -1,0 +1,22 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/phone_verification.puml
+@startuml
+actor User
+participant "Phone Verification Page" as PhoneVerificationPage
+participant "Backend Server" as BackendServer
+participant "SMS Service" as SMSService
+database Database
+
+User -> PhoneVerificationPage: Enter phone number
+PhoneVerificationPage -> BackendServer: Submit phone number
+BackendServer -> SMSService: Send verification code
+SMSService --> BackendServer: Confirm code sent
+BackendServer --> PhoneVerificationPage: Confirm code sent
+PhoneVerificationPage --> User: Display code sent confirmation
+
+User -> PhoneVerificationPage: Enter verification code
+PhoneVerificationPage -> BackendServer: Verify code
+BackendServer -> Database: Store verified phone number
+Database --> BackendServer: Confirm phone number stored
+BackendServer --> PhoneVerificationPage: Confirm verification
+PhoneVerificationPage --> User: Display verification confirmation
+@enduml

@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/review_applications.puml
+@startuml
+actor "Admissions Staff" as Staff
+participant "Review Applications Page" as ReviewApplicationsPage
+participant "Backend Server" as BackendServer
+database Database
+
+Staff -> ReviewApplicationsPage: Request application review
+ReviewApplicationsPage -> BackendServer: Fetch applications
+BackendServer -> Database: Query applications
+Database --> BackendServer: Return applications
+BackendServer --> ReviewApplicationsPage: Return applications
+ReviewApplicationsPage --> Staff: Display applications
+@enduml

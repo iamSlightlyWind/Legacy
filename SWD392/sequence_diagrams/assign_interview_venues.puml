@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/assign_interview_venues.puml
+@startuml
+actor "Logistics Staff" as Staff
+participant "Assign Interview Venues Page" as AssignInterviewVenuesPage
+participant "Backend Server" as BackendServer
+database Database
+
+Staff -> AssignInterviewVenuesPage: Assign interview venues
+AssignInterviewVenuesPage -> BackendServer: Submit interview venue details
+BackendServer -> Database: Store interview venue details
+Database --> BackendServer: Confirm interview venue details stored
+BackendServer --> AssignInterviewVenuesPage: Confirm interview venue details
+AssignInterviewVenuesPage --> Staff: Display confirmation
+@enduml

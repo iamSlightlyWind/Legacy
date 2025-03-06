@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/view_entrance_test_info.puml
+@startuml
+actor User
+participant "Entrance Test Info Page" as EntranceTestInfoPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> EntranceTestInfoPage: Request entrance test info
+EntranceTestInfoPage -> BackendServer: Fetch entrance test info
+BackendServer -> Database: Query entrance test info
+Database --> BackendServer: Return entrance test info
+BackendServer --> EntranceTestInfoPage: Return entrance test info
+EntranceTestInfoPage --> User: Display entrance test info
+@enduml

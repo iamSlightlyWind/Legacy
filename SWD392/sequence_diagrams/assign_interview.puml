@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/assign_interview.puml
+@startuml
+actor "Admissions Staff" as Staff
+participant "Interview Assignment Page" as InterviewAssignmentPage
+participant "Backend Server" as BackendServer
+database Database
+
+Staff -> InterviewAssignmentPage: Assign interview
+InterviewAssignmentPage -> BackendServer: Submit interview assignment
+BackendServer -> Database: Store interview assignment
+Database --> BackendServer: Confirm interview assignment stored
+BackendServer --> InterviewAssignmentPage: Confirm interview assignment
+InterviewAssignmentPage --> Staff: Display confirmation
+@enduml

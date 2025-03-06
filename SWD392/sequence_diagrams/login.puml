@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/login.puml
+@startuml
+actor User
+participant "Login Page" as LoginPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> LoginPage: Enter credentials
+LoginPage -> BackendServer: Authenticate user
+BackendServer -> Database: Verify credentials
+Database --> BackendServer: Return authentication result
+BackendServer --> LoginPage: Return authentication result
+LoginPage --> User: Display authentication result
+@enduml

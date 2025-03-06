@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/view_test_results.puml
+@startuml
+actor User
+participant "Test Results Page" as TestResultsPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> TestResultsPage: Request test results
+TestResultsPage -> BackendServer: Fetch test results
+BackendServer -> Database: Query test results
+Database --> BackendServer: Return test results
+BackendServer --> TestResultsPage: Return test results
+TestResultsPage --> User: Display test results
+@enduml

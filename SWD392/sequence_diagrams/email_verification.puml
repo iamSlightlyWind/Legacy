@@ -1,0 +1,22 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/email_verification.puml
+@startuml
+actor User
+participant "Email Verification Page" as EmailVerificationPage
+participant "Backend Server" as BackendServer
+participant "Email Service" as EmailService
+database Database
+
+User -> EmailVerificationPage: Enter email address
+EmailVerificationPage -> BackendServer: Submit email address
+BackendServer -> EmailService: Send verification email
+EmailService --> BackendServer: Confirm email sent
+BackendServer --> EmailVerificationPage: Confirm email sent
+EmailVerificationPage --> User: Display email sent confirmation
+
+User -> EmailVerificationPage: Enter verification code
+EmailVerificationPage -> BackendServer: Verify code
+BackendServer -> Database: Store verified email
+Database --> BackendServer: Confirm email stored
+BackendServer --> EmailVerificationPage: Confirm verification
+EmailVerificationPage --> User: Display verification confirmation
+@enduml

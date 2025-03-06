@@ -1,0 +1,17 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/submit_application_fees.puml
+@startuml
+actor User
+participant "Payment Page" as PaymentPage
+participant "Backend Server" as BackendServer
+participant "Payment Gateway" as PaymentGateway
+database Database
+
+User -> PaymentPage: Enter payment details
+PaymentPage -> BackendServer: Submit payment details
+BackendServer -> PaymentGateway: Process payment
+PaymentGateway --> BackendServer: Confirm payment
+BackendServer -> Database: Store payment record
+Database --> BackendServer: Confirm payment record stored
+BackendServer --> PaymentPage: Confirm payment
+PaymentPage --> User: Display payment confirmation
+@enduml

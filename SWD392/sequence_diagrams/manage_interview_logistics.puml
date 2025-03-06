@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/manage_interview_logistics.puml
+@startuml
+actor "Logistics Staff" as Staff
+participant "Manage Interview Logistics Page" as ManageInterviewLogisticsPage
+participant "Backend Server" as BackendServer
+database Database
+
+Staff -> ManageInterviewLogisticsPage: Manage interview logistics
+ManageInterviewLogisticsPage -> BackendServer: Submit logistics details
+BackendServer -> Database: Store logistics details
+Database --> BackendServer: Confirm logistics details stored
+BackendServer --> ManageInterviewLogisticsPage: Confirm logistics details
+ManageInterviewLogisticsPage --> Staff: Display confirmation
+@enduml

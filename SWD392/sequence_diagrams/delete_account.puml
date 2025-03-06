@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/delete_account.puml
+@startuml
+actor User
+participant "Delete Account Page" as DeleteAccountPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> DeleteAccountPage: Request account deletion
+DeleteAccountPage -> BackendServer: Submit account deletion request
+BackendServer -> Database: Delete user data
+Database --> BackendServer: Confirm data deletion
+BackendServer --> DeleteAccountPage: Confirm account deletion
+DeleteAccountPage --> User: Display account deletion confirmation
+@enduml

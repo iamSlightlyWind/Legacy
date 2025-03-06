@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/register.puml
+@startuml
+actor User
+participant "Registration Page" as RegistrationPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> RegistrationPage: Enter registration details
+RegistrationPage -> BackendServer: Submit registration details
+BackendServer -> Database: Store user details
+Database --> BackendServer: Confirm user details stored
+BackendServer --> RegistrationPage: Confirm registration
+RegistrationPage --> User: Display registration confirmation
+@enduml

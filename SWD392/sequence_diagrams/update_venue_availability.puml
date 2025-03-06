@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/update_venue_availability.puml
+@startuml
+actor "Logistics Staff" as Staff
+participant "Update Venue Availability Page" as UpdateVenueAvailabilityPage
+participant "Backend Server" as BackendServer
+database Database
+
+Staff -> UpdateVenueAvailabilityPage: Update venue availability
+UpdateVenueAvailabilityPage -> BackendServer: Submit venue availability
+BackendServer -> Database: Store venue availability
+Database --> BackendServer: Confirm venue availability stored
+BackendServer --> UpdateVenueAvailabilityPage: Confirm venue availability
+UpdateVenueAvailabilityPage --> Staff: Display confirmation
+@enduml

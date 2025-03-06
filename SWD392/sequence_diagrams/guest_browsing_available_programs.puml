@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/guest_browsing_available_programs.puml
+@startuml
+actor User
+participant "Programs Page" as ProgramsPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> ProgramsPage: Request available programs
+ProgramsPage -> BackendServer: Fetch available programs
+BackendServer -> Database: Query available programs
+Database --> BackendServer: Return available programs
+BackendServer --> ProgramsPage: Return available programs
+ProgramsPage --> User: Display available programs
+@enduml

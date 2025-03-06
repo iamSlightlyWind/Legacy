@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/fill_personal_information.puml
+@startuml
+actor User
+participant "Personal Information Page" as PersonalInfoPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> PersonalInfoPage: Enter personal information
+PersonalInfoPage -> BackendServer: Submit personal information
+BackendServer -> Database: Store personal information
+Database --> BackendServer: Confirm information stored
+BackendServer --> PersonalInfoPage: Confirm information stored
+PersonalInfoPage --> User: Display confirmation
+@enduml

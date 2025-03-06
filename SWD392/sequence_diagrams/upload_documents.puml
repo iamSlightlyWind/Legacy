@@ -1,0 +1,18 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/upload_documents.puml
+@startuml
+actor User
+participant "Upload Documents Page" as UploadPage
+participant "Backend Server" as BackendServer
+database Database
+participant "Storage Service" as StorageService
+
+User -> UploadPage: Upload documents
+UploadPage -> BackendServer: Send document metadata
+BackendServer -> Database: Store document metadata
+Database --> BackendServer: Confirm metadata storage
+UploadPage -> BackendServer: Send document files
+BackendServer -> StorageService: Upload document files
+StorageService --> BackendServer: Confirm document upload
+BackendServer --> UploadPage: Confirm document upload
+UploadPage --> User: Display upload confirmation
+@enduml

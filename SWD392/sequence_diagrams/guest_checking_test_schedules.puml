@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/guest_checking_test_schedules.puml
+@startuml
+actor User
+participant "Test Schedules Page" as TestSchedulesPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> TestSchedulesPage: Request test schedules
+TestSchedulesPage -> BackendServer: Fetch test schedules
+BackendServer -> Database: Query test schedules
+Database --> BackendServer: Return test schedules
+BackendServer --> TestSchedulesPage: Return test schedules
+TestSchedulesPage --> User: Display test schedules
+@enduml

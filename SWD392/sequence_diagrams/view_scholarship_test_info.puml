@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/view_scholarship_test_info.puml
+@startuml
+actor User
+participant "Scholarship Test Info Page" as ScholarshipTestInfoPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> ScholarshipTestInfoPage: Request scholarship test info
+ScholarshipTestInfoPage -> BackendServer: Fetch scholarship test info
+BackendServer -> Database: Query scholarship test info
+Database --> BackendServer: Return scholarship test info
+BackendServer --> ScholarshipTestInfoPage: Return scholarship test info
+ScholarshipTestInfoPage --> User: Display scholarship test info
+@enduml

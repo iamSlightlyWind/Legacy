@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/guest_viewing_admission_requirements.puml
+@startuml
+actor User
+participant "Program Page" as ProgramPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> ProgramPage: Request admission requirements
+ProgramPage -> BackendServer: Fetch admission requirements
+BackendServer -> Database: Query admission requirements
+Database --> BackendServer: Return admission requirements
+BackendServer --> ProgramPage: Return admission requirements
+ProgramPage --> User: Display admission requirements
+@enduml

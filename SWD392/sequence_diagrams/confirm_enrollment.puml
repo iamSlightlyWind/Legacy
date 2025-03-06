@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/confirm_enrollment.puml
+@startuml
+actor User
+participant "Enrollment Confirmation Page" as EnrollmentConfirmationPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> EnrollmentConfirmationPage: Confirm enrollment
+EnrollmentConfirmationPage -> BackendServer: Submit enrollment confirmation
+BackendServer -> Database: Store enrollment confirmation
+Database --> BackendServer: Confirm enrollment stored
+BackendServer --> EnrollmentConfirmationPage: Confirm enrollment
+EnrollmentConfirmationPage --> User: Display enrollment confirmation
+@enduml

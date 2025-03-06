@@ -1,0 +1,13 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/notify_students_of_test_interview_details.puml
+@startuml
+actor "Logistics Staff" as Staff
+participant "Notification System" as NotificationSystem
+participant "Backend Server" as BackendServer
+database Database
+
+Staff -> BackendServer: Identify test/interview details
+BackendServer -> Database: Query test/interview details
+Database --> BackendServer: Return test/interview details
+BackendServer -> NotificationSystem: Send notifications
+NotificationSystem --> Staff: Confirm notifications sent
+@enduml

@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/assign_test_venues.puml
+@startuml
+actor "Logistics Staff" as Staff
+participant "Assign Test Venues Page" as AssignTestVenuesPage
+participant "Backend Server" as BackendServer
+database Database
+
+Staff -> AssignTestVenuesPage: Assign test venues
+AssignTestVenuesPage -> BackendServer: Submit test venue details
+BackendServer -> Database: Store test venue details
+Database --> BackendServer: Confirm test venue details stored
+BackendServer --> AssignTestVenuesPage: Confirm test venue details
+AssignTestVenuesPage --> Staff: Display confirmation
+@enduml

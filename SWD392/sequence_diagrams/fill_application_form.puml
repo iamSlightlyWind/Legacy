@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/fill_application_form.puml
+@startuml
+actor User
+participant "Application Form Page" as ApplicationFormPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> ApplicationFormPage: Fill application form
+ApplicationFormPage -> BackendServer: Submit application form
+BackendServer -> Database: Store application form data
+Database --> BackendServer: Confirm form data stored
+BackendServer --> ApplicationFormPage: Confirm form data stored
+ApplicationFormPage --> User: Display confirmation
+@enduml

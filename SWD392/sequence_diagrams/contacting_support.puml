@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/contacting_support.puml
+@startuml
+actor User
+participant "Support Page" as SupportPage
+participant "Backend Server" as BackendServer
+participant "Support System" as SupportSystem
+
+User -> SupportPage: Request support
+SupportPage -> BackendServer: Forward support request
+BackendServer -> SupportSystem: Send support request
+SupportSystem --> BackendServer: Confirm support request received
+BackendServer --> SupportPage: Confirm support request received
+SupportPage --> User: Display support confirmation
+@enduml

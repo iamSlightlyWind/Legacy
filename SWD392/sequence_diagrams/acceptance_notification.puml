@@ -1,0 +1,13 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/acceptance_notification.puml
+@startuml
+actor "Admissions Staff" as Staff
+participant "Notification System" as NotificationSystem
+participant "Backend Server" as BackendServer
+database Database
+
+Staff -> BackendServer: Identify accepted applications
+BackendServer -> Database: Query accepted applications
+Database --> BackendServer: Return accepted applications
+BackendServer -> NotificationSystem: Send acceptance notifications
+NotificationSystem --> Staff: Confirm notifications sent
+@enduml

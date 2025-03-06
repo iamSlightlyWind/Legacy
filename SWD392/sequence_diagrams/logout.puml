@@ -1,0 +1,11 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/logout.puml
+@startuml
+actor User
+participant "Logout Page" as LogoutPage
+participant "Backend Server" as BackendServer
+
+User -> LogoutPage: Click logout
+LogoutPage -> BackendServer: Invalidate session
+BackendServer --> LogoutPage: Confirm session invalidation
+LogoutPage --> User: Display logout confirmation
+@enduml

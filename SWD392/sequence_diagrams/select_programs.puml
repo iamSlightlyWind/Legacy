@@ -1,0 +1,14 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/select_programs.puml
+@startuml
+actor User
+participant "Program Selection Page" as ProgramSelectionPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> ProgramSelectionPage: Select programs
+ProgramSelectionPage -> BackendServer: Submit selected programs
+BackendServer -> Database: Store selected programs
+Database --> BackendServer: Confirm programs stored
+BackendServer --> ProgramSelectionPage: Confirm programs stored
+ProgramSelectionPage --> User: Display confirmation
+@enduml

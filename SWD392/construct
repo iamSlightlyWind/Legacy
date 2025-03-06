@@ -1,0 +1,167 @@
+given task:
+Based on your experience and reading news about Customer Relationship Management
+(CRM), you should Propose the new CRM to support the Student Admissions (Hệ thống
+hỗ trợ tuyển sinh sinh viên cho ĐH FPT với tầm nhìn hệ thống có thể dùng chung cho tất
+cả các đơn vị khác nhau của ĐH FPT, FU Hà Nội, FU TP Hồ Chí Minh, FU Cần Thơ, FU Quy
+Nhơn, FU Đà Nẵng). Dựa theo hiểu biết, kinh nghiệm bản thân, và tự tìm hiểu hệ thống
+CRM cho lĩnh vực cụ thể là hỗ trợ tuyển sinh hiệu quả hơn).
+
+You propose the new solution that can solve the problems (tuyển sinh sinh viên với
+lượng khách hàng tiềm năng lớn, số lượng tuyển sinh lớn, thi đầu vào số lượng lớn về
+thi, hậu cần để thi, hệ thống hỗ trợ tuyển sinh cho cả 5 đơn vị của FU… em tự nghĩ
+thêm)
+
+Identifiped the problems and writing the problems in software requirement
+specification. The software requirements can be break into 2 smaller parts:
+a. Identify Functional requirements. Write >= 50 use cases. Writing in short
+statements. Not long paragraphs.
+
+Actors:
+1. Guest
+2. Prospective Students
+3. Admissions Staff (Review Admission, Plan Tests)
+4. API (FAP, Email, AWS, Database, Payment, etc)
+5. Logistics (Test Venues, Interview Venues)
+
+Student Admissions CRM User Interaction Flow
+
+1. Student Registration
+    - Users create an account with required personal information.
+2. Application Submission
+    - Users complete an application form.
+    - Upload required documents:
+        + High school transcripts.
+        + National High School Graduation Exam (NHSGE) results.
+        + Proof of ranking in the top 50% based on NHSGE scores (certified via SchoolRank).
+    - Select desired programs.
+3. Fee Payment
+    - Users submit application fees via integrated payment gateways.
+    - Payment confirmation received in the system.
+4. Application Review
+    - Admissions officers review applications.
+    - System notifies users of missing or incorrect documents.
+5. Scholarship Test (if applicable)
+    - Users register for the scholarship test.
+    - Test includes a logic math test, an essay, and an interview.
+    - Results are accessible within the system.
+    - If users do not take the scholarship test, no interview is required.
+6. Admission Decision
+    - Users receive acceptance, rejection, or waitlist notifications.
+    - Decision letters available for download.
+7. Enrollment Confirmation
+    - Accepted users confirm enrollment via the system.
+    - Submit additional required documents.
+    - Pay tuition deposit if applicable.
+8. English Proficiency Assessment
+    - Enrolled students take an English placement test before starting main courses.
+    - Students with an IELTS score of 6.0 or equivalent can skip English preparatory courses.
+9. Student Account Creation
+    - Enrolled students receive credentials for university systems.
+    - Access to Learning Management System (LMS), email, and FAP (FPTU Academic Portal).
+10. General (For guest mostly)
+    - Viewing admission requirements
+    - Browsing available programs
+    - Checking test schedules
+    - Contacting support
+
+usecases:
+Actor	Use Case
+Guest	Viewing admission requirements
+Guest	Browsing available programs
+Guest	Checking test schedules
+Guest, Prospective Students	Contacting support
+Prospective Students, Admissions Staff	Login
+Prospective Students	Register
+Prospective Students, Admissions Staff	Forgot Password
+Prospective Students	Phone Verification
+Prospective Students	Email Verification
+Prospective Students, Admissions Staff	Logout
+Prospective Students, Admissions Staff	Reset Password
+Prospective Students	Delete Account
+Prospective Students, Admissions Staff	Remember Me
+Prospective Students	Fill Personal Information
+Prospective Students	Upload Documents
+Prospective Students	Update Information
+Prospective Students	Submit Application Fees
+Prospective Students	Select Programs
+Prospective Students	Fill Application Form
+Prospective Students	Take Logic Math Test
+Prospective Students	Take Essay Test
+Prospective Students	View Test Results
+Admissions Staff	Review Applications
+Admissions Staff	Verify Documents
+Admissions Staff	Verify Rankings, Certificates
+Admissions Staff, System	Notify Missing Documents
+Admissions Staff, System	Acceptance Notification
+Admissions Staff, System	Rejection Notification
+Admissions Staff, System	Waitlist Notification
+Admissions Staff	Assign Scholarship Test
+Admissions Staff	Assign Interview
+Prospective Students	Pay Tuition Deposit
+Prospective Students	Confirm Enrollment
+Logistics Staff	Schedule Entrance Test Sessions
+Logistics Staff	Assign Test Venues
+Logistics Staff	Assign Interview Venues
+Logistics Staff	Manage Test Logistics
+Logistics Staff	Manage Interview Logistics
+Logistics Staff, System	Notify Students of Test/Interview Details
+Logistics Staff	Update Venue Availability
+
+code packages:
+Parent Package	Sub-Package	Description
+config	AuthenticationHandler	Manages authentication and authorization logic.
+	SecurityConfig	Configures security settings, such as access control and encryption.
+utils	CommonFuncs	Contains general utility functions used across the application.
+	SecurityUtils	Provides security-related utilities, such as hashing and token validation.
+controller	GuestController	Handles guest-related operations, such as viewing programs and test schedules.
+	StudentController	Manages student operations, such as registration and application submission.
+	LogStaffController	Handles logistics staff interactions, such as managing test venues.
+	AdmStaffController	Manages admission staff tasks, such as reviewing applications.
+	ExternalController	Bridges external services and APIs with the system.
+	InternalController	Manages internal system interactions and service coordination.
+ExternalController	DocVerifier	Verifies uploaded documents, such as transcripts and certificates.
+	CertVerifier	Validates student certificates using external sources.
+repository	DatabaseRepo	Provides database access for various entities.
+	StorageRepo	Manages interactions with cloud storage, such as S3.
+entity	User	Represents student and staff user accounts.
+	Test	Stores test-related information, such as schedule and results.
+	Venue	Defines venue details for exams and interviews.
+	Interview	Stores interview-related details.
+	Payment	Represents payment transactions and statuses.
+	Form	Manages application forms and submitted documents.
+	UserDetail	Stores additional user information, such as contact details.
+	Program	Defines the academic programs available for application.
+InternalController	DatabaseService	Handles database operations and queries.
+	StorageService	Manages file storage and retrieval operations.
+	EmailService	Sends notifications and confirmation emails.
+	PaymentService	Handles payment processing and transaction verification.
+
+screens:
+Category	Requirement
+Phone Verification	Users enter and verify their phone number to proceed with registration.
+Email Verification	Users verify their email address via a confirmation link.
+Registration	New users fill out their details to create an account.
+Login	Users enter credentials to access the system.
+Reset Password	Users reset their password via email verification.
+Home Page	The main dashboard where users access all features.
+Application Status	Users check their application progress and updates.
+Contact Support	Users can request help or ask questions.
+Personal Information	Users enter and update their personal details.
+Admission Requirements	Displays information on eligibility and necessary documents.
+Program Overview	Users browse available programs and their details.
+Program Selection	Users select their desired programs for application.
+Application Form	Users fill out and submit the admission application.
+FPT DNG / FPT Pay	External payment gateway integration for fee submission.
+Enrollment Confirmation	Users confirm their enrollment and submit necessary documents.
+Venue Detail	Displays test/interview venue details for applicants.
+Staff Dashboard	Admissions staff manage applications, interviews, and tests.
+Application Detail	Staff review individual application information.
+Application Status (Staff)	Admissions staff track application statuses.
+Certificate Verification	Staff verify submitted certificates and academic records.
+Document Verification	Staff review and verify user-uploaded documents.
+Assign Interview	Staff schedule interview sessions for applicants.
+Assign Test	Staff schedule entrance tests for applicants.
+Assign Venue & Time	Staff assign applicants to test/interview venues and times.
+Test List	Staff view a list of scheduled tests.
+Test Detail	Staff access details of specific tests.
+Interview List	Staff view a list of scheduled interviews.

@@ -1,0 +1,13 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/rejection_notification.puml
+@startuml
+actor "Admissions Staff" as Staff
+participant "Notification System" as NotificationSystem
+participant "Backend Server" as BackendServer
+database Database
+
+Staff -> BackendServer: Identify rejected applications
+BackendServer -> Database: Query rejected applications
+Database --> BackendServer: Return rejected applications
+BackendServer -> NotificationSystem: Send rejection notifications
+NotificationSystem --> Staff: Confirm notifications sent
+@enduml

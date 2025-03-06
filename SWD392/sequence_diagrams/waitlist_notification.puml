@@ -1,0 +1,13 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/waitlist_notification.puml
+@startuml
+actor "Admissions Staff" as Staff
+participant "Notification System" as NotificationSystem
+participant "Backend Server" as BackendServer
+database Database
+
+Staff -> BackendServer: Identify waitlisted applications
+BackendServer -> Database: Query waitlisted applications
+Database --> BackendServer: Return waitlisted applications
+BackendServer -> NotificationSystem: Send waitlist notifications
+NotificationSystem --> Staff: Confirm notifications sent
+@enduml
