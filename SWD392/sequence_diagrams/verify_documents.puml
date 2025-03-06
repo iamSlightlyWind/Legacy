@@ -1,14 +1,14 @@
 ; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/verify_documents.puml
 @startuml
-actor "Admissions Staff" as Staff
+actor "User" as Staff
 participant "Verify Documents Page" as VerifyDocumentsPage
 participant "Backend Server" as BackendServer
-database Database
+participant "Storage Service" as StorageService
 
 Staff -> VerifyDocumentsPage: Request document verification
 VerifyDocumentsPage -> BackendServer: Fetch documents
-BackendServer -> Database: Query documents
-Database --> BackendServer: Return documents
+BackendServer -> StorageService: Retrieve documents
+StorageService --> BackendServer: Return documents
 BackendServer --> VerifyDocumentsPage: Return documents
 VerifyDocumentsPage --> Staff: Display documents
 @enduml

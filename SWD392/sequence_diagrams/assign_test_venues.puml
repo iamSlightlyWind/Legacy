@@ -1,6 +1,6 @@
 ; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/assign_test_venues.puml
 @startuml
-actor "Logistics Staff" as Staff
+actor "User" as Staff
 participant "Assign Test Venues Page" as AssignTestVenuesPage
 participant "Backend Server" as BackendServer
 database Database

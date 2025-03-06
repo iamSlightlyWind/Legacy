@@ -1,13 +1,17 @@
 ; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/notify_missing_documents.puml
 @startuml
-actor "Admissions Staff" as Staff
+actor "User" as Staff
+participant "Application Detail Page" as ApplicationDetailPage
 participant "Notification System" as NotificationSystem
 participant "Backend Server" as BackendServer
 database Database
 
-Staff -> BackendServer: Identify missing documents
+Staff -> ApplicationDetailPage: Identify missing documents
+ApplicationDetailPage -> BackendServer: Fetch missing documents
 BackendServer -> Database: Query missing documents
 Database --> BackendServer: Return missing documents
 BackendServer -> NotificationSystem: Notify missing documents
-NotificationSystem --> Staff: Confirm notifications sent
+NotificationSystem --> BackendServer: Confirm notifications sent
+BackendServer --> ApplicationDetailPage: Confirm notifications sent
+ApplicationDetailPage --> Staff: Display confirmation
 @enduml

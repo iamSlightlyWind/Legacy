@@ -1,6 +1,6 @@
 ; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/assign_interview.puml
 @startuml
-actor "Admissions Staff" as Staff
+actor "User" as Staff
 participant "Interview Assignment Page" as InterviewAssignmentPage
 participant "Backend Server" as BackendServer
 database Database

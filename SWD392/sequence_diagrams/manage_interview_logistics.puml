@@ -1,6 +1,6 @@
 ; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/manage_interview_logistics.puml
 @startuml
-actor "Logistics Staff" as Staff
+actor "User" as Staff
 participant "Manage Interview Logistics Page" as ManageInterviewLogisticsPage
 participant "Backend Server" as BackendServer
 database Database

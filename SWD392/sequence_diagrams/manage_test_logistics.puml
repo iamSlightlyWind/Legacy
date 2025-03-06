@@ -1,6 +1,6 @@
 ; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/manage_test_logistics.puml
 @startuml
-actor "Logistics Staff" as Staff
+actor "User" as Staff
 participant "Manage Test Logistics Page" as ManageTestLogisticsPage
 participant "Backend Server" as BackendServer
 database Database

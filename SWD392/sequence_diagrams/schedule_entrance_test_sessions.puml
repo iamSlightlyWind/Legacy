@@ -1,6 +1,6 @@
 ; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/schedule_entrance_test_sessions.puml
 @startuml
-actor "Logistics Staff" as Staff
+actor "User" as Staff
 participant "Schedule Test Sessions Page" as ScheduleTestSessionsPage
 participant "Backend Server" as BackendServer
 database Database

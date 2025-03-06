@@ -1,14 +1,17 @@
 ; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/verify_rankings_certificates.puml
 @startuml
-actor "Admissions Staff" as Staff
+actor "User" as Staff
 participant "Verify Rankings Page" as VerifyRankingsPage
 participant "Backend Server" as BackendServer
 database Database
+participant "Storage Service" as StorageService
 
-Staff -> VerifyRankingsPage: Request rankings verification
-VerifyRankingsPage -> BackendServer: Fetch rankings
+Staff -> VerifyRankingsPage: Request rankings and certificates verification
+VerifyRankingsPage -> BackendServer: Fetch rankings and certificates
 BackendServer -> Database: Query rankings
 Database --> BackendServer: Return rankings
-BackendServer --> VerifyRankingsPage: Return rankings
-VerifyRankingsPage --> Staff: Display rankings
+BackendServer -> StorageService: Retrieve certificates
+StorageService --> BackendServer: Return certificates
+BackendServer --> VerifyRankingsPage: Return rankings and certificates
+VerifyRankingsPage --> Staff: Display rankings and certificates
 @enduml
