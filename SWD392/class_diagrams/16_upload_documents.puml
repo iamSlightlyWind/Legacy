@@ -24,6 +24,8 @@ package entity {
     }
 }
 
+repo
+
 StudentController --> DatabaseRepo : uses
 StudentController --> StorageRepo : uses
 DatabaseRepo --> Form : stores

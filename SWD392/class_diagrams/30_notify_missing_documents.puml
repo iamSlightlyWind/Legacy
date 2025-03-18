@@ -9,10 +9,9 @@ package repository {
     class DatabaseRepo {
         +queryMissingDocuments()
     }
-}
 
 package service {
-    class NotificationService {
+    class EmailService {
         +sendNotification()
     }
 }
@@ -27,6 +26,6 @@ package entity {
 }
 
 AdmStaffController --> DatabaseRepo : uses
-AdmStaffController --> NotificationService : uses
+AdmStaffController --> EmailService : uses
 DatabaseRepo --> Document : returns
 @enduml

@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Directory containing .puml files
-DIR="/home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams"
-
-# Remove lines starting with "; filepath:"
-find "$DIR" -type f -name "*.puml" -exec sed -i '/^; filepath:/d' {} +

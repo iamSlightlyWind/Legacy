@@ -6,7 +6,7 @@ package controller {
 }
 
 package repository {
-    class FormRepo {
+    class StorageRepo {
         +storeApplicationForm()
     }
 }
@@ -19,6 +19,6 @@ package entity {
     }
 }
 
-StudentController --> FormRepo : uses
-FormRepo --> Form : stores
+StudentController --> StorageRepo : uses
+StorageRepo --> Form : stores
 @enduml

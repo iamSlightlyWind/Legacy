@@ -6,13 +6,13 @@ package controller {
 }
 
 package repository {
-    class NotificationRepo {
+    class StorageRepo {
         +storeNotificationDetails()
     }
 }
 
 package service {
-    class NotificationService {
+    class EmailService {
         +sendNotification()
     }
 }
@@ -26,7 +26,7 @@ package entity {
     }
 }
 
-LogStaffController --> NotificationService : uses
-NotificationService --> NotificationRepo : uses
-NotificationRepo --> Notification : stores
+LogStaffController --> EmailService : uses
+EmailService --> StorageRepo : uses
+StorageRepo --> Notification : stores
 @enduml

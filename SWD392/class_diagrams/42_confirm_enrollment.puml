@@ -6,7 +6,7 @@ package controller {
 }
 
 package repository {
-    class EnrollmentRepo {
+    class DatabaseRepo {
         +storeEnrollmentConfirmation()
     }
 }
@@ -20,6 +20,6 @@ package entity {
     }
 }
 
-StudentController --> EnrollmentRepo : uses
-EnrollmentRepo --> Enrollment : stores
+StudentController --> DatabaseRepo : uses
+DatabaseRepo --> Enrollment : stores
 @enduml

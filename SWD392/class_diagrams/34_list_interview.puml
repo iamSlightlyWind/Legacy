@@ -6,7 +6,7 @@ package controller {
 }
 
 package repository {
-    class InterviewRepo {
+    class DatabaseRepo {
         +queryListInterviews()
     }
 }
@@ -19,6 +19,6 @@ package entity {
     }
 }
 
-LogStaffController --> InterviewRepo : uses
-InterviewRepo --> Interview : returns
+LogStaffController --> DatabaseRepo : uses
+DatabaseRepo --> Interview : returns
 @enduml

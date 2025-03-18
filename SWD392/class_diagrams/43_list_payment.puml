@@ -6,7 +6,7 @@ package controller {
 }
 
 package repository {
-    class PaymentRepo {
+    class DatabaseRepo {
         +queryListPayments()
     }
 }
@@ -20,6 +20,6 @@ package entity {
     }
 }
 
-AdmStaffController --> PaymentRepo : uses
-PaymentRepo --> Payment : returns
+AdmStaffController --> DatabaseRepo : uses
+DatabaseRepo --> Payment : returns
 @enduml

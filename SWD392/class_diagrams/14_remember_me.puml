@@ -6,7 +6,7 @@ package controller {
 }
 
 package repository {
-    class UserRepo {
+    class DatabaseRepo {
         +verifyCredentials()
         +storeRememberMeToken()
     }
@@ -21,6 +21,6 @@ package entity {
     }
 }
 
-AuthController --> UserRepo : uses
-UserRepo --> User : returns
+AuthController --> DatabaseRepo : uses
+DatabaseRepo --> User : returns
 @enduml

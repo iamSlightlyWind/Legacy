@@ -6,7 +6,7 @@ package controller {
 }
 
 package repository {
-    class TestRepo {
+    class DatabaseRepo {
         +storeTestSessionDetails()
     }
 }
@@ -19,6 +19,6 @@ package entity {
     }
 }
 
-LogStaffController --> TestRepo : uses
-TestRepo --> Test : stores
+LogStaffController --> DatabaseRepo : uses
+DatabaseRepo --> Test : stores
 @enduml

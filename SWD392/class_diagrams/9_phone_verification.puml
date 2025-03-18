@@ -12,7 +12,7 @@ package repository {
 }
 
 package utils {
-    class SMSService {
+    class CommonFuncs {
         +sendVerificationCode()
     }
 }
@@ -26,6 +26,6 @@ package entity {
 }
 
 StudentController --> DatabaseRepo : uses
-StudentController --> SMSService : uses
+StudentController --> CommonFuncs : uses
 DatabaseRepo --> User : updates
 @enduml

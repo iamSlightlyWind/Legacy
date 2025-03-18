@@ -6,7 +6,7 @@ package controller {
 }
 
 package repository {
-    class ApplicationRepo {
+    class DatabaseRepo {
         +queryListApplications()
     }
 }
@@ -19,6 +19,6 @@ package entity {
     }
 }
 
-StudentController --> ApplicationRepo : uses
-ApplicationRepo --> Application : returns
+StudentController --> DatabaseRepo : uses
+DatabaseRepo --> Application : returns
 @enduml

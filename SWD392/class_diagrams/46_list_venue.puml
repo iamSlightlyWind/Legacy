@@ -6,8 +6,12 @@ package controller {
 }
 
 package repository {
-    class LogisticsRepo {
+    class StorageRepo {
         +storeTestLogisticsDetails()
+    }
+
+    class StorageRepo {
+        +queryListVenues()
     }
 }
 
@@ -17,10 +21,16 @@ package entity {
         +testId: int
         +details: String
     }
+
+    class Venue {
+        +id: int
+        +name: String
+        +location: String
+    }
 }
 
-LogStaffController --> LogisticsRepo : uses
-LogisticsRepo --> TestLogistics : stores
+LogStaffController --> StorageRepo : uses
+StorageRepo --> TestLogistics : stores
 @enduml
 
 @startuml
@@ -30,20 +40,6 @@ package controller {
     }
 }
 
-package repository {
-    class VenueRepo {
-        +queryListVenues()
-    }
-}
-
-package entity {
-    class Venue {
-        +id: int
-        +name: String
-        +location: String
-    }
-}
-
-AdmStaffController --> VenueRepo : uses
-VenueRepo --> Venue : returns
+AdmStaffController --> StorageRepo : uses
+StorageRepo --> Venue : returns
 @enduml

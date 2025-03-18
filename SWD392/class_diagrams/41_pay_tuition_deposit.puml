@@ -6,7 +6,7 @@ package controller {
 }
 
 package repository {
-    class PaymentRepo {
+    class DatabaseRepo {
         +storePaymentRecord()
     }
 }
@@ -27,6 +27,6 @@ package entity {
 }
 
 StudentController --> PaymentService : uses
-PaymentService --> PaymentRepo : uses
-PaymentRepo --> Payment : stores
+PaymentService --> DatabaseRepo : uses
+DatabaseRepo --> Payment : stores
 @enduml

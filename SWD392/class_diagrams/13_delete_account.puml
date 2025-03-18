@@ -6,7 +6,7 @@ package controller {
 }
 
 package repository {
-    class UserRepo {
+    class DatabaseRepo {
         +deleteUser()
     }
 }
@@ -20,6 +20,6 @@ package entity {
     }
 }
 
-StudentController --> UserRepo : uses
-UserRepo --> User : deletes
+StudentController --> DatabaseRepo : uses
+DatabaseRepo --> User : deletes
 @enduml

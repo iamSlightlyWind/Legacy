@@ -9,10 +9,9 @@ package repository {
     class DatabaseRepo {
         +queryRejectedApplications()
     }
-}
 
 package service {
-    class NotificationService {
+    class EmailService {
         +sendNotification()
     }
 }
@@ -26,6 +25,6 @@ package entity {
 }
 
 AdmStaffController --> DatabaseRepo : uses
-AdmStaffController --> NotificationService : uses
+AdmStaffController --> EmailService : uses
 DatabaseRepo --> Application : returns
 @enduml
