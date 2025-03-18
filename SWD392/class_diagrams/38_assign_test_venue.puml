@@ -6,7 +6,7 @@ package controller {
 }
 
 package repository {
-    class StorageRepo {
+    class DatabaseRepo {
         +storeVenueAssignment()
     }
 }
@@ -19,6 +19,6 @@ package entity {
     }
 }
 
-AdmStaffController --> StorageRepo : uses
-StorageRepo --> Venue : stores
+AdmStaffController --> DatabaseRepo : uses
+DatabaseRepo --> Venue : stores
 @enduml
