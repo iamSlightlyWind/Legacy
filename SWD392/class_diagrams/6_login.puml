@@ -1,6 +1,6 @@
 @startuml
 package controller {
-    class ExternalController {
+    class AuthController {
         +login()
     }
 }
@@ -20,6 +20,6 @@ package entity {
     }
 }
 
-ExternalController --> DatabaseRepo : uses
+AuthController --> DatabaseRepo : uses
 DatabaseRepo --> User : returns
 @enduml
