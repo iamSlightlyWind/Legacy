@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/contacting_support.puml
 @startuml
 package controller {
     class GuestController {

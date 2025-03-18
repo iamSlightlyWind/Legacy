@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/manage_test_logistics.puml
 @startuml
 package controller {
     class LogStaffController {

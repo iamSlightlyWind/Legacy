@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/assign_interview_venues.puml
 @startuml
 actor "User" as Staff
 participant "Assign Interview Venues Page" as AssignInterviewVenuesPage

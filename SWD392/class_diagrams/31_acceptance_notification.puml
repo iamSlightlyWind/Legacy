@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/acceptance_notification.puml
 @startuml
 package controller {
     class AdmStaffController {

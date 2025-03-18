@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/notify_missing_documents.puml
 @startuml
 package controller {
     class AdmStaffController {

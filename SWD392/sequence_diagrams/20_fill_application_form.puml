@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/fill_application_form.puml
 @startuml
 actor User
 participant "Application Form Page" as ApplicationFormPage

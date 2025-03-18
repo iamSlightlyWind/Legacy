@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/logout.puml
 @startuml
 actor User
 participant "Logout Page" as LogoutPage

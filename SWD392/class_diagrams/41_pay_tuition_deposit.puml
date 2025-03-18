@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/pay_tuition_deposit.puml
 @startuml
 package controller {
     class StudentController {

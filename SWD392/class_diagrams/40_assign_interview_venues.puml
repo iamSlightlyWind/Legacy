@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/assign_interview_venues.puml
 @startuml
 package controller {
     class LogStaffController {

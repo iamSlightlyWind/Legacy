@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/view_scholarship_test_info.puml
 @startuml
 actor User
 participant "Scholarship Test Info Page" as ScholarshipTestInfoPage

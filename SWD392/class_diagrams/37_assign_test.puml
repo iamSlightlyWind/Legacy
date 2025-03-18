@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/schedule_entrance_test_sessions.puml
 @startuml
 package controller {
     class LogStaffController {

@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/submit_application_fees.puml
 @startuml
 package controller {
     class StudentController {
@@ -7,7 +6,7 @@ package controller {
 }
 
 package repository {
-    class PaymentRepo {
+    class DatabaseRepo {
         +storePaymentRecord()
     }
 }
@@ -28,6 +27,6 @@ package entity {
 }
 
 StudentController --> PaymentService : uses
-PaymentService --> PaymentRepo : uses
-PaymentRepo --> Payment : stores
+PaymentService --> DatabaseRepo : uses
+DatabaseRepo --> Payment : stores
 @enduml

@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/1_list_programs.puml
 @startuml
 package controller {
     class GuestController {

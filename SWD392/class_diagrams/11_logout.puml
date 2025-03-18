@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/logout.puml
 @startuml
 package controller {
     class AuthController {
@@ -7,10 +6,10 @@ package controller {
 }
 
 package repository {
-    class SessionRepo {
+    class DatabaseRepo {
         +invalidateSession()
     }
 }
 
-AuthController --> SessionRepo : uses
+AuthController --> DatabaseRepo : uses
 @enduml

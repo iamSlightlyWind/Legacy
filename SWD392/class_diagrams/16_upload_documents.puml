@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/upload_documents.puml
 @startuml
 package controller {
     class StudentController {
@@ -7,7 +6,7 @@ package controller {
 }
 
 package repository {
-    class FormRepo {
+    class DatabaseRepo {
         +storeDocumentMetadata()
     }
 
@@ -25,7 +24,7 @@ package entity {
     }
 }
 
-StudentController --> FormRepo : uses
+StudentController --> DatabaseRepo : uses
 StudentController --> StorageRepo : uses
-FormRepo --> Form : stores
+DatabaseRepo --> Form : stores
 @enduml

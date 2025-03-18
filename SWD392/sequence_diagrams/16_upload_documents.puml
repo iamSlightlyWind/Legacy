@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/sequence_diagrams/upload_documents.puml
 @startuml
 actor User
 participant "Upload Documents Page" as UploadPage

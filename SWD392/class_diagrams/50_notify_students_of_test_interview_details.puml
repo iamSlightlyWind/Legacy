@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/notify_students_of_test_interview_details.puml
 @startuml
 package controller {
     class LogStaffController {

@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/view_entrance_test_info.puml
 @startuml
 package controller {
     class StudentController {
@@ -10,7 +9,6 @@ package repository {
     class TestRepo {
         +queryEntranceTestInfo()
     }
-}
 
 package entity {
     class Test {

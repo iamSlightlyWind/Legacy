@@ -1,4 +1,3 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/select_programs.puml
 @startuml
 package controller {
     class StudentController {
@@ -7,7 +6,7 @@ package controller {
 }
 
 package repository {
-    class ProgramRepo {
+    class DatabaseRepo {
         +storeSelectedPrograms()
     }
 }
@@ -20,6 +19,6 @@ package entity {
     }
 }
 
-StudentController --> ProgramRepo : uses
-ProgramRepo --> Program : stores
+StudentController --> DatabaseRepo : uses
+DatabaseRepo --> Program : stores
 @enduml
