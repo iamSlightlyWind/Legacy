@@ -1,0 +1,16 @@
+@startuml
+actor User
+participant "View Interview Page" as ViewInterviewPage
+participant "Backend Server" as BackendServer
+database Database
+participant "Storage Service" as StorageService
+
+User -> ViewInterviewPage: Request interview details
+ViewInterviewPage -> BackendServer: Fetch interview details
+BackendServer -> Database: Query interview details
+Database --> BackendServer: Return interview details
+BackendServer -> StorageService: Fetch interview files
+StorageService --> BackendServer: Return interview files
+BackendServer --> ViewInterviewPage: Return interview details and files
+ViewInterviewPage --> User: Display interview details and files
+@enduml

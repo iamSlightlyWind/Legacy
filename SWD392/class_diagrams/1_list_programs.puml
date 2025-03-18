@@ -1,0 +1,25 @@
+; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/1_list_programs.puml
+@startuml
+package controller {
+    class GuestController {
+        +browseAvailablePrograms()
+    }
+}
+
+package repository {
+    class DatabaseRepo {
+        +queryAvailablePrograms()
+    }
+}
+
+package entity {
+    class Program {
+        +id: int
+        +name: String
+        +description: String
+    }
+}
+
+GuestController --> DatabaseRepo : uses
+DatabaseRepo --> Program : returns
+@enduml

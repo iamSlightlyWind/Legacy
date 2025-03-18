@@ -1,14 +1,15 @@
-; filepath: /home/slightlywind/Repositories/Legacy/SWD392/class_diagrams/browsing_available_programs.puml
 @startuml
 package controller {
     class GuestController {
         +browseAvailablePrograms()
+        +searchProgram(query: String)
     }
 }
 
 package repository {
     class DatabaseRepo {
         +queryAvailablePrograms()
+        +searchPrograms(query: String)
     }
 }
 

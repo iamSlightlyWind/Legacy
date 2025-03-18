@@ -1,0 +1,13 @@
+@startuml
+actor Admin
+participant "Assign Test Venue Page" as AssignTestVenuePage
+participant "Backend Server" as BackendServer
+database Database
+
+Admin -> AssignTestVenuePage: Assign test venue
+AssignTestVenuePage -> BackendServer: Send venue assignment details
+BackendServer -> Database: Store venue assignment details
+Database --> BackendServer: Confirm venue assignment storage
+BackendServer --> AssignTestVenuePage: Confirm venue assignment
+AssignTestVenuePage --> Admin: Display assignment confirmation
+@enduml

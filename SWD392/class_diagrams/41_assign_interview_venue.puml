@@ -1,0 +1,24 @@
+@startuml
+package controller {
+    class AdmStaffController {
+        +assignInterviewVenue()
+    }
+}
+
+package repository {
+    class VenueRepo {
+        +storeInterviewVenueAssignment()
+    }
+}
+
+package entity {
+    class Venue {
+        +id: int
+        +name: String
+        +location: String
+    }
+}
+
+AdmStaffController --> VenueRepo : uses
+VenueRepo --> Venue : stores
+@enduml

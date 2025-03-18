@@ -1,0 +1,25 @@
+@startuml
+package controller {
+    class AdmStaffController {
+        +listPayments()
+    }
+}
+
+package repository {
+    class PaymentRepo {
+        +queryListPayments()
+    }
+}
+
+package entity {
+    class Payment {
+        +id: int
+        +amount: float
+        +date: Date
+        +status: String
+    }
+}
+
+AdmStaffController --> PaymentRepo : uses
+PaymentRepo --> Payment : returns
+@enduml

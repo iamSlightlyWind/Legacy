@@ -1,0 +1,13 @@
+@startuml
+actor User
+participant "Search Interview Page" as SearchInterviewPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> SearchInterviewPage: Request interview search
+SearchInterviewPage -> BackendServer: Fetch interview search results
+BackendServer -> Database: Query interview search results
+Database --> BackendServer: Return interview search results
+BackendServer --> SearchInterviewPage: Return interview search results
+SearchInterviewPage --> User: Display interview search results
+@enduml

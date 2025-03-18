@@ -1,0 +1,13 @@
+@startuml
+actor User
+participant "Search Payment Page" as SearchPaymentPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> SearchPaymentPage: Request payment search
+SearchPaymentPage -> BackendServer: Fetch payment search results
+BackendServer -> Database: Query payment search results
+Database --> BackendServer: Return payment search results
+BackendServer --> SearchPaymentPage: Return payment search results
+SearchPaymentPage --> User: Display payment search results
+@enduml

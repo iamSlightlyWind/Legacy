@@ -7,7 +7,7 @@ package controller {
 }
 
 package repository {
-    class SupportRepo {
+    class StorageRepo {
         +submitSupportRequest()
     }
 }
@@ -21,6 +21,6 @@ package entity {
     }
 }
 
-GuestController --> SupportRepo : uses
-SupportRepo --> SupportRequest : returns
+GuestController --> StorageRepo : uses
+StorageRepo --> SupportRequest : returns
 @enduml

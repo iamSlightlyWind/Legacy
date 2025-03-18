@@ -1,0 +1,31 @@
+@startuml
+package controller {
+    class LogStaffController {
+        +viewInterview()
+    }
+}
+
+package repository {
+    class InterviewRepo {
+        +queryInterviewDetails()
+    }
+}
+
+package service {
+    class StorageService {
+        +fetchInterviewFiles()
+    }
+}
+
+package entity {
+    class Interview {
+        +id: int
+        +date: Date
+        +status: String
+    }
+}
+
+LogStaffController --> InterviewRepo : uses
+InterviewRepo --> Interview : returns
+LogStaffController --> StorageService : uses
+@enduml

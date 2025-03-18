@@ -7,12 +7,12 @@ package controller {
 }
 
 package repository {
-    class UserRepo {
+    class DatabaseRepo {
         +updatePhoneVerification()
     }
 }
 
-package service {
+package utils {
     class SMSService {
         +sendVerificationCode()
     }
@@ -26,7 +26,7 @@ package entity {
     }
 }
 
-StudentController --> UserRepo : uses
+StudentController --> DatabaseRepo : uses
 StudentController --> SMSService : uses
-UserRepo --> User : updates
+DatabaseRepo --> User : updates
 @enduml

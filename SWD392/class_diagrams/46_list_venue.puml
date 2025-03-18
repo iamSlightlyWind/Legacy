@@ -23,3 +23,28 @@ package entity {
 LogStaffController --> LogisticsRepo : uses
 LogisticsRepo --> TestLogistics : stores
 @enduml
+
+@startuml
+package controller {
+    class AdmStaffController {
+        +listVenues()
+    }
+}
+
+package repository {
+    class VenueRepo {
+        +queryListVenues()
+    }
+}
+
+package entity {
+    class Venue {
+        +id: int
+        +name: String
+        +location: String
+    }
+}
+
+AdmStaffController --> VenueRepo : uses
+VenueRepo --> Venue : returns
+@enduml

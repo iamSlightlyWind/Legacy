@@ -1,0 +1,24 @@
+@startuml
+package controller {
+    class StudentController {
+        +listApplications()
+    }
+}
+
+package repository {
+    class ApplicationRepo {
+        +queryListApplications()
+    }
+}
+
+package entity {
+    class Application {
+        +id: int
+        +date: Date
+        +status: String
+    }
+}
+
+StudentController --> ApplicationRepo : uses
+ApplicationRepo --> Application : returns
+@enduml

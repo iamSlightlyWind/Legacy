@@ -1,0 +1,13 @@
+@startuml
+actor User
+participant "Venues Page" as VenuesPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> VenuesPage: Request list of venues
+VenuesPage -> BackendServer: Fetch list of venues
+BackendServer -> Database: Query list of venues
+Database --> BackendServer: Return list of venues
+BackendServer --> VenuesPage: Return list of venues
+VenuesPage --> User: Display list of venues
+@enduml

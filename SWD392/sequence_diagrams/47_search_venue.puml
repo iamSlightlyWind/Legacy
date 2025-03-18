@@ -1,0 +1,13 @@
+@startuml
+actor User
+participant "Search Venue Page" as SearchVenuePage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> SearchVenuePage: Request venue search
+SearchVenuePage -> BackendServer: Fetch venue search results
+BackendServer -> Database: Query venue search results
+Database --> BackendServer: Return venue search results
+BackendServer --> SearchVenuePage: Return venue search results
+SearchVenuePage --> User: Display venue search results
+@enduml

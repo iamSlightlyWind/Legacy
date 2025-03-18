@@ -1,0 +1,13 @@
+@startuml
+actor User
+participant "Payments Page" as PaymentsPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> PaymentsPage: Request list of payments
+PaymentsPage -> BackendServer: Fetch list of payments
+BackendServer -> Database: Query list of payments
+Database --> BackendServer: Return list of payments
+BackendServer --> PaymentsPage: Return list of payments
+PaymentsPage --> User: Display list of payments
+@enduml

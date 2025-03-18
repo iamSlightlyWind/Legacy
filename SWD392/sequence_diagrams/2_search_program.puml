@@ -1,0 +1,13 @@
+@startuml
+actor User
+participant "Search Page" as SearchPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> SearchPage: Request search for a program
+SearchPage -> BackendServer: Fetch search results
+BackendServer -> Database: Query search results
+Database --> BackendServer: Return search results
+BackendServer --> SearchPage: Return search results
+SearchPage --> User: Display search results
+@enduml

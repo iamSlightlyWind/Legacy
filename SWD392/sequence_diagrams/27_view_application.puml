@@ -1,0 +1,16 @@
+@startuml
+actor User
+participant "View Application Page" as ViewApplicationPage
+participant "Backend Server" as BackendServer
+database Database
+participant "Storage Service" as StorageService
+
+User -> ViewApplicationPage: Request application details
+ViewApplicationPage -> BackendServer: Fetch application details
+BackendServer -> Database: Query application details
+Database --> BackendServer: Return application details
+BackendServer -> StorageService: Fetch application files
+StorageService --> BackendServer: Return application files
+BackendServer --> ViewApplicationPage: Return application details and files
+ViewApplicationPage --> User: Display application details and files
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+actor User
+participant "Program Details Page" as ProgramDetailsPage
+participant "Backend Server" as BackendServer
+database Database
+
+User -> ProgramDetailsPage: Request program details
+ProgramDetailsPage -> BackendServer: Fetch program details
+BackendServer -> Database: Query program details
+Database --> BackendServer: Return program details
+BackendServer --> ProgramDetailsPage: Return program details
+ProgramDetailsPage --> User: Display program details
+@enduml
